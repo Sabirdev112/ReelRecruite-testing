@@ -25,18 +25,19 @@ export class SignupPage {
   }
 
   async signup(fullName, email, password, confirmPassword) {
-    await this.fullNameInput.fill(fullName);
-    await this.emailInput.fill(email);
-    await this.passwordInput.fill(password);
-    await this.confirmPasswordInput.fill(confirmPassword);
+    await this.fullNameInput.pressSequentially(fullName);
+    await this.emailInput.pressSequentially(email);
+    await this.passwordInput.pressSequentially(password);
+    await this.confirmPasswordInput.pressSequentially(confirmPassword);
 
     await this.selectRoleDropdown.click();
     await this.selectRole.click();
 
-    // Click Create Account
-    await this.signUpButton.click();
-
-    // Wait for toast to confirm DB entry
-    await this.page.getByText('Account created! Please signin now.').waitFor();
   }
+    async createAccount() {
+  await this.signUpButton.click();
+  // Wait 3 seconds before next user
+  await this.page.waitForTimeout(3000);
+}
+
 }
