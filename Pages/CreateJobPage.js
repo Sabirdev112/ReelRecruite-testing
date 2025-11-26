@@ -37,6 +37,7 @@ export class CreateJobPage {
     this.responseType = page.getByRole('combobox');
     // preview - target the primary Preview button specifically to avoid strict-mode collisions
     this.previewButton = page.locator('button.bg-primary:has-text("Preview")');
+    this.seeAllButton = page.getByRole('button', { name: 'See All' });
   }
 
   // Open the form after login
@@ -160,5 +161,9 @@ async previewJob() {
       
       this.createJobButton.click()
     ]);
+    
+  }
+  async seeAllApplications() {
+    await this.seeAllButton.click();
   }
 }
