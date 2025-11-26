@@ -7,6 +7,7 @@ export class ApplyJobPage {
     this.stopRecordingButton = page.getByRole('button', { name: 'Stop Recording' });
     this.confirmVideoButton = page.getByRole('button', { name: 'Use This Video' });
     this.submitButton = page.getByRole('button', { name: 'Submit Application' });
+    
   }
 
   async applyNow() {
@@ -23,4 +24,5 @@ export class ApplyJobPage {
   async submitApplication() {
     await this.submitButton.click();
   }
+  
 }
