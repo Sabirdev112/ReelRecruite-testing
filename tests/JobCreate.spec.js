@@ -8,6 +8,7 @@ test('Login and create a new job', async ({ page }) => {
 
   await loginPage.goto();
   await loginPage.login('carlos@gmail.com', 'Carlos@123');
+  await loginPage.clickSignIn();
 
   await createJobPage.openJobForm();
   await createJobPage.fillJobDetails();
