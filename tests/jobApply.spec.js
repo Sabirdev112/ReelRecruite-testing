@@ -7,13 +7,11 @@ import { ApplyJobPage } from '../Pages/ApplyJobPage.js';
 const USERS_FILE = path.join(process.cwd(), 'users.json');
 const users = JSON.parse(fs.readFileSync(USERS_FILE, 'utf-8'));
 
-/**
- * Handles login → OTP → apply job → logout for one user
- */
 async function userFlow(browser, user, jobUrl) {
   const context = await browser.newContext({
     permissions: ['camera', 'microphone']
   });
+
   const page = await context.newPage();
 
   const loginPage = new LoginPage(page);
@@ -23,14 +21,12 @@ async function userFlow(browser, user, jobUrl) {
 
   // --- LOGIN ---
   await loginPage.goto();
+
+  // ✅ PASS EMAIL & PASSWORD PROPERLY
   await loginPage.login(user.email, user.password);
+  await loginPage.clickSignIn(user.email, user.password);
 
-  // Click sign in button if separate
-  if (loginPage.clickSignIn) {
-    await loginPage.clickSignIn();
-  }
-
-  await loginPage.fillOTP('123456');
+  await page.waitForTimeout(5000);
 
   // --- APPLY FOR JOB ---
   await page.goto(jobUrl);
@@ -39,7 +35,6 @@ async function userFlow(browser, user, jobUrl) {
   await applyJobPage.recordVideo();
   await applyJobPage.submitApplication();
 
- 
   // --- LOGOUT ---
   if (loginPage.logout) {
     await loginPage.logout();
@@ -51,14 +46,16 @@ async function userFlow(browser, user, jobUrl) {
 
 test('Apply for specific job (all users from JSON)', async () => {
   const browser = await chromium.launch({ headless: false });
-  const jobUrl = 'https://recruitai-web-production.up.railway.app/jobs/5ca0ffad-7d88-4743-9a56-bc42385dcad2';
+
+  const jobUrl =
+    'https://recruitai-web-production.up.railway.app/jobs/5ab69721-a242-4f6b-910a-40ae4d9e8367';
 
   for (const user of users) {
     try {
       await userFlow(browser, user, jobUrl);
     } catch (error) {
       console.log(`Failed to process user: ${user.email}`, error);
-      continue; // continue with next user
+      continue;
     }
   }
 
