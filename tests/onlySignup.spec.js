@@ -26,10 +26,12 @@ test('Candidate signs up', async ({ page }) => {
       await signupPage.createAccount(); // includes 3s wait
 
       console.log(`Signed up user: ${user.email}`);
-      existingEmails.add(user.email);
+      await page.waitForTimeout(10000);
 
+    
       // Optional: clear form for next iteration
-      await signupPage.clearInputs();
+      await signupPage.fillOTP('123456');
+      console.log(`Filled OTP for user: ${user.email}`);
       
     } catch (error) {
       console.log(`Failed to sign up user: ${user.email}. Skipping to next.`);

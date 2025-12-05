@@ -1,10 +1,5 @@
 [
   
   
-  { "fullName": "Oliver Thompson", "email": "oliver.thompson15@test.com", "password": "Pass@1234" },
-  { "fullName": "Paula Garcia", "email": "paula.garcia16@test.com", "password": "Pass@1234" },
-  { "fullName": "Quentin Martinez", "email": "quentin.martinez17@test.com", "password": "Pass@1234" },
-  { "fullName": "Rachel Robinson", "email": "rachel.robinson18@test.com", "password": "Pass@1234" },
-  { "fullName": "Samuel Clark", "email": "samuel.clark19@test.com", "password": "Pass@1234" },
-  { "fullName": "Tina Lewis", "email": "tina.lewis20@test.com", "password": "Pass@1234" }
+  { "fullName": "Oliver Thompson", "email": "oler.thomson05192@test.com", "password": "Pass@1234" }
 ]

@@ -1,15 +1,9 @@
 export class LoginPage {
   constructor(page) {
     this.page = page;
-    this.otpinput1 = page.getByRole('textbox', { name: 'Digit 1' });
-    this.otpinput2 = page.getByRole('textbox', { name: 'Digit 2' });
-    this.otpinput3 = page.getByRole('textbox', { name: 'Digit 3' });
-    this.otpinput4 = page.getByRole('textbox', { name: 'Digit 4' });
-    this.otpinput5 = page.getByRole('textbox', { name: 'Digit 5' });
-    this.otpinput6 = page.getByRole('textbox', { name: 'Digit 6' });
     this.usernameInput = page.getByRole('textbox', { name: 'Enter your email' });
     this.passwordInput = page.getByRole('textbox', { name: 'Enter your password' });
-    this.signInButtonLocator = this.page.locator('button[type="submit"]', { hasText: 'Sign In' });
+    this.signInButtonLocator = page.locator('xpath=//*[@id="root"]/div[2]/div[2]/div/div[2]/form/button');
     this.avatar = page.locator("//p[@class='text-xs capitalize text-gray-500']");
     this.signoutButton = page.getByText('Log out', { exact: true });
   }
@@ -31,15 +25,6 @@ export class LoginPage {
 
   async clickSignIn() {
     await this.signInButtonLocator.click();
-  }
-async fillOTP(otp) {
-    const digits = otp.split('');
-    await this.otpinput1.fill(digits[0]);
-    await this.otpinput2.fill(digits[1]);
-    await this.otpinput3.fill(digits[2]);
-    await this.otpinput4.fill(digits[3]);
-    await this.otpinput5.fill(digits[4]);
-    await this.otpinput6.fill(digits[5]);
   }
   async logout() {
     await this.avatar.click();

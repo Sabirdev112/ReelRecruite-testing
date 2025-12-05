@@ -3,6 +3,7 @@ export class CreateJobPage {
     this.page = page;
 
     // Main buttons
+    this.cancelButton = page.getByRole('button', { name: 'Cancel' });
     this.postNewJobButton = page.getByRole('button', { name: 'Post New Job' });
     this.nextButton = page.getByRole('button', { name: 'Next' });
     this.createJobButton = page.getByRole('button', { name: 'Confirm & publish job' });
@@ -40,7 +41,10 @@ export class CreateJobPage {
     this.seeAllButton = page.getByRole('button', { name: 'See All' });
   }
 
-  // Open the form after login
+async Cancel() {
+    await this.cancelButton.click();
+}
+
   async openJobForm() {
     
     await this.postNewJobButton.waitFor({ state: 'visible', timeout: 10000 });
@@ -64,7 +68,7 @@ export class CreateJobPage {
     experience = 'Executive',
     salaryRange = '50000-70000',
     currency = 'pkr (₨)',
-    expirationDate = '2025-11-30'
+    expirationDate = '2025-12-30'
   } = {}) {
     // Wait for Job Type section
     await this.page.waitForSelector('.react-select__input-container', { state: 'visible', timeout: 10000 });
