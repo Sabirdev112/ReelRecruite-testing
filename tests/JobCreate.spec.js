@@ -11,6 +11,7 @@ test('Login and create a new job', async ({ page }) => {
   await loginPage.login('carlos@gmail.com', 'Carlos@123');
   await loginPage.clickSignIn();
   // await createJobPage.Cancel();
+  await page.waitForTimeout(3000);
   await createJobPage.openJobForm();
   await createJobPage.fillJobDetails();
   await createJobPage.fillJobTypeAndCompensation();
@@ -24,6 +25,6 @@ test('Login and create a new job', async ({ page }) => {
 
   await page.waitForTimeout(3000);
   await createJobPage.submitJob();
-
+  await createJobPage.seeAllApplications();
   await page.waitForTimeout(5000);
 });

@@ -23,8 +23,8 @@ async function userFlow(browser, user, jobUrl) {
   await loginPage.goto();
 
   // ✅ PASS EMAIL & PASSWORD PROPERLY
-  await loginPage.login(user.email, user.password);
-  await loginPage.clickSignIn(user.email, user.password);
+  await loginPage.login("khurrramimran908@gmail", "Tech@123456");
+  await loginPage.clickSignIn("khurrramimran908@gmail", "Tech@123456");
 
   await page.waitForTimeout(5000);
 
@@ -33,6 +33,9 @@ async function userFlow(browser, user, jobUrl) {
 
   await applyJobPage.applyNow();
   await applyJobPage.recordVideo();
+  await page.waitForTimeout(10000);
+  await applyJobPage.stopRecording();
+  await page.waitForTimeout(3000);
   await applyJobPage.submitApplication();
 
   // --- LOGOUT ---
@@ -48,7 +51,7 @@ test('Apply for specific job (all users from JSON)', async () => {
   const browser = await chromium.launch({ headless: false });
 
   const jobUrl =
-    'https://recruitai-web-production.up.railway.app/jobs/5ab69721-a242-4f6b-910a-40ae4d9e8367';
+    'https://recruitai-web-production.up.railway.app/jobs/0ecbefe5-c622-4d1e-baee-83145a4b3f09';
 
   for (const user of users) {
     try {
