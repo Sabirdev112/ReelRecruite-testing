@@ -17,10 +17,12 @@ export class ApplyJobPage {
   async recordVideo() {
     await this.recordVideoButton.click();
     await this.startRecordingButton.click();
+  }
+
+  async stopRecording() {
     await this.stopRecordingButton.click();
     await this.confirmVideoButton.click();
   }
-
   async submitApplication() {
     await this.submitButton.click();
   }
