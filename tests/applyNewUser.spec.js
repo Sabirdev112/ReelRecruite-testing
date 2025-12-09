@@ -24,9 +24,6 @@ async function userFlow(browser, user, jobUrl) {
   // ✅ PASS EMAIL & PASSWORD PROPERLY
   await loginPage.login(user.email, user.password);
   await loginPage.clickSignIn(user.email, user.password);
-
-  await page.waitForTimeout(5000);
-
   //profile compeletion
   await page.goto(jobUrl);
   await applyJobPage.applyNow();
