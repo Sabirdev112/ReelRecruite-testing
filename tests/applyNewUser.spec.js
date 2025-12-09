@@ -27,9 +27,16 @@ async function userFlow(browser, user, jobUrl) {
 
   await page.waitForTimeout(5000);
 
+  //profile compeletion
+  await applyJobPage.profileData();
+  await applyJobPage.completeAboutSection();
+  await applyJobPage.addSkills();
+  await applyJobPage.addExperience();
+  await applyJobPage.addEducation();
+  await applyJobPage.recordCoverVideo();
+
   // --- APPLY FOR JOB ---
-  await page.goto(jobUrl);
-  await applyJobPage.goto(); 
+  await page.goto(jobUrl); 
   await applyJobPage.applyNow();
   await applyJobPage.recordVideo();
   await applyJobPage.submitApplication();
