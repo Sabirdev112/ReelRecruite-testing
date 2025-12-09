@@ -49,6 +49,13 @@ export class ApplyJobPage {
     this.submitButton = page.getByRole('button', { name: 'Submit Application' });
     
   }
+  async gotoProfile(){
+    await this.completeprofileButton.click();
+  }
+  async scrollDown(pixels = 600) {
+  await this.page.evaluate((y) => window.scrollBy(0, y), pixels);
+}
+
 async profileData(){
     await this.editprofileButton.click();
     await this.professionalTitleButton.pressSequentially('Software Engineer');
