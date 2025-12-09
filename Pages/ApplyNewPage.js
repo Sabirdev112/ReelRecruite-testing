@@ -7,11 +7,12 @@ export class ApplyJobPage {
     this.professionalTitleButton = page.getByRole('textbox', { name: 'Professional Title*' });
     this.saveProfileButton = page.getByRole('button', { name: 'Save Changes' });
     //About section
-    this.bioButton = page.getByRole('textbox', { name: 'Bio*' });
-    this.locationInput = page.getByRole('textbox', { name: 'Location*' });
-    this.countryInptut = page.getByRole('textbox', { name: 'Location*' });
+    this.bioButton = page.getByRole('button', { name: 'Add About Information' });
+    this.bioInput = page.getByRole('textbox', { name: 'Bio*' })
+    this.locationInput = page.getByPlaceholder('e.g., San Francisco, CA');
+    this.countryInptut = page.getByRole('textbox', { name: 'Country*' });
     this.phoneInput = page.getByRole('textbox', { name: 'Phone Number *' });
-    this.saveAboutButton = page.getByRole('textbox', { name: 'Phone Number *' });
+    this.saveAboutButton = page.getByRole('button', { name: 'Save Changes' });
     //add skills
     this.addSkillButton = page.getByRole('button', { name: 'Add Your Skills' });
     this.skillInput = page.getByRole('textbox', { name: 'Type a skill and press Enter' });
@@ -30,7 +31,7 @@ export class ApplyJobPage {
     this.degreeInput = page.getByRole('textbox', { name: 'e.g., Bachelor of Science' });
     this.fieldInput = page.getByRole('textbox', { name: 'e.g., Computer Science' });
     this.gpaInput = page.getByRole('textbox', { name: 'e.g., 3.8 GPA' });
-    this.locationInput = page.getByRole('textbox', { name: 'e.g., Cambridge, MA' });
+    this.institutelocation = page.getByRole('textbox', { name: 'e.g., Cambridge, MA' });
     this.startDateInput = page.getByRole('textbox', { name: 'Start Date *' });
     this.currentlyStudyingLabel = page.locator('label').filter({ hasText: 'I am currently studying here' });
     this.descriptionInput = page.getByRole('textbox', { name: 'Describe your studies,' });
@@ -52,9 +53,7 @@ export class ApplyJobPage {
   async gotoProfile(){
     await this.completeprofileButton.click();
   }
-  async scrollDown(pixels = 600) {
-  await this.page.evaluate((y) => window.scrollBy(0, y), pixels);
-}
+ 
 
 async profileData(){
     await this.editprofileButton.click();
@@ -63,13 +62,14 @@ async profileData(){
 }
 
     async completeAboutSection() {
-        await this.bioButton.pressSequentially('Experienced Software Engineer with a passion for developing innovative programs that expedite the efficiency and effectiveness of organizational success.');
+        await this.bioButton.click();
+        await this.bioInput.pressSequentially('Experienced Software Engineer with a passion for developing innovative programs that expedite the efficiency and effectiveness of organizational success.');
         await this.locationInput.pressSequentially('New York, NY');
         await this.countryInptut.pressSequentially('United States');
         await this.phoneInput.pressSequentially('1234567890');
         await this.saveAboutButton.click();
     }
-    async addSkills(skills) {
+    async addSkills() {
         await this.addSkillButton.click();
         await this.skillInput.pressSequentially("playwright, Selenium, Cucumber");
         await this.skillInput.press('Enter');
@@ -92,7 +92,7 @@ async profileData(){
         await this.degreeInput.pressSequentially('Bachelor of Science');
         await this.fieldInput.pressSequentially('Computer Science');
         await this.gpaInput.pressSequentially('3.8');
-        await this.locationInput.pressSequentially('New York, NY');
+        await this.institutelocation.pressSequentially('New York, NY');
         await this.startDateInput.pressSequentially('2022-01-01');
         await this.currentlyStudyingLabel.click();
         await this.descriptionInput.pressSequentially('As a student of computer science i have made many projects during my institue study');
@@ -119,5 +119,11 @@ async profileData(){
   async submitApplication() {
     await this.submitButton.click();
   }
+
+   async scrollDown(pixels = 300) {
+     await this.page.waitForTimeout(1500);
+  await this.page.evaluate((y) => window.scrollBy(0, y), pixels);
+   await this.page.waitForTimeout(1500);
+}
   
 }

@@ -25,6 +25,7 @@ export class LoginPage {
 
   async clickSignIn() {
     await this.signInButtonLocator.click();
+    await this.page.waitForURL('**/jobs');
   }
   async logout() {
     await this.avatar.click();
