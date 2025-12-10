@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 import fs from 'fs/promises';
 import path from 'path';
 
-import { LoginPage } from '../Pages/LoginPage.js';
+import { LoginPage } from '../../Pages/LoginPage.js';
 
 
 const VALID_RECRUITER_EMAIL = 'carlos@gmail.com';

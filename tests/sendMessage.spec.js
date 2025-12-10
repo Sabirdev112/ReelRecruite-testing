@@ -10,13 +10,13 @@ function getRandomMessage() {
     return cleaned[Math.floor(Math.random() * cleaned.length)];
 }
 
-test('Candidate logs in and sends a message', async ({ page }) => {
+test('recruiter logs in and sends a message', async ({ page }) => {
     const loginPage = new LoginPage(page);
     const sendMessagePage = new SendMessagePage(page);
 
     // Step 1: Login
     await loginPage.goto();
-    await loginPage.login('carlos@gmail.com', 'Carlos@123');
+    await loginPage.login('carlos@gmail.com', 'Carlos@1233');
 
     // Step 2: Messaging actions
     await sendMessagePage.openMessages();
