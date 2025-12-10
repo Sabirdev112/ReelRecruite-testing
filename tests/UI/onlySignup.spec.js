@@ -1,7 +1,7 @@
 import { test } from '@playwright/test';
 import fs from 'fs';
 import path from 'path';
-import { SignupPage } from '../Pages/SignupPage.js';
+import { SignupPage } from '../../Pages/SignupPage.js';
 
 test('Candidate signs up', async ({ page }) => {
   const USERS_FILE = path.join(process.cwd(), 'users.json');
