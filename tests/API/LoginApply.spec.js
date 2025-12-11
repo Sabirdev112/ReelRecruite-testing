@@ -1,8 +1,8 @@
 import { test } from '@playwright/test';
 import fs from 'fs';
 import path from 'path';
-import FormData from 'form-data';
-import fetch from 'node-fetch';
+import { FormData, fetch } from 'undici';
+
 
 const users = JSON.parse(fs.readFileSync('users.json', 'utf-8'));
 const JOB_ID = '0ecbefe5-c622-4d1e-baee-83145a4b3f09';

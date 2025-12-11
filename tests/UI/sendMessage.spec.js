@@ -1,7 +1,7 @@
 import fs from 'fs';
 import { test } from '@playwright/test';
-import { SendMessagePage } from '../Pages/SendMessagePage.js';
-import { LoginPage } from '../Pages/LoginPage.js';
+import { SendMessagePage } from '../../Pages/SendMessagePage.js';
+import { LoginPage } from '../../Pages/LoginPage.js';
 
 function getRandomMessage() {
     const data = fs.readFileSync('random_messages.csv', 'utf8');
