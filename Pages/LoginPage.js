@@ -13,9 +13,10 @@ export class LoginPage {
   }
 
   async login(email, password) {
+  await this.usernameInput.waitFor({ state: 'visible'});
   await this.usernameInput.click();
   await this.usernameInput.pressSequentially(email, { delay: 40 });
-
+  await this.passwordInput.waitFor({ state: 'visible'});
   await this.passwordInput.click();
   await this.passwordInput.pressSequentially(password, { delay: 40 });
 
@@ -25,10 +26,11 @@ export class LoginPage {
 
   async clickSignIn() {
     await this.signInButtonLocator.click();
-    await this.page.waitForURL('**/jobs');
+    await this.page.waitForTimeout(5000);
   }
   async logout() {
     await this.avatar.click();
+    await this.signoutButton.waitFor({ state: 'visible'});
     await this.signoutButton.click();
   }
 }

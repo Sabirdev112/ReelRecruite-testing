@@ -20,24 +20,20 @@ async function userFlow(browser, user, jobUrl) {
 
   // --- LOGIN ---
   await loginPage.goto();
-
-  // ✅ PASS EMAIL & PASSWORD PROPERLY
   await loginPage.login(user.email, user.password);
-  await loginPage.clickSignIn(user.email, user.password);
+  await loginPage.clickSignIn();
+  console.log(`Logged in as: ${user.email}`);
   //profile compeletion
   await page.goto(jobUrl);
   await applyJobPage.applyNow();
   await applyJobPage.gotoProfile();
   await applyJobPage.profileData();
-  await applyJobPage.scrollDown();
   await applyJobPage.completeAboutSection();
-  await applyJobPage.scrollDown();
   await applyJobPage.addSkills();
-  await applyJobPage.scrollDown();
   await applyJobPage.addExperience();
-  await applyJobPage.scrollDown();
+  console.log(`Adding experience for: ${user.email}`);
   await applyJobPage.addEducation();
-  await applyJobPage.scrollDown();
+  console.log(`Adding education for: ${user.email}`);
   await applyJobPage.recordCoverVideo();
 
   // --- APPLY FOR JOB ---
@@ -49,10 +45,10 @@ async function userFlow(browser, user, jobUrl) {
   // --- LOGOUT ---
   if (loginPage.logout) {
     await loginPage.logout();
-    await page.waitForSelector('text=Sign In', { timeout: 10000 });
+    await page.waitForSelector('text=Sign In');
   }
 
-  await context.close();
+  
 }
 
 test('Apply for specific job (all users from JSON)', async () => {
@@ -69,6 +65,4 @@ test('Apply for specific job (all users from JSON)', async () => {
       continue;
     }
   }
-
-  await browser.close();
 });
