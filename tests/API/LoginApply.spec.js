@@ -1,11 +1,11 @@
 import { test } from '@playwright/test';
 import fs from 'fs';
 import path from 'path';
-import { FormData, fetch } from 'undici';
-
+import FormData from 'form-data';
+import fetch from 'node-fetch'; // required for Cloudinary upload
 
 const users = JSON.parse(fs.readFileSync('users.json', 'utf-8'));
-const JOB_ID = '0ecbefe5-c622-4d1e-baee-83145a4b3f09';
+const JOB_ID = 'a18e25af-08ad-4f67-ae40-6d4255661161';
 const videosFolder = path.join(process.cwd(), 'videos'); // path to videos folder
 const videoFiles = fs.readdirSync(videosFolder).filter(file => file.endsWith('.mp4'));
 
@@ -30,7 +30,35 @@ async function uploadVideoToCloudinary(filePath) {
   return data.secure_url;
 }
 
-test('Sign in users and apply job with unique video', async ({ request }) => {
+// Job questions and answers
+const jobQuestions = [
+  {
+    question: "How many years of Experience do you have",
+    questionType: "text",
+    isRequired: true,
+    orderIndex: 0
+  },
+  {
+    orderIndex: 1,
+    isRequired: true,
+    questionType: "boolean",
+    question: "Are you comfortable to relocate?"
+  },
+  {
+    question: "What's your current salary?",
+    questionType: "text",
+    isRequired: true,
+    orderIndex: 2
+  }
+];
+
+const questionAnswers = [
+  { jobQuestionId: "028febd6-e729-4508-a249-e7644ee5b86d", answer: "5" },
+  { jobQuestionId: "22e2a816-741b-407e-a507-1859c55d0e38", answerJson: true },
+  { jobQuestionId: "af65651e-2ffa-4f28-a922-1d823a648c10", answer: "25k" }
+];
+
+test('Sign in users and apply job with video and questions', async ({ request }) => {
   let videoIndex = 0;
 
   for (const user of users) {
@@ -79,7 +107,7 @@ test('Sign in users and apply job with unique video', async ({ request }) => {
     const applyPayload = {
       jobId: JOB_ID,
       videoUrl: videoUrl,
-      questionAnswers: [] // ignoring optional video question
+      questionAnswers: questionAnswers
     };
 
     const applyResp = await request.post(
