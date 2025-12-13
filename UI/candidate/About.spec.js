@@ -1,6 +1,6 @@
 import {test} from '@playwright/test';
-import { LoginPage } from '../../Pages/LoginPage.js';
-import { CandidateAboutPage } from '../../Pages/CandidateAboutPage.js';
+import { LoginPage } from '../../../Pages/LoginPage.js';
+import { CandidateAboutPage } from '../../../Pages/CandidateAboutPage.js';
 test('Candidate logs in and updates About section', async ({ page }) => {
   const loginPage = new LoginPage(page);
   const candidateAboutPage = new CandidateAboutPage(page);
