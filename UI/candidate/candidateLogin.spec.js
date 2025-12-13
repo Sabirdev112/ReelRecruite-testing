@@ -2,7 +2,7 @@ import { test } from '@playwright/test';
 import fs from 'fs';
 import path from 'path';
 
-import { LoginPage } from '../../Pages/LoginPage.js';
+import { LoginPage } from '../../../Pages/LoginPage.js';
 
 test('Candidate logs in', async ({ page }) => {
   const USERS_FILE = path.join(process.cwd(), 'users.json');
@@ -15,19 +15,6 @@ test('Candidate logs in', async ({ page }) => {
   // Store already used emails in memory
   const usedEmails = new Set();
   
-  // Select a random user NOT used before
-  function getRandomUnusedUser(users) {
-    const unused = users.filter(u => !usedEmails.has(u.email));
-  
-    if (unused.length === 0) return null; // all used
-  
-    const randomIndex = Math.floor(Math.random() * unused.length);
-    const selected = unused[randomIndex];
-  
-    usedEmails.add(selected.email);
-    return selected;
-  }
-
   const users = getUsers();
   const loginPage = new LoginPage(page);
 
