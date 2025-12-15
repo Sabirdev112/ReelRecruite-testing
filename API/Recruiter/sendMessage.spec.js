@@ -1,7 +1,7 @@
 import { test } from '@playwright/test';
 import fs from 'fs';
 
-const messages = JSON.parse(fs.readFileSync('randomMessages.json', 'utf-8'));
+const messages = JSON.parse(fs.readFileSync('../../fixtures/messages/randomMessages.json', 'utf-8'));
 
 // User credentials
 const USER = {

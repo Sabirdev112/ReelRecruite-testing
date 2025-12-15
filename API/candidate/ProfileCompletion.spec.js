@@ -1,7 +1,7 @@
 import { test } from '@playwright/test';
 import fs from 'fs';
 
-const users = JSON.parse(fs.readFileSync('users.json', 'utf-8'));
+const users = JSON.parse(fs.readFileSync('../../fixtures/candidate/Credentials.json'));
 
 for (const user of users) {
   test(`Update profile for ${user.email}`, async ({ request }) => {
