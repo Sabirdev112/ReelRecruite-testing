@@ -1,9 +1,8 @@
 import { test } from '@playwright/test';
 import fs from 'fs';
-import path from 'path';
 
-const users = JSON.parse(fs.readFileSync('users.json', 'utf-8'));
-const OUTPUT_FILE = 'verifiedUsers.json';
+const users = JSON.parse(fs.readFileSync('../fixtures/users/NewUser.json', 'utf-8'));
+const OUTPUT_FILE = '../fixtures/users/Candidate.json';
 const results = [];
 
 test('Signup and verify all users', async ({ request }) => {

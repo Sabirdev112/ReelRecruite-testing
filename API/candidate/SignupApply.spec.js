@@ -3,7 +3,7 @@ import fs from 'fs';
 import path from 'path';
 
 // Load users
-const users = JSON.parse(fs.readFileSync('users.json', 'utf-8'));
+const users = JSON.parse(fs.readFileSync('../../fixtures/users/Candidate.json', 'utf-8'));
 const JOB_ID = 'b36c2275-eb87-422a-b7e8-821e7f3fa4cf';
 
 // --------- VIDEO LOADING FIX ---------
