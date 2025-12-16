@@ -2,9 +2,9 @@ import { test } from '@playwright/test';
 import fs from 'fs';
 import path from 'path';
 import FormData from 'form-data';
-import fetch from 'node-fetch'; // required for Cloudinary upload
+import { fetch } from 'undici'; // required for Cloudinary upload
 
-const users = JSON.parse(fs.readFileSync('../../fixtures/candidate/Credentials.json', 'utf-8'));
+const users = JSON.parse(fs.readFileSync(path.join(__dirname, '../../fixtures/Candidate/Credentials.json'), 'utf-8'));
 const JOB_ID = 'a18e25af-08ad-4f67-ae40-6d4255661161';
 const videosFolder = path.join(process.cwd(), 'videos'); // path to videos folder
 const videoFiles = fs.readdirSync(videosFolder).filter(file => file.endsWith('.mp4'));
