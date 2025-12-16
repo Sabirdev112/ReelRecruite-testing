@@ -1,6 +1,10 @@
+import fs from 'fs';
+import path from 'path';
+
 export class CreateJobPage {
   constructor(page) {
     this.page = page;
+    this.createdJobId = null;
 
     // Main buttons
     this.cancelButton = page.getByRole('button', { name: 'Cancel' });
@@ -36,32 +40,86 @@ export class CreateJobPage {
     this.questionBox = page.getByRole('textbox', { name: 'e.g., Why are you interested' });
     this.requiredCheckbox = page.getByRole('checkbox', { name: 'This question is required' });
     this.responseType = page.getByRole('combobox');
-    // preview - target the primary Preview button specifically to avoid strict-mode collisions
+
+    // Preview / Post
     this.previewButton = page.locator('button.bg-primary:has-text("Preview")');
     this.seeAllButton = page.getByRole('button', { name: 'See All' });
   }
 
-async Cancel() {
-    await this.cancelButton.click();
+  /* ------------------ Helpers ------------------ */
+
+  async captureAndStoreJobId() {
+  this.page.on('response', async (response) => {
+    if (
+      response.request().method() === 'POST' &&
+      response.url().includes('/v1/jobs/create')
+    ) {
+      const body = await response.json();
+
+      // ✅ CORRECT PATH
+      this.createdJobId = body?.job?.id;
+
+      if (!this.createdJobId) return;
+
+      const filePath = path.join(
+        process.cwd(),
+        'fixtures/recruiter/jobid.json'
+      );
+
+      fs.mkdirSync(path.dirname(filePath), { recursive: true });
+
+      fs.writeFileSync(
+        filePath,
+        JSON.stringify(
+          {
+            jobId: this.createdJobId,
+            recruiterId: body.job.recruiterId,
+            companyId: body.job.companyId,
+            createdAt: body.job.createdAt
+          },
+          null,
+          2
+        )
+      );
+    }
+  });
 }
 
-  async openJobForm() {
-    
-    await this.postNewJobButton.waitFor({ state: 'visible', timeout: 10000 });
-    await this.postNewJobButton.click();
-    await this.titleInput.waitFor({ state: 'visible', timeout: 10000 });
-  }
 
-  // Step 1: Job Details
+  /* ------------------ Flow Methods ------------------ */
+
+  async Cancel() {
+    await this.cancelButton.click();
+  }
+  async clickIfVisible(locator) {
+  if (await locator.isVisible().catch(() => false)) {
+    await locator.click();
+    return true;
+  }
+  return false;
+}
+
+
+  async openJobForm() {
+  // Click Cancel if it appears immediately after login
+  await this.clickIfVisible(this.cancelButton);
+
+  // Continue to Post New Job
+  await this.postNewJobButton.waitFor({ state: 'visible', timeout: 10000 });
+  await this.postNewJobButton.click();
+  await this.titleInput.waitFor({ state: 'visible', timeout: 10000 });
+}
+
   async fillJobDetails() {
     await this.titleInput.fill('Software Quality Assurance Engineer');
-    await this.summaryInput.fill('We need a Software QA Engineer skilled in Playwright and automation testing.');
+    await this.summaryInput.fill(
+      'We need a Software QA Engineer skilled in Playwright and automation testing.'
+    );
     await this.regionInput.fill('South America');
     await this.locationInput.fill('Pakistan');
     await this.nextButton.click();
   }
 
-  // Step 2: Job Type, Work Type, Experience, Salary, Currency, Expiration Date
   async fillJobTypeAndCompensation({
     jobType = 'Internship',
     workType = 'On-site',
@@ -70,65 +128,44 @@ async Cancel() {
     currency = 'pkr (₨)',
     expirationDate = '2025-12-30'
   } = {}) {
-    // Wait for Job Type section
-    await this.page.waitForSelector('.react-select__input-container', { state: 'visible', timeout: 10000 });
+    await this.page.waitForSelector('.react-select__input-container', { timeout: 10000 });
 
-    // Define locators AFTER wait
-    const reactSelectInputContainers = this.page.locator('.react-select__input-container');
-    const reactSelectControls = this.page.locator('.react-select__control');
+    const inputContainers = this.page.locator('.react-select__input-container');
+    const controls = this.page.locator('.react-select__control');
 
-    // Job Type
-    await reactSelectInputContainers.first().click();
-    await this.page.getByRole('option', { name: jobType }).waitFor({ state: 'visible', timeout: 5000 });
+    await inputContainers.first().click();
     await this.page.getByRole('option', { name: jobType }).click();
 
-    // Work Type
-    await reactSelectControls.nth(1).locator('.react-select__value-container > .react-select__input-container').click();
-    await this.page.getByRole('option', { name: workType }).waitFor({ state: 'visible', timeout: 5000 });
+    await controls.nth(1).locator('.react-select__input-container').click();
     await this.page.getByRole('option', { name: workType }).click();
 
-    // Experience
-    await reactSelectControls.nth(2).locator('.react-select__value-container > .react-select__input-container').click();
-    await this.page.getByRole('option', { name: experience }).waitFor({ state: 'visible', timeout: 5000 });
+    await controls.nth(2).locator('.react-select__input-container').click();
     await this.page.getByRole('option', { name: experience }).click();
 
-    // Salary & Currency
-    await this.salaryInput.waitFor({ state: 'visible', timeout: 5000 });
     await this.salaryInput.fill(salaryRange);
     await this.currencySelectControl.click();
-    await this.page.getByRole('option', { name: currency }).waitFor({ state: 'visible', timeout: 15000 });
     await this.page.getByRole('option', { name: currency }).click();
 
-    // Expiration Date
-    await this.expirationDateInput.waitFor({ state: 'visible', timeout: 15000 });
     await this.expirationDateInput.fill(expirationDate);
-
-    // Next → Description Section
     await this.nextButton.click();
-    await this.page.waitForSelector('.ql-editor', { state: 'visible', timeout: 15000 });
   }
 
-  // Step 3: Description
   async fillJobDescription() {
-    await this.descriptionBox.waitFor({ state: 'visible', timeout: 15000 });
-    await this.descriptionBox.fill('Responsible for testing web applications, writing test cases, and automating tests using Playwright.');
+    await this.descriptionBox.fill(
+      'Responsible for testing web applications and automating tests using Playwright.'
+    );
     await this.nextButton.click();
   }
 
-  // Step 4: Skills
   async addSkills() {
-    await this.skillInput.waitFor({ state: 'visible', timeout: 15000 });
     const skills = ['Playwright', 'Postman', 'JMeter'];
     for (const skill of skills) {
       await this.skillInput.fill(skill);
       await this.skillInput.press('Enter');
     }
-    
   }
 
-  // Step 5: Requirements
   async fillRequirements() {
-    await this.educationInput.waitFor({ state: 'visible', timeout: 15000 });
     await this.educationInput.fill('BSCS');
     await this.educationInput.press('Enter');
     await this.cultureInput.fill('SQA');
@@ -136,37 +173,73 @@ async Cancel() {
     await this.nextButton.click();
   }
 
-  // Step 6: Questions
   async addQuestions() {
-    await this.addQuestionButton.waitFor({ state: 'visible', timeout: 5000 });
     await this.addQuestionButton.click();
-
-    await this.questionBox.fill('Do you have the skills mentioned?');
+    await this.questionBox.fill('How many years of experience do you have?');
     await this.requiredCheckbox.check();
 
     await this.addQuestionButton.click();
     await this.questionBox.fill('Are you a CS graduate?');
     await this.responseType.selectOption('boolean');
+  }
 
-    await this.addQuestionButton.click();
-    await this.questionBox.fill('Are you a boy?');
-    await this.responseType.selectOption('video');
-  }
-async previewJob() {
-    await this.previewButton.waitFor({ state: 'visible', timeout: 10000 });
+  async previewJob() {
     await this.previewButton.click();
-    // Wait for a preview panel/modal to appear (best-effort)
-    await this.page.waitForSelector('div[role="dialog"], .modal, text=Preview', { state: 'visible', timeout: 10000 }).catch(() => {});
-}
-  // Step 7: Submit Job
-  async submitJob() {
-    await this.createJobButton.waitFor({ state: 'visible', timeout: 10000 });
-    await Promise.all([
-      
-      this.createJobButton.click()
-    ]);
-    
   }
+
+async submitJob() {
+  await this.createJobButton.waitFor({ state: 'visible', timeout: 10000 });
+
+  // Wait for the job creation API response while clicking the button
+  const response = await Promise.all([
+    this.page.waitForResponse(
+      (res) =>
+        res.request().method() === 'POST' &&
+        res.url().includes('/v1/jobs/create'),
+      { timeout: 15000 } // adjust if needed
+    ),
+    this.createJobButton.click()
+  ]);
+
+  const responseBody = await response[0].json();
+
+  // Extract jobId from response
+  this.createdJobId = responseBody?.job?.id;
+
+  if (!this.createdJobId) {
+    throw new Error(
+      `Job ID not found in response: ${JSON.stringify(responseBody)}`
+    );
+  }
+
+  // Store jobId in JSON file
+  const filePath = path.join(
+    process.cwd(),
+    'fixtures/recruiter/jobid.json'
+  );
+
+  fs.mkdirSync(path.dirname(filePath), { recursive: true });
+
+  fs.writeFileSync(
+    filePath,
+    JSON.stringify(
+      {
+        jobId: this.createdJobId,
+        recruiterId: responseBody.job.recruiterId,
+        companyId: responseBody.job.companyId,
+        createdAt: responseBody.job.createdAt
+      },
+      null,
+      2
+    )
+  );
+
+  return this.createdJobId;
+}
+
+
+
+
   async seeAllApplications() {
     await this.seeAllButton.click();
   }

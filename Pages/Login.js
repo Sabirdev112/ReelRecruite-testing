@@ -26,7 +26,7 @@ export class Login {
 
     async clickSignIn() {
         await this.signInButtonLocator.click();
-        await this.page.waitForTimeout(5000);
+        await this.page.waitForLoadState('networkidle');
     }
     async logout() {
         await this.avatar.click();
