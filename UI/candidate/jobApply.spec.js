@@ -1,11 +1,31 @@
 import { test, chromium } from '@playwright/test';
 import fs from 'fs';
 import path from 'path';
-import { LoginPage } from '../../../Pages/LoginPage.js';
-import { ApplyJobPage } from '../../../Pages/ApplyJobPage.js';
+import { fileURLToPath } from 'url';
+import { Login } from '../../Pages/Login.js';
+import { ApplyJobPage } from '../../Pages/ApplyJobPage.js';
 
-const USERS_FILE = path.join(process.cwd(), 'users.json');
-const users = JSON.parse(fs.readFileSync(USERS_FILE, 'utf-8'));
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// Load candidate credentials
+const users = JSON.parse(
+  fs.readFileSync(
+    path.join(__dirname, '../../fixtures/Candidate/Credentials.json'),
+    'utf-8'
+  )
+);
+
+// Load latest job ID from fixture
+const jobDataPath = path.join(__dirname, '../../fixtures/recruiter/jobid.json');
+if (!fs.existsSync(jobDataPath)) {
+  throw new Error('Job ID file not found. Create a job first!');
+}
+const jobData = JSON.parse(fs.readFileSync(jobDataPath, 'utf-8'));
+const jobId = jobData.jobId;
+
+// Construct the job URL dynamically
+const jobUrl = `https://recruitai-web-production.up.railway.app/jobs/${jobId}`;
 
 async function userFlow(browser, user, jobUrl) {
   const context = await browser.newContext({
@@ -14,51 +34,39 @@ async function userFlow(browser, user, jobUrl) {
 
   const page = await context.newPage();
 
-  const loginPage = new LoginPage(page);
+  const loginPage = new Login(page);
   const applyJobPage = new ApplyJobPage(page);
 
   console.log(`Processing user: ${user.email}`);
 
-  // --- LOGIN ---
+  // LOGIN
   await loginPage.goto();
+  await loginPage.login(user.email, user.password);
+  await loginPage.clickSignIn();
 
-  // ✅ PASS EMAIL & PASSWORD PROPERLY
-  await loginPage.login("khurrramimran908@gmail", "Tech@123456");
-  await loginPage.clickSignIn("khurrramimran908@gmail", "Tech@123456");
+  // Wait for dashboard signal (avoid networkidle)
+  await page.waitForURL('**/jobs');
 
-  await page.waitForTimeout(5000);
-
-  // --- APPLY FOR JOB ---
+  // APPLY JOB
   await page.goto(jobUrl);
-
   await applyJobPage.applyNow();
   await applyJobPage.recordVideo();
   await page.waitForTimeout(10000);
   await applyJobPage.stopRecording();
-  await page.waitForTimeout(3000);
+  await applyJobPage.answerOne();
+  await applyJobPage.answerTwo();
   await applyJobPage.submitApplication();
-
-  // --- LOGOUT ---
-  if (loginPage.logout) {
-    await loginPage.logout();
-    await page.waitForSelector('text=Sign In', { timeout: 10000 });
-  }
-
-  await context.close();
+  console.log(`Application submitted for: ${user.email}`);
 }
 
-test('Apply for specific job (all users from JSON)', async () => {
+test('Apply for latest job (users from JSON)', async () => {
   const browser = await chromium.launch({ headless: false });
-
-  const jobUrl =
-    'https://recruitai-web-production.up.railway.app/jobs/0ecbefe5-c622-4d1e-baee-83145a4b3f09';
 
   for (const user of users) {
     try {
       await userFlow(browser, user, jobUrl);
-    } catch (error) {
-      console.log(`Failed to process user: ${user.email}`, error);
-      continue;
+    } catch (err) {
+      console.error(`Failed for ${user.email}`, err);
     }
   }
 
