@@ -1,5 +1,5 @@
 import { test, } from '@playwright/test';
-import { LoginPage } from '../../Pages/LoginPage.js';
+import { LoginPage } from '../Pages/LoginPage.js';
 import { CreateJobPage } from '../../Pages/CreateJobPage.js';
 
 test('Login and create a new job', async ({ page }) => {
