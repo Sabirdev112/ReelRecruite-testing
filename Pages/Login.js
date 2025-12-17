@@ -7,11 +7,9 @@ export class Login {
         this.avatar = page.locator("//p[@class='text-xs capitalize text-gray-500']");
         this.signoutButton = page.getByText('Log out', { exact: true });
     }
-
     async goto() {
         await this.page.goto('https://recruitai-web-production.up.railway.app/auth');
     }
-
     async login(email, password) {
         await this.usernameInput.waitFor({ state: 'visible' });
         await this.usernameInput.click();
@@ -19,11 +17,8 @@ export class Login {
         await this.passwordInput.waitFor({ state: 'visible' });
         await this.passwordInput.click();
         await this.passwordInput.pressSequentially(password, { delay: 40 });
-
         await this.passwordInput.blur();
     }
-
-
     async clickSignIn() {
         await this.signInButtonLocator.click();
         await this.page.waitForLoadState('networkidle');
@@ -33,4 +28,4 @@ export class Login {
         await this.signoutButton.waitFor({ state: 'visible' });
         await this.signoutButton.click();
     }
-}
+};
