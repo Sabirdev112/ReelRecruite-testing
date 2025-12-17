@@ -1,32 +1,27 @@
 import { defineConfig } from '@playwright/test';
+
 export default defineConfig({
+  // Allow Playwright to discover tests anywhere
   testDir: '.',
+
+  // Only treat proper test files as tests
   testMatch: [
-    '**/*.spec.ts',
     '**/*.spec.js',
-    '**/*.test.ts',
-    '**/*.test.js'
+    '**/*.test.js',
+    '**/*.spec.ts',
+    '**/*.test.ts'
   ],
   timeout: 0 * 1000,
   retries: 0,
   use: {
+    // baseURL intentionally removed
     trace: 'on-first-retry'
   },
-  projects: [
-  {
-    name: 'Chromium',
-    testDir: './UI',
-    use: { browserName: 'chromium', headless: false }
-  },
-  {
-    name: 'API',
-    testDir: './API',
-    use: { browserName: 'chromium', headless: true }
-  }
-],
+
   reporter: [
     ['html', { open: 'never' }],
     ['list']
   ],
+
   outputDir: 'test-results'
 });

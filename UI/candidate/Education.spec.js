@@ -1,9 +1,9 @@
 import { test, expect } from '@playwright/test';
-import { LoginPage } from '../../../Pages/LoginPage.js';
+import { Login} from '../../../Pages/LoginPage.js';
 import { UpdateEducationPage } from '../../../Pages/UpdateEducationPage.js';
 
 test('Candidate logs in and adds education details', async ({ page }) => {
-  const loginPage = new LoginPage(page);
+  const loginPage = new Login(page);
   
   const addEducationPage = new UpdateEducationPage(page);
 
