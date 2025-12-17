@@ -1,7 +1,7 @@
 import { test, chromium } from '@playwright/test';
 import fs from 'fs';
 import path from 'path';
-import { LoginPage } from '../../../Pages/LoginPage.js';
+import { LoginPage } from '../../Pages/LoginPage.js';
 import { ApplyJobPage } from '../../../Pages/ApplyJobPage.js';
 
 const USERS_FILE = path.join(process.cwd(), 'users.json');
