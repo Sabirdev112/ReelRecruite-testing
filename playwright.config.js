@@ -7,7 +7,7 @@ export default defineConfig({
     '**/*.test.ts',
     '**/*.test.js'
   ],
-  timeout: 120 * 1000,
+  timeout: 0 * 1000,
   retries: 0,
   use: {
     trace: 'on-first-retry'

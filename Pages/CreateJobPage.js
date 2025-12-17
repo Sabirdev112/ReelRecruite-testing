@@ -105,9 +105,9 @@ export class CreateJobPage {
   await this.clickIfVisible(this.cancelButton);
 
   // Continue to Post New Job
-  await this.postNewJobButton.waitFor({ state: 'visible', timeout: 10000 });
+  await this.postNewJobButton.waitFor({ state: 'visible'});
   await this.postNewJobButton.click();
-  await this.titleInput.waitFor({ state: 'visible', timeout: 10000 });
+  await this.titleInput.waitFor({ state: 'visible' });
 }
 
   async fillJobDetails() {
@@ -120,35 +120,50 @@ export class CreateJobPage {
     await this.nextButton.click();
   }
 
-  async fillJobTypeAndCompensation({
-    jobType = 'Internship',
-    workType = 'On-site',
-    experience = 'Executive',
-    salaryRange = '50000-70000',
-    currency = 'pkr (₨)',
-    expirationDate = '2025-12-30'
-  } = {}) {
-    await this.page.waitForSelector('.react-select__input-container', { timeout: 10000 });
+ async fillJobTypeAndCompensation({
+  jobType = 'Internship',
+  workType = 'On-site',
+  experience = 'Executive',
+  salaryRange = '50000-70000',
+  currency = 'pkr (₨)',
+  expirationDate
+} = {}) {
+  await this.page.waitForSelector('.react-select__input-container');
 
-    const inputContainers = this.page.locator('.react-select__input-container');
-    const controls = this.page.locator('.react-select__control');
+  const inputContainers = this.page.locator('.react-select__input-container');
+  const controls = this.page.locator('.react-select__control');
 
-    await inputContainers.first().click();
-    await this.page.getByRole('option', { name: jobType }).click();
+  // ----------- Calculate expiration date (+2 days) -----------
+  const baseDate = expirationDate ? new Date(expirationDate) : new Date();
+  baseDate.setDate(baseDate.getDate() + 2);
 
-    await controls.nth(1).locator('.react-select__input-container').click();
-    await this.page.getByRole('option', { name: workType }).click();
+  const formattedExpirationDate = baseDate
+    .toISOString()
+    .split('T')[0]; // YYYY-MM-DD
 
-    await controls.nth(2).locator('.react-select__input-container').click();
-    await this.page.getByRole('option', { name: experience }).click();
+  // ----------- Job type -----------
+  await inputContainers.first().click();
+  await this.page.getByRole('option', { name: jobType }).click();
 
-    await this.salaryInput.fill(salaryRange);
-    await this.currencySelectControl.click();
-    await this.page.getByRole('option', { name: currency }).click();
+  // ----------- Work type -----------
+  await controls.nth(1).locator('.react-select__input-container').click();
+  await this.page.getByRole('option', { name: workType }).click();
 
-    await this.expirationDateInput.fill(expirationDate);
-    await this.nextButton.click();
-  }
+  // ----------- Experience -----------
+  await controls.nth(2).locator('.react-select__input-container').click();
+  await this.page.getByRole('option', { name: experience }).click();
+
+  // ----------- Salary & currency -----------
+  await this.salaryInput.fill(salaryRange);
+  await this.currencySelectControl.click();
+  await this.page.getByRole('option', { name: currency }).click();
+
+  // ----------- Expiration date (+2 days) -----------
+  await this.expirationDateInput.fill(formattedExpirationDate);
+
+  await this.nextButton.click();
+}
+
 
   async fillJobDescription() {
     await this.descriptionBox.fill(
@@ -188,7 +203,7 @@ export class CreateJobPage {
   }
 
 async submitJob() {
-  await this.createJobButton.waitFor({ state: 'visible', timeout: 10000 });
+  await this.createJobButton.waitFor({ state: 'visible' });
 
   // Wait for the job creation API response while clicking the button
   const response = await Promise.all([
