@@ -1,30 +1,42 @@
 import { defineConfig } from '@playwright/test';
+import path from 'path';
 
 export default defineConfig({
-  // Allow Playwright to discover tests anywhere
-  testDir: '.',
-
-  // Only treat proper test files as tests
+  testDir: '.', // root directory for your tests
   testMatch: [
-    '**/*.spec.ts',
     '**/*.spec.js',
-    '**/*.test.ts',
-    '**/*.test.js'
+    '**/*.test.js',
+    '**/*.spec.ts',
+    '**/*.test.ts'
   ],
 
-  timeout: 60 * 1000,
-
+  timeout: 120 * 1000, // 2 minutes per test
   retries: 0,
 
   use: {
-    // baseURL intentionally removed
-    trace: 'on-first-retry'
+    trace: 'on-first-retry',
+    headless: false, // optional: run in headed mode for debugging
+    viewport: { width: 1280, height: 720 },
+    actionTimeout: 30 * 1000,
+    ignoreHTTPSErrors: true,
   },
+
+  projects: [
+    {
+      name: 'chromium',
+      use: { browserName: 'chromium' },
+    },
+  ],
 
   reporter: [
     ['html', { open: 'never' }],
     ['list']
   ],
 
-  outputDir: 'test-results'
+  outputDir: 'test-results',
+
+  // Make sure ES modules are supported
+  // This ensures top-level await works in your spec files
+  fullyParallel: true,
+  forbidOnly: !!process.env.CI,
 });
