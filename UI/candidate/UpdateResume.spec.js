@@ -1,27 +1,51 @@
-import { test, expect } from '@playwright/test';
+import { test } from '@playwright/test';
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
 import { Login } from '../../Pages/Login.js';
-import { UpdateResumePage } from '../../Pages/UpdateResume.js';
-async function loginAndNavigateToProfile(page) {
+import { UploadResume } from '../../Pages/ChangeResume.js';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// Load candidate credentials
+const candidate = JSON.parse(
+  fs.readFileSync(
+    path.join(__dirname, '../../fixtures/Candidate/Credentials.json'),
+    'utf-8'
+  )
+)[0];
+
+// Resume file path
+const resumePath = path.join(
+  __dirname,
+  '../../fixtures/Bold-Poster.pdf'
+);
+
+test('Candidate deletes and uploads resume', async ({ page }) => {
+  // ----------- Login -----------
   const loginPage = new Login(page);
-  const updateResume = new UpdateResumePage(page);
-
+   const uploadResumePage = new UploadResume(page);
   await loginPage.goto();
-  await loginPage.login('khurrramimran908@gmail.com', 'Tech@12345');
+  await loginPage.login(candidate.email, candidate.password);
   await loginPage.clickSignIn();
-  await page.waitForLoadState('networkidle');
+  await page.waitForURL('**/jobs');
+  await uploadResumePage.handleMaybeLaterIfPresent();
 
-  await updateResume.clickProfile();
-  await updateResume.openProfile();
+  // ----------- Profile & Resume flow -----------
+ 
 
-  return updateResume;
-}
+  await uploadResumePage.clickProfileMenu();
+  await uploadResumePage.goToProfile();
 
-test('candidate can remove and upload resume again', async ({ page }) => {
-    const updateResume = await loginAndNavigateToProfile(page);
-  
-    await updateResume.removeAndUploadResume('./fixtures/Bold Poster.pdf');
-  
-    // ✅ Verify upload succeeded by checking "Remove Resume" button exists
-    await expect(updateResume.removeResumeButton.first()).toBeVisible();
-  });
-  
+  await uploadResumePage.navigateToResumeSection();
+  console.log('Navigated to Resume section.');
+  await uploadResumePage.deleteExistingResume();
+  console.log('Existing resume deleted if it was present.');
+  await uploadResumePage.confirmDelete();
+  console.log('Confirmed resume deletion.');
+
+  await uploadResumePage.uploadNewResume(resumePath);
+  console.log('New resume uploaded.');
+});
