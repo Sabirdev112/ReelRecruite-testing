@@ -11,7 +11,6 @@ export default defineConfig({
     '**/*.spec.ts',
     '**/*.test.ts'
   ],
-  timeout: 0 * 1000,
   timeout: 120 * 1000,
   retries: 0,
   use: {

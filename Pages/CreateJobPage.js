@@ -46,7 +46,7 @@ export class CreateJobPage {
     this.seeAllButton = page.getByRole('button', { name: 'See All' });
   }
 
-  /* ------------------ Helpers ------------------ */
+  
 
   async captureAndStoreJobId() {
   this.page.on('response', async (response) => {
@@ -91,24 +91,36 @@ export class CreateJobPage {
   async Cancel() {
     await this.cancelButton.click();
   }
-  async clickIfVisible(locator) {
-  if (await locator.isVisible().catch(() => false)) {
-    await locator.click();
-    return true;
+async handleCancelIfPresent() {
+  try {
+    await this.cancelButton.waitFor({
+      state: 'visible',
+      timeout: 2000
+    });
+    await this.cancelButton.click();
+    await this.cancelButton.waitFor({ state: 'hidden' });
+  } catch {
+    // Cancel modal did not appear — continue safely
   }
-  return false;
 }
+
 
 
   async openJobForm() {
-  // Click Cancel if it appears immediately after login
-  await this.clickIfVisible(this.cancelButton);
+  // Handle cancel if it appears before clicking
+  await this.handleCancelIfPresent();
 
-  // Continue to Post New Job
-  await this.postNewJobButton.waitFor({ state: 'visible'});
+  // Click Post New Job
+  await this.postNewJobButton.waitFor({ state: 'visible' });
   await this.postNewJobButton.click();
+
+  // Handle cancel if it appears after clicking
+  await this.handleCancelIfPresent();
+
+  // Wait for job form to be ready
   await this.titleInput.waitFor({ state: 'visible' });
 }
+
 
   async fillJobDetails() {
     await this.titleInput.fill('Software Quality Assurance Engineer');
