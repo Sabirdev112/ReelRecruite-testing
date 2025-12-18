@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { test } from '@playwright/test';
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -9,30 +9,22 @@ import { ChangePassword } from '../../Pages/ChangePassword.js';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const credentialsPath = path.join(__dirname, '../../fixtures/candidate/credentials.json');
+// ----------- Load candidate credentials -----------
+const user = JSON.parse(
+  fs.readFileSync(
+    path.join(__dirname, '../../fixtures/Candidate/Credentials.json'),
+    'utf-8'
+  )
+)[0];
 
-test('Candidate changes password ', async ({ page }) => {
-  // ----------- Read candidate safely -----------
-  const candidatesRaw = fs.readFileSync(credentialsPath, 'utf-8');
-  if (!candidatesRaw) throw new Error('Credentials file is empty');
+test('Candidate changes password', async ({ page }) => {
+  const oldPassword = user.password;
+  const newPassword = `${oldPassword}`;
 
-  const candidates = JSON.parse(candidatesRaw);
-  if (!Array.isArray(candidates) || candidates.length === 0) {
-    throw new Error('No candidates found in credentials.json');
-  }
-
-  const candidate = candidates[0];
-  if (!candidate.email || !candidate.password) {
-    throw new Error('Email or password is missing in credentials.json');
-  }
-
-  const oldPassword = candidate.password;
-  const newPassword = `${oldPassword}_1`; // slight change
-
-  // ----------- Login with old password -----------
+  // ----------- Login -----------
   const loginPage = new Login(page);
   await loginPage.goto();
-  await loginPage.login(candidate.email, oldPassword);
+  await loginPage.login(user.email, oldPassword);
   await loginPage.clickSignIn();
   await page.waitForURL('**/jobs');
 
@@ -46,10 +38,20 @@ test('Candidate changes password ', async ({ page }) => {
   console.log('New password:', newPassword);
 
   // ----------- Update credentials.json -----------
-  const updatedCandidates = candidates.map(c =>
-    c.email === candidate.email ? { ...c, password: newPassword } : c
+  const credentialsPath = path.join(
+    __dirname,
+    '../../fixtures/candidate/credentials.json'
   );
 
-  fs.writeFileSync(credentialsPath, JSON.stringify(updatedCandidates, null, 2), 'utf-8');
+  const users = JSON.parse(fs.readFileSync(credentialsPath, 'utf-8'));
 
+  const updatedUsers = users.map(u =>
+    u.email === user.email ? { ...u, password: newPassword } : u
+  );
+
+  fs.writeFileSync(
+    credentialsPath,
+    JSON.stringify(updatedUsers, null, 2),
+    'utf-8'
+  );
 });

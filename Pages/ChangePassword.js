@@ -6,9 +6,7 @@ export class ChangePassword {
     this.page = page;
 
     // UI elements
-    this.profileMenu = page.locator(
-      'div.flex.items-center.gap-2.p-1.pr-3.hover\\:bg-gray-100.rounded-lg.transition-colors.cursor-pointer'
-    );
+    this.profileMenu = page.locator('xpath=//*[@id="root"]/div[2]/header/div/div[2]/div[2]/div/div/div[2]');
     this.settingsButton = page.getByText('Settings', { exact: true });
     this.oldPasswordInput = page.getByRole('textbox', { name: 'Enter your existing password' });
     this.newPasswordInput = page.getByRole('textbox', { name: 'New password' });

@@ -1,6 +1,20 @@
 import { test, expect } from '@playwright/test';
 import { Login } from '../../Pages/Login.js';
 import { CreateJobPage } from '../../Pages/CreateJobPage.js';
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// Load recruiter credentials
+const recruiter = JSON.parse(
+  fs.readFileSync(
+    path.join(__dirname, '../../fixtures/Recruiter/Credentials.json'),
+    'utf-8'
+  )
+)[0];
 
 test('Recruiter login and create a new job', async ({ page }) => {
   const loginPage = new Login(page);
@@ -8,7 +22,7 @@ test('Recruiter login and create a new job', async ({ page }) => {
 
   // Login
   await loginPage.goto();
-  await loginPage.login('carlos@gmail.com', 'Carlos@123');
+  await loginPage.login(recruiter.email, recruiter.password);
   await loginPage.clickSignIn();
 
   // Job creation flow
