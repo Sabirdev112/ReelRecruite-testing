@@ -16,7 +16,7 @@ const recruiter = JSON.parse(
   )
 )[0];
 
-test('Recruiter logs in and archives a chat', async ({ page }) => {
+test('Recruiter logs in and Unarchives a chat', async ({ page }) => {
   const loginPage = new Login(page);
   const archiveChatPage = new ArchiveChatPage(page);
 
@@ -29,5 +29,5 @@ test('Recruiter logs in and archives a chat', async ({ page }) => {
   await archiveChatPage.openMessages();
   await archiveChatPage.openChat();
   await archiveChatPage.archiveChat();
-  console.log('Chat archived successfully');
+  console.log('Chat Unarchived successfully');
 });
