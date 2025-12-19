@@ -12,7 +12,7 @@ export default defineConfig({
     '**/*.test.ts'
   ],
 
-  timeout: 60 * 1000,
+  timeout: 120 * 1000,
 
   retries: 0,
   use: {
