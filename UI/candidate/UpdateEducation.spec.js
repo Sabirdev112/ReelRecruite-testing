@@ -43,8 +43,9 @@ test('candidate can update education', async ({ page }) => {
   await educationPage.openProfile();
 
  
+  
+  await educationPage.navigateToEducation();
   await educationPage.deleteIfVisibleAndProceed();
-
   await educationPage.clickAddEducation();
   await educationPage.updateSchool(updatedEducation.school);
   await educationPage.updateDegree(updatedEducation.degree);
