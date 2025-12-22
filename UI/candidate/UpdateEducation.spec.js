@@ -1,32 +1,62 @@
 import { test, expect } from '@playwright/test';
 import { Login } from '../../Pages/Login.js';
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
 import { UpdateEducationPage } from '../../Pages/UpdateEducation.js';
 
-test('candidate can update education section', async ({ page }) => {
-  const loginPage = new Login(page);
-  const updateEducation = new UpdateEducationPage(page);
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
+// Load candidate credentials
+const candidate = JSON.parse(
+  fs.readFileSync(
+    path.join(__dirname, '../../fixtures/Candidate/Credentials.json'),
+    'utf-8'
+  )
+)[0];
+
+// Sample updated education data
+const updatedEducation = {
+  school: 'Harvard University',
+  degree: 'Bachelor of Science',
+  fieldOfStudy: 'Computer Science',
+  gpa: '3.9',
+  location: 'Cambridge, MA',
+  startDate: '2021-01-01',
+  description: 'Updated description of studies and achievements.'
+};
+
+test('candidate can update education', async ({ page }) => {
+  const loginPage = new Login(page);
+  const educationPage = new UpdateEducationPage(page);
+
+  // Navigate to login page and login
   await loginPage.goto();
-  await loginPage.login('khurrramimran908@gmail.com', 'Tech@12345');
+  await loginPage.login(candidate.email, candidate.password);
   await loginPage.clickSignIn();
-  await updateEducation.clickProfile();
-  await updateEducation.openProfile();
-  await updateEducation.clickEditEducation();
+  await page.waitForURL('**/jobs');
+  await educationPage.handleMaybeLaterIfPresent();
+
+  // Navigate to candidate profile
+  await educationPage.clickProfile();
+  await educationPage.openProfile();
 
  
-  await updateEducation.updateEducation({
-    school: 'University of Technology',
-    degree: 'Bachelor of Science',
-    fieldOfStudy: 'Computer Science',
-    gpa: '3.8',
-    location: 'Lahore, Pakistan',
-    startDate: '2018-09-01',
-    endDate: '2022-06-30',
-    description: 'Graduated with honors',
-    isPresent: false,
-  });
+  await educationPage.deleteIfVisibleAndProceed();
+
+  await educationPage.clickAddEducation();
+  await educationPage.updateSchool(updatedEducation.school);
+  await educationPage.updateDegree(updatedEducation.degree);
+  await educationPage.updateFieldOfStudy(updatedEducation.fieldOfStudy);
+  await educationPage.updateGPA(updatedEducation.gpa);
+  await educationPage.updateLocation(updatedEducation.location);
+  await educationPage.updateStartDate(updatedEducation.startDate);
+  console.log('Start date updated.');
+  await educationPage.updateEndDate(); 
+  console.log('End date updated.');
+  await educationPage.updateDescription(updatedEducation.description);
+  console.log('Description updated.');
+  await educationPage.saveChanges();
+  console.log('Education updated successfully.');
 });
-
-
-// Optional: add an assertion if there is some confirmation text
-// await expect(page.getByText('Education updated successfully')).toBeVisible();

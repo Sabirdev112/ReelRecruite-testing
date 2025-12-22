@@ -7,18 +7,30 @@ export class UpdateAboutPage {
       // Locators
       this.profileMenu = page.locator('//*[@id="root"]/div[2]/header/div/div[2]/div[2]/div[1]/div/div[1]/div');
       this.ProfileButton = page.getByText('Profile', { exact: true });
+
+      this.editAboutButton = page.locator('xpath=//*[@id="root"]/div[2]/main/div/div/div[2]/div[1]/button');
+
       this.bioTextbox = page.getByRole('textbox', { name: 'Bio*' });
-      this.editAboutButton = page.locator(
-        "//div[@class='bg-white rounded-lg shadow-sm border border-border p-6']//button[@class='p-2 hover:bg-gray-100 rounded-lg transition-colors']//*[name()='svg']//*[name()='path' and contains(@fill,'currentCol')]"
-      );
       this.countryTextbox = page.getByRole('textbox', { name: 'Country*' });
       this.phoneTextbox = page.getByRole('textbox', { name: 'Phone Number *' });
       this.locationTextbox = page.getByRole('textbox', { name: 'Location*' });
       this.saveChangesButton = page.getByRole('button', { name: 'Save Changes' });
+      this.maybeLaterButton = page.getByRole('button', { name: 'Maybe Later' });
     }
  // ... inside UpdateAboutPage ...
-
-async clickProfile() {
+  async handleMaybeLaterIfPresent() {
+        try {
+            await this.maybeLaterButton.waitFor({
+                state: 'visible',
+                timeout: 2500
+            });
+            await this.maybeLaterButton.click();
+            await this.maybeLaterButton.waitFor({ state: 'hidden' });
+        } catch {
+            // Modal did not appear — safe to continue
+        }
+    }
+  async clickProfile() {
     await this.profileMenu.waitFor({ state: 'visible', timeout: 10000 });
     await this.profileMenu.click();
   }
@@ -26,49 +38,41 @@ async clickProfile() {
 
   async openProfile() {
     await this.ProfileButton.waitFor({ state: 'visible' });
-    await this.page.waitForLoadState('networkidle');
     await this.ProfileButton.click();
+     await this.page.waitForLoadState('networkidle');
   }
 
-    // Click edit icon on About section
-    async clickEditAbout() {
-        await this.editAboutButton.click({ force: true });
-      }
-  
-    // Fill Bio
-    async fillBio(text) {
-      await this.bioTextbox.fill(text);
-    }
-  
-    // Fill Country
-    async fillCountry(country) {
-      await this.countryTextbox.fill(country);
-    }
-  
-    // Fill Phone Number
-    async fillPhoneNumber(phone) {
-      await this.phoneTextbox.fill(phone);
-    }
-  
-    // Fill Location
-    async fillLocation(location) {
-      await this.locationTextbox.fill(location);
-    }
-  
-    // Click Save Changes
-    async clickSaveChanges() {
-      await this.saveChangesButton.click();
-    }
-  
-    // Full flow: update about information
-    async updateAbout({ bio, country, phone, location }) {
-      await this.clickEditAbout();
-      if (bio !== undefined) await this.fillBio(bio);
-      if (country !== undefined) await this.fillCountry(country);
-      if (phone !== undefined) await this.fillPhoneNumber(phone);
-      if (location !== undefined) await this.fillLocation(location);
-      await this.clickSaveChanges();
-    }
+  async clickEditAbout() {
+    await this.editAboutButton.waitFor({ state: 'visible' });
+    await this.editAboutButton.click();
+  }
+   async clearAndTypeUsingKeyboard(locator, value) {
+    await locator.waitFor({ state: 'visible' });
+    await locator.click();
+    await locator.press('Control+A');
+    await locator.press('Backspace');
+    await locator.type(value);
+  }
+
+  async updateBio(bio) {
+    await this.clearAndTypeUsingKeyboard(this.bioTextbox, bio);
   }
   
-  export default UpdateAboutPage;
+  async updateCountry(country) {
+    await this.clearAndTypeUsingKeyboard(this.countryTextbox, country);
+  }
+  
+  async updatePhone(phone) {
+    await this.clearAndTypeUsingKeyboard(this.phoneTextbox, phone);
+  }
+
+  async updateLocation(location) {
+    await this.clearAndTypeUsingKeyboard(this.locationTextbox, location);
+  }
+
+  async saveChanges() {
+    await this.saveChangesButton.waitFor({ state: 'visible' });
+    await this.saveChangesButton.click();
+  }
+
+}

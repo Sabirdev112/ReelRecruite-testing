@@ -2,7 +2,7 @@ import fs from 'fs';
 
 export class UploadResume {
     constructor(page) { 
-        this.page = page;
+        this.page = page;       
 
         // -------- Profile navigation --------
         this.profileMenu = page.locator('//*[@id="root"]/div[2]/header/div/div[2]/div[2]/div[1]/div/div[1]/div');
@@ -80,7 +80,7 @@ export class UploadResume {
     async confirmDelete() {
         if (await this.confirmDeleteButton.isVisible()) {
             await this.confirmDeleteButton.click();
-            await this.page.waitForTimeout(300);
+            await this.page.waitForLoadState('networkidle');
         }
     }
 
