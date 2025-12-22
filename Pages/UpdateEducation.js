@@ -7,9 +7,11 @@ export class UpdateEducationPage {
       // Locators - Profile navigation (same as UpdateAbout)
       this.profileMenu = page.locator('//*[@id="root"]/div[2]/header/div/div[2]/div[2]/div[1]/div/div[1]/div');
       this.ProfileButton = page.getByText('Profile', { exact: true });
-      this.deleteEduButton = page.locator('xpath=//*[@id="root"]/div[2]/main/div/div/div[3]/div[3]/div[2]/div/div/div[2]/div[1]/div[2]/div/button[2]/svg/path');
+
+      this.educationSection = page.getByRole('heading', { name: 'Education' });
+      this.deleteEduButton = page.locator("body > div:nth-child(1) > div:nth-child(2) > main:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(3) > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(2) > button:nth-child(2) > svg:nth-child(1) > path:nth-child(1)");
       this.confirmDeleteButton = page.getByRole('button', { name: 'Ok' });
-      this.addEducationButton = page.getByText('Add Education', { exact: true });
+      this.addEducationButton = page.locator('xpath=//*[@id="root"]/div[2]/main/div/div/div[3]/div[3]/div[2]/button');
   
       // Education form fields
       this.schoolTextbox = page.getByRole('textbox', { name: /e\.g\., Harvard University/i });
@@ -44,11 +46,16 @@ export class UpdateEducationPage {
       await this.ProfileButton.click();
       await this.page.waitForLoadState('networkidle');
     }
+
+    async navigateToEducation() {
+      await this.educationSection.scrollIntoViewIfNeeded();
+    }
   async deleteEducation() {
     await this.deleteEduButton.waitFor({ state: 'visible' });
     await this.deleteEduButton.click();
   }
   async confirmDelete() {
+    await this.handleMaybeLaterIfPresent();
     await this.confirmDeleteButton.waitFor({ state: 'visible' });
     await this.confirmDeleteButton.click();
   }
