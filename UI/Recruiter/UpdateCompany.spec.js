@@ -27,7 +27,6 @@ test('Recruiter updates company details and logo', async ({ page }) => {
   await loginPage.login(recruiter.email, recruiter.password);
   await loginPage.clickSignIn();
   await page.waitForURL('**/my-jobs');
-  await page.waitForTimeout(3000);
   
 
   // -------- Company Details --------
