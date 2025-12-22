@@ -28,6 +28,6 @@ test('Recruiter logs in and Unarchives a chat', async ({ page }) => {
   // Step 2: Archive a chat
   await archiveChatPage.openMessages();
   await archiveChatPage.openChat();
-  await archiveChatPage.archiveChat();
+  await archiveChatPage.unArchiveChat();
   console.log('Chat Unarchived successfully');
 });

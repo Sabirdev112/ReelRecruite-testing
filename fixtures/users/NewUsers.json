@@ -1,0 +1,14 @@
+[
+  {
+    "email": "Random@gmail.com",
+    "password": "Pass@1234",
+    "username": "sabir",
+    "userType": "candidate"
+  },
+  {
+    "fullName": "Ahsan Malik",
+    "email": "ahsan.malik01@testmail.dev",
+    "phone": "+923001000001",
+    "password": "Test@1234"
+  }
+]

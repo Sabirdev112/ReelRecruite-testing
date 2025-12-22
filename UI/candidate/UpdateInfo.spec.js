@@ -1,44 +1,48 @@
-import { test, expect } from '@playwright/test';
-import { Login } from '../../Pages/Login.js';
-import { UpdateInfoPage } from '../../Pages/UpdateInfo.js';
+import {test} from '@playwright/test';
+import fs from 'fs';
+import path from 'path';
+import {fileURLToPath} from 'url';
+import {Login} from '../../Pages/Login.js';
+import {UpdateInfoPage} from '../../Pages/UpdateInfo.js';
 
-test('candidate can update info section', async ({ page }) => {
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// Recruiter credentials
+const recruiter = JSON.parse(
+  fs.readFileSync(
+    path.join(__dirname, '../../fixtures/Candidate/Credentials.json'),
+    'utf-8'
+  )
+)[0];
+
+// Logo path
+const bannerPath = path.join(__dirname, '../../fixtures/logo.jpg');
+const profilePath = path.join(__dirname, '../../fixtures/profile.png');
+
+test('Candidate info, profile picture, and banner update', async ({ page }) => {
+  // -------- Login --------
   const loginPage = new Login(page);
-  const updateInfo = new UpdateInfoPage(page);
-
+   const updateInfoPage = new UpdateInfoPage(page);
   await loginPage.goto();
-  await loginPage.login('khurrramimran908@gmail.com', 'Tech@12345');
+  await loginPage.login(recruiter.email, recruiter.password);
   await loginPage.clickSignIn();
-  await page.waitForLoadState('networkidle');
-  await updateInfo.clickProfile();
-  await updateInfo.openProfile();
-  
-  // Wait for profile page to fully load
-  await page.waitForLoadState('networkidle');
-  await page.waitForTimeout(1000);
-  
-  // Click main Edit Profile button to enter edit mode
-  await updateInfo.clickEditProfile();
-  
-  // Optional: Click cover image button (if needed)
-  // await updateInfo.clickCoverImage();
-  // await updateInfo.uploadCoverImage('path/to/cover-image.jpg');
-  
-  // Optional: Click profile picture button (if needed)
-  // await updateInfo.clickProfilePicture();
-  // await updateInfo.uploadProfilePicture('path/to/profile-picture.jpg');
-  
-  // updateInfo() method already calls clickEditInfo() internally
-  await updateInfo.updateInfo({
-    fullName: 'Khurram Imran',
-    professionalTitle: 'SQA Engineer',
-  });
-  
-  // Wait a bit for changes to reflect
-  await page.waitForTimeout(2000);
-  
-  // Optional: Verify changes were saved
-  // await expect(page.getByText('Khurram Imran')).toBeVisible();
-  // await expect(page.getByText('SQA Engineer')).toBeVisible();
-});
+  await page.waitForURL('**/jobs');
 
+ 
+
+  await updateInfoPage.handleMaybeLaterIfPresent();
+  await updateInfoPage.openProfileMenu();
+  await updateInfoPage.clickProfile();
+  await updateInfoPage.clickEditProfile();
+  await updateInfoPage.uploadCoverImage(bannerPath);
+  console.log('Cover image updated.');
+  await updateInfoPage.uploadProfilePicture(profilePath);
+  console.log('Profile picture updated.');
+  await updateInfoPage.fillFullName('Sabir SQA');
+  console.log('Full name updated.');
+  await updateInfoPage.fillProfessionalTitle('Senior QA Engineer');
+  console.log('Professional title updated.');
+  await updateInfoPage.clickSaveChanges();
+  console.log('Information changes saved.');
+});

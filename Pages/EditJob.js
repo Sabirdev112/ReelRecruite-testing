@@ -11,14 +11,17 @@ export class EditJobPage {
         await this.editButton.waitFor({ state: 'visible' });
         await this.editButton.click();
     }
+
+     async clearAndTypeUsingKeyboard(locator, value) {
+    await locator.waitFor({ state: 'visible' });
+    await locator.click();
+    await locator.press('Control+A');
+    await locator.press('Backspace');
+    await locator.type(value);
+  }
+
    async updateDetails() {
-  await this.summaryInput.waitFor({ state: 'visible' });
-
-  const randomText = `Edited summary ${Math.random()
-    .toString(36)
-    .substring(2, 10)}`;
-
-  await this.summaryInput.fill(randomText);
+       await this.clearAndTypeUsingKeyboard(this.summaryInput, 'Updated job summary for testing purposes.');
 }
 
     async clickCustomFields(){
