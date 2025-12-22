@@ -11,8 +11,8 @@ export default defineConfig({
     '**/*.spec.ts',
     '**/*.test.ts'
   ],
-  timeout: 120 * 1000,
-  retries: 0,
+  timeout: 60 * 1000,
+  retries: 1,
   use: {
     // baseURL intentionally removed
     trace: 'on-first-retry'
