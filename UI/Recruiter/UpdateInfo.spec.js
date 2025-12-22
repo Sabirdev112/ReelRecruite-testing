@@ -11,7 +11,7 @@ const __dirname = path.dirname(__filename);
 // Recruiter credentials
 const recruiter = JSON.parse(
   fs.readFileSync(
-    path.join(__dirname, '../../fixtures/Candidate/Credentials.json'),
+    path.join(__dirname, '../../fixtures/Recruiter/Credentials.json'),
     'utf-8'
   )
 )[0];
@@ -20,18 +20,18 @@ const recruiter = JSON.parse(
 const bannerPath = path.join(__dirname, '../../fixtures/logo.jpg');
 const profilePath = path.join(__dirname, '../../fixtures/profile.png');
 
-test('Candidate info, profile picture, and banner update', async ({ page }) => {
+test('Recruiter info, profile picture, and banner', async ({ page }) => {
   // -------- Login --------
   const loginPage = new Login(page);
-   const updateInfoPage = new UpdateInfoPage(page);
   await loginPage.goto();
   await loginPage.login(recruiter.email, recruiter.password);
   await loginPage.clickSignIn();
-  await page.waitForURL('**/jobs');
+  await page.waitForURL('**/my-jobs');
+  await page.waitForTimeout(3000);
 
- 
+  const updateInfoPage = new UpdateInfoPage(page);
 
-  await updateInfoPage.handleMaybeLaterIfPresent();
+  
   await updateInfoPage.openProfileMenu();
   await updateInfoPage.clickProfile();
   await updateInfoPage.clickEditProfile();
