@@ -9,6 +9,8 @@ test ('Recruiter saves a job draft', async ({page}) => {
   await login.goto();
   await login.login('carlos@gmail.com', 'Carlos@123');
   await login.clickSignIn();
+  await page.waitForURL('**/my-jobs');
+  
   await saveDraft.postJob();
   await saveDraft.fillBasicInfo();
   await saveDraft.saveDraft();

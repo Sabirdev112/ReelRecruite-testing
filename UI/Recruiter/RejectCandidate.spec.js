@@ -33,6 +33,7 @@ test('Recruiter Reject candidate from applications', async ({ page }) => {
   await loginPage.goto();
   await loginPage.login(recruiter.email, recruiter.password);
   await loginPage.clickSignIn();
+  await page.waitForURL('**/my-jobs');
 
   // Wait for dashboard + auth cookies
   await page.waitForURL('https://recruitai-web-production.up.railway.app/my-jobs');

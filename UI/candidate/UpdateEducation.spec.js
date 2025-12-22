@@ -46,12 +46,19 @@ test('candidate can update education', async ({ page }) => {
   
   await educationPage.navigateToEducation();
   await educationPage.deleteIfVisibleAndProceed();
+  console.log('Education deleted.');
   await educationPage.clickAddEducation();
+  console.log('Add education clicked.');
   await educationPage.updateSchool(updatedEducation.school);
+  console.log('School updated.');
   await educationPage.updateDegree(updatedEducation.degree);
+  console.log('Degree updated.');
   await educationPage.updateFieldOfStudy(updatedEducation.fieldOfStudy);
+  console.log('Field of study updated.');
   await educationPage.updateGPA(updatedEducation.gpa);
+  console.log('GPA updated.');
   await educationPage.updateLocation(updatedEducation.location);
+  console.log('Location updated.');
   await educationPage.updateStartDate(updatedEducation.startDate);
   console.log('Start date updated.');
   await educationPage.updateEndDate(); 
