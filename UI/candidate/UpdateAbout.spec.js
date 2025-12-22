@@ -1,25 +1,43 @@
 import { test, expect } from '@playwright/test';
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
 import { Login } from '../../Pages/Login.js';
 import { UpdateAboutPage } from '../../Pages/UpdateAbout.js';
+
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const candidate = JSON.parse(
+  fs.readFileSync(
+    path.join(__dirname, '../../fixtures/Candidate/Credentials.json'),
+    'utf-8'
+  )
+)[0];
 
 test('candidate can update about section', async ({ page }) => {
   const loginPage = new Login(page);
   const updateAbout = new UpdateAboutPage(page);
 
   await loginPage.goto();
-  await loginPage.login('khurrramimran908@gmail.com', 'Tech@12345');
+  await loginPage.login(candidate.email, candidate.password);
   await loginPage.clickSignIn();
-  await page.waitForLoadState('networkidle'); // optional
+  await page.waitForURL('**/jobs');
+
+  await updateAbout.handleMaybeLaterIfPresent();
+
+  /* ---------- PROFILE ---------- */
   await updateAbout.clickProfile()
   await updateAbout.openProfile();
   await updateAbout.clickEditAbout();
 
-  await updateAbout.updateAbout({
-    bio: 'sqa engineer with 1 years experience',
-    country: 'Pakistan',
-    phone: '92310232322',
-    location: 'Lahore',
-  });
+  /* ---------- UPDATE ABOUT ---------- */
+  await updateAbout.updateBio('Experienced software engineer with a passion for developing innovative programs that expedite the efficiency and effectiveness of organizational success.');
+  await updateAbout.updateCountry('United States');
+  await updateAbout.updateLocation('San Francisco, CA');
+  await updateAbout.saveChanges();
+  console.log('About section updated successfully.');
 });
   // Optional: add an assertion if there is some confirmation text
   // await expect(page.getByText('Profile updated successfully')).toBeVisible();

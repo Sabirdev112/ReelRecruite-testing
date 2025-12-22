@@ -4,7 +4,6 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import { Login } from '../../Pages/Login.js';
 import { UpdateWorkPage } from '../../Pages/UpdateWork.js';
-import { time } from 'console';
 
 
 const __filename = fileURLToPath(import.meta.url);

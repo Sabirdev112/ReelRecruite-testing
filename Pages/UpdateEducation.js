@@ -7,9 +7,9 @@ export class UpdateEducationPage {
       // Locators - Profile navigation (same as UpdateAbout)
       this.profileMenu = page.locator('//*[@id="root"]/div[2]/header/div/div[2]/div[2]/div[1]/div/div[1]/div');
       this.ProfileButton = page.getByText('Profile', { exact: true });
-  
-      // Edit Education button - UPDATED locator
-      this.editEducationButton = page.locator("button[title='Edit'] svg path");
+      this.deleteEduButton = page.locator('xpath=//*[@id="root"]/div[2]/main/div/div/div[3]/div[3]/div[2]/div/div/div[2]/div[1]/div[2]/div/button[2]/svg/path');
+      this.confirmDeleteButton = page.getByRole('button', { name: 'Ok' });
+      this.addEducationButton = page.getByText('Add Education', { exact: true });
   
       // Education form fields
       this.schoolTextbox = page.getByRole('textbox', { name: /e\.g\., Harvard University/i });
@@ -17,17 +17,23 @@ export class UpdateEducationPage {
       this.fieldOfStudyTextbox = page.getByRole('textbox', { name: 'e.g., Computer Science' });
       this.gpaTextbox = page.getByRole('textbox', { name: /e\.g\., 3\.8 GPA/i });
       this.locationTextbox = page.getByRole('textbox', { name: /e\.g\., Cambridge, MA/i });
-      this.startDateTextbox = page.getByRole('textbox', { name: /Start Date \*/i });
-      this.endDateTextbox = page.getByRole('textbox', { name: /End Date \*/i });
-      this.presentCheckbox = page.getByRole('checkbox');
+      this.startDateInput = page.getByRole('textbox', { name: /Start Date \*/i });
+      this.endDateTextbox = page.getByLabel('I am currently studying here');
       this.descriptionTextbox = page.getByRole('textbox', { name: /Describe your studies, achievements, activities\.\.\./i });
   
-      // Action buttons
-      this.addEducationButton = page.getByRole('button', { name: /Add Education/i });
-      this.saveChangesButton = page.getByRole('button', { name: /Save Changes/i });
-      this.cancelButton = page.getByRole('button', { name: 'Cancel' });
+      this.saveChangesButton = page.locator('xpath=//*[@id="root"]/div[2]/main/div/div/div[4]/div/form/div[2]/button[1]');
+      this.maybeLaterButton = page.getByRole('button', { name: 'Maybe Later' });
+
     }
   
+    async handleMaybeLaterIfPresent() {
+    try {
+      await this.maybeLaterButton.waitFor({ state: 'visible', timeout: 2000 });
+      await this.maybeLaterButton.click();
+      await this.maybeLaterButton.waitFor({ state: 'hidden' });
+    } catch {}
+  }
+
     async clickProfile() {
       await this.profileMenu.waitFor({ state: 'visible', timeout: 10000 });
       await this.profileMenu.click();
@@ -35,89 +41,83 @@ export class UpdateEducationPage {
   
     async openProfile() {
       await this.ProfileButton.waitFor({ state: 'visible' });
-      await this.page.waitForLoadState('networkidle');
       await this.ProfileButton.click();
+      await this.page.waitForLoadState('networkidle');
     }
-  
-    async clickEditEducation() {
-      await this.editEducationButton.click({ force: true });
-    }
-  
-    async fillSchool(school) {
-        await this.schoolTextbox.fill(school);
-    }
-  
-    async fillDegree(degree) {
-      await this.degreeTextbox.fill(degree);
-    }
-  
-    async fillFieldOfStudy(field) {
-      await this.fieldOfStudyTextbox.fill(field);
-    }
-  
-    async fillGPA(gpa) {
-      await this.gpaTextbox.fill(gpa);
-    }
-  
-    async fillLocation(location) {
-      await this.locationTextbox.fill(location);
-    }
-  
-    async fillStartDate(date) {
-      await this.startDateTextbox.fill(date);
-    }
-  
-    async fillEndDate(date) {
-      await this.endDateTextbox.fill(date);
-    }
-  
-    async fillDescription(description) {
-      await this.descriptionTextbox.fill(description);
-    }
-  
-    async checkPresent(isPresent = true) {
-      if (isPresent) {
-        await this.presentCheckbox.check();
-      } else {
-        await this.presentCheckbox.uncheck();
-      }
-    }
-  
+  async deleteEducation() {
+    await this.deleteEduButton.waitFor({ state: 'visible' });
+    await this.deleteEduButton.click();
+  }
+  async confirmDelete() {
+    await this.confirmDeleteButton.waitFor({ state: 'visible' });
+    await this.confirmDeleteButton.click();
+  }
+    async deleteIfVisibleAndProceed() {
+  const isDeleteVisible = await this.deleteEduButton.isVisible().catch(() => false);
+
+  if (isDeleteVisible) {
+    await this.deleteEduButton.click();
+    await this.confirmDeleteButton.waitFor({ state: 'visible' });
+    await this.confirmDeleteButton.click();
+    await this.page.waitForLoadState('networkidle');
+  }
+
+  // If delete is not visible, it will silently continue
+}
+
+
     async clickAddEducation() {
+      await this.addEducationButton.waitFor({ state: 'visible' });
       await this.addEducationButton.click();
     }
-  
-    async clickSaveChanges() {
-      await this.saveChangesButton.click();
-    }
-  
-    async clickCancel() {
-      await this.cancelButton.click();
-    }
-  
-    async updateEducation({ school, degree, fieldOfStudy, gpa, location, startDate, endDate, description, isPresent }) {
-      await this.clickEditEducation();
-      
-        if (school !== undefined) await this.fillSchool(school);
-      if (degree !== undefined) await this.fillDegree(degree);
-      if (fieldOfStudy !== undefined) await this.fillFieldOfStudy(fieldOfStudy);
-      if (gpa !== undefined) await this.fillGPA(gpa);
-      if (location !== undefined) await this.fillLocation(location);
-      if (startDate !== undefined) await this.fillStartDate(startDate);
-      if (isPresent) {
-        await this.checkPresent(true);
-      } else if (endDate !== undefined) {
-        await this.fillEndDate(endDate);
-      }
-      if (description !== undefined) await this.fillDescription(description);
-      
-      await this.clickSaveChanges();
-    }
-  
-    async addEducation({ school, degree, fieldOfStudy, gpa, location, startDate, endDate, description, isPresent }) {
-      await this.clickAddEducation();
-      await this.updateEducation({ school, degree, fieldOfStudy, gpa, location, startDate, endDate, description, isPresent });
-    }
+
+    async clearAndTypeUsingKeyboard(locator, value) {
+    await locator.waitFor({ state: 'visible' });
+    await locator.click();
+    await locator.press('Control+A');
+    await locator.press('Backspace');
+    await locator.type(value);
+  }
+
+  async updateSchool(school) {
+    await this.clearAndTypeUsingKeyboard(this.schoolTextbox, school);
+  }
+
+  async updateDegree(degree) {
+    await this.clearAndTypeUsingKeyboard(this.degreeTextbox, degree); 
+  }
+
+  async updateFieldOfStudy(fieldOfStudy) {
+    await this.clearAndTypeUsingKeyboard(this.fieldOfStudyTextbox, fieldOfStudy);
+  }
+
+  async updateGPA(gpa) {
+    await this.clearAndTypeUsingKeyboard(this.gpaTextbox, gpa);
+  }
+
+  async updateLocation(location) {
+    await this.clearAndTypeUsingKeyboard(this.locationTextbox, location);
+  }
+
+  async updateStartDate(startDate) {
+    await this.startDateInput.waitFor({ state: 'visible' });
+    await this.startDateInput.fill(startDate);
+  }
+
+  async updateEndDate(){
+    await this.endDateTextbox.waitFor({ state: 'visible' });
+    await this.endDateTextbox.check();
+  }
+
+  async updateDescription(description) {
+    await this.clearAndTypeUsingKeyboard(this.descriptionTextbox, description);
+  }
+
+  async saveChanges() {
+    await this.saveChangesButton.waitFor({ state: 'visible' });
+    await this.saveChangesButton.click();
+    await this.page.waitForLoadState('networkidle');
   }
   
-  export default UpdateEducationPage;
+
+  }

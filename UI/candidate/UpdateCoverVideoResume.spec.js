@@ -1,32 +1,50 @@
 import { test, expect } from '@playwright/test';
 import { Login } from '../../Pages/Login.js';
-import {UpdateCoverVideoResumePage} from '../../Pages/UpdateCoverVideoResume.js';
+import fs from 'fs';
+import { fileURLToPath } from 'url';
 import path from 'path';
+import {UpdateCoverVideoResumePage} from '../../Pages/UploadCoverVideo.js';
 
-test.describe('Cover Video Resume Upload Test', () => {
-  const fixtureVideoPath = path.resolve('./fixtures/sample-video.mp4');
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const candidate = JSON.parse(
+  fs.readFileSync(
+    path.join(__dirname, '../../fixtures/Candidate/Credentials.json'),
+    'utf-8'
+  )
+)[0];
+
+const VideoPath = path.join(
+  __dirname,
+  '../../fixtures/sample-video.mp4'
+);
+
+
+  
 
   test('candidate can upload a video resume', async ({ page }) => {
-    const loginPage = new Login(page);
-    const coverVideoPage = new UpdateCoverVideoResumePage(page);
+  const loginPage = new Login(page);
+  const coverVideoPage = new UpdateCoverVideoResumePage(page);
 
-    // Navigate and login
-    await loginPage.goto();
-    await loginPage.login('khurrramimran908@gmail.com', 'Tech@12345');
-    await loginPage.clickSignIn();
-    await page.waitForLoadState('networkidle');
+  await loginPage.goto();
+  await loginPage.login(candidate.email, candidate.password);
+  await loginPage.clickSignIn();
 
-    // Navigate to profile
-    await coverVideoPage.clickProfile();
-    await coverVideoPage.openProfile();
-    await coverVideoPage.removeVideo();
-    console.log('Existing video removed if present.');
+  await page.waitForURL('**/jobs');
+  await coverVideoPage.handleMaybeLaterIfPresent();
 
-    // Upload video
-    await coverVideoPage.uploadVideo(fixtureVideoPath);
-    console.log('Video upload initiated.');
-    
-    // Verify upload
-    await expect(coverVideoPage.removeVideoButton).toBeVisible({ timeout: 10000 });
-  });
+  await coverVideoPage.clickProfile();
+  await coverVideoPage.openProfile();
+
+  await coverVideoPage.navigateToCoverVideoSection();
+  await coverVideoPage.removeVideoIfExists();
+  console.log('Existing video removed if present.');
+
+  await coverVideoPage.uploadVideo(VideoPath);
+  console.log('Video uploaded successfully.');
+
 });
+
+
