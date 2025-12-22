@@ -23,7 +23,7 @@ test('recruiter can update about section', async ({ page }) => {
   await loginPage.goto();
   await loginPage.login(recruiter.email, recruiter.password);
   await loginPage.clickSignIn();
-  await page.waitForURL('**/jobs');
+  await page.waitForURL('**/my-jobs');
 
   await updateAbout.handleMaybeLaterIfPresent();
 
