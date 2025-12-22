@@ -11,13 +11,15 @@ export class SignupPage {
 
     this.fullNameInput = page.getByRole('textbox', { name: 'Enter full name' });
     this.emailInput = page.getByRole('textbox', { name: 'Enter email' });
+    this.phoneInput = page.getByRole('textbox', { name: 'Enter phone number' });
     this.passwordInput = page.getByRole('textbox', { name: 'Create password' });
     this.confirmPasswordInput = page.getByRole('textbox', { name: 'Confirm password' });
 
     this.selectRoleDropdown = page.locator('div.react-select__input-container.css-19bb58m');
-    this.selectRole = page.getByRole('option', { name: 'Job Seeker' });
+    this.selectRoleButton = page.getByRole('option', { name: 'Job Seeker' });
 
     this.signUpButton = page.locator('//*[@id="root"]/div[2]/div[2]/div/div[2]/form/button');
+     this.emailExistsError = page.getByText('An account with this email already exists',{ exact: false });
   }
 
   async goto() {
@@ -29,20 +31,35 @@ export class SignupPage {
     await this.registerButton.click();
   }
 
-  async signup(fullName, email, password, confirmPassword) {
+  async enterFullName(fullName) {
+    await this.fullNameInput.waitFor({ state: 'visible' });
     await this.fullNameInput.pressSequentially(fullName);
+  }
+  async enterEmail(email) {
+    await this.emailInput.waitFor({ state: 'visible' });
     await this.emailInput.pressSequentially(email);
+  }
+  async enterPhone(phone) {
+    await this.phoneInput.waitFor({ state: 'visible' });
+    await this.phoneInput.pressSequentially(phone);
+  }
+  async enterPassword(password) {
+    await this.passwordInput.waitFor({ state: 'visible' });
     await this.passwordInput.pressSequentially(password);
+  }
+  async enterConfirmPassword(confirmPassword) {
+    await this.confirmPasswordInput.waitFor({ state: 'visible' });
     await this.confirmPasswordInput.pressSequentially(confirmPassword);
-
+  }
+  async selectRole(role) {
     await this.selectRoleDropdown.click();
-    await this.selectRole.click();
-
+    await this.selectRoleButton.click(role);
+    
   }
     async createAccount() {
   await this.signUpButton.click();
   // Wait 3 seconds before next user
-  await this.page.waitForTimeout(3000);
+  await this.page.waitForLoadState('networkidle');
 }
 async fillOTP(otp) {
     const digits = otp.split('');

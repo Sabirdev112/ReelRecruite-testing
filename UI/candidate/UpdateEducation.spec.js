@@ -9,7 +9,6 @@ test('candidate can update education section', async ({ page }) => {
   await loginPage.goto();
   await loginPage.login('khurrramimran908@gmail.com', 'Tech@12345');
   await loginPage.clickSignIn();
-  await page.waitForLoadState('networkidle');
   await updateEducation.clickProfile();
   await updateEducation.openProfile();
   await updateEducation.clickEditEducation();
