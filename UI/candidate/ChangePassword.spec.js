@@ -2,7 +2,6 @@ import { test } from '@playwright/test';
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-
 import { Login } from '../../Pages/Login.js';
 import { ChangePassword } from '../../Pages/ChangePassword.js';
 
@@ -23,13 +22,17 @@ test('Candidate changes password', async ({ page }) => {
 
   // ----------- Login -----------
   const loginPage = new Login(page);
+  const changePasswordPage = new ChangePassword(page);
+
   await loginPage.goto();
   await loginPage.login(user.email, oldPassword);
   await loginPage.clickSignIn();
   await page.waitForURL('**/jobs');
+  await changePasswordPage.handleMaybeLaterIfPresent();
+  
 
   // ----------- Change password -----------
-  const changePasswordPage = new ChangePassword(page);
+  
   await changePasswordPage.openProfileMenu();
   await changePasswordPage.navigateToSettings();
   await changePasswordPage.changePassword(oldPassword, newPassword);

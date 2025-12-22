@@ -1,7 +1,7 @@
 import { test } from '@playwright/test';
 import fs from 'fs';
 import path from 'path';
-import { SignupPage } from '../../Pages/SignupPage.js';
+import { SignupPage } from '../Pages/SignupPage.js';
 
 const RANDOM_USERS_FILE = path.join(process.cwd(), 'fixtures/users/RandomUsers.json');
 const NEW_USERS_FILE = path.join(process.cwd(), 'fixtures/users/NewUsers.json');
