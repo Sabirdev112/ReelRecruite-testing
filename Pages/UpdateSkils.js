@@ -17,6 +17,19 @@ export class UpdateSkillsPage {
       // Action buttons
       this.saveChangesButton = page.getByRole('button', { name: /Save Changes/i });
       this.cancelButton = page.getByRole('button', { name: 'Cancel' });
+      this.maybeLaterButton = page.getByRole('button', { name: 'Maybe Later' });
+    }
+    async handleMaybeLaterIfPresent() {
+        try {
+            await this.maybeLaterButton.waitFor({
+                state: 'visible',
+                timeout: 2500
+            });
+            await this.maybeLaterButton.click();
+            await this.maybeLaterButton.waitFor({ state: 'hidden' });
+        } catch {
+            // Modal did not appear — safe to continue
+        }
     }
   
     async clickProfile() {

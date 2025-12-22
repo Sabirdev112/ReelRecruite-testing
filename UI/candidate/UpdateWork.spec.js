@@ -1,125 +1,65 @@
 import { test, expect } from '@playwright/test';
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
 import { Login } from '../../Pages/Login.js';
 import { UpdateWorkPage } from '../../Pages/UpdateWork.js';
+import { time } from 'console';
 
-/* =======================
-   Helper: Login & Open Profile
-======================= */
-async function loginAndOpenProfile(page) {
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const candidate = JSON.parse(
+  fs.readFileSync(
+    path.join(__dirname, '../../fixtures/Candidate/Credentials.json'),
+    'utf-8'
+  )
+)[0];
+
+test('Candidate deletes existing work (if any) and adds new experience', async ({ page }) => {
   const loginPage = new Login(page);
   const updateWorkPage = new UpdateWorkPage(page);
 
+  /* ---------- LOGIN ---------- */
   await loginPage.goto();
-  await loginPage.login('khurrramimran908@gmail.com', 'Tech@12345');
+  await loginPage.login(candidate.email, candidate.password);
   await loginPage.clickSignIn();
+  await page.waitForURL('**/jobs');
+  await updateWorkPage.handleMaybeLaterIfPresent();
 
-  await page.waitForLoadState('networkidle');
+
+  /* ---------- PROFILE ---------- */
+  await updateWorkPage.openProfileDropdown();
   await updateWorkPage.openProfile();
+  await updateWorkPage.navigateToWorkSection();
 
-  return updateWorkPage;
-}
+  /* ---------- DELETE IF EXISTS ---------- */
+  await updateWorkPage.deleteIfVisibleAndProceed();
+  console.log('Existing work experience deleted if it existed.');
 
-/* =======================
-   Tests
-======================= */
-test.describe('Work Experience Tests', () => {
+  /* ---------- ADD EXPERIENCE ---------- */
+  await updateWorkPage.clickAddWork();
+  console.log('Adding new work experience...');
+  await updateWorkPage.addCompany('Tech Solutions Inc');
+  await updateWorkPage.addPosition('Senior Software Engineer');
+  await updateWorkPage.addEmploymentType('Full-time');
+  await updateWorkPage.addLocationType('On-site');
+  await updateWorkPage.addStartDate('2021-01-01');
+  await updateWorkPage.addEndDate();
+  await updateWorkPage.addDescription(
+    'Led QA automation initiatives and improved delivery quality'
+  );
 
-  test('candidate can update existing work experience', async ({ page }) => {
-    const updateWork = await loginAndOpenProfile(page);
+  await updateWorkPage.addAchievement('Reduced regression failures by 40%');
+  await updateWorkPage.addAchievement('Introduced Playwright automation');
 
-    await updateWork.updateWork({
-      company: 'Tech Solutions Inc',
-      jobTitle: 'Senior Software Engineer',
-      employmentType: 'Full-time',
-      locationType: 'On-site',
-      startDate: '2020-01-15',
-      endDate: '2023-12-31',
-      isPresent: false,
-      description: 'Led a team of 5 developers and implemented automated testing frameworks',
-      achievements: [
-        'Increased test coverage by 40%',
-        'Reduced bug reports by 30%',
-      ],
-      skills: ['JavaScript', 'Playwright'],
-    });
+  await updateWorkPage.addSkill('Playwright');
+  await updateWorkPage.addSkill('JavaScript');
 
-    // Optional assertion
-    await expect(page.getByText('Tech Solutions Inc')).toBeVisible();
-  });
+  await updateWorkPage.saveChanges();
+  console.log('New work experience added and changes saved.');
 
-//   test('candidate can add new work experience (hybrid, part-time)', async ({ page }) => {
-//     const updateWork = await loginAndOpenProfile(page);
-
-//     await updateWork.addNewWorkExperience({
-//       company: 'Innovation Labs',
-//       jobTitle: 'QA Lead',
-//       employmentType: 'Part-time',
-//       locationType: 'Hybrid',
-//       startDate: '2024-01-01',
-//       isPresent: true,
-//       description: 'Leading QA initiatives and automation strategies',
-//       achievements: ['Implemented new testing framework'],
-//       skills: ['Playwright', 'Test Automation'],
-//     });
-
-//     await expect(page.getByText('Innovation Labs')).toBeVisible();
-//   });
-
-//   test('candidate can add contract onsite work experience', async ({ page }) => {
-//     const updateWork = await loginAndOpenProfile(page);
-
-//     await updateWork.addNewWorkExperience({
-//       company: 'Contract Corp',
-//       jobTitle: 'Automation Engineer',
-//       employmentType: 'Contract',
-//       locationType: 'On-site',
-//       startDate: '2023-05-01',
-//       endDate: '2023-11-30',
-//       isPresent: false,
-//       description: 'Short-term automation project',
-//       achievements: ['Delivered project on time'],
-//       skills: ['Selenium'],
-//     });
-
-//     await expect(page.getByText('Contract Corp')).toBeVisible();
-//   });
-
-//   test('candidate can add freelancer remote experience', async ({ page }) => {
-//     const updateWork = await loginAndOpenProfile(page);
-
-//     await updateWork.addNewWorkExperience({
-//       company: 'Freelance Clients',
-//       jobTitle: 'Independent Test Consultant',
-//       employmentType: 'Freelancer',
-//       locationType: 'Remote',
-//       startDate: '2021-03-01',
-//       endDate: '2022-02-28',
-//       isPresent: false,
-//       description: 'Provided testing consultancy to multiple clients',
-//       achievements: [
-//         'Helped 10+ companies improve QA processes',
-//         '95% client satisfaction rate',
-//       ],
-//       skills: ['Cypress', 'Jest'],
-//     });
-
-//     await expect(page.getByText('Freelance Clients')).toBeVisible();
-//   });
-
-//   test('candidate can add work experience with minimal fields', async ({ page }) => {
-//     const updateWork = await loginAndOpenProfile(page);
-
-//     await updateWork.addNewWorkExperience({
-//       company: 'Simple Corp',
-//       jobTitle: 'Tester',
-//       employmentType: 'Full-time',
-//       locationType: 'On-site',
-//       startDate: '2018-01-01',
-//       endDate: '2019-12-31',
-//       isPresent: false,
-//     });
-
-//     await expect(page.getByText('Simple Corp')).toBeVisible();
-//   });
-
+  /* ---------- ASSERT ---------- */
+  await expect(page.getByText('Tech Solutions Inc')).toBeVisible();
 });
