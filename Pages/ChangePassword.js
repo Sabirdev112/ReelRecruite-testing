@@ -11,7 +11,21 @@ export class ChangePassword {
     this.oldPasswordInput = page.getByRole('textbox', { name: 'Enter your existing password' });
     this.newPasswordInput = page.getByRole('textbox', { name: 'New password' });
     this.saveChangesButton = page.getByRole('button', { name: 'Update password' });
+    this.maybeLaterButton = page.getByRole('button', { name: 'Maybe Later' });
   }
+
+   async handleMaybeLaterIfPresent() {
+        try {
+            await this.maybeLaterButton.waitFor({
+                state: 'visible',
+                timeout: 2500
+            });
+            await this.maybeLaterButton.click();
+            await this.maybeLaterButton.waitFor({ state: 'hidden' });
+        } catch {
+            // Modal did not appear — safe to continue
+        }
+    } 
 
   async openProfileMenu() {
     await this.profileMenu.waitFor({ state: 'visible' });
@@ -21,6 +35,7 @@ export class ChangePassword {
   async navigateToSettings() {
     await this.settingsButton.waitFor({ state: 'visible' });
     await this.settingsButton.click();
+    await this.page.waitForLoadState('networkidle');
   }
 
   async changePassword(oldPassword, newPassword) {

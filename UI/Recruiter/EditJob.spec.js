@@ -27,13 +27,13 @@ const { jobId } = JSON.parse(
 // Construct job URL
 const jobUrl = `https://recruitai-web-production.up.railway.app/jobs/${jobId}`;
 
-test('Recruiter Edit Job', async ({ page }) => {
+test('Recruiter Edits Job', async ({ page }) => {
   // ----------- Login -----------
   const loginPage = new Login(page);
   await loginPage.goto();
   await loginPage.login(recruiter.email, recruiter.password);
   await loginPage.clickSignIn();
-  await page.waitForTimeout(10000);
+  await page.waitForURL('**/my-jobs');
   
   await page.goto(jobUrl);
   console.log(`Successfully navigated to Job URL: ${jobUrl}`);

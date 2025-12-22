@@ -9,19 +9,19 @@ import { UpdateAboutPage } from '../../Pages/UpdateAbout.js';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const candidate = JSON.parse(
+const recruiter = JSON.parse(
   fs.readFileSync(
-    path.join(__dirname, '../../fixtures/Candidate/Credentials.json'),
+    path.join(__dirname, '../../fixtures/Recruiter/Credentials.json'),
     'utf-8'
   )
 )[0];
 
-test('candidate can update about section', async ({ page }) => {
+test('recruiter can update about section', async ({ page }) => {
   const loginPage = new Login(page);
   const updateAbout = new UpdateAboutPage(page);
 
   await loginPage.goto();
-  await loginPage.login(candidate.email, candidate.password);
+  await loginPage.login(recruiter.email, recruiter.password);
   await loginPage.clickSignIn();
   await page.waitForURL('**/jobs');
 

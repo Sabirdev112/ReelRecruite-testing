@@ -16,7 +16,7 @@ export class UpdateInfoPage {
     this.cancelButton = page.getByRole('button', { name: /Cancel/i });
     this.maybeLaterButton = page.getByRole('button', { name: 'Maybe Later' });
   }
-async handleMaybeLaterIfPresent() {
+  async handleMaybeLaterIfPresent() {
         try {
             await this.maybeLaterButton.waitFor({
                 state: 'visible',
@@ -36,6 +36,7 @@ async handleMaybeLaterIfPresent() {
   async clickProfile() {
     await this.profileButton.waitFor({ state: 'visible' });
     await this.profileButton.click();
+    await this.page.waitForLoadState('networkidle');
   }
 
   async clickEditProfile() {
