@@ -35,9 +35,6 @@ test('Recruiter Reject candidate from applications', async ({ page }) => {
   await loginPage.clickSignIn();
   await page.waitForURL('**/my-jobs');
 
-  // Wait for dashboard + auth cookies
-  await page.waitForURL('https://recruitai-web-production.up.railway.app/my-jobs');
-  await page.waitForLoadState('networkidle');
 
   // ----------- Navigate to job (FIXED) -----------
   await page.goto(jobUrl, { waitUntil: 'domcontentloaded' });
@@ -47,8 +44,12 @@ test('Recruiter Reject candidate from applications', async ({ page }) => {
   // ----------- View reels & shortlist -----------
   const shortlistPage = new ShortlistCandidatePage(page);
   await shortlistPage.clickViewApplications();
+  console.log('Viewed all application');
   await shortlistPage.clickViewDetails();
+  console.log('Viewed candidate details');
   await shortlistPage.updateStatus();
+  console.log('Updated status clicked');
   await shortlistPage.clickReject();
+  console.log('Rejected candidate');
   await shortlistPage.clickSave();
 });

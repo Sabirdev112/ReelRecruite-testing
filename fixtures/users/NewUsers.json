@@ -10,5 +10,11 @@
     "email": "ahsan.malik01@testmail.dev",
     "phone": "+923001000001",
     "password": "Test@1234"
+  },
+  {
+    "fullName": "Danish Farooq",
+    "email": "danish.farooq13@testmail.dev",
+    "phone": "+923001000013",
+    "password": "Test@1234"
   }
 ]
