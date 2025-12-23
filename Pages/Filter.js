@@ -34,12 +34,6 @@ export class FilterPage {
     this.removeFiltersButton = page.getByRole('button', { name: 'Remove filters' });
   }
 
-  // ======================
-  // Common helpers
-  // ======================
-
-
-
   
   async openFilters() {
     await this.filtersButton.waitFor({ state: 'visible' });

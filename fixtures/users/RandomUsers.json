@@ -1,29 +1,5 @@
 [
   {
-    "fullName": "Salman Akram",
-    "email": "salman.akram21@testmail.dev",
-    "phone": "3001000021",
-    "password": "Test@1234"
-  },
-  {
-    "fullName": "Adnan Yousaf",
-    "email": "adnan.yousaf22@testmail.dev",
-    "phone": "3001000022",
-    "password": "Test@1234"
-  },
-  {
-    "fullName": "Zubair Latif",
-    "email": "zubair.latif23@testmail.dev",
-    "phone": "3001000023",
-    "password": "Test@1234"
-  },
-  {
-    "fullName": "Farhan Qureshi",
-    "email": "farhan.qureshi24@testmail.dev",
-    "phone": "3001000024",
-    "password": "Test@1234"
-  },
-  {
     "fullName": "Irfan Bashir",
     "email": "irfan.bashir25@testmail.dev",
     "phone": "3001000025",

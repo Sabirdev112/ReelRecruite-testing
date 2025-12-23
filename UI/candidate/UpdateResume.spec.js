@@ -31,6 +31,7 @@ test('Candidate deletes and uploads resume', async ({ page }) => {
   await loginPage.login(candidate.email, candidate.password);
   await loginPage.clickSignIn();
   await page.waitForURL('**/jobs');
+  console.log('Candidate logged in successfully.');
   await uploadResumePage.handleMaybeLaterIfPresent();
 
   // ----------- Profile & Resume flow -----------
