@@ -35,20 +35,3 @@ npx playwright test UI/Recruiter/UnArchiveChat.spec.js
 npx playwright test UI/Recruiter/RejectCandidate.spec.js
 npx playwright test UI/candidate/ViewAppliedJobs.spec.js
 npx playwright test UI/Recruiter/DeleteJob.spec.js
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

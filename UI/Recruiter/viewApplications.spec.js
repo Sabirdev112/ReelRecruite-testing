@@ -33,10 +33,8 @@ test('Recruiter view all applications for a job', async ({ page }) => {
   await loginPage.goto();
   await loginPage.login(recruiter.email, recruiter.password);
   await loginPage.clickSignIn();
-
-  // Wait for dashboard + auth cookies
-  await page.waitForURL('https://recruitai-web-production.up.railway.app/my-jobs');
-  await page.waitForLoadState('networkidle');
+  await page.waitForURL('**/my-jobs');
+  
 
   // ----------- Navigate to job (FIXED) -----------
   await page.goto(jobUrl, { waitUntil: 'domcontentloaded' });
