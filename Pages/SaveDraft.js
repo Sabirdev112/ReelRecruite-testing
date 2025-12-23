@@ -12,6 +12,7 @@ export class SaveDraft {
    async Cancel() {
     await this.cancelButton.click();
   }
+  
 
    async clickIfVisible(locator) {
   if (await locator.isVisible().catch(() => false)) {
