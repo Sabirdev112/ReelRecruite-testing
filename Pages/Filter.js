@@ -4,7 +4,7 @@ export class FilterPage {
     this.page = page;
 
     // Open Filters modal
-    this.filtersButton = this.filtersButton = page.getByRole('button', { name: 'Filters' });
+    this.filtersButton = page.locator('button:has-text("Filters")');
 
     // Job Type
     this.jobTypeSelect = page.locator(
@@ -43,6 +43,7 @@ export class FilterPage {
   
   async openFilters() {
     await this.filtersButton.waitFor({ state: 'visible' });
+    await this.page.waitForTimeout(1000);
     await this.filtersButton.click();
   }
 
