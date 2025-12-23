@@ -1,7 +1,7 @@
 export class ShortlistCandidatePage {
   constructor(page) {
     this.page = page;
-    this.viewApplicationButton = page.getByRole('button', { name: 'View All Applications' });
+    this.viewApplicationButton = page.locator('button').filter({ hasText: 'View All Applications' }).first();
     this.viewDetailsButton = page.locator('xpath=//*[@id="root"]/div[2]/main/div/div[2]/div[3]/div[1]/div/div[2]/button/span');
     this.changeStatusButton = page.getByRole('button', { name: 'Update Status' });
     this.shortListedButton = page.getByRole('button', { name: '⭐Shortlisted' });

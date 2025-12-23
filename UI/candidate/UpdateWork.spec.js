@@ -41,11 +41,17 @@ test('Candidate deletes existing work (if any) and adds new experience', async (
   await updateWorkPage.clickAddWork();
   console.log('Adding new work experience...');
   await updateWorkPage.addCompany('Tech Solutions Inc');
+  console.log('Company added.');
   await updateWorkPage.addPosition('Senior Software Engineer');
+  console.log('Position added.');
   await updateWorkPage.addEmploymentType('Full-time');
+  console.log('Employment type added.');
   await updateWorkPage.addLocationType('On-site');
+  console.log('Location type added.');
   await updateWorkPage.addStartDate('2021-01-01');
+  console.log('Start date added.');
   await updateWorkPage.addEndDate();
+  console.log('End date added.');
   await updateWorkPage.addDescription(
     'Led QA automation initiatives and improved delivery quality'
   );

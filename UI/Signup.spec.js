@@ -4,7 +4,7 @@ import path from 'path';
 import { SignupPage } from '../Pages/SignupPage.js';
 
 const RANDOM_USERS_FILE = path.join(process.cwd(), 'fixtures/users/RandomUsers.json');
-const NEW_USERS_FILE = path.join(process.cwd(), 'fixtures/users/NewUsers.json');
+const NEW_USERS_FILE = path.join(process.cwd(), 'ixtures/users/NewUsers.json');
 
 test('Candidate signs up and moves user from RandomUsers to NewUsers', async ({ page }) => {
   const signupPage = new SignupPage(page);

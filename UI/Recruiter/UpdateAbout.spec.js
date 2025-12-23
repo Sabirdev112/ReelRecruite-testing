@@ -34,8 +34,11 @@ test('recruiter can update about section', async ({ page }) => {
 
   /* ---------- UPDATE ABOUT ---------- */
   await updateAbout.updateBio('Experienced software engineer with a passion for developing innovative programs that expedite the efficiency and effectiveness of organizational success.');
+  console.log('Bio updated successfully.');
   await updateAbout.updateCountry('United States');
+  console.log('Country updated successfully.');
   await updateAbout.updateLocation('San Francisco, CA');
+  console.log('Location updated successfully.');
   await updateAbout.saveChanges();
   console.log('About section updated successfully.');
 });

@@ -41,6 +41,7 @@ export class SignupPage {
   }
   async enterPhone(phone) {
     await this.phoneInput.waitFor({ state: 'visible' });
+    await this.phoneInput.fill(''); 
     await this.phoneInput.pressSequentially(phone);
   }
   async enterPassword(password) {
