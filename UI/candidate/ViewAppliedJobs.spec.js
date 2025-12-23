@@ -9,7 +9,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // Load recruiter credentials
-const user = JSON.parse(
+const candidate = JSON.parse(
   fs.readFileSync(
     path.join(__dirname, '../../fixtures/Candidate/Credentials.json'),
     'utf-8'
@@ -26,7 +26,7 @@ test ('Candidate views applied jobs', async ({ page }) => {
     
       // LOGIN
       await loginPage.goto();
-      await loginPage.login(user.email, user.password);
+      await loginPage.login(candidate.email, candidate.password);
       await loginPage.clickSignIn();
     
       
