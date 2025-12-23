@@ -40,8 +40,11 @@ test('Recruiter see Resume', async ({ page }) => {
   console.log(`Successfully navigated to Job URL: ${jobUrl}`);
 
   await seeResume.navigateToApplications();
+  console.log('Navigated to applications.');
   await seeResume.viewCandidateDetails();
+  console.log('Viewed candidate details.');
   await seeResume.viewCandidateProfile();
+  console.log('Viewed candidate profile.');
   await seeResume.navigateToResumeSection();
   console.log('Navigated to resume section.');
   await seeResume.clickViewResume();
