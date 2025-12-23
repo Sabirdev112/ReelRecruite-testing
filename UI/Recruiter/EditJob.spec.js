@@ -41,6 +41,7 @@ test('Recruiter Edits Job', async ({ page }) => {
   const editJob = new EditJobPage(page);
     await editJob.editJob();
     await editJob.updateDetails();
+    console.log('Job details updated successfully');
     await editJob.clickCustomFields();
     await editJob.saveChanges();
     console.log('Job edited successfully, Job ID:', jobId);

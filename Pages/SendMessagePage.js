@@ -4,25 +4,30 @@ export class SendMessagePage {
 
     // Locators for the message functionality
     this.messagesButton = page.getByRole('button', { name: 'Messages' });
-    this.messageLocator = page.getByRole('img', { name: 'Sabir' });
-    this.messageInput = page.locator('input.flex-1.bg-transparent.outline-none.text-sm:visible');
+    this.messageLocator = page.locator('xpath=//*[@id="root"]/div[2]/main/div/div/div[1]/div[3]/div/div[3]/div[2]/div[1]/div');
+    this.messageInput = page.locator('xpath=//*[@id="root"]/div[2]/main/div/div/div[2]/div/div[3]/div/form/div/input');
     
     // Updated send button selector
-    this.sendButton = page.locator('#root > div.min-h-screen.bg-gray-50 > main > div > div > div.flex-1.hidden.md\\:flex.flex-col.overflow-hidden.bg-gray-50 > div > div.flex-shrink-0.px-4.py-3.bg-white.border-t.border-gray-200.z-10 > form > button > svg');
+    this.sendButton = page.locator('xpath=//*[@id="root"]/div[2]/main/div/div/div[3]/div/div[3]/div/form/button[2]/svg');
   }
 
   async openMessages() {
-    await this.messagesButton.waitFor({ state: 'visible', timeout: 10000 });
-    await this.messagesButton.click(); // Click the Messages button
+    await this.messagesButton.waitFor({ state: 'visible'});
+    await this.messagesButton.click();
+    await this.page.waitForLoadState('networkidle');
   }
 
   async selectMessage() {
-    await this.messageLocator.waitFor({ state: 'visible', timeout: 10000 });
-    await this.messageLocator.click(); // Click the specific message
+    await this.messageLocator.waitFor({ state: 'visible' });
+    await this.messageLocator.click();
   }
 
-  async sendMessage(content) {
-    await this.messageInput.fill(content); // Fill the message input
-    await this.sendButton.click(); // Click the send button
+  async sendMessage(message) {
+    await this.messageInput.waitFor({ state: 'visible' });
+    await this.messageInput.fill(message);
+     await this.messageInput.press('Enter');
+     await this.page.waitForTimeout(3000);
   }
+
+  
 }

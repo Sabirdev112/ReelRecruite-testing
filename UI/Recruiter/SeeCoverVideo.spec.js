@@ -40,11 +40,15 @@ test('Recruiter see cover video', async ({ page }) => {
   console.log(`Successfully navigated to Job URL: ${jobUrl}`);
 
   await seeCoverVideo.navigateToApplications();
+  console.log('Navigated to applications.');
   await seeCoverVideo.viewCandidateDetails();
+  console.log('Viewed candidate details.');
   await seeCoverVideo.viewCandidateProfile();
+  console.log('Viewed candidate profile.');
   await seeCoverVideo.navigateToCoverVideoSection();
   console.log('Navigated to cover video section.');
   await seeCoverVideo.playVideo();
+  console.log('Cover video playback started.');
   await seeCoverVideo.isVideoPlaying();
-  console.log('Cover video playback initiated.');
+  console.log('Cover video playback completed.');
 });

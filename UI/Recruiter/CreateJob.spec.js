@@ -27,13 +27,21 @@ test('Recruiter login and create a new job', async ({ page }) => {
 
   // Job creation flow
   await createJob.openJobForm();
+  console.log('Job form opened successfully');
   await createJob.fillJobDetails();
+  console.log('Job details filled successfully');
   await createJob.fillJobTypeAndCompensation();
+  console.log('Job type and compensation filled successfully');
   await createJob.fillJobDescription();
+  console.log('Job description filled successfully');
   await createJob.addSkills();
+  console.log('Job skills added successfully');
   await createJob.fillRequirements();
+  console.log('Job requirements filled successfully');
   await createJob.addQuestions();
+  console.log('Job questions added successfully');
   await createJob.previewJob();
+  console.log('Job previewed successfully');
 
   // Submit job and capture jobId from POM
   const jobId = await createJob.submitJob();
