@@ -24,6 +24,7 @@ test('candidate can update about section', async ({ page }) => {
   await loginPage.login(candidate.email, candidate.password);
   await loginPage.clickSignIn();
   await page.waitForURL('**/jobs');
+  console.log('Candidate logged in successfully.');
 
   await updateAbout.handleMaybeLaterIfPresent();
 

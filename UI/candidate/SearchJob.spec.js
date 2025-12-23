@@ -25,6 +25,8 @@ test('Search job by name and verify results', async ({ page }) => {
   await loginPage.goto();
   await loginPage.login(candidate.email, candidate.password);
   await loginPage.clickSignIn();
+  await page.waitForURL('**/jobs');
+  console.log('Candidate logged in successfully.');
 
   // Keywords to test (one by one)
   const keywords = ['software','react'];
@@ -34,5 +36,6 @@ test('Search job by name and verify results', async ({ page }) => {
 
     const result = await searchPage.verifyResultsContain(keyword);
     expect(result).toBeTruthy();
+    console.log(`Searched for "${keyword}" and found results: ${result}`);
   }
 });

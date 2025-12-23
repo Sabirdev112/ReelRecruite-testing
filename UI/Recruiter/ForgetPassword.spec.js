@@ -20,7 +20,7 @@ const recruiter = JSON.parse(
 // ----------- Forget password data -----------
 const forgetPasswordPath = path.join(
   __dirname,
-  '../../fixtures/Recruiter/ForgetPassword.json'
+  '../../fixtures/Recruiter/Credentials.json'
 );
 
 const recruiters = JSON.parse(fs.readFileSync(forgetPasswordPath, 'utf-8'));
@@ -65,5 +65,5 @@ test('Recruiter forget password flow', async ({ page }) => {
     'utf-8'
   );
 
-  console.log(`Password updated in ForgetPassword.json`, updatedRecruiters);
+  console.log(`Password updated in Credentials.json`, updatedRecruiters);
 });
