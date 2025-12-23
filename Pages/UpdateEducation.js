@@ -9,7 +9,7 @@ export class UpdateEducationPage {
       this.ProfileButton = page.getByText('Profile', { exact: true });
 
       this.educationSection = page.getByRole('heading', { name: 'Education' });
-      this.deleteEduButton = page.locator("//button[@title='Delete']//*[name()='svg']//*[name()='path' and contains(@fill,'currentCol')]");
+      this.deleteEduButton = page.locator('xpath=//*[@id="root"]/div[2]/main/div/div/div[3]/div[3]/div[2]/div/div/div[2]/div[1]/div[2]/div/button[2]');
       this.confirmDeleteButton = page.getByRole('button', { name: 'Ok' });
       this.addEducationButton = page.locator('xpath=//*[@id="root"]/div[2]/main/div/div/div[3]/div[3]/div[2]/button');
   
@@ -36,6 +36,18 @@ export class UpdateEducationPage {
     } catch {}
   }
 
+  async clearAndTypeUsingKeyboard(locator, value) {
+    await locator.waitFor({ state: 'visible' });
+    await locator.click();
+    await locator.press('Control+A');
+    await locator.press('Backspace');
+    await locator.type(value);
+  }
+  async selectDropdownByLabel(dropdown, label) {
+    await dropdown.waitFor({ state: 'visible' });
+    await dropdown.selectOption({ label });
+  }
+
     async clickProfile() {
       await this.profileMenu.waitFor({ state: 'visible', timeout: 10000 });
       await this.profileMenu.click();
@@ -52,13 +64,11 @@ export class UpdateEducationPage {
     }
   async deleteEducation() {
     await this.deleteEduButton.waitFor({ state: 'visible' });
-    await this.deleteEduButton.scrollIntoViewIfNeeded();
-    await this.deleteEduButton.click({ force: true });
+    await this.deleteEduButton.click();
 
 
   }
   async confirmDelete() {
-    await this.handleMaybeLaterIfPresent();
     await this.confirmDeleteButton.waitFor({ state: 'visible' });
     await this.confirmDeleteButton.click();
   }
@@ -66,8 +76,6 @@ export class UpdateEducationPage {
   const isDeleteVisible = await this.deleteEduButton.isVisible().catch(() => false);
 
   if (isDeleteVisible) {
-    await this.handleMaybeLaterIfPresent(); // close any popups
-    await this.deleteEduButton.scrollIntoViewIfNeeded();
     await this.deleteEduButton.click({ force: true });
 
     await this.confirmDeleteButton.waitFor({ state: 'visible' });
@@ -86,13 +94,7 @@ export class UpdateEducationPage {
       await this.addEducationButton.click();
     }
 
-    async clearAndTypeUsingKeyboard(locator, value) {
-    await locator.waitFor({ state: 'visible' });
-    await locator.click();
-    await locator.press('Control+A');
-    await locator.press('Backspace');
-    await locator.type(value);
-  }
+    
 
   async updateSchool(school) {
     await this.clearAndTypeUsingKeyboard(this.schoolTextbox, school);
