@@ -38,6 +38,7 @@ export class ApplyJobPage {
   async submitApplication() {
     await this.submitButton.waitFor({ state: 'visible' });
     await this.submitButton.click();
+    await this.page.waitForLoadState('networkidle');
   }
   
 }

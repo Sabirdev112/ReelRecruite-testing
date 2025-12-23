@@ -43,10 +43,8 @@ async function userFlow(browser, user, jobUrl) {
   await loginPage.goto();
   await loginPage.login(user.email, user.password);
   await loginPage.clickSignIn();
-
-  // Wait for dashboard signal (avoid networkidle)
   await page.waitForURL('**/jobs');
-
+  console.log('Candidate logged in successfully.');
   // APPLY JOB
   await page.goto(jobUrl);
   await applyJobPage.applyNow();
@@ -54,7 +52,9 @@ async function userFlow(browser, user, jobUrl) {
   await page.waitForTimeout(10000);
   await applyJobPage.stopRecording();
   await applyJobPage.answerOne();
+  console.log(`Answered question 1 for: ${user.email}`);
   await applyJobPage.answerTwo();
+  console.log(`Answered question 2 for: ${user.email}`);
   await applyJobPage.submitApplication();
   console.log(`Application submitted for: ${user.email}`);
 }
