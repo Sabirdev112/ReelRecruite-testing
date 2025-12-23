@@ -28,6 +28,7 @@ test('Candidate changes password', async ({ page }) => {
   await loginPage.login(user.email, oldPassword);
   await loginPage.clickSignIn();
   await page.waitForURL('**/jobs');
+  console.log('Candidate logged in successfully.');
   await changePasswordPage.handleMaybeLaterIfPresent();
   
 

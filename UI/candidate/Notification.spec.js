@@ -26,7 +26,8 @@ test('Notification flow – handle empty & existing notifications', async ({
   await login.goto();
   await login.login(candidate.email, candidate.password);
   await login.clickSignIn();
-  await page.waitForLoadState('networkidle');
+  await page.waitForURL('**/jobs');
+  console.log('Candidate logged in successfully.');
 
   await notification.handleNotificationsFlow();
 

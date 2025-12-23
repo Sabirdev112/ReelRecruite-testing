@@ -28,6 +28,7 @@ test('Candidate info, profile picture, and banner update', async ({ page }) => {
   await loginPage.login(recruiter.email, recruiter.password);
   await loginPage.clickSignIn();
   await page.waitForURL('**/jobs');
+  console.log('Candidate logged in successfully.');
 
  
 
