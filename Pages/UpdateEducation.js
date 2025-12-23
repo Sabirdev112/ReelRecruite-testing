@@ -9,9 +9,9 @@ export class UpdateEducationPage {
       this.ProfileButton = page.getByText('Profile', { exact: true });
 
       this.educationSection = page.getByRole('heading', { name: 'Education' });
-      this.deleteEduButton = page.locator("body > div:nth-child(1) > div:nth-child(2) > main:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(3) > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(2) > button:nth-child(2) > svg:nth-child(1) > path:nth-child(1)");
+      this.deleteEduButton = page.locator("//button[@title='Delete']//*[name()='svg']//*[name()='path' and contains(@fill,'currentCol')]");
       this.confirmDeleteButton = page.getByRole('button', { name: 'Ok' });
-      this.addEducationButton = page.getByText('Add Education', { exact: true });
+      this.addEducationButton = page.locator('xpath=//*[@id="root"]/div[2]/main/div/div/div[3]/div[3]/div[2]/button');
   
       // Education form fields
       this.schoolTextbox = page.getByRole('textbox', { name: /e\.g\., Harvard University/i });
@@ -51,9 +51,11 @@ export class UpdateEducationPage {
       await this.educationSection.scrollIntoViewIfNeeded();
     }
   async deleteEducation() {
-    await this.handleMaybeLaterIfPresent();
     await this.deleteEduButton.waitFor({ state: 'visible' });
-    await this.deleteEduButton.click();
+    await this.deleteEduButton.scrollIntoViewIfNeeded();
+    await this.deleteEduButton.click({ force: true });
+
+
   }
   async confirmDelete() {
     await this.handleMaybeLaterIfPresent();
@@ -64,14 +66,19 @@ export class UpdateEducationPage {
   const isDeleteVisible = await this.deleteEduButton.isVisible().catch(() => false);
 
   if (isDeleteVisible) {
-    await this.deleteEduButton.click();
+    await this.handleMaybeLaterIfPresent(); // close any popups
+    await this.deleteEduButton.scrollIntoViewIfNeeded();
+    await this.deleteEduButton.click({ force: true });
+
     await this.confirmDeleteButton.waitFor({ state: 'visible' });
     await this.confirmDeleteButton.click();
-    await this.page.waitForTimeout(3000);
-  }
 
-  // If delete is not visible, it will silently continue
+    await this.page.reload({ waitUntil: 'networkidle' });
+    await this.handleMaybeLaterIfPresent();
+  }
 }
+
+
 
 
     async clickAddEducation() {

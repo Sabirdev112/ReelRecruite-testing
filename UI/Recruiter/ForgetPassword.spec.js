@@ -38,11 +38,17 @@ test('Recruiter forget password flow', async ({ page }) => {
   // ----------- Forget Password flow -----------
   const forgetPasswordPage = new ForgetPassword(page);
   await forgetPasswordPage.clickForgetPassword();
+  console.log('Forget password page opened successfully');
   await forgetPasswordPage.enterEmail(recruiter.email);
+  console.log('Email entered successfully');
   await forgetPasswordPage.clickGetCode();
+  console.log('Code sent successfully');
   await forgetPasswordPage.fillOTP(otp);
+  console.log('OTP entered successfully');
   await forgetPasswordPage.clickContinue();
+  console.log('OTP verified successfully');
   await forgetPasswordPage.enterNewPassword(newPassword, newPassword);
+  console.log('New password entered successfully');
   await forgetPasswordPage.clickSavePassword();
 
   console.log(`Password changed for ${recruiter.email}`);
