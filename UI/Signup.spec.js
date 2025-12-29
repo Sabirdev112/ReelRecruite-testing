@@ -1,10 +1,10 @@
-import { test } from '@playwright/test';
+import { test, expect } from '@playwright/test';
 import fs from 'fs';
 import path from 'path';
 import { SignupPage } from '../Pages/SignupPage.js';
-
+import { runQuery } from '../utils/db/dbClient.js';
 const RANDOM_USERS_FILE = path.join(process.cwd(), 'fixtures/users/RandomUsers.json');
-const NEW_USERS_FILE = path.join(process.cwd(), 'ixtures/users/NewUsers.json');
+const NEW_USERS_FILE = path.join(process.cwd(), 'fixtures/users/NewUsers.json');
 
 test('Candidate signs up and moves user from RandomUsers to NewUsers', async ({ page }) => {
   const signupPage = new SignupPage(page);
@@ -49,6 +49,20 @@ test('Candidate signs up and moves user from RandomUsers to NewUsers', async ({ 
     await signupPage.fillOTP('123456');
 
     console.log(`Signed up successfully: ${user.email}`);
+
+    // ✅ Verify user exists in DB
+    const usersInDb = await runQuery(
+      `
+      SELECT id, email
+      FROM users
+      WHERE email = $1
+      `,
+      [user.email]
+    );
+
+    expect(usersInDb.length).toBe(1);
+    expect(usersInDb[0].email).toBe(user.email);
+    console.log('DB verification passed: User Created in db');
 
     // ✅ Move to NewUsers.json
     newUsers.push(user);

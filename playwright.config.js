@@ -12,7 +12,7 @@ export default defineConfig({
     '**/*.test.ts'
   ],
   timeout: 60 * 1000,
-  retries: 1,
+  retries: 0,
   use: {
     // baseURL intentionally removed
     trace: 'on-first-retry'

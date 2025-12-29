@@ -1,158 +1,134 @@
 [
   {
-    "fullName": "Irfan Bashir",
-    "email": "irfan.bashir25@testmail.dev",
-    "phone": "3001000025",
-    "password": "Test@1234"
-  },
-  {
-    "fullName": "Arslan Nawaz",
-    "email": "arslan.nawaz26@testmail.dev",
-    "phone": "3001000026",
-    "password": "Test@1234"
-  },
-  {
-    "fullName": "Shahid Munir",
-    "email": "shahid.munir27@testmail.dev",
-    "phone": "3001000027",
-    "password": "Test@1234"
-  },
-  {
-    "fullName": "Kamran Ashraf",
-    "email": "kamran.ashraf28@testmail.dev",
-    "phone": "3001000028",
-    "password": "Test@1234"
-  },
-  {
     "fullName": "Ammar Sohail",
-    "email": "ammar.sohail29@testmail.dev",
-    "phone": "3001000029",
+    "email": "ammar.sohail104@testmail.dev",
+    "phone": "4002000104",
     "password": "Test@1234"
   },
   {
     "fullName": "Sameer Khalid",
-    "email": "sameer.khalid30@testmail.dev",
-    "phone": "3001000030",
+    "email": "sameer.khalid105@testmail.dev",
+    "phone": "4002000105",
     "password": "Test@1234"
   },
   {
     "fullName": "Faizan Latif",
-    "email": "faizan.latif31@testmail.dev",
-    "phone": "3001000031",
+    "email": "faizan.latif106@testmail.dev",
+    "phone": "4002000106",
     "password": "Test@1234"
   },
   {
     "fullName": "Hasnain Riaz",
-    "email": "hasnain.riaz32@testmail.dev",
-    "phone": "3001000032",
+    "email": "hasnain.riaz107@testmail.dev",
+    "phone": "4002000107",
     "password": "Test@1234"
   },
   {
     "fullName": "Taha Asghar",
-    "email": "taha.asghar33@testmail.dev",
-    "phone": "3001000033",
+    "email": "taha.asghar108@testmail.dev",
+    "phone": "4002000108",
     "password": "Test@1234"
   },
   {
     "fullName": "Nouman Saleem",
-    "email": "nouman.saleem34@testmail.dev",
-    "phone": "3001000034",
+    "email": "nouman.saleem109@testmail.dev",
+    "phone": "4002000109",
     "password": "Test@1234"
   },
   {
     "fullName": "Haris Mehmood",
-    "email": "haris.mehmood35@testmail.dev",
-    "phone": "3001000035",
+    "email": "haris.mehmood110@testmail.dev",
+    "phone": "4002000110",
     "password": "Test@1234"
   },
   {
     "fullName": "Sheryar Awan",
-    "email": "sheryar.awan36@testmail.dev",
-    "phone": "3001000036",
+    "email": "sheryar.awan111@testmail.dev",
+    "phone": "4002000111",
     "password": "Test@1234"
   },
   {
     "fullName": "Muneeb Akhtar",
-    "email": "muneeb.akhtar37@testmail.dev",
-    "phone": "3001000037",
+    "email": "muneeb.akhtar112@testmail.dev",
+    "phone": "4002000112",
     "password": "Test@1234"
   },
   {
     "fullName": "Owais Rafiq",
-    "email": "owais.rafiq38@testmail.dev",
-    "phone": "3001000038",
+    "email": "owais.rafiq113@testmail.dev",
+    "phone": "4002000113",
     "password": "Test@1234"
   },
   {
     "fullName": "Junaid Siddiq",
-    "email": "junaid.siddiq39@testmail.dev",
-    "phone": "3001000039",
+    "email": "junaid.siddiq114@testmail.dev",
+    "phone": "4002000114",
     "password": "Test@1234"
   },
   {
     "fullName": "Azhar Mahmood",
-    "email": "azhar.mahmood40@testmail.dev",
-    "phone": "3001000040",
+    "email": "azhar.mahmood115@testmail.dev",
+    "phone": "4002000115",
     "password": "Test@1234"
   },
   {
     "fullName": "Rehan Zafar",
-    "email": "rehan.zafar41@testmail.dev",
-    "phone": "3001000041",
+    "email": "rehan.zafar116@testmail.dev",
+    "phone": "4002000116",
     "password": "Test@1234"
   },
   {
     "fullName": "Faisal Nadeem",
-    "email": "faisal.nadeem42@testmail.dev",
-    "phone": "3001000042",
+    "email": "faisal.nadeem117@testmail.dev",
+    "phone": "4002000117",
     "password": "Test@1234"
   },
   {
     "fullName": "Saqib Rauf",
-    "email": "saqib.rauf43@testmail.dev",
-    "phone": "3001000043",
+    "email": "saqib.rauf118@testmail.dev",
+    "phone": "4002000118",
     "password": "Test@1234"
   },
   {
     "fullName": "Ubaid Hassan",
-    "email": "ubaid.hassan44@testmail.dev",
-    "phone": "3001000044",
+    "email": "ubaid.hassan119@testmail.dev",
+    "phone": "4002000119",
     "password": "Test@1234"
   },
   {
     "fullName": "Yasir Mehmood",
-    "email": "yasir.mehmood45@testmail.dev",
-    "phone": "3001000045",
+    "email": "yasir.mehmood120@testmail.dev",
+    "phone": "4002000120",
     "password": "Test@1234"
   },
   {
     "fullName": "Asad Jamil",
-    "email": "asad.jamil46@testmail.dev",
-    "phone": "3001000046",
+    "email": "asad.jamil121@testmail.dev",
+    "phone": "4002000121",
     "password": "Test@1234"
   },
   {
     "fullName": "Naveed Ilyas",
-    "email": "naveed.ilyas47@testmail.dev",
-    "phone": "3001000047",
+    "email": "naveed.ilyas122@testmail.dev",
+    "phone": "4002000122",
     "password": "Test@1234"
   },
   {
     "fullName": "Khurram Shahzad",
-    "email": "khurram.shahzad48@testmail.dev",
-    "phone": "3001000048",
+    "email": "khurram.shahzad123@testmail.dev",
+    "phone": "4002000123",
     "password": "Test@1234"
   },
   {
     "fullName": "Bilawal Qasim",
-    "email": "bilawal.qasim49@testmail.dev",
-    "phone": "3001000049",
+    "email": "bilawal.qasim124@testmail.dev",
+    "phone": "4002000124",
     "password": "Test@1234"
   },
   {
     "fullName": "Ammad Rehman",
-    "email": "ammad.rehman50@testmail.dev",
-    "phone": "3001000050",
+    "email": "ammad.rehman125@testmail.dev",
+    "phone": "4002000125",
     "password": "Test@1234"
   }
 ]
