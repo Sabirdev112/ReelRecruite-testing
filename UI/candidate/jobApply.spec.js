@@ -1,9 +1,10 @@
-import { test, chromium } from '@playwright/test';
+import { test, chromium, expect } from '@playwright/test';
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { Login } from '../../Pages/Login.js';
 import { ApplyJobPage } from '../../Pages/ApplyJobPage.js';
+import { runQuery } from '../../utils/db/dbClient.js'; // Add your DB client
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -45,6 +46,7 @@ async function userFlow(browser, user, jobUrl) {
   await loginPage.clickSignIn();
   await page.waitForURL('**/jobs');
   console.log('Candidate logged in successfully.');
+
   // APPLY JOB
   await page.goto(jobUrl);
   await applyJobPage.applyNow();
@@ -57,6 +59,42 @@ async function userFlow(browser, user, jobUrl) {
   console.log(`Answered question 2 for: ${user.email}`);
   await applyJobPage.submitApplication();
   console.log(`Application submitted for: ${user.email}`);
+
+  // Get candidate ID from email
+const candidateRecords = await runQuery(
+  `SELECT id FROM users WHERE email = $1`,
+  [user.email]
+);
+
+expect(candidateRecords.length).toBe(1);
+const candidateId = candidateRecords[0].id;
+
+// Verify application exists
+const applicationsInDb = await runQuery(
+  `
+  SELECT id, candidate_id, job_id
+  FROM applications
+  WHERE candidate_id = $1 AND job_id = $2
+  `,
+  [candidateId, jobId]
+);
+
+expect(applicationsInDb.length).toBe(1);
+console.log(`DB verification passed: Application exists for ${user.email}`);
+
+// Optional: Verify answers were recorded
+const applicationId = applicationsInDb[0].id;
+const answersInDb = await runQuery(
+  `
+  SELECT id, application_id, job_question_id, answer
+  FROM application_answers
+  WHERE application_id = $1
+  `,
+  [applicationId]
+);
+
+expect(answersInDb.length).toBeGreaterThan(0);
+console.log(`DB verification passed: Answers recorded for application ${applicationId}`);
 }
 
 test('Apply for latest job (users from JSON)', async () => {

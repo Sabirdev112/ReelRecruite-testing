@@ -1,6 +1,7 @@
 import { test, expect } from '@playwright/test';
 import { Login } from '../../Pages/Login.js';
 import { CreateJobPage } from '../../Pages/CreateJobPage.js';
+import { runQuery } from '../../utils/db/dbClient.js';
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -24,30 +25,44 @@ test('Recruiter login and create a new job', async ({ page }) => {
   await loginPage.goto();
   await loginPage.login(recruiter.email, recruiter.password);
   await loginPage.clickSignIn();
+  await page.waitForURL('**/my-jobs');
+  console.log('Recruiter logged in successfully');
 
   // Job creation flow
   await createJob.openJobForm();
-  console.log('Job form opened successfully');
   await createJob.fillJobDetails();
-  console.log('Job details filled successfully');
   await createJob.fillJobTypeAndCompensation();
-  console.log('Job type and compensation filled successfully');
   await createJob.fillJobDescription();
-  console.log('Job description filled successfully');
   await createJob.addSkills();
-  console.log('Job skills added successfully');
   await createJob.fillRequirements();
-  console.log('Job requirements filled successfully');
   await createJob.addQuestions();
-  console.log('Job questions added successfully');
   await createJob.previewJob();
-  console.log('Job previewed successfully');
 
-  // Submit job and capture jobId from POM
+  // Submit job and capture jobId
   const jobId = await createJob.submitJob();
-expect(jobId).toBeTruthy();
+  expect(jobId).toBeTruthy();
 
   console.log(`Job successfully created with ID: ${jobId}`);
+
+  /* =========================
+     DB VERIFICATION (READ ONLY)
+     ========================= */
+
+  const jobs = await runQuery(
+    `
+    SELECT j.id, j.title, j.recruiter_id, u.email
+    FROM jobs j
+    JOIN users u ON u.id = j.recruiter_id
+    WHERE j.id = $1
+    `,
+    [jobId]
+  );
+
+  expect(jobs.length).toBe(1);
+  expect(jobs[0].id).toBe(jobId);
+  expect(jobs[0].email).toBe(recruiter.email);
+
+  console.log('DB verification passed: Job exists and recruiter is correct');
 
   // Navigate to applications
   await createJob.seeAllApplications();

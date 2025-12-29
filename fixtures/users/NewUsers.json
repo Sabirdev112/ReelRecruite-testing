@@ -16,5 +16,11 @@
     "email": "danish.farooq13@testmail.dev",
     "phone": "+923001000013",
     "password": "Test@1234"
+  },
+  {
+    "fullName": "Kamran Ashraf",
+    "email": "kamran.ashraf103@testmail.dev",
+    "phone": "4002000103",
+    "password": "Test@1234"
   }
 ]
