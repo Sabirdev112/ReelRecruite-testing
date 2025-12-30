@@ -1,0 +1,502 @@
+[
+  {
+    "id": 1767113456501,
+    "startedAt": "2025-12-30T16:50:28.864Z",
+    "endedAt": "2025-12-30T16:50:56.501Z",
+    "duration": 27637,
+    "summary": {
+      "total": 1,
+      "passed": 0,
+      "failed": 1,
+      "skipped": 0
+    },
+    "tests": [
+      {
+        "title": "Notification flow – handle empty & existing notifications",
+        "description": "",
+        "file": "C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\UI\\candidate\\Notification.spec.js",
+        "line": 20,
+        "status": "failed",
+        "duration": 22959,
+        "retries": 0,
+        "error": "Error: page.goto: net::ERR_NAME_NOT_RESOLVED at https://recruitai-web-production.up.railway.app/auth\nCall log:\n\u001b[2m  - navigating to \"https://recruitai-web-production.up.railway.app/auth\", waiting until \"load\"\u001b[22m\n",
+        "stack": "Error: page.goto: net::ERR_NAME_NOT_RESOLVED at https://recruitai-web-production.up.railway.app/auth\nCall log:\n\u001b[2m  - navigating to \"https://recruitai-web-production.up.railway.app/auth\", waiting until \"load\"\u001b[22m\n\n    at Login.goto (C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\Pages\\Login.js:14:25)\n    at C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\UI\\candidate\\Notification.spec.js:26:15",
+        "attachments": [
+          {
+            "name": "error-context",
+            "path": "C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\test-results\\UI-candidate-Notification--1a926-mpty-existing-notifications\\error-context.md",
+            "contentType": "text/markdown"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1767105404417,
+    "startedAt": "2025-12-30T14:36:28.572Z",
+    "endedAt": "2025-12-30T14:36:44.417Z",
+    "duration": 15845,
+    "summary": {
+      "total": 1,
+      "passed": 0,
+      "failed": 1,
+      "skipped": 0
+    },
+    "tests": [
+      {
+        "title": "candidate can update skills section",
+        "description": "",
+        "file": "C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\UI\\candidate\\UpdateSkill.spec.js",
+        "line": 21,
+        "status": "failed",
+        "duration": 13927,
+        "retries": 0,
+        "error": "Error: locator.waitFor: Target page, context or browser has been closed\nCall log:\n\u001b[2m  - waiting for getByRole('textbox', { name: 'Type a skill and press Enter' }) to be visible\u001b[22m\n",
+        "stack": "Error: locator.waitFor: Target page, context or browser has been closed\nCall log:\n\u001b[2m  - waiting for getByRole('textbox', { name: 'Type a skill and press Enter' }) to be visible\u001b[22m\n\n    at UpdateSkillsPage.addSkill (C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\Pages\\UpdateSkils.js:55:32)\n    at UpdateSkillsPage.addSkills (C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\Pages\\UpdateSkils.js:64:20)\n    at UpdateSkillsPage.updateSkills (C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\Pages\\UpdateSkils.js:85:9)\n    at C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\UI\\candidate\\UpdateSkill.spec.js:38:3",
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1767105359031,
+    "startedAt": "2025-12-30T14:35:48.246Z",
+    "endedAt": "2025-12-30T14:35:59.031Z",
+    "duration": 10785,
+    "summary": {
+      "total": 1,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 0
+    },
+    "tests": [
+      {
+        "title": "candidate can update skills section",
+        "description": "",
+        "file": "C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\UI\\candidate\\UpdateSkill.spec.js",
+        "line": 21,
+        "status": "interrupted",
+        "duration": 9166,
+        "retries": 0,
+        "error": "Error: page.waitForURL: Test ended.\n=========================== logs ===========================\nwaiting for navigation to \"**/jobs\" until \"load\"\n============================================================",
+        "stack": "Error: page.waitForURL: Test ended.\n=========================== logs ===========================\nwaiting for navigation to \"**/jobs\" until \"load\"\n============================================================\n    at C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\UI\\candidate\\UpdateSkill.spec.js:28:14",
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1767103877554,
+    "startedAt": "2025-12-30T14:11:09.019Z",
+    "endedAt": "2025-12-30T14:11:17.554Z",
+    "duration": 8535,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0
+    },
+    "tests": [
+      {
+        "title": "Apply Work Type filter",
+        "description": "",
+        "file": "C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\UI\\candidate\\workTypeFilter.spec.js",
+        "line": 21,
+        "status": "passed",
+        "duration": 6501,
+        "retries": 0,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1767103107115,
+    "startedAt": "2025-12-30T13:58:19.334Z",
+    "endedAt": "2025-12-30T13:58:27.115Z",
+    "duration": 7781,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0
+    },
+    "tests": [
+      {
+        "title": "Notification flow – handle empty & existing notifications",
+        "description": "",
+        "file": "C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\UI\\candidate\\Notification.spec.js",
+        "line": 20,
+        "status": "passed",
+        "duration": 5997,
+        "retries": 0,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1767102845213,
+    "startedAt": "2025-12-30T13:53:57.480Z",
+    "endedAt": "2025-12-30T13:54:05.213Z",
+    "duration": 7733,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0
+    },
+    "tests": [
+      {
+        "title": "Notification flow – handle empty & existing notifications",
+        "description": "",
+        "file": "C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\UI\\candidate\\Notification.spec.js",
+        "line": 20,
+        "status": "passed",
+        "duration": 5826,
+        "retries": 0,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1767102700080,
+    "startedAt": "2025-12-30T13:51:35.219Z",
+    "endedAt": "2025-12-30T13:51:40.079Z",
+    "duration": 4860,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0
+    },
+    "tests": [
+      {
+        "title": "Candidate can log in using phone number",
+        "description": "",
+        "file": "C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\UI\\candidate\\PhoneLogin.spec.js",
+        "line": 18,
+        "status": "passed",
+        "duration": 3061,
+        "retries": 0,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1767102606277,
+    "startedAt": "2025-12-30T13:49:58.175Z",
+    "endedAt": "2025-12-30T13:50:06.277Z",
+    "duration": 8102,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0
+    },
+    "tests": [
+      {
+        "title": "Apply Region filter",
+        "description": "",
+        "file": "C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\UI\\candidate\\regionFilter.spec.js",
+        "line": 19,
+        "status": "passed",
+        "duration": 6192,
+        "retries": 0,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1767102335660,
+    "startedAt": "2025-12-30T13:45:26.568Z",
+    "endedAt": "2025-12-30T13:45:35.660Z",
+    "duration": 9092,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0
+    },
+    "tests": [
+      {
+        "title": "Apply all job filters together",
+        "description": "",
+        "file": "C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\UI\\candidate\\FIlter.spec.js",
+        "line": 21,
+        "status": "passed",
+        "duration": 7177,
+        "retries": 0,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1767101173440,
+    "startedAt": "2025-12-30T13:26:04.741Z",
+    "endedAt": "2025-12-30T13:26:13.440Z",
+    "duration": 8699,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0
+    },
+    "tests": [
+      {
+        "title": "Apply all job filters together",
+        "description": "",
+        "file": "C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\UI\\candidate\\FIlter.spec.js",
+        "line": 21,
+        "status": "passed",
+        "duration": 6774,
+        "retries": 0,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1767100856747,
+    "startedAt": "2025-12-30T13:20:48.189Z",
+    "endedAt": "2025-12-30T13:20:56.747Z",
+    "duration": 8558,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0
+    },
+    "tests": [
+      {
+        "title": "Apply Region filter",
+        "description": "",
+        "file": "C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\UI\\candidate\\regionFilter.spec.js",
+        "line": 19,
+        "status": "passed",
+        "duration": 6652,
+        "retries": 0,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1767100618407,
+    "startedAt": "2025-12-30T13:16:50.441Z",
+    "endedAt": "2025-12-30T13:16:58.407Z",
+    "duration": 7966,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0
+    },
+    "tests": [
+      {
+        "title": "Apply Region filter",
+        "description": "",
+        "file": "C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\UI\\candidate\\regionFilter.spec.js",
+        "line": 19,
+        "status": "passed",
+        "duration": 6082,
+        "retries": 0,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1767100579406,
+    "startedAt": "2025-12-30T13:16:14.771Z",
+    "endedAt": "2025-12-30T13:16:19.406Z",
+    "duration": 4635,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0
+    },
+    "tests": [
+      {
+        "title": "Candidate can log in using phone number",
+        "description": "",
+        "file": "C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\UI\\candidate\\PhoneLogin.spec.js",
+        "line": 18,
+        "status": "passed",
+        "duration": 2798,
+        "retries": 0,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1767100518786,
+    "startedAt": "2025-12-30T13:15:10.416Z",
+    "endedAt": "2025-12-30T13:15:18.786Z",
+    "duration": 8370,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0
+    },
+    "tests": [
+      {
+        "title": "Apply all job filters together",
+        "description": "",
+        "file": "C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\UI\\candidate\\FIlter.spec.js",
+        "line": 21,
+        "status": "passed",
+        "duration": 6586,
+        "retries": 0,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1767100405986,
+    "startedAt": "2025-12-30T13:13:17.563Z",
+    "endedAt": "2025-12-30T13:13:25.986Z",
+    "duration": 8423,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0
+    },
+    "tests": [
+      {
+        "title": "Apply all job filters together",
+        "description": "",
+        "file": "C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\UI\\candidate\\FIlter.spec.js",
+        "line": 21,
+        "status": "passed",
+        "duration": 6396,
+        "retries": 0,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1767100190122,
+    "startedAt": "2025-12-30T13:09:41.669Z",
+    "endedAt": "2025-12-30T13:09:50.122Z",
+    "duration": 8453,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0
+    },
+    "tests": [
+      {
+        "title": "Apply Work Type filter",
+        "description": "",
+        "file": "C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\UI\\candidate\\workTypeFilter.spec.js",
+        "line": 21,
+        "status": "passed",
+        "duration": 6592,
+        "retries": 0,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1767100144348,
+    "startedAt": "2025-12-30T13:08:51.457Z",
+    "endedAt": "2025-12-30T13:09:04.348Z",
+    "duration": 12891,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0
+    },
+    "tests": [
+      {
+        "title": "candidate can update education",
+        "description": "",
+        "file": "C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\UI\\candidate\\UpdateEducation.spec.js",
+        "line": 30,
+        "status": "passed",
+        "duration": 11020,
+        "retries": 0,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1767099979484,
+    "startedAt": "2025-12-30T13:06:05.473Z",
+    "endedAt": "2025-12-30T13:06:19.484Z",
+    "duration": 14011,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0
+    },
+    "tests": [
+      {
+        "title": "candidate can update education",
+        "description": "",
+        "file": "C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\UI\\candidate\\UpdateEducation.spec.js",
+        "line": 30,
+        "status": "passed",
+        "duration": 11815,
+        "retries": 0,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1767099556138,
+    "startedAt": "2025-12-30T12:59:01.961Z",
+    "endedAt": "2025-12-30T12:59:16.138Z",
+    "duration": 14177,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0
+    },
+    "tests": [
+      {
+        "title": "candidate can update education",
+        "description": "",
+        "file": "C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\UI\\candidate\\UpdateEducation.spec.js",
+        "line": 30,
+        "status": "passed",
+        "duration": 12125,
+        "retries": 0,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  }
+]
