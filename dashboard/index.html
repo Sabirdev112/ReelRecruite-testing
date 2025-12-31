@@ -3,153 +3,88 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Playwright Test Dashboard</title>
+  <title>Playwright Report Dashboard</title>
   <link rel="stylesheet" href="style.css">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-  <!-- Header -->
-  <header>
-    <div class="header-content">
-      <div class="header-left">
-        <h1>Playwright Dashboard</h1>
-        <div class="run-info">
-          <span class="run-badge" id="runTime">No runs loaded</span>
-        </div>
-      </div>
-      <div class="header-right">
-        <button id="toggleTheme" class="theme-btn" aria-label="Toggle theme">
-          <span class="theme-icon text-2xl">🌙</span>
-        </button>
-      </div>
-    </div>
-  </header>
+  <div class="container">
+    <header class="header">
+      <h1 class="header-title">Playwright Report Dashboard</h1>
+      <button id="themeToggle" class="theme-toggle">🌙</button>
+    </header>
 
-  <!-- Main Container -->
-  <main class="container">
-    
-    <!-- Summary Cards Section -->
-    <section id="summary" class="summary-section">
-      <div class="card total">
-        <div class="card-content">
-          <div class="card-title">Total Tests</div>
-          <div class="card-value" id="total">0</div>
-          <div class="card-subtitle">Overall</div>
-        </div>
+    <section class="summary-cards">
+      <div class="card">
+        <div class="card-label">Total Runs</div>
+        <div class="card-value" id="totalRuns">0</div>
+        <div class="card-sub">Total number of test executions</div>
       </div>
-      
-      <div class="card pass">
-        <div class="card-content">
-          <div class="card-title">Passed</div>
-          <div class="card-value" id="passed">0</div>
-          <div class="card-subtitle">Overall</div>
-        </div>
+      <div class="card">
+        <div class="card-label">Total Tests</div>
+        <div class="card-value" id="totalTests">0</div>
+        <div class="card-sub">Across all runs</div>
       </div>
-      
-      <div class="card fail">
-        <div class="card-content">
-          <div class="card-title">Failed</div>
-          <div class="card-value" id="failed">0</div>
-          <div class="card-subtitle">Overall</div>
-        </div>
+      <div class="card">
+        <div class="card-label">Overall Pass Rate</div>
+        <div class="card-value" id="passRate">0%</div>
       </div>
-      
-      <div class="card skip">
-        <div class="card-content">
-          <div class="card-title">Skipped</div>
-          <div class="card-value" id="skipped">0</div>
-          <div class="card-subtitle">Overall</div>
-        </div>
+      <div class="card">
+        <div class="card-label">Avg Duration / Test</div>
+        <div class="card-value" id="avgDuration">0s</div>
+        <div class="card-sub">Average execution time per test</div>
       </div>
     </section>
 
-    <!-- Charts Section -->
-    <section id="charts" class="charts-section">
-      <div class="chart-wrapper">
-        <div class="chart-header">
-          <h3>Test Results Overview</h3>
-        </div>
-        <div class="chart-container">
-          <canvas id="resultChart"></canvas>
-        </div>
+    <section class="charts-section">
+      <div class="chart-card">
+        <h3 class="chart-title">Overall Test Status</h3>
+        <p class="chart-desc">Aggregated results from all runs.</p>
+        <canvas id="statusDonut"></canvas>
+        <div class="donut-legend">
+  <span>
+    <span class="legend-dot passed"></span> Passed
+  </span>
+  
+  <span>
+    <span class="legend-dot failed"></span> Failed
+  </span>
+  <span class="legend-dot skipped"></span> Skipped
+  </span>
+  <span>
+    <span class="legend-dot interrupted"></span> Interrupted
+  </span>
+</div>
       </div>
-      
-      <div class="chart-wrapper">
-        <div class="chart-header">
-          <h3>Distribution</h3>
-        </div>
-        <div class="chart-container">
-          <canvas id="pieChart"></canvas>
-        </div>
+      <div class="chart-card">
+        <h3 class="chart-title">Tests Per Run</h3>
+        <p class="chart-desc">Total number of tests in recent runs.</p>
+        <canvas id="testsBar"></canvas>
       </div>
     </section>
 
-    <!-- Test Runs Section -->
-    <section id="recentRuns" class="recent-runs-section">
-
-      <!-- Search and Filters -->
-      <div class="search-section">
-        <div class="search-wrapper">
-          <span class="search-icon absolute left-4 top-1/2 -translate-y-1/2 text-xl text-var(--text-muted)">🔍</span>
-          <input 
-            type="text" 
-            id="searchInput" 
-            placeholder="Search tests by name or file..."
-            class="search-input"
-            aria-label="Search tests"
-          >
-        </div>
-        
-        <div class="filter-buttons">
-          <button class="filter-btn active" data-filter="all">All</button>
-          <button class="filter-btn" data-filter="passed">Passed</button>
-          <button class="filter-btn" data-filter="failed">Failed</button>
-          <button class="filter-btn" data-filter="skipped">Skipped</button>
-        </div>
-      </div>
-
-      <!-- Test Results Table -->
+    <section class="runs-section">
+      <h2 class="section-title">All Test Runs</h2>
       <div class="table-wrapper">
-        <table id="testTable">
+        <table class="runs-table">
           <thead>
             <tr>
-              <th class="col-test">Test Name</th>
-              <th class="col-status">Status</th>
-              <th class="col-duration">Duration</th>
-              <th class="col-file">File</th>
-              <th class="col-error">Error Details</th>
+              <th>Run ID</th>
+              <th>Execution Date</th>
+              <th>Total</th>
+              <th>Passed</th>
+              <th>Failed</th>
+              <th>Skipped</th>
+              <th>Interrupted</th>
+              <th>Actions</th>
             </tr>
           </thead>
-          <tbody>
-            <tr class="empty-state">
-              <td colspan="5">
-                <div class="empty-content text-center">
-                  <span class="empty-icon block text-6xl mb-4 opacity-40">📭</span>
-                  <p class="text-xl font-medium text-var(--text-secondary)">No test results to display</p>
-                  <small class="text-var(--text-muted)">Run your tests to see results here</small>
-                </div>
-              </td>
-            </tr>
-          </tbody>
+          <tbody id="runsBody"></tbody>
         </table>
       </div>
-
-      <!-- Table Footer with Stats -->
-      <div class="table-footer mt-6 pt-6 border-t border-var(--border)">
-        <div class="footer-stats text-var(--text-secondary) font-medium">
-          <span id="visibleTests">0 tests displayed</span>
-        </div>
-      </div>
-      
     </section>
-
-  </main>
-
-  <!-- Footer -->
-  <footer class="dashboard-footer">
-    <p class="text-var(--text-muted)">Powered by Playwright • Modern Dashboard 2025</p>
-  </footer>
+  </div>
 
   <script src="app.js"></script>
 </body>
