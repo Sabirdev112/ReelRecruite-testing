@@ -4,6 +4,26 @@ let donutChart, barChart;
 let currentPage = 1;
 let pageSize = 25;
 
+function setRunUI(isRunning, { force = false } = {}) {
+  if (isRunning) {
+    activateStopButton();
+    localStorage.setItem('fullRunInProgress', 'true');
+    localStorage.setItem('runLocked', 'true');
+  } else {
+    if (force) {
+      resetRunButtons();
+      localStorage.removeItem('fullRunInProgress');
+      localStorage.removeItem('runLocked');
+    } else {
+      // only clear if not locked by a user action
+      if (!localStorage.getItem('runLocked')) {
+        resetRunButtons();
+        localStorage.removeItem('fullRunInProgress');
+      }
+    }
+  }
+}
+
 // Theme toggle
 document.getElementById('themeToggle')?.addEventListener('click', () => {
   document.body.classList.toggle('dark');
@@ -25,15 +45,10 @@ const isReport = window.location.pathname.includes('report.html');
 const urlParams = new URLSearchParams(window.location.search);
 const runId = urlParams.get('id');
 
-if (isReport && runId) {
-  loadRunReport(runId);
-} else {
-  loadDashboard();
-}
+// Defer loading data until window 'load' so optimistic UI restore runs first
+// (actual load is triggered in the load event handler below)
 
-setInterval(() => {
-  if (!isReport) loadDashboard(true);
-}, 30000);
+// Polling will be started after window load so optimistic UI restoration runs first
 
 async function loadDashboard(silent = false) {
   try {
@@ -49,6 +64,7 @@ async function loadDashboard(silent = false) {
       return;
     }
 
+    // Calculate overall stats
     const overall = runsData.reduce((acc, run) => {
       const s = run.summary || {};
       acc.totalTests += s.total || 0;
@@ -77,11 +93,143 @@ async function loadDashboard(silent = false) {
     renderPagination(currentPage, totalPages);
     updatePaginationInfo(currentPage, pageSize, totalRuns);
 
+    // Determine if a full run is currently running
+    const latestRun = runsData[0];
+    const isCurrentlyRunning =
+      latestRun &&
+      (latestRun.endedAt == null || latestRun.status === 'running');
+
+    console.debug('[dashboard] latestRun:', latestRun ? { id: latestRun.id, status: latestRun.status, endedAt: latestRun.endedAt } : null);
+    console.debug('[dashboard] isCurrentlyRunning:', isCurrentlyRunning, 'runLocked:', !!localStorage.getItem('runLocked'));
+
+    // Only enable the running UI when a run is detected. Do not automatically clear the locked state
+    // on refresh — keep the Run button disabled until the user explicitly presses Stop.
+    if (isCurrentlyRunning) setRunUI(true);
+
   } catch (err) {
     console.error('Dashboard load error:', err);
-    if (!silent) alert('Failed to load data.');
+    // Do nothing — preserve current button state on error
   }
 }
+
+// Activate "running" UI
+function activateStopButton() {
+  const runAllBtn = document.getElementById('runAllTests');
+  const stopBtn = document.getElementById('stopRun');
+
+  if (runAllBtn) {
+    runAllBtn.disabled = true;
+    runAllBtn.textContent = 'Running All Tests...';
+  }
+  if (stopBtn) {
+    stopBtn.style.display = 'inline-block';
+    stopBtn.disabled = false;
+    stopBtn.textContent = 'Stop Run';
+  }
+}
+
+// Reset to idle state
+function resetRunButtons() {
+  const runAllBtn = document.getElementById('runAllTests');
+  const stopBtn = document.getElementById('stopRun');
+
+  if (runAllBtn) {
+    runAllBtn.disabled = false;
+    runAllBtn.textContent = 'Run All Tests';
+  }
+  if (stopBtn) {
+    stopBtn.style.display = 'inline-block';
+    stopBtn.disabled = true;
+    stopBtn.textContent = 'Stop Run';
+  }
+}
+
+// Run All Tests — only alert on real failure
+document.getElementById('runAllTests')?.addEventListener('click', async () => {
+  const runAllBtn = document.getElementById('runAllTests');
+  const stopBtn = document.getElementById('stopRun');
+
+  if (runAllBtn.disabled) return;
+
+  // set UI state immediately and persist
+  setRunUI(true);
+
+  try {
+    const response = await fetch('/api/run-all-tests', { method: 'POST' });
+    if (!response.ok) throw new Error('Failed');
+
+    // Confirm run actually started — poll backend for up to 10 seconds
+    let started = false;
+    for (let i = 0; i < 10; i++) {
+      await new Promise(r => setTimeout(r, 1000));
+      try {
+        const res = await fetch('/api/runs');
+        if (!res.ok) continue;
+        const data = await res.json();
+        const latest = Array.isArray(data) ? data[0] : (data.runs || [])[0];
+        if (latest && (latest.endedAt == null || latest.status === 'running')) {
+          started = true;
+          break;
+        }
+      } catch (e) {
+        // ignore individual poll errors
+      }
+    }
+
+    if (!started) {
+      // couldn't detect a started run — keep UI locked until user stops; log for debugging
+      console.warn('Failed to detect started run after POST /api/run-all-tests. Server may be slow or down.');
+    }
+    } catch (err) {
+    console.error('Failed to start full test run', err);
+    // rollback immediately on failure
+    setRunUI(false, { force: true });
+  }
+});
+
+// Stop Run
+document.getElementById('stopRun')?.addEventListener('click', async () => {
+  const stopBtn = document.getElementById('stopRun');
+  stopBtn.disabled = true;
+  stopBtn.textContent = 'Stopping...';
+
+  try {
+    const response = await fetch('/api/stop-run', { method: 'POST' });
+    if (response.ok) {
+      alert('Test run stopped successfully');
+    } else {
+      alert('Stop command sent, but response was not OK');
+    }
+  } catch (err) {
+    alert('Failed to send stop command');
+  } finally {
+    await loadDashboard();
+    // user pressed Stop — force UI reset
+    setRunUI(false, { force: true });
+  }
+});
+
+// Restore UI immediately on page load/refresh
+window.addEventListener('load', () => {
+  // optimistic restore (instant)
+  if (localStorage.getItem('fullRunInProgress') === 'true') {
+    setRunUI(true);
+  }
+
+  // backend confirmation: load dashboard or report after optimistic UI restore
+  if (isReport && runId) {
+    loadRunReport(runId);
+  } else {
+    loadDashboard();
+  }
+
+  // start polling after initial load
+  setInterval(() => {
+    if (!isReport) loadDashboard(true);
+  }, 5000);
+});
+
+// === Rest of your functions (unchanged) ===
 
 async function loadRunReport(runId) {
   try {
@@ -152,7 +300,6 @@ async function loadRunReport(runId) {
   }
 }
 
-// Dashboard donut
 function renderDonut(overall) {
   const ctx = document.getElementById('statusDonut')?.getContext('2d');
   if (!ctx) return;
@@ -181,7 +328,6 @@ function renderDonut(overall) {
   });
 }
 
-// Report donut
 function renderRunDonut(summary) {
   const ctx = document.getElementById('runDonut')?.getContext('2d');
   if (!ctx) return;
@@ -208,7 +354,6 @@ function renderRunDonut(summary) {
   });
 }
 
-// Test Runs Per Day Chart
 function renderRunsPerDayChart(runs) {
   const ctx = document.getElementById('testsBar')?.getContext('2d');
   if (!ctx || runs.length === 0) return;
@@ -271,7 +416,6 @@ function renderRunsPerDayChart(runs) {
   });
 }
 
-// Pagination functions
 function renderTablePage(page, size) {
   const start = (page - 1) * size;
   const end = start + size;
@@ -383,87 +527,6 @@ document.getElementById('pageSizeSelect')?.addEventListener('change', (e) => {
   updatePaginationInfo(currentPage, pageSize, runsData.length);
 });
 
-// Run All Tests + Stop Run
-const runAllBtn = document.getElementById('runAllTests');
-const stopBtn = document.getElementById('stopRun');
-
-runAllBtn?.addEventListener('click', async () => {
-  if (runAllBtn.disabled) return;
-
-  runAllBtn.disabled = true;
-  runAllBtn.textContent = 'Running All Tests...';
-  stopBtn.style.display = 'inline-block';
-  stopBtn.disabled = false;
-
-  try {
-    const response = await fetch('/api/run-all-tests', { method: 'POST' });
-    if (!response.ok) throw new Error();
-  } catch (err) {
-    runAllBtn.disabled = false;
-    runAllBtn.textContent = 'Run All Tests';
-    stopBtn.style.display = 'none';
-    alert('Failed to start full run');
-  }
-});
-
-stopBtn?.addEventListener('click', async () => {
-  stopBtn.disabled = true;
-  stopBtn.textContent = 'Stopping...';
-
-  try {
-    const response = await fetch('/api/stop-run', { method: 'POST' });
-    const result = await response.json();
-    if (result.success) {
-      alert('Test run stopped');
-    }
-  } catch (err) {
-    alert('Failed to stop');
-  } finally {
-    runAllBtn.disabled = false;
-    runAllBtn.textContent = 'Run All Tests';
-    stopBtn.style.display = 'none';
-    loadDashboard();
-  }
-});
-
-// Restore button state ONLY if a run is confirmed in progress
-window.addEventListener('load', async () => {
-  const runBtn = document.getElementById('runAllTests');
-  const stopBtn = document.getElementById('stopRun');
-
-  if (!runBtn || !stopBtn) return;
-
-  // Clear any old stuck state first
-  runBtn.disabled = false;
-  runBtn.textContent = 'Run All Tests';
-  stopBtn.style.display = 'none';
-
-  try {
-    const res = await fetch('/api/runs');
-    if (!res.ok) return;
-
-    const data = await res.json();
-    if (data.length === 0) return;
-
-    const latest = data[0];
-    const now = Date.now();
-    const runTime = new Date(latest.startedAt).getTime();
-
-    // Only assume running if the run started very recently AND has no endedAt (means incomplete)
-    const isIncomplete = !latest.endedAt;
-    const isRecent = (now - runTime) < 2 * 60 * 1000; // less than 2 minutes
-
-    if (isIncomplete && isRecent) {
-      runBtn.disabled = true;
-      runBtn.textContent = 'Running All Tests...';
-      stopBtn.style.display = 'inline-block';
-      stopBtn.disabled = false;
-    }
-  } catch (e) {
-    console.error('Error checking run state on load:', e);
-  }
-});
-// Re-run single test with redirect
 async function rerunTest(event, file, title, button) {
   if (event) {
     event.stopPropagation();
@@ -487,6 +550,9 @@ async function rerunTest(event, file, title, button) {
     const result = await response.json();
 
     if (result.success) {
+      // Show stop UI immediately when a rerun is accepted
+      setRunUI(true);
+
       statusEl.textContent = 'Completed! Loading new results...';
       statusEl.style.color = '#22c55e';
 

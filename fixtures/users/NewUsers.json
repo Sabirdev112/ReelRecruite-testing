@@ -58,5 +58,29 @@
     "email": "owais.rafiq113@testmail.dev",
     "phone": "4002000113",
     "password": "Test@1234"
+  },
+  {
+    "fullName": "Azhar Mahmood",
+    "email": "azhar.mahmood115@testmail.dev",
+    "phone": "4002000115",
+    "password": "Test@1234"
+  },
+  {
+    "fullName": "Rehan Zafar",
+    "email": "rehan.zafar116@testmail.dev",
+    "phone": "4002000116",
+    "password": "Test@1234"
+  },
+  {
+    "fullName": "Saqib Rauf",
+    "email": "saqib.rauf118@testmail.dev",
+    "phone": "4002000118",
+    "password": "Test@1234"
+  },
+  {
+    "fullName": "Bilawal Qasim",
+    "email": "bilawal.qasim124@testmail.dev",
+    "phone": "4002000124",
+    "password": "Test@1234"
   }
 ]
