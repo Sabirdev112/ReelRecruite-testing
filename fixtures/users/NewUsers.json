@@ -28,5 +28,35 @@
     "email": "ammar.sohail104@testmail.dev",
     "phone": "4002000104",
     "password": "Test@1234"
+  },
+  {
+    "fullName": "Sameer Khalid",
+    "email": "sameer.khalid105@testmail.dev",
+    "phone": "4002000105",
+    "password": "Test@1234"
+  },
+  {
+    "fullName": "Faizan Latif",
+    "email": "faizan.latif106@testmail.dev",
+    "phone": "4002000106",
+    "password": "Test@1234"
+  },
+  {
+    "fullName": "Hasnain Riaz",
+    "email": "hasnain.riaz107@testmail.dev",
+    "phone": "4002000107",
+    "password": "Test@1234"
+  },
+  {
+    "fullName": "Taha Asghar",
+    "email": "taha.asghar108@testmail.dev",
+    "phone": "4002000108",
+    "password": "Test@1234"
+  },
+  {
+    "fullName": "Owais Rafiq",
+    "email": "owais.rafiq113@testmail.dev",
+    "phone": "4002000113",
+    "password": "Test@1234"
   }
 ]

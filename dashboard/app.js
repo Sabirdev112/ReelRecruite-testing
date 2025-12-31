@@ -1,22 +1,24 @@
 let runsData = [];
 let donutChart, barChart;
 
+let currentPage = 1;
+let pageSize = 25;
+
 // Theme toggle
 document.getElementById('themeToggle')?.addEventListener('click', () => {
   document.body.classList.toggle('dark');
-  const isNowDark = document.body.classList.contains('dark');
-  localStorage.setItem('theme', isNowDark ? 'dark' : 'light');
+  localStorage.setItem('theme', document.body.classList.contains('dark') ? 'dark' : 'light');
 
-  // Update charts with new theme colors
   if (donutChart) donutChart.update();
   if (barChart) {
-    // Destroy and re-render bar chart to apply new bar color
     barChart.destroy();
-    renderBarChart(runsData);  // Re-render with current runsData
+    renderRunsPerDayChart(runsData);
   }
 });
 
-if (localStorage.getItem('theme') === 'dark') document.body.classList.add('dark');
+if (localStorage.getItem('theme') === 'dark') {
+  document.body.classList.add('dark');
+}
 
 // Load data
 const isReport = window.location.pathname.includes('report.html');
@@ -29,7 +31,6 @@ if (isReport && runId) {
   loadDashboard();
 }
 
-// Real-time update (poll every 30s)
 setInterval(() => {
   if (!isReport) loadDashboard(true);
 }, 30000);
@@ -43,10 +44,11 @@ async function loadDashboard(silent = false) {
 
     if (runsData.length === 0) {
       document.getElementById('runsBody').innerHTML = '<tr><td colspan="8" class="text-center py-8">No runs yet</td></tr>';
+      document.getElementById('paginationInfo').textContent = 'Showing 0 to 0 of 0 entries';
+      document.getElementById('pagination').innerHTML = '';
       return;
     }
 
-    // Overall stats
     const overall = runsData.reduce((acc, run) => {
       const s = run.summary || {};
       acc.totalTests += s.total || 0;
@@ -65,32 +67,19 @@ async function loadDashboard(silent = false) {
     const avgDur = overall.totalTests ? (overall.duration / overall.totalTests / 1000).toFixed(2) + 's' : '0s';
     document.getElementById('avgDuration').textContent = avgDur;
 
-    // Charts
     renderDonut(overall);
-    renderBarChart(runsData);
+    renderRunsPerDayChart(runsData);
 
-    // Table
-    const tbody = document.getElementById('runsBody');
-    tbody.innerHTML = '';
-    runsData.forEach(run => {
-      const s = run.summary || {};
-      const tr = document.createElement('tr');
-      tr.innerHTML = `
-        <td class="font-mono">${String(run.id).slice(0, 12)}</td>
-        <td>${run.startedAt ? new Date(run.startedAt).toLocaleString() : 'Unknown'}</td>
-        <td>${s.total || 0}</td>
-        <td><span class="status-circle passed"></span> ${s.passed || 0}</td>
-        <td><span class="status-circle failed"></span> ${s.failed || 0}</td>
-        <td><span class="status-circle skipped"></span> ${s.skipped || 0}</td>
-        <td><span class="status-circle interrupted"></span> ${s.interrupted || 0}</td>
-        <td><a href="report.html?id=${run.id}" class="btn-view">View Report →</a></td>
-      `;
-      tbody.appendChild(tr);
-    });
+    const totalRuns = runsData.length;
+    const totalPages = Math.ceil(totalRuns / pageSize);
+
+    renderTablePage(currentPage, pageSize);
+    renderPagination(currentPage, totalPages);
+    updatePaginationInfo(currentPage, pageSize, totalRuns);
 
   } catch (err) {
-    console.error(err);
-    if (!silent) alert('Failed to load data. Check /api/runs endpoint.');
+    console.error('Dashboard load error:', err);
+    if (!silent) alert('Failed to load data.');
   }
 }
 
@@ -106,74 +95,31 @@ async function loadRunReport(runId) {
       return;
     }
 
-    // Run Summary
-    document.getElementById('runSummary').textContent = `Total execution duration: ${(run.duration / 1000).toFixed(2)}s | Executed on: ${new Date(run.startedAt).toLocaleString()}`;
+    document.getElementById('runSummary').textContent = 
+      `Total duration: ${(run.duration / 1000).toFixed(2)}s | Executed on: ${new Date(run.startedAt).toLocaleString()}`;
 
     const s = run.summary || {};
-
-    // Status Cards
     document.getElementById('totalTests').textContent = s.total || 0;
     document.getElementById('passedTests').textContent = s.passed || 0;
     document.getElementById('failedTests').textContent = s.failed || 0;
     document.getElementById('skippedTests').textContent = s.skipped || 0;
     document.getElementById('interruptedTests').textContent = s.interrupted || 0;
 
-    // Breakdown bars - Set colors FIRST, then widths (prevents flash)
     const total = s.total || 1;
-
-    document.getElementById('passedFill').style.backgroundColor = '#1aff01ff';
-    document.getElementById('failedFill').style.backgroundColor = s.failed > 0 ? '#ff5252' : '#e9ecef';
-    document.getElementById('skippedFill').style.backgroundColor = '#fff701ff';
-    document.getElementById('interruptedFill').style.backgroundColor = '#c7c7c7ff';
-
     document.getElementById('passedFill').style.width = `${(s.passed / total) * 100}%`;
     document.getElementById('failedFill').style.width = `${(s.failed / total) * 100}%`;
     document.getElementById('skippedFill').style.width = `${(s.skipped / total) * 100}%`;
     document.getElementById('interruptedFill').style.width = `${((s.interrupted || 0) / total) * 100}%`;
 
-    // Donut Chart - Always show passed segment (light gray)
-    const ctx = document.getElementById('runDonut').getContext('2d');
-    if (donutChart) donutChart.destroy();
+    renderRunDonut(s);
 
-    const donutData = [s.passed || 0];
-    const donutColors = ['#1aff01ff']; // passed = light gray
-
-    if (s.failed > 0) {
-      donutData.push(s.failed);
-      donutColors.push('#ff5252');
-    }
-    if (s.skipped > 0) {
-      donutData.push(s.skipped);
-      donutColors.push('#ffd43b');
-    }
-    if (s.interrupted > 0) {
-      donutData.push(s.interrupted);
-      donutColors.push('#cacacaff');
-    }
-
-    donutChart = new Chart(ctx, {
-      type: 'doughnut',
-      data: {
-        datasets: [{
-          data: donutData,
-          backgroundColor: donutColors,
-          borderWidth: 0,
-          cutout: '80%'
-        }]
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: true,
-        plugins: { legend: { display: false } }
-      }
-    });
-
-    // Test Details List
     const list = document.getElementById('testsList');
     list.innerHTML = '';
     run.tests.forEach(test => {
       const div = document.createElement('div');
       div.className = `test-item ${test.status}`;
+      if (test.status === 'failed') div.classList.add('expanded');
+
       div.innerHTML = `
         <div class="test-header" onclick="this.parentElement.classList.toggle('expanded')">
           <div class="test-title">
@@ -189,198 +135,401 @@ async function loadRunReport(runId) {
         ${test.error ? `
         <div class="test-error">
           <strong>Failure Reason:</strong><br>${escapeHtml(test.error)}<br><br>
-          <strong>Location:</strong> ${escapeHtml(test.file || 'Unknown')}
+          <strong>Location:</strong> ${escapeHtml(test.file || 'Unknown')}:${test.line || '?'}
         </div>` : ''}
+        <div class="test-rerun">
+          <button class="btn-rerun" onclick="rerunTest(event, '${escapeHtml(test.file || '')}', '${escapeHtml(test.title)}', this)">
+            🔄 Re-run This Test
+          </button>
+          <span class="rerun-status"></span>
+        </div>
       `;
-      if (test.status === 'failed') div.classList.add('expanded');
       list.appendChild(div);
     });
-
   } catch (err) {
-    console.error(err);
+    console.error('Report load error:', err);
     document.getElementById('runSummary').textContent = 'Error loading report';
   }
 }
 
+// Dashboard donut
 function renderDonut(overall) {
-  const ctx = document.getElementById('statusDonut').getContext('2d');
+  const ctx = document.getElementById('statusDonut')?.getContext('2d');
+  if (!ctx) return;
+
   if (donutChart) donutChart.destroy();
 
-  const donutData = [];
-  const donutColors = [];
+  const data = [];
+  const colors = [];
+  if (overall.passed > 0) { data.push(overall.passed); colors.push('#1aff01ff'); }
+  if (overall.failed > 0) { data.push(overall.failed); colors.push('#ff5252'); }
+  if (overall.skipped > 0) { data.push(overall.skipped); colors.push('#e8f900ff'); }
+  if (overall.interrupted > 0) { data.push(overall.interrupted); colors.push('#94a3b8'); }
+  if (data.length === 0) { data.push(1); colors.push('#e9ecef'); }
 
-  // Exact order to match tooltip labels: Passed, Failed, Skipped, Interrupted
-  if (overall.passed > 0) {
-    donutData.push(overall.passed);
-    donutColors.push('#1aff01ff'); // green
-  }
-  if (overall.failed > 0) {
-    donutData.push(overall.failed);
-    donutColors.push('#ff5252'); // red
-  }
-  if (overall.skipped > 0) {
-    donutData.push(overall.skipped);
-    donutColors.push('#e8f900ff'); // yellow
-  }
-  if (overall.interrupted > 0) {
-    donutData.push(overall.interrupted);
-    donutColors.push('#94a3b8'); // gray
-  }
-
-  if (donutData.length === 0) {
-    donutData.push(1);
-    donutColors.push('#e9ecef');
-  }
-  donutChart = new Chart(ctx, {
-    type: 'doughnut',
-    data: {
-      datasets: [{
-        data: donutData,
-        backgroundColor: donutColors,
-        borderWidth: 0,
-        cutout: '75%'
-      }]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: true,
-      plugins: {
-        legend: { display: false },
-        tooltip: {
-          callbacks: {
-            label: (context) => {
-              const labels = ['Passed', 'Failed', 'Skipped', 'Interrupted'];
-              return `${labels[context.dataIndex]}: ${context.raw}`;
-            }
-          }
-        }
+  requestAnimationFrame(() => {
+    donutChart = new Chart(ctx, {
+      type: 'doughnut',
+      data: { datasets: [{ data, backgroundColor: colors, borderWidth: 0, cutout: '75%' }] },
+      options: {
+        responsive: true,
+        maintainAspectRatio: true,
+        plugins: { legend: { display: false } }
       }
-    }
+    });
+    setTimeout(() => donutChart?.resize(), 100);
   });
-  console.log('Overall aggregated summary:', overall);
 }
 
-function renderBarChart(runs) {
-  if (runs.length === 0) return;
+// Report donut
+function renderRunDonut(summary) {
+  const ctx = document.getElementById('runDonut')?.getContext('2d');
+  if (!ctx) return;
 
-  // Group runs by date (YYYY-MM-DD)
+  if (donutChart) donutChart.destroy();
+
+  const data = [summary.passed || 0];
+  const colors = ['#1aff01ff'];
+  if (summary.failed > 0) { data.push(summary.failed); colors.push('#ff5252'); }
+  if (summary.skipped > 0) { data.push(summary.skipped); colors.push('#ffd43b'); }
+  if (summary.interrupted > 0) { data.push(summary.interrupted); colors.push('#cacacaff'); }
+
+  requestAnimationFrame(() => {
+    donutChart = new Chart(ctx, {
+      type: 'doughnut',
+      data: { datasets: [{ data, backgroundColor: colors, borderWidth: 0, cutout: '80%' }] },
+      options: {
+        responsive: true,
+        maintainAspectRatio: true,
+        plugins: { legend: { display: false } }
+      }
+    });
+    setTimeout(() => donutChart?.resize(), 100);
+  });
+}
+
+// Test Runs Per Day Chart
+function renderRunsPerDayChart(runs) {
+  const ctx = document.getElementById('testsBar')?.getContext('2d');
+  if (!ctx || runs.length === 0) return;
+
+  if (barChart) barChart.destroy();
+
   const runsByDay = {};
-
   runs.forEach(run => {
-    if (!run.startedAt) return;
     const date = new Date(run.startedAt);
-    const dayKey = date.toISOString().slice(0, 10); // '2025-12-31'
-
-    if (!runsByDay[dayKey]) {
-      runsByDay[dayKey] = {
-        date,
-        count: 0,
-        totalTests: 0
-      };
-    }
-    runsByDay[dayKey].count += 1;
-    runsByDay[dayKey].totalTests += run.summary?.total || 0;
+    const dayKey = date.toISOString().slice(0, 10);
+    runsByDay[dayKey] = (runsByDay[dayKey] || 0) + 1;
   });
 
-  // Sort days chronologically (oldest first for natural left-to-right)
-  const sortedDays = Object.keys(runsByDay)
-    .sort((a, b) => new Date(a) - new Date(b));
-
-  // Limit to last 30 days to avoid overcrowding (adjust if needed)
+  const sortedDays = Object.keys(runsByDay).sort();
   const recentDays = sortedDays.slice(-30);
 
   const labels = recentDays.map(day => {
     const date = new Date(day);
-    return date.toLocaleDateString('en-US', {
-      month: 'short',
-      day: 'numeric'
-    });
+    return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
   });
 
-  // You can choose: number of RUNS per day OR total TESTS per day
-  const data = recentDays.map(day => runsByDay[day].count); // ← Change to .totalTests if you want sum of tests
-
-  const ctx = document.getElementById('testsBar').getContext('2d');
-  if (barChart) barChart.destroy();
+  const data = recentDays.map(day => runsByDay[day]);
 
   const isDark = document.body.classList.contains('dark');
   const barColor = isDark ? '#ffffff' : '#1e293b';
 
-  barChart = new Chart(ctx, {
-    type: 'bar',
-    data: {
-      labels: labels,
-      datasets: [{
-        label: 'Runs per day',
-        data: data,
-        backgroundColor: barColor,
-        borderRadius: 8,
-        borderSkipped: false,
-        barPercentage: 0.85,
-        categoryPercentage: 0.9
-      }]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: {
-        legend: { display: false },
-        tooltip: {
-          callbacks: {
-            title: (items) => {
-              const dayKey = recentDays[items[0].dataIndex];
-              return new Date(dayKey).toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
-            },
-            label: (item) => `${item.raw} test run${item.raw === 1 ? '' : 's'} executed`
-          }
-        }
+  requestAnimationFrame(() => {
+    barChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels,
+        datasets: [{
+          data,
+          backgroundColor: barColor,
+          borderRadius: 8,
+          borderSkipped: false,
+          barPercentage: 0.8,
+          categoryPercentage: 0.9
+        }]
       },
-      scales: {
-        x: {
-          ticks: {
-            color: '#64748b',
-            font: { size: 12 },
-            maxRotation: 45,
-            minRotation: 0
-          },
-          grid: { display: false }
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false },
+          tooltip: { callbacks: { label: item => `Test runs: ${item.raw}` } }
         },
-        y: {
-          beginAtZero: true,
-          ticks: {
-            color: '#64748b',
-            font: { size: 12 },
-            stepSize: 1,
-            precision: 0
-          },
-          grid: {
-            color: '#e2e8f0',
-            drawBorder: false
-          },
-          title: {
-            display: true,
-            text: 'Test Runs per Day',
-            color: '#64748b',
-            font: { size: 13, weight: '600' }
+        scales: {
+          x: { ticks: { color: '#64748b' }, grid: { display: false } },
+          y: {
+            beginAtZero: true,
+            ticks: { color: '#64748b', stepSize: 1 },
+            grid: { color: '#e2e8f0' },
+            title: { display: true, text: 'Test Runs Per Day', color: '#64748b' }
           }
         }
       }
-    }
+    });
+    setTimeout(() => barChart?.resize(), 100);
   });
 }
 
+// Pagination functions
+function renderTablePage(page, size) {
+  const start = (page - 1) * size;
+  const end = start + size;
+  const pageRuns = runsData.slice(start, end);
+
+  const tbody = document.getElementById('runsBody');
+  tbody.innerHTML = '';
+  pageRuns.forEach(run => {
+    const s = run.summary || {};
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td class="font-mono">${String(run.id).slice(0, 12)}</td>
+      <td>${run.startedAt ? new Date(run.startedAt).toLocaleString() : 'Unknown'}</td>
+      <td>${s.total || 0}</td>
+      <td><span class="status-circle passed"></span> ${s.passed || 0}</td>
+      <td><span class="status-circle failed"></span> ${s.failed || 0}</td>
+      <td><span class="status-circle skipped"></span> ${s.skipped || 0}</td>
+      <td><span class="status-circle interrupted"></span> ${s.interrupted || 0}</td>
+      <td><a href="report.html?id=${run.id}" class="btn-view">View Report →</a></td>
+    `;
+    tbody.appendChild(tr);
+  });
+}
+
+function renderPagination(currentPage, totalPages) {
+  const container = document.getElementById('pagination');
+  if (!container) return;
+  container.innerHTML = '';
+
+  if (totalPages <= 1) return;
+
+  const prev = document.createElement('button');
+  prev.textContent = 'Previous';
+  prev.disabled = currentPage === 1;
+  prev.onclick = () => {
+    currentPage--;
+    renderTablePage(currentPage, pageSize);
+    renderPagination(currentPage, totalPages);
+    updatePaginationInfo(currentPage, pageSize, runsData.length);
+    window.scrollTo(0, 0);
+  };
+  container.appendChild(prev);
+
+  const maxVisible = 7;
+  let start = Math.max(1, currentPage - 3);
+  let end = Math.min(totalPages, start + maxVisible - 1);
+  if (end - start + 1 < maxVisible) start = Math.max(1, end - maxVisible + 1);
+
+  if (start > 1) {
+    addPageButton(1);
+    if (start > 2) addEllipsis();
+  }
+
+  for (let i = start; i <= end; i++) addPageButton(i);
+
+  if (end < totalPages) {
+    if (end < totalPages - 1) addEllipsis();
+    addPageButton(totalPages);
+  }
+
+  const next = document.createElement('button');
+  next.textContent = 'Next';
+  next.disabled = currentPage === totalPages;
+  next.onclick = () => {
+    currentPage++;
+    renderTablePage(currentPage, pageSize);
+    renderPagination(currentPage, totalPages);
+    updatePaginationInfo(currentPage, pageSize, runsData.length);
+    window.scrollTo(0, 0);
+  };
+  container.appendChild(next);
+
+  function addPageButton(num) {
+    const btn = document.createElement('button');
+    btn.textContent = num;
+    btn.classList.toggle('active', num === currentPage);
+    btn.onclick = () => {
+      currentPage = num;
+      renderTablePage(currentPage, pageSize);
+      renderPagination(currentPage, totalPages);
+      updatePaginationInfo(currentPage, pageSize, runsData.length);
+      window.scrollTo(0, 0);
+    };
+    container.appendChild(btn);
+  }
+
+  function addEllipsis() {
+    const span = document.createElement('span');
+    span.textContent = '...';
+    span.style.padding = '0 0.5rem';
+    container.appendChild(span);
+  }
+}
+
+function updatePaginationInfo(page, size, total) {
+  const info = document.getElementById('paginationInfo');
+  if (!info) return;
+  const start = (page - 1) * size + 1;
+  const end = Math.min(page * size, total);
+  info.textContent = `Showing ${start} to ${end} of ${total} entries`;
+}
+
+document.getElementById('pageSizeSelect')?.addEventListener('change', (e) => {
+  pageSize = parseInt(e.target.value);
+  currentPage = 1;
+  const totalPages = Math.ceil(runsData.length / pageSize);
+  renderTablePage(currentPage, pageSize);
+  renderPagination(currentPage, totalPages);
+  updatePaginationInfo(currentPage, pageSize, runsData.length);
+});
+
+// Run All Tests + Stop Run
+const runAllBtn = document.getElementById('runAllTests');
+const stopBtn = document.getElementById('stopRun');
+
+runAllBtn?.addEventListener('click', async () => {
+  if (runAllBtn.disabled) return;
+
+  runAllBtn.disabled = true;
+  runAllBtn.textContent = 'Running All Tests...';
+  stopBtn.style.display = 'inline-block';
+  stopBtn.disabled = false;
+
+  try {
+    const response = await fetch('/api/run-all-tests', { method: 'POST' });
+    if (!response.ok) throw new Error();
+  } catch (err) {
+    runAllBtn.disabled = false;
+    runAllBtn.textContent = 'Run All Tests';
+    stopBtn.style.display = 'none';
+    alert('Failed to start full run');
+  }
+});
+
+stopBtn?.addEventListener('click', async () => {
+  stopBtn.disabled = true;
+  stopBtn.textContent = 'Stopping...';
+
+  try {
+    const response = await fetch('/api/stop-run', { method: 'POST' });
+    const result = await response.json();
+    if (result.success) {
+      alert('Test run stopped');
+    }
+  } catch (err) {
+    alert('Failed to stop');
+  } finally {
+    runAllBtn.disabled = false;
+    runAllBtn.textContent = 'Run All Tests';
+    stopBtn.style.display = 'none';
+    loadDashboard();
+  }
+});
+
+// Restore button state ONLY if a run is confirmed in progress
+window.addEventListener('load', async () => {
+  const runBtn = document.getElementById('runAllTests');
+  const stopBtn = document.getElementById('stopRun');
+
+  if (!runBtn || !stopBtn) return;
+
+  // Clear any old stuck state first
+  runBtn.disabled = false;
+  runBtn.textContent = 'Run All Tests';
+  stopBtn.style.display = 'none';
+
+  try {
+    const res = await fetch('/api/runs');
+    if (!res.ok) return;
+
+    const data = await res.json();
+    if (data.length === 0) return;
+
+    const latest = data[0];
+    const now = Date.now();
+    const runTime = new Date(latest.startedAt).getTime();
+
+    // Only assume running if the run started very recently AND has no endedAt (means incomplete)
+    const isIncomplete = !latest.endedAt;
+    const isRecent = (now - runTime) < 2 * 60 * 1000; // less than 2 minutes
+
+    if (isIncomplete && isRecent) {
+      runBtn.disabled = true;
+      runBtn.textContent = 'Running All Tests...';
+      stopBtn.style.display = 'inline-block';
+      stopBtn.disabled = false;
+    }
+  } catch (e) {
+    console.error('Error checking run state on load:', e);
+  }
+});
+// Re-run single test with redirect
+async function rerunTest(event, file, title, button) {
+  if (event) {
+    event.stopPropagation();
+    event.preventDefault();
+  }
+
+  const statusEl = button.nextElementSibling;
+  statusEl.textContent = 'Running test...';
+  statusEl.style.display = 'inline';
+  statusEl.style.color = '#64748b';
+  button.disabled = true;
+  button.textContent = 'Running...';
+
+  try {
+    const response = await fetch('/api/rerun-test', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ file, title })
+    });
+
+    const result = await response.json();
+
+    if (result.success) {
+      statusEl.textContent = 'Completed! Loading new results...';
+      statusEl.style.color = '#22c55e';
+
+      let attempts = 0;
+      const interval = setInterval(async () => {
+        attempts++;
+        try {
+          const res = await fetch('/api/runs');
+          const data = await res.json();
+          const latest = data[0];
+          if (latest && latest.id !== runId) {
+            clearInterval(interval);
+            window.location.href = `report.html?id=${latest.id}`;
+          }
+        } catch (e) {}
+
+        if (attempts > 20) {
+          clearInterval(interval);
+          location.reload();
+        }
+      }, 1000);
+    } else {
+      statusEl.textContent = 'Failed';
+      statusEl.style.color = '#ef4444';
+    }
+  } catch (err) {
+    statusEl.textContent = 'Error';
+    statusEl.style.color = '#ef4444';
+    console.error(err);
+  } finally {
+    setTimeout(() => {
+      button.disabled = false;
+      button.textContent = '🔄 Re-run This Test';
+    }, 10000);
+  }
+}
+
 function formatDuration(ms) {
-  return ms ? (ms / 1000).toFixed(2) + 'ms' : '0ms';
+  return ms ? (ms / 1000).toFixed(2) + 's' : '0s';
 }
 
 function escapeHtml(text) {
   const div = document.createElement('div');
   div.textContent = text;
   return div.innerHTML;
-}
-
-// Manual refresh
-async function refreshData() {
-  await loadDashboard();
-  console.log('Data refreshed at', new Date().toLocaleString());
 }
