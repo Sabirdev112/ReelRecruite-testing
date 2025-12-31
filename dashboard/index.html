@@ -41,49 +41,65 @@
       <div class="chart-card">
         <h3 class="chart-title">Overall Test Status</h3>
         <p class="chart-desc">Aggregated results from all runs.</p>
-        <canvas id="statusDonut"></canvas>
+        <div class="chart-wrapper">
+          <canvas id="statusDonut"></canvas>
+        </div>
         <div class="donut-legend">
-  <span>
-    <span class="legend-dot passed"></span> Passed
-  </span>
-  
-  <span>
-    <span class="legend-dot failed"></span> Failed
-  </span>
-  <span class="legend-dot skipped"></span> Skipped
-  </span>
-  <span>
-    <span class="legend-dot interrupted"></span> Interrupted
-  </span>
-</div>
+          <span><span class="legend-dot passed"></span> Passed</span>
+          <span><span class="legend-dot failed"></span> Failed</span>
+          <span><span class="legend-dot skipped"></span> Skipped</span>
+          <span><span class="legend-dot interrupted"></span> Interrupted</span>
+        </div>
       </div>
+
       <div class="chart-card">
-        <h3 class="chart-title">Tests Per Run</h3>
-        <p class="chart-desc">Total number of tests in recent runs.</p>
-        <canvas id="testsBar"></canvas>
+        <h3 class="chart-title">Test Runs Per Day</h3>
+        <p class="chart-desc">Number of test executions per day (last 30 days).</p>
+        <div class="chart-wrapper">
+          <canvas id="testsBar"></canvas>
+        </div>
       </div>
     </section>
 
     <section class="runs-section">
-      <h2 class="section-title">All Test Runs</h2>
-      <div class="table-wrapper">
-        <table class="runs-table">
-          <thead>
-            <tr>
-              <th>Run ID</th>
-              <th>Execution Date</th>
-              <th>Total</th>
-              <th>Passed</th>
-              <th>Failed</th>
-              <th>Skipped</th>
-              <th>Interrupted</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody id="runsBody"></tbody>
-        </table>
-      </div>
-    </section>
+  <h2 class="section-title">All Test Runs</h2>
+    <div class="table-controls">
+  <div class="pagination-info" id="paginationInfo">Showing 1 to 25 of 0 entries</div>
+  <div class="run-controls">
+    <button id="runAllTests" class="btn-run-all">Run All Tests</button>
+    <button id="stopRun" class="btn-stop-run" style="display: none;">Stop Run</button>
+  </div>
+  <div class="page-size">
+    <label>Show</label>
+    <select id="pageSizeSelect">
+      <option value="10">10</option>
+      <option value="25" selected>25</option>
+      <option value="50">50</option>
+      <option value="100">100</option>
+    </select>
+    <label>entries</label>
+  </div>
+</div>
+  </div>
+  <div class="table-wrapper">
+    <table class="runs-table">
+      <thead>
+        <tr>
+          <th>Run ID</th>
+          <th>Execution Date</th>
+          <th>Total</th>
+          <th>Passed</th>
+          <th>Failed</th>
+          <th>Skipped</th>
+          <th>Interrupted</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="runsBody"></tbody>
+    </table>
+  </div>
+  <div class="pagination" id="pagination"></div>
+</section>
   </div>
 
   <script src="app.js"></script>
