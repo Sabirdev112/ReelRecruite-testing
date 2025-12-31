@@ -29,13 +29,16 @@ export default class CustomReporter {
   }
 
   async onEnd() {
-    const runEndTime = Date.now();
-    const summary = {
-      total: this.results.length,
-      passed: this.results.filter(t => t.status === 'passed').length,
-      failed: this.results.filter(t => t.status === 'failed').length,
-      skipped: this.results.filter(t => t.status === 'skipped').length
-    };
+  const runEndTime = Date.now();
+  const summary = {
+    total: this.results.length,
+    passed: this.results.filter(t => t.status === 'passed').length,
+    failed: this.results.filter(t => t.status === 'failed').length,
+    skipped: this.results.filter(t => 
+      t.status === 'skipped' || t.status === 'timedOut' // ← ADD timedOut here
+    ).length,
+    interrupted: this.results.filter(t => t.status === 'interrupted').length 
+  };
 
     const runData = {
       id: Date.now(),

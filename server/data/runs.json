@@ -1,30 +1,112 @@
 [
   {
-    "id": 1767113456501,
-    "startedAt": "2025-12-30T16:50:28.864Z",
-    "endedAt": "2025-12-30T16:50:56.501Z",
-    "duration": 27637,
+    "id": 1767186278027,
+    "startedAt": "2025-12-31T13:04:29.602Z",
+    "endedAt": "2025-12-31T13:04:38.027Z",
+    "duration": 8425,
     "summary": {
       "total": 1,
       "passed": 0,
-      "failed": 1,
-      "skipped": 0
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 1
     },
     "tests": [
       {
-        "title": "Notification flow – handle empty & existing notifications",
+        "title": "Recruiter shortlists candidate from Applications",
         "description": "",
-        "file": "C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\UI\\candidate\\Notification.spec.js",
-        "line": 20,
-        "status": "failed",
-        "duration": 22959,
+        "file": "D:\\ReelRecruite-testing\\UI\\Recruiter\\ShortlistCandidate.spec.js",
+        "line": 30,
+        "status": "interrupted",
+        "duration": 6123,
         "retries": 0,
-        "error": "Error: page.goto: net::ERR_NAME_NOT_RESOLVED at https://recruitai-web-production.up.railway.app/auth\nCall log:\n\u001b[2m  - navigating to \"https://recruitai-web-production.up.railway.app/auth\", waiting until \"load\"\u001b[22m\n",
-        "stack": "Error: page.goto: net::ERR_NAME_NOT_RESOLVED at https://recruitai-web-production.up.railway.app/auth\nCall log:\n\u001b[2m  - navigating to \"https://recruitai-web-production.up.railway.app/auth\", waiting until \"load\"\u001b[22m\n\n    at Login.goto (C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\Pages\\Login.js:14:25)\n    at C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\UI\\candidate\\Notification.spec.js:26:15",
+        "error": "Error: locator.waitFor: Target page, context or browser has been closed\nCall log:\n\u001b[2m  - waiting for locator('//*[@id=\"root\"]/div[2]/main/div/div[2]/div[3]/div[1]/div/div[2]/button/span') to be visible\u001b[22m\n",
+        "stack": "Error: locator.waitFor: Target page, context or browser has been closed\nCall log:\n\u001b[2m  - waiting for locator('//*[@id=\"root\"]/div[2]/main/div/div[2]/div[3]/div[1]/div/div[2]/button/span') to be visible\u001b[22m\n\n    at ShortlistCandidatePage.clickViewDetails (D:\\ReelRecruite-testing\\Pages\\ShortListCandidate.js:16:34)\n    at D:\\ReelRecruite-testing\\UI\\Recruiter\\ShortlistCandidate.spec.js:47:23",
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1767186264631,
+    "startedAt": "2025-12-31T13:04:13.219Z",
+    "endedAt": "2025-12-31T13:04:24.631Z",
+    "duration": 11412,
+    "summary": {
+      "total": 1,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 1
+    },
+    "tests": [
+      {
+        "title": "Recruiter shortlists candidate from Applications",
+        "description": "",
+        "file": "D:\\ReelRecruite-testing\\UI\\Recruiter\\ShortlistCandidate.spec.js",
+        "line": 30,
+        "status": "interrupted",
+        "duration": 8693,
+        "retries": 0,
+        "error": "Error: locator.waitFor: Target page, context or browser has been closed\nCall log:\n\u001b[2m  - waiting for locator('//*[@id=\"root\"]/div[2]/main/div/div[2]/div[3]/div[1]/div/div[2]/button/span') to be visible\u001b[22m\n",
+        "stack": "Error: locator.waitFor: Target page, context or browser has been closed\nCall log:\n\u001b[2m  - waiting for locator('//*[@id=\"root\"]/div[2]/main/div/div[2]/div[3]/div[1]/div/div[2]/button/span') to be visible\u001b[22m\n\n    at ShortlistCandidatePage.clickViewDetails (D:\\ReelRecruite-testing\\Pages\\ShortListCandidate.js:16:34)\n    at D:\\ReelRecruite-testing\\UI\\Recruiter\\ShortlistCandidate.spec.js:47:23",
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1767185909789,
+    "startedAt": "2025-12-31T12:58:18.217Z",
+    "endedAt": "2025-12-31T12:58:29.788Z",
+    "duration": 11571,
+    "summary": {
+      "total": 1,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 1
+    },
+    "tests": [
+      {
+        "title": "Recruiter shortlists candidate from Applications",
+        "description": "",
+        "file": "D:\\ReelRecruite-testing\\UI\\Recruiter\\ShortlistCandidate.spec.js",
+        "line": 30,
+        "status": "interrupted",
+        "duration": 9314,
+        "retries": 0,
+        "error": "Error: locator.waitFor: Target page, context or browser has been closed\nCall log:\n\u001b[2m  - waiting for locator('//*[@id=\"root\"]/div[2]/main/div/div[2]/div[3]/div[1]/div/div[2]/button/span') to be visible\u001b[22m\n",
+        "stack": "Error: locator.waitFor: Target page, context or browser has been closed\nCall log:\n\u001b[2m  - waiting for locator('//*[@id=\"root\"]/div[2]/main/div/div[2]/div[3]/div[1]/div/div[2]/button/span') to be visible\u001b[22m\n\n    at ShortlistCandidatePage.clickViewDetails (D:\\ReelRecruite-testing\\Pages\\ShortListCandidate.js:16:34)\n    at D:\\ReelRecruite-testing\\UI\\Recruiter\\ShortlistCandidate.spec.js:47:23",
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1767184728551,
+    "startedAt": "2025-12-31T12:37:45.929Z",
+    "endedAt": "2025-12-31T12:38:48.551Z",
+    "duration": 62622,
+    "summary": {
+      "total": 1,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 1,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Recruiter shortlists candidate from Applications",
+        "description": "",
+        "file": "D:\\ReelRecruite-testing\\UI\\Recruiter\\ShortlistCandidate.spec.js",
+        "line": 30,
+        "status": "timedOut",
+        "duration": 60091,
+        "retries": 0,
+        "error": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+        "stack": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
         "attachments": [
           {
             "name": "error-context",
-            "path": "C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\test-results\\UI-candidate-Notification--1a926-mpty-existing-notifications\\error-context.md",
+            "path": "D:\\ReelRecruite-testing\\test-results\\UI-Recruiter-ShortlistCand-54fbb-candidate-from-Applications\\error-context.md",
             "contentType": "text/markdown"
           }
         ]
@@ -32,10 +114,10 @@
     ]
   },
   {
-    "id": 1767105404417,
-    "startedAt": "2025-12-30T14:36:28.572Z",
-    "endedAt": "2025-12-30T14:36:44.417Z",
-    "duration": 15845,
+    "id": 1767184445089,
+    "startedAt": "2025-12-31T12:33:38.475Z",
+    "endedAt": "2025-12-31T12:34:05.089Z",
+    "duration": 26614,
     "summary": {
       "total": 1,
       "passed": 0,
@@ -44,24 +126,24 @@
     },
     "tests": [
       {
-        "title": "candidate can update skills section",
+        "title": "Recruiter see Resume",
         "description": "",
-        "file": "C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\UI\\candidate\\UpdateSkill.spec.js",
-        "line": 21,
+        "file": "D:\\ReelRecruite-testing\\UI\\Recruiter\\SeeResume.spec.js",
+        "line": 30,
         "status": "failed",
-        "duration": 13927,
+        "duration": 23975,
         "retries": 0,
-        "error": "Error: locator.waitFor: Target page, context or browser has been closed\nCall log:\n\u001b[2m  - waiting for getByRole('textbox', { name: 'Type a skill and press Enter' }) to be visible\u001b[22m\n",
-        "stack": "Error: locator.waitFor: Target page, context or browser has been closed\nCall log:\n\u001b[2m  - waiting for getByRole('textbox', { name: 'Type a skill and press Enter' }) to be visible\u001b[22m\n\n    at UpdateSkillsPage.addSkill (C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\Pages\\UpdateSkils.js:55:32)\n    at UpdateSkillsPage.addSkills (C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\Pages\\UpdateSkils.js:64:20)\n    at UpdateSkillsPage.updateSkills (C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\Pages\\UpdateSkils.js:85:9)\n    at C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\UI\\candidate\\UpdateSkill.spec.js:38:3",
+        "error": "Error: locator.waitFor: Target page, context or browser has been closed\nCall log:\n\u001b[2m  - waiting for locator('button').filter({ hasText: 'View Details' }).first() to be visible\u001b[22m\n",
+        "stack": "Error: locator.waitFor: Target page, context or browser has been closed\nCall log:\n\u001b[2m  - waiting for locator('button').filter({ hasText: 'View Details' }).first() to be visible\u001b[22m\n\n    at SeeResumePage.viewCandidateDetails (D:\\ReelRecruite-testing\\Pages\\SeeResume.js:16:34)\n    at D:\\ReelRecruite-testing\\UI\\Recruiter\\SeeResume.spec.js:44:19",
         "attachments": []
       }
     ]
   },
   {
-    "id": 1767105359031,
-    "startedAt": "2025-12-30T14:35:48.246Z",
-    "endedAt": "2025-12-30T14:35:59.031Z",
-    "duration": 10785,
+    "id": 1767184415235,
+    "startedAt": "2025-12-31T12:32:32.141Z",
+    "endedAt": "2025-12-31T12:33:35.235Z",
+    "duration": 63094,
     "summary": {
       "total": 1,
       "passed": 0,
@@ -70,38 +152,552 @@
     },
     "tests": [
       {
+        "title": "Recruiter shortlists candidate from Applications",
+        "description": "",
+        "file": "D:\\ReelRecruite-testing\\UI\\Recruiter\\ShortlistCandidate.spec.js",
+        "line": 30,
+        "status": "timedOut",
+        "duration": 60083,
+        "retries": 0,
+        "error": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+        "stack": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+        "attachments": [
+          {
+            "name": "error-context",
+            "path": "D:\\ReelRecruite-testing\\test-results\\UI-Recruiter-ShortlistCand-54fbb-candidate-from-Applications\\error-context.md",
+            "contentType": "text/markdown"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1767184348736,
+    "startedAt": "2025-12-31T12:32:20.877Z",
+    "endedAt": "2025-12-31T12:32:28.736Z",
+    "duration": 7859,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0
+    },
+    "tests": [
+      {
+        "title": "Recruiter view all applications for a job",
+        "description": "",
+        "file": "D:\\ReelRecruite-testing\\UI\\Recruiter\\viewApplications.spec.js",
+        "line": 30,
+        "status": "passed",
+        "duration": 5111,
+        "retries": 0,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1767184337815,
+    "startedAt": "2025-12-31T12:31:13.353Z",
+    "endedAt": "2025-12-31T12:32:17.815Z",
+    "duration": 64462,
+    "summary": {
+      "total": 1,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 0
+    },
+    "tests": [
+      {
+        "title": "Apply for latest job (users from JSON)",
+        "description": "",
+        "file": "D:\\ReelRecruite-testing\\UI\\candidate\\jobApply.spec.js",
+        "line": 100,
+        "status": "timedOut",
+        "duration": 60028,
+        "retries": 0,
+        "error": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+        "stack": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+        "attachments": [
+          {
+            "name": "error-context",
+            "path": "D:\\ReelRecruite-testing\\test-results\\UI-candidate-jobApply-Apply-for-latest-job-users-from-JSON-\\error-context.md",
+            "contentType": "text/markdown"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1767184268610,
+    "startedAt": "2025-12-31T12:30:04.465Z",
+    "endedAt": "2025-12-31T12:31:08.610Z",
+    "duration": 64145,
+    "summary": {
+      "total": 1,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 0
+    },
+    "tests": [
+      {
+        "title": "Recruiter Edits Job",
+        "description": "",
+        "file": "D:\\ReelRecruite-testing\\UI\\Recruiter\\EditJob.spec.js",
+        "line": 30,
+        "status": "timedOut",
+        "duration": 60081,
+        "retries": 0,
+        "error": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+        "stack": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+        "attachments": [
+          {
+            "name": "error-context",
+            "path": "D:\\ReelRecruite-testing\\test-results\\UI-Recruiter-EditJob-Recruiter-Edits-Job\\error-context.md",
+            "contentType": "text/markdown"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1767184199884,
+    "startedAt": "2025-12-31T12:29:39.886Z",
+    "endedAt": "2025-12-31T12:29:59.884Z",
+    "duration": 19998,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0
+    },
+    "tests": [
+      {
+        "title": "Recruiter login and create a new job",
+        "description": "",
+        "file": "D:\\ReelRecruite-testing\\UI\\Recruiter\\CreateJob.spec.js",
+        "line": 20,
+        "status": "passed",
+        "duration": 16086,
+        "retries": 0,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1767184174650,
+    "startedAt": "2025-12-31T12:29:25.599Z",
+    "endedAt": "2025-12-31T12:29:34.650Z",
+    "duration": 9051,
+    "summary": {
+      "total": 1,
+      "passed": 0,
+      "failed": 1,
+      "skipped": 0
+    },
+    "tests": [
+      {
+        "title": "Recruiter saves a job draft",
+        "description": "",
+        "file": "D:\\ReelRecruite-testing\\UI\\Recruiter\\SaveDraft.spec.js",
+        "line": 21,
+        "status": "failed",
+        "duration": 5066,
+        "retries": 0,
+        "error": "TypeError: Cannot read properties of undefined (reading 'isVisible')",
+        "stack": "TypeError: Cannot read properties of undefined (reading 'isVisible')\n    at SaveDraft.clickIfVisible (D:\\ReelRecruite-testing\\Pages\\SaveDraft.js:18:21)\n    at D:\\ReelRecruite-testing\\UI\\Recruiter\\SaveDraft.spec.js:29:19",
+        "attachments": [
+          {
+            "name": "error-context",
+            "path": "D:\\ReelRecruite-testing\\test-results\\UI-Recruiter-SaveDraft-Recruiter-saves-a-job-draft\\error-context.md",
+            "contentType": "text/markdown"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1767184161027,
+    "startedAt": "2025-12-31T12:28:16.367Z",
+    "endedAt": "2025-12-31T12:29:21.027Z",
+    "duration": 64660,
+    "summary": {
+      "total": 1,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 0
+    },
+    "tests": [
+      {
+        "title": "Apply Currency filter",
+        "description": "",
+        "file": "D:\\ReelRecruite-testing\\UI\\candidate\\currencyFilter.spec.js",
+        "line": 20,
+        "status": "timedOut",
+        "duration": 60180,
+        "retries": 0,
+        "error": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+        "stack": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+        "attachments": [
+          {
+            "name": "error-context",
+            "path": "D:\\ReelRecruite-testing\\test-results\\UI-candidate-currencyFilter-Apply-Currency-filter\\error-context.md",
+            "contentType": "text/markdown"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1767184091171,
+    "startedAt": "2025-12-31T12:27:08.265Z",
+    "endedAt": "2025-12-31T12:28:11.171Z",
+    "duration": 62906,
+    "summary": {
+      "total": 1,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 0
+    },
+    "tests": [
+      {
+        "title": "Apply Experience Level filter",
+        "description": "",
+        "file": "D:\\ReelRecruite-testing\\UI\\candidate\\experienceLevelFilter.spec.js",
+        "line": 20,
+        "status": "timedOut",
+        "duration": 60201,
+        "retries": 0,
+        "error": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+        "stack": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+        "attachments": [
+          {
+            "name": "error-context",
+            "path": "D:\\ReelRecruite-testing\\test-results\\UI-candidate-experienceLev-5a0d4-ply-Experience-Level-filter\\error-context.md",
+            "contentType": "text/markdown"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1767184024934,
+    "startedAt": "2025-12-31T12:26:02.149Z",
+    "endedAt": "2025-12-31T12:27:04.934Z",
+    "duration": 62785,
+    "summary": {
+      "total": 1,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 0
+    },
+    "tests": [
+      {
+        "title": "Apply Job Type filter",
+        "description": "",
+        "file": "D:\\ReelRecruite-testing\\UI\\candidate\\jobtype.spec.js",
+        "line": 20,
+        "status": "timedOut",
+        "duration": 60115,
+        "retries": 0,
+        "error": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+        "stack": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+        "attachments": [
+          {
+            "name": "error-context",
+            "path": "D:\\ReelRecruite-testing\\test-results\\UI-candidate-jobtype-Apply-Job-Type-filter\\error-context.md",
+            "contentType": "text/markdown"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1767183958985,
+    "startedAt": "2025-12-31T12:24:56.174Z",
+    "endedAt": "2025-12-31T12:25:58.985Z",
+    "duration": 62811,
+    "summary": {
+      "total": 1,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 0
+    },
+    "tests": [
+      {
+        "title": "Notification flow – handle empty & existing notifications",
+        "description": "",
+        "file": "D:\\ReelRecruite-testing\\UI\\candidate\\Notification.spec.js",
+        "line": 20,
+        "status": "timedOut",
+        "duration": 60164,
+        "retries": 0,
+        "error": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+        "stack": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+        "attachments": [
+          {
+            "name": "error-context",
+            "path": "D:\\ReelRecruite-testing\\test-results\\UI-candidate-Notification--1a926-mpty-existing-notifications\\error-context.md",
+            "contentType": "text/markdown"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1767183893181,
+    "startedAt": "2025-12-31T12:23:50.326Z",
+    "endedAt": "2025-12-31T12:24:53.181Z",
+    "duration": 62855,
+    "summary": {
+      "total": 1,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 0
+    },
+    "tests": [
+      {
+        "title": "Apply Region filter",
+        "description": "",
+        "file": "D:\\ReelRecruite-testing\\UI\\candidate\\regionFilter.spec.js",
+        "line": 19,
+        "status": "timedOut",
+        "duration": 60174,
+        "retries": 0,
+        "error": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+        "stack": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+        "attachments": [
+          {
+            "name": "error-context",
+            "path": "D:\\ReelRecruite-testing\\test-results\\UI-candidate-regionFilter-Apply-Region-filter\\error-context.md",
+            "contentType": "text/markdown"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1767183826988,
+    "startedAt": "2025-12-31T12:23:35.554Z",
+    "endedAt": "2025-12-31T12:23:46.988Z",
+    "duration": 11434,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0
+    },
+    "tests": [
+      {
+        "title": "Search job by name and verify results",
+        "description": "",
+        "file": "D:\\ReelRecruite-testing\\UI\\candidate\\SearchJob.spec.js",
+        "line": 20,
+        "status": "passed",
+        "duration": 8222,
+        "retries": 0,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1767183810201,
+    "startedAt": "2025-12-31T12:22:25.112Z",
+    "endedAt": "2025-12-31T12:23:30.200Z",
+    "duration": 65088,
+    "summary": {
+      "total": 1,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 0
+    },
+    "tests": [
+      {
+        "title": "Apply Work Type filter",
+        "description": "",
+        "file": "D:\\ReelRecruite-testing\\UI\\candidate\\workTypeFilter.spec.js",
+        "line": 21,
+        "status": "timedOut",
+        "duration": 60165,
+        "retries": 0,
+        "error": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+        "stack": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+        "attachments": [
+          {
+            "name": "error-context",
+            "path": "D:\\ReelRecruite-testing\\test-results\\UI-candidate-workTypeFilter-Apply-Work-Type-filter\\error-context.md",
+            "contentType": "text/markdown"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1767183739725,
+    "startedAt": "2025-12-31T12:21:15.774Z",
+    "endedAt": "2025-12-31T12:22:19.725Z",
+    "duration": 63951,
+    "summary": {
+      "total": 1,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 0
+    },
+    "tests": [
+      {
+        "title": "Apply all job filters together",
+        "description": "",
+        "file": "D:\\ReelRecruite-testing\\UI\\candidate\\FIlter.spec.js",
+        "line": 21,
+        "status": "timedOut",
+        "duration": 60153,
+        "retries": 0,
+        "error": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+        "stack": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+        "attachments": [
+          {
+            "name": "error-context",
+            "path": "D:\\ReelRecruite-testing\\test-results\\UI-candidate-FIlter-Apply-all-job-filters-together\\error-context.md",
+            "contentType": "text/markdown"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1767183671080,
+    "startedAt": "2025-12-31T12:20:07.850Z",
+    "endedAt": "2025-12-31T12:21:11.080Z",
+    "duration": 63230,
+    "summary": {
+      "total": 1,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 0
+    },
+    "tests": [
+      {
+        "title": "candidate can upload a video resume",
+        "description": "",
+        "file": "D:\\ReelRecruite-testing\\UI\\candidate\\UpdateCoverVideoResume.spec.js",
+        "line": 27,
+        "status": "timedOut",
+        "duration": 60131,
+        "retries": 0,
+        "error": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+        "stack": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+        "attachments": [
+          {
+            "name": "error-context",
+            "path": "D:\\ReelRecruite-testing\\test-results\\UI-candidate-UpdateCoverVi-050d6-e-can-upload-a-video-resume\\error-context.md",
+            "contentType": "text/markdown"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1767183604530,
+    "startedAt": "2025-12-31T12:19:39.775Z",
+    "endedAt": "2025-12-31T12:20:04.530Z",
+    "duration": 24755,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0
+    },
+    "tests": [
+      {
+        "title": "Candidate deletes and uploads resume",
+        "description": "",
+        "file": "D:\\ReelRecruite-testing\\UI\\candidate\\UpdateResume.spec.js",
+        "line": 26,
+        "status": "passed",
+        "duration": 22051,
+        "retries": 0,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1767183576638,
+    "startedAt": "2025-12-31T12:19:20.837Z",
+    "endedAt": "2025-12-31T12:19:36.638Z",
+    "duration": 15801,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0
+    },
+    "tests": [
+      {
+        "title": "candidate can update education",
+        "description": "",
+        "file": "D:\\ReelRecruite-testing\\UI\\candidate\\UpdateEducation.spec.js",
+        "line": 30,
+        "status": "passed",
+        "duration": 13057,
+        "retries": 0,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1767183557670,
+    "startedAt": "2025-12-31T12:19:00.835Z",
+    "endedAt": "2025-12-31T12:19:17.669Z",
+    "duration": 16834,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0
+    },
+    "tests": [
+      {
+        "title": "Candidate deletes existing work (if any) and adds new experience",
+        "description": "",
+        "file": "D:\\ReelRecruite-testing\\UI\\candidate\\UpdateWork.spec.js",
+        "line": 19,
+        "status": "passed",
+        "duration": 14093,
+        "retries": 0,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1767183537737,
+    "startedAt": "2025-12-31T12:18:42.939Z",
+    "endedAt": "2025-12-31T12:18:57.736Z",
+    "duration": 14797,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0
+    },
+    "tests": [
+      {
         "title": "candidate can update skills section",
         "description": "",
-        "file": "C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\UI\\candidate\\UpdateSkill.spec.js",
-        "line": 21,
-        "status": "interrupted",
-        "duration": 9166,
-        "retries": 0,
-        "error": "Error: page.waitForURL: Test ended.\n=========================== logs ===========================\nwaiting for navigation to \"**/jobs\" until \"load\"\n============================================================",
-        "stack": "Error: page.waitForURL: Test ended.\n=========================== logs ===========================\nwaiting for navigation to \"**/jobs\" until \"load\"\n============================================================\n    at C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\UI\\candidate\\UpdateSkill.spec.js:28:14",
-        "attachments": []
-      }
-    ]
-  },
-  {
-    "id": 1767103877554,
-    "startedAt": "2025-12-30T14:11:09.019Z",
-    "endedAt": "2025-12-30T14:11:17.554Z",
-    "duration": 8535,
-    "summary": {
-      "total": 1,
-      "passed": 1,
-      "failed": 0,
-      "skipped": 0
-    },
-    "tests": [
-      {
-        "title": "Apply Work Type filter",
-        "description": "",
-        "file": "C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\UI\\candidate\\workTypeFilter.spec.js",
+        "file": "D:\\ReelRecruite-testing\\UI\\candidate\\UpdateSkill.spec.js",
         "line": 21,
         "status": "passed",
-        "duration": 6501,
+        "duration": 12015,
         "retries": 0,
         "error": null,
         "stack": null,
@@ -110,10 +706,10 @@
     ]
   },
   {
-    "id": 1767103107115,
-    "startedAt": "2025-12-30T13:58:19.334Z",
-    "endedAt": "2025-12-30T13:58:27.115Z",
-    "duration": 7781,
+    "id": 1767183519883,
+    "startedAt": "2025-12-31T12:18:27.975Z",
+    "endedAt": "2025-12-31T12:18:39.883Z",
+    "duration": 11908,
     "summary": {
       "total": 1,
       "passed": 1,
@@ -122,12 +718,12 @@
     },
     "tests": [
       {
-        "title": "Notification flow – handle empty & existing notifications",
+        "title": "candidate can update about section",
         "description": "",
-        "file": "C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\UI\\candidate\\Notification.spec.js",
-        "line": 20,
+        "file": "D:\\ReelRecruite-testing\\UI\\candidate\\UpdateAbout.spec.js",
+        "line": 19,
         "status": "passed",
-        "duration": 5997,
+        "duration": 9414,
         "retries": 0,
         "error": null,
         "stack": null,
@@ -136,10 +732,10 @@
     ]
   },
   {
-    "id": 1767102845213,
-    "startedAt": "2025-12-30T13:53:57.480Z",
-    "endedAt": "2025-12-30T13:54:05.213Z",
-    "duration": 7733,
+    "id": 1767183504627,
+    "startedAt": "2025-12-31T12:18:12.741Z",
+    "endedAt": "2025-12-31T12:18:24.627Z",
+    "duration": 11886,
     "summary": {
       "total": 1,
       "passed": 1,
@@ -148,12 +744,12 @@
     },
     "tests": [
       {
-        "title": "Notification flow – handle empty & existing notifications",
+        "title": "Candidate info, profile picture, and banner update",
         "description": "",
-        "file": "C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\UI\\candidate\\Notification.spec.js",
-        "line": 20,
+        "file": "D:\\ReelRecruite-testing\\UI\\candidate\\UpdateInfo.spec.js",
+        "line": 23,
         "status": "passed",
-        "duration": 5826,
+        "duration": 9416,
         "retries": 0,
         "error": null,
         "stack": null,
@@ -162,10 +758,140 @@
     ]
   },
   {
-    "id": 1767102700080,
-    "startedAt": "2025-12-30T13:51:35.219Z",
-    "endedAt": "2025-12-30T13:51:40.079Z",
-    "duration": 4860,
+    "id": 1767183489708,
+    "startedAt": "2025-12-31T12:17:41.103Z",
+    "endedAt": "2025-12-31T12:18:09.708Z",
+    "duration": 28605,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0
+    },
+    "tests": [
+      {
+        "title": "Recruiter updates company details and logo",
+        "description": "",
+        "file": "D:\\ReelRecruite-testing\\UI\\Recruiter\\UpdateCompany.spec.js",
+        "line": 23,
+        "status": "passed",
+        "duration": 25934,
+        "retries": 0,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1767183458058,
+    "startedAt": "2025-12-31T12:17:26.636Z",
+    "endedAt": "2025-12-31T12:17:38.058Z",
+    "duration": 11422,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0
+    },
+    "tests": [
+      {
+        "title": "recruiter can update about section",
+        "description": "",
+        "file": "D:\\ReelRecruite-testing\\UI\\Recruiter\\UpdateAbout.spec.js",
+        "line": 19,
+        "status": "passed",
+        "duration": 9100,
+        "retries": 0,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1767183443619,
+    "startedAt": "2025-12-31T12:17:15.152Z",
+    "endedAt": "2025-12-31T12:17:23.619Z",
+    "duration": 8467,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0
+    },
+    "tests": [
+      {
+        "title": "Recruiter info, profile picture, and banner",
+        "description": "",
+        "file": "D:\\ReelRecruite-testing\\UI\\Recruiter\\UpdateInfo.spec.js",
+        "line": 23,
+        "status": "passed",
+        "duration": 6095,
+        "retries": 0,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1767183432077,
+    "startedAt": "2025-12-31T12:17:05.149Z",
+    "endedAt": "2025-12-31T12:17:12.076Z",
+    "duration": 6927,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0
+    },
+    "tests": [
+      {
+        "title": "Recruiter logs in successfully",
+        "description": "",
+        "file": "D:\\ReelRecruite-testing\\UI\\Login.spec.js",
+        "line": 4,
+        "status": "passed",
+        "duration": 4665,
+        "retries": 0,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1767183421984,
+    "startedAt": "2025-12-31T12:16:48.689Z",
+    "endedAt": "2025-12-31T12:17:01.984Z",
+    "duration": 13295,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0
+    },
+    "tests": [
+      {
+        "title": "Candidate changes password",
+        "description": "",
+        "file": "D:\\ReelRecruite-testing\\UI\\candidate\\ChangePassword.spec.js",
+        "line": 19,
+        "status": "passed",
+        "duration": 10578,
+        "retries": 0,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1767183405452,
+    "startedAt": "2025-12-31T12:16:40.044Z",
+    "endedAt": "2025-12-31T12:16:45.452Z",
+    "duration": 5408,
     "summary": {
       "total": 1,
       "passed": 1,
@@ -176,10 +902,10 @@
       {
         "title": "Candidate can log in using phone number",
         "description": "",
-        "file": "C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\UI\\candidate\\PhoneLogin.spec.js",
+        "file": "D:\\ReelRecruite-testing\\UI\\candidate\\PhoneLogin.spec.js",
         "line": 18,
         "status": "passed",
-        "duration": 3061,
+        "duration": 2815,
         "retries": 0,
         "error": null,
         "stack": null,
@@ -188,10 +914,10 @@
     ]
   },
   {
-    "id": 1767102606277,
-    "startedAt": "2025-12-30T13:49:58.175Z",
-    "endedAt": "2025-12-30T13:50:06.277Z",
-    "duration": 8102,
+    "id": 1767183397066,
+    "startedAt": "2025-12-31T12:16:29.009Z",
+    "endedAt": "2025-12-31T12:16:37.066Z",
+    "duration": 8057,
     "summary": {
       "total": 1,
       "passed": 1,
@@ -200,12 +926,12 @@
     },
     "tests": [
       {
-        "title": "Apply Region filter",
+        "title": "Recruiter forget password flow",
         "description": "",
-        "file": "C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\UI\\candidate\\regionFilter.spec.js",
-        "line": 19,
+        "file": "D:\\ReelRecruite-testing\\UI\\Recruiter\\ForgetPassword.spec.js",
+        "line": 28,
         "status": "passed",
-        "duration": 6192,
+        "duration": 5509,
         "retries": 0,
         "error": null,
         "stack": null,
@@ -214,10 +940,10 @@
     ]
   },
   {
-    "id": 1767102335660,
-    "startedAt": "2025-12-30T13:45:26.568Z",
-    "endedAt": "2025-12-30T13:45:35.660Z",
-    "duration": 9092,
+    "id": 1767183385902,
+    "startedAt": "2025-12-31T12:16:18.003Z",
+    "endedAt": "2025-12-31T12:16:25.901Z",
+    "duration": 7898,
     "summary": {
       "total": 1,
       "passed": 1,
@@ -226,12 +952,12 @@
     },
     "tests": [
       {
-        "title": "Apply all job filters together",
+        "title": "Candidate signs up and moves user from RandomUsers to NewUsers",
         "description": "",
-        "file": "C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\UI\\candidate\\FIlter.spec.js",
-        "line": 21,
+        "file": "D:\\ReelRecruite-testing\\UI\\Signup.spec.js",
+        "line": 9,
         "status": "passed",
-        "duration": 7177,
+        "duration": 5221,
         "retries": 0,
         "error": null,
         "stack": null,
@@ -240,10 +966,10 @@
     ]
   },
   {
-    "id": 1767101173440,
-    "startedAt": "2025-12-30T13:26:04.741Z",
-    "endedAt": "2025-12-30T13:26:13.440Z",
-    "duration": 8699,
+    "id": 1767183294530,
+    "startedAt": "2025-12-31T12:14:37.576Z",
+    "endedAt": "2025-12-31T12:14:54.529Z",
+    "duration": 16953,
     "summary": {
       "total": 1,
       "passed": 1,
@@ -252,246 +978,12 @@
     },
     "tests": [
       {
-        "title": "Apply all job filters together",
+        "title": "Recruiter login and create a new job",
         "description": "",
-        "file": "C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\UI\\candidate\\FIlter.spec.js",
-        "line": 21,
+        "file": "D:\\ReelRecruite-testing\\UI\\Recruiter\\CreateJob.spec.js",
+        "line": 20,
         "status": "passed",
-        "duration": 6774,
-        "retries": 0,
-        "error": null,
-        "stack": null,
-        "attachments": []
-      }
-    ]
-  },
-  {
-    "id": 1767100856747,
-    "startedAt": "2025-12-30T13:20:48.189Z",
-    "endedAt": "2025-12-30T13:20:56.747Z",
-    "duration": 8558,
-    "summary": {
-      "total": 1,
-      "passed": 1,
-      "failed": 0,
-      "skipped": 0
-    },
-    "tests": [
-      {
-        "title": "Apply Region filter",
-        "description": "",
-        "file": "C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\UI\\candidate\\regionFilter.spec.js",
-        "line": 19,
-        "status": "passed",
-        "duration": 6652,
-        "retries": 0,
-        "error": null,
-        "stack": null,
-        "attachments": []
-      }
-    ]
-  },
-  {
-    "id": 1767100618407,
-    "startedAt": "2025-12-30T13:16:50.441Z",
-    "endedAt": "2025-12-30T13:16:58.407Z",
-    "duration": 7966,
-    "summary": {
-      "total": 1,
-      "passed": 1,
-      "failed": 0,
-      "skipped": 0
-    },
-    "tests": [
-      {
-        "title": "Apply Region filter",
-        "description": "",
-        "file": "C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\UI\\candidate\\regionFilter.spec.js",
-        "line": 19,
-        "status": "passed",
-        "duration": 6082,
-        "retries": 0,
-        "error": null,
-        "stack": null,
-        "attachments": []
-      }
-    ]
-  },
-  {
-    "id": 1767100579406,
-    "startedAt": "2025-12-30T13:16:14.771Z",
-    "endedAt": "2025-12-30T13:16:19.406Z",
-    "duration": 4635,
-    "summary": {
-      "total": 1,
-      "passed": 1,
-      "failed": 0,
-      "skipped": 0
-    },
-    "tests": [
-      {
-        "title": "Candidate can log in using phone number",
-        "description": "",
-        "file": "C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\UI\\candidate\\PhoneLogin.spec.js",
-        "line": 18,
-        "status": "passed",
-        "duration": 2798,
-        "retries": 0,
-        "error": null,
-        "stack": null,
-        "attachments": []
-      }
-    ]
-  },
-  {
-    "id": 1767100518786,
-    "startedAt": "2025-12-30T13:15:10.416Z",
-    "endedAt": "2025-12-30T13:15:18.786Z",
-    "duration": 8370,
-    "summary": {
-      "total": 1,
-      "passed": 1,
-      "failed": 0,
-      "skipped": 0
-    },
-    "tests": [
-      {
-        "title": "Apply all job filters together",
-        "description": "",
-        "file": "C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\UI\\candidate\\FIlter.spec.js",
-        "line": 21,
-        "status": "passed",
-        "duration": 6586,
-        "retries": 0,
-        "error": null,
-        "stack": null,
-        "attachments": []
-      }
-    ]
-  },
-  {
-    "id": 1767100405986,
-    "startedAt": "2025-12-30T13:13:17.563Z",
-    "endedAt": "2025-12-30T13:13:25.986Z",
-    "duration": 8423,
-    "summary": {
-      "total": 1,
-      "passed": 1,
-      "failed": 0,
-      "skipped": 0
-    },
-    "tests": [
-      {
-        "title": "Apply all job filters together",
-        "description": "",
-        "file": "C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\UI\\candidate\\FIlter.spec.js",
-        "line": 21,
-        "status": "passed",
-        "duration": 6396,
-        "retries": 0,
-        "error": null,
-        "stack": null,
-        "attachments": []
-      }
-    ]
-  },
-  {
-    "id": 1767100190122,
-    "startedAt": "2025-12-30T13:09:41.669Z",
-    "endedAt": "2025-12-30T13:09:50.122Z",
-    "duration": 8453,
-    "summary": {
-      "total": 1,
-      "passed": 1,
-      "failed": 0,
-      "skipped": 0
-    },
-    "tests": [
-      {
-        "title": "Apply Work Type filter",
-        "description": "",
-        "file": "C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\UI\\candidate\\workTypeFilter.spec.js",
-        "line": 21,
-        "status": "passed",
-        "duration": 6592,
-        "retries": 0,
-        "error": null,
-        "stack": null,
-        "attachments": []
-      }
-    ]
-  },
-  {
-    "id": 1767100144348,
-    "startedAt": "2025-12-30T13:08:51.457Z",
-    "endedAt": "2025-12-30T13:09:04.348Z",
-    "duration": 12891,
-    "summary": {
-      "total": 1,
-      "passed": 1,
-      "failed": 0,
-      "skipped": 0
-    },
-    "tests": [
-      {
-        "title": "candidate can update education",
-        "description": "",
-        "file": "C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\UI\\candidate\\UpdateEducation.spec.js",
-        "line": 30,
-        "status": "passed",
-        "duration": 11020,
-        "retries": 0,
-        "error": null,
-        "stack": null,
-        "attachments": []
-      }
-    ]
-  },
-  {
-    "id": 1767099979484,
-    "startedAt": "2025-12-30T13:06:05.473Z",
-    "endedAt": "2025-12-30T13:06:19.484Z",
-    "duration": 14011,
-    "summary": {
-      "total": 1,
-      "passed": 1,
-      "failed": 0,
-      "skipped": 0
-    },
-    "tests": [
-      {
-        "title": "candidate can update education",
-        "description": "",
-        "file": "C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\UI\\candidate\\UpdateEducation.spec.js",
-        "line": 30,
-        "status": "passed",
-        "duration": 11815,
-        "retries": 0,
-        "error": null,
-        "stack": null,
-        "attachments": []
-      }
-    ]
-  },
-  {
-    "id": 1767099556138,
-    "startedAt": "2025-12-30T12:59:01.961Z",
-    "endedAt": "2025-12-30T12:59:16.138Z",
-    "duration": 14177,
-    "summary": {
-      "total": 1,
-      "passed": 1,
-      "failed": 0,
-      "skipped": 0
-    },
-    "tests": [
-      {
-        "title": "candidate can update education",
-        "description": "",
-        "file": "C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\UI\\candidate\\UpdateEducation.spec.js",
-        "line": 30,
-        "status": "passed",
-        "duration": 12125,
+        "duration": 14341,
         "retries": 0,
         "error": null,
         "stack": null,

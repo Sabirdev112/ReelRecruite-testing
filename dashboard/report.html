@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Playwright Test Report</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <h1 class="header-title">Playwright Test Report</h1>
+      <a href="index.html" class="back-link">← Back to Dashboard</a>
+    </header>
+
+    <!-- Run Summary -->
+    <section class="run-summary">
+      <h2 class="section-title">Run Summary</h2>
+      <p id="runSummary" class="summary-text">Loading...</p>
+    </section>
+
+    <!-- Charts + Breakdown -->
+    <section class="charts-section">
+      <div class="chart-card large">
+        <canvas id="runDonut"></canvas>
+      </div>
+
+      <div class="breakdown-card">
+        <h3 class="chart-title">Test Breakdown</h3>
+        <p class="chart-desc">A summary of test results by status.</p>
+        <div class="breakdown-bars">
+          <div class="bar-row">
+            <span>Passed</span>
+            <div class="bar"><div class="bar-fill passed" id="passedFill"></div></div>
+          </div>
+          <div class="bar-row">
+            <span>Failed</span>
+            <div class="bar"><div class="bar-fill failed" id="failedFill"></div></div>
+          </div>
+          <div class="bar-row">
+            <span>Skipped</span>
+            <div class="bar"><div class="bar-fill skipped" id="skippedFill"></div></div>
+          </div>
+          <div class="bar-row">
+            <span>Interrupted</span>
+            <div class="bar"><div class="bar-fill interrupted" id="interruptedFill"></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Status Cards -->
+    <section class="status-cards">
+      <div class="status-card">
+        <div class="label">Total Tests</div>
+        <div class="value" id="totalTests">0</div>
+      </div>
+      <div class="status-card passed">
+        <div class="label">Passed</div>
+        <div class="value" id="passedTests">0</div>
+        <div class="icon">✓</div>
+      </div>
+      <div class="status-card failed">
+        <div class="label">Failed</div>
+        <div class="value" id="failedTests">0</div>
+        <div class="icon">✗</div>
+      </div>
+      <div class="status-card skipped">
+        <div class="label">Skipped</div>
+        <div class="value" id="skippedTests">0</div>
+        <div class="icon">↷</div>
+      </div>
+      <div class="status-card interrupted">
+        <div class="label">Interrupted</div>
+        <div class="value" id="interruptedTests">0</div>
+        <div class="icon">!</div>
+      </div>
+    </section>
+
+    <!-- Test Details -->
+    <section class="test-details">
+      <h2 class="section-title">Test Details</h2>
+      <p class="chart-desc">Explore the results of each individual test from this run. Failed tests are expanded by default.</p>
+      <div class="filters">
+        <select id="statusFilter">
+          <option value="all">All Statuses</option>
+          <option value="passed">Passed</option>
+          <option value="failed">Failed</option>
+          <option value="skipped">Skipped</option>
+          <option value="interrupted">Interrupted</option>
+        </select>
+        <select id="orderFilter">
+          <option>Default Order</option>
+        </select>
+      </div>
+      <div id="testsList" class="tests-list"></div>
+    </section>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
