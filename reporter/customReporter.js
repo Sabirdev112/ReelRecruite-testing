@@ -9,24 +9,29 @@ export default class CustomReporter {
   }
 
   onTestEnd(test, result) {
-    this.results.push({
-      title: test.title,
-      description:
-        test.annotations?.find(a => a.type === 'description')?.description || '',
-      file: test.location.file,
-      line: test.location.line,
-      status: result.status,
-      duration: result.duration,
-      retries: result.retry,
-      error: result.error ? result.error.message : null,
-      stack: result.error ? result.error.stack : null,
-      attachments: result.attachments.map(a => ({
-        name: a.name,
-        path: a.path,
-        contentType: a.contentType
-      }))
-    });
-  }
+  // Get full relative path from project root
+  const fullPath = test.location.file; // This is usually absolute
+  const relativePath = path.relative(process.cwd(), fullPath).replace(/\\/g, '/'); // Normalize to forward slashes
+
+  this.results.push({
+    title: test.title,
+    description:
+      test.annotations?.find(a => a.type === 'description')?.description || '',
+    file: path.relative(process.cwd(), test.location.file).replace(/\\/g, '/'),        // ← NOW CORRECT: e.g., "UI/Recruiter/UpdateInfo.spec.js"
+    line: test.location.line,
+    status: result.status,
+    duration: result.duration,
+    retries: result.retry,
+    wasFlaky: result.retry > 0 && result.status === 'passed',
+    error: result.error ? result.error.message : null,
+    stack: result.error ? result.error.stack : null,
+    attachments: result.attachments.map(a => ({
+      name: a.name,
+      path: a.path,
+      contentType: a.contentType
+    }))
+  });
+}
 
   async onEnd() {
   const runEndTime = Date.now();

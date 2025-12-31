@@ -23,8 +23,18 @@
 
     <!-- Charts + Breakdown -->
     <section class="charts-section">
-      <div class="chart-card large">
-        <canvas id="runDonut"></canvas>
+      <div class="chart-card">
+        <h3 class="chart-title">Test Status</h3>
+        <p class="chart-desc">Results for this run.</p>
+        <div class="chart-wrapper">
+          <canvas id="runDonut"></canvas>
+        </div>
+        <div class="donut-legend">
+          <span><span class="legend-dot passed"></span> Passed</span>
+          <span><span class="legend-dot failed"></span> Failed</span>
+          <span><span class="legend-dot skipped"></span> Skipped</span>
+          <span><span class="legend-dot interrupted"></span> Interrupted</span>
+        </div>
       </div>
 
       <div class="breakdown-card">
@@ -81,22 +91,12 @@
 
     <!-- Test Details -->
     <section class="test-details">
-      <h2 class="section-title">Test Details</h2>
-      <p class="chart-desc">Explore the results of each individual test from this run. Failed tests are expanded by default.</p>
-      <div class="filters">
-        <select id="statusFilter">
-          <option value="all">All Statuses</option>
-          <option value="passed">Passed</option>
-          <option value="failed">Failed</option>
-          <option value="skipped">Skipped</option>
-          <option value="interrupted">Interrupted</option>
-        </select>
-        <select id="orderFilter">
-          <option>Default Order</option>
-        </select>
-      </div>
-      <div id="testsList" class="tests-list"></div>
-    </section>
+  <h2 class="section-title">Test Details</h2>
+  <p class="chart-desc">Explore the results of each individual test from this run. Failed tests are expanded by default.</p>
+  <div class="tests-list-container">
+    <div id="testsList" class="tests-list"></div>
+  </div>
+</section>
   </div>
 
   <script src="app.js"></script>
