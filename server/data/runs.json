@@ -1,5 +1,997 @@
 [
   {
+    "id": 1767281042944,
+    "startedAt": "2026-01-01T15:24:02.482Z",
+    "endedAt": "2026-01-01T15:24:02.944Z",
+    "duration": 462,
+    "summary": {
+      "total": 0,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": []
+  },
+  {
+    "id": 1767279524506,
+    "startedAt": "2026-01-01T14:58:18.601Z",
+    "endedAt": "2026-01-01T14:58:44.505Z",
+    "duration": 25904,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Recruiter forget password flow",
+        "description": "",
+        "file": "UI/Recruiter/ForgetPassword.spec.js",
+        "line": 28,
+        "status": "passed",
+        "duration": 22451,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1767279495797,
+    "startedAt": "2026-01-01T14:58:12.829Z",
+    "endedAt": "2026-01-01T14:58:15.797Z",
+    "duration": 2968,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Candidate signs up and moves user from RandomUsers to NewUsers",
+        "description": "",
+        "file": "UI/Signup.spec.js",
+        "line": 9,
+        "status": "passed",
+        "duration": 199,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1767278786306,
+    "startedAt": "2026-01-01T14:46:25.673Z",
+    "endedAt": "2026-01-01T14:46:26.306Z",
+    "duration": 633,
+    "summary": {
+      "total": 0,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": []
+  },
+  {
+    "id": 1767278746797,
+    "startedAt": "2026-01-01T14:45:42.954Z",
+    "endedAt": "2026-01-01T14:45:46.797Z",
+    "duration": 3843,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Candidate signs up and moves user from RandomUsers to NewUsers",
+        "description": "",
+        "file": "UI/Signup.spec.js",
+        "line": 9,
+        "status": "passed",
+        "duration": 257,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1767278707630,
+    "startedAt": "2026-01-01T14:45:07.056Z",
+    "endedAt": "2026-01-01T14:45:07.629Z",
+    "duration": 573,
+    "summary": {
+      "total": 0,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": []
+  },
+  {
+    "id": 1767278543029,
+    "startedAt": "2026-01-01T14:42:22.528Z",
+    "endedAt": "2026-01-01T14:42:23.029Z",
+    "duration": 501,
+    "summary": {
+      "total": 0,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": []
+  },
+  {
+    "id": 1767273890038,
+    "startedAt": "2026-01-01T13:24:49.661Z",
+    "endedAt": "2026-01-01T13:24:50.038Z",
+    "duration": 377,
+    "summary": {
+      "total": 0,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": []
+  },
+  {
+    "id": 1767273828424,
+    "startedAt": "2026-01-01T13:23:48.198Z",
+    "endedAt": "2026-01-01T13:23:48.424Z",
+    "duration": 226,
+    "summary": {
+      "total": 0,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": []
+  },
+  {
+    "id": 1767270734457,
+    "startedAt": "2026-01-01T12:32:12.510Z",
+    "endedAt": "2026-01-01T12:32:14.457Z",
+    "duration": 1947,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Candidate signs up and moves user from RandomUsers to NewUsers",
+        "description": "",
+        "file": "UI/Signup.spec.js",
+        "line": 9,
+        "status": "passed",
+        "duration": 179,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1767269558294,
+    "startedAt": "2026-01-01T12:11:36.723Z",
+    "endedAt": "2026-01-01T12:12:38.294Z",
+    "duration": 61571,
+    "summary": {
+      "total": 1,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 1,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Apply all job filters together",
+        "description": "",
+        "file": "UI/candidate/FIlter.spec.js",
+        "line": 21,
+        "status": "timedOut",
+        "duration": 60103,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+        "stack": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+        "attachments": [
+          {
+            "name": "error-context",
+            "path": "C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\test-results\\UI-candidate-FIlter-Apply-all-job-filters-together\\error-context.md",
+            "contentType": "text/markdown"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1767269495434,
+    "startedAt": "2026-01-01T12:10:33.888Z",
+    "endedAt": "2026-01-01T12:11:35.434Z",
+    "duration": 61546,
+    "summary": {
+      "total": 1,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 1,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "candidate can upload a video resume",
+        "description": "",
+        "file": "UI/candidate/UpdateCoverVideoResume.spec.js",
+        "line": 27,
+        "status": "timedOut",
+        "duration": 60090,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+        "stack": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+        "attachments": [
+          {
+            "name": "error-context",
+            "path": "C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\test-results\\UI-candidate-UpdateCoverVi-050d6-e-can-upload-a-video-resume\\error-context.md",
+            "contentType": "text/markdown"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1767269432665,
+    "startedAt": "2026-01-01T12:10:10.142Z",
+    "endedAt": "2026-01-01T12:10:32.665Z",
+    "duration": 22523,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Candidate deletes and uploads resume",
+        "description": "",
+        "file": "UI/candidate/UpdateResume.spec.js",
+        "line": 26,
+        "status": "passed",
+        "duration": 21055,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1767269408915,
+    "startedAt": "2026-01-01T12:09:57.806Z",
+    "endedAt": "2026-01-01T12:10:08.915Z",
+    "duration": 11109,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "candidate can update education",
+        "description": "",
+        "file": "UI/candidate/UpdateEducation.spec.js",
+        "line": 30,
+        "status": "passed",
+        "duration": 9612,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1767269396602,
+    "startedAt": "2026-01-01T12:09:47.613Z",
+    "endedAt": "2026-01-01T12:09:56.602Z",
+    "duration": 8989,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Candidate deletes existing work (if any) and adds new experience",
+        "description": "",
+        "file": "UI/candidate/UpdateWork.spec.js",
+        "line": 19,
+        "status": "passed",
+        "duration": 7455,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1767269386375,
+    "startedAt": "2026-01-01T12:09:36.553Z",
+    "endedAt": "2026-01-01T12:09:46.375Z",
+    "duration": 9822,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "candidate can update skills section",
+        "description": "",
+        "file": "UI/candidate/UpdateSkill.spec.js",
+        "line": 21,
+        "status": "passed",
+        "duration": 8448,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1767269375304,
+    "startedAt": "2026-01-01T12:09:27.789Z",
+    "endedAt": "2026-01-01T12:09:35.304Z",
+    "duration": 7515,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "candidate can update about section",
+        "description": "",
+        "file": "UI/candidate/UpdateAbout.spec.js",
+        "line": 19,
+        "status": "passed",
+        "duration": 6118,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1767269366568,
+    "startedAt": "2026-01-01T12:09:18.946Z",
+    "endedAt": "2026-01-01T12:09:26.568Z",
+    "duration": 7622,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Candidate info, profile picture, and banner update",
+        "description": "",
+        "file": "UI/candidate/UpdateInfo.spec.js",
+        "line": 23,
+        "status": "passed",
+        "duration": 6181,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1767269357693,
+    "startedAt": "2026-01-01T12:08:56.086Z",
+    "endedAt": "2026-01-01T12:09:17.693Z",
+    "duration": 21607,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Recruiter updates company details and logo",
+        "description": "",
+        "file": "UI/Recruiter/UpdateCompany.spec.js",
+        "line": 23,
+        "status": "passed",
+        "duration": 20108,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1767269334834,
+    "startedAt": "2026-01-01T12:08:46.007Z",
+    "endedAt": "2026-01-01T12:08:54.834Z",
+    "duration": 8827,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "recruiter can update about section",
+        "description": "",
+        "file": "UI/Recruiter/UpdateAbout.spec.js",
+        "line": 19,
+        "status": "passed",
+        "duration": 7466,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1767269324734,
+    "startedAt": "2026-01-01T12:08:38.274Z",
+    "endedAt": "2026-01-01T12:08:44.734Z",
+    "duration": 6460,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Recruiter info, profile picture, and banner",
+        "description": "",
+        "file": "UI/Recruiter/UpdateInfo.spec.js",
+        "line": 23,
+        "status": "passed",
+        "duration": 4942,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1767269316957,
+    "startedAt": "2026-01-01T12:08:31.130Z",
+    "endedAt": "2026-01-01T12:08:36.957Z",
+    "duration": 5827,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Recruiter logs in successfully",
+        "description": "",
+        "file": "UI/Login.spec.js",
+        "line": 4,
+        "status": "passed",
+        "duration": 4389,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1767269309855,
+    "startedAt": "2026-01-01T12:08:21.321Z",
+    "endedAt": "2026-01-01T12:08:29.855Z",
+    "duration": 8534,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Candidate changes password",
+        "description": "",
+        "file": "UI/candidate/ChangePassword.spec.js",
+        "line": 19,
+        "status": "passed",
+        "duration": 7102,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1767269300095,
+    "startedAt": "2026-01-01T12:08:15.836Z",
+    "endedAt": "2026-01-01T12:08:20.095Z",
+    "duration": 4259,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Candidate can log in using phone number",
+        "description": "",
+        "file": "UI/candidate/PhoneLogin.spec.js",
+        "line": 18,
+        "status": "passed",
+        "duration": 2883,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1767269294574,
+    "startedAt": "2026-01-01T12:08:03.254Z",
+    "endedAt": "2026-01-01T12:08:14.574Z",
+    "duration": 11320,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Recruiter forget password flow",
+        "description": "",
+        "file": "UI/Recruiter/ForgetPassword.spec.js",
+        "line": 28,
+        "status": "passed",
+        "duration": 9712,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1767269282026,
+    "startedAt": "2026-01-01T12:07:59.971Z",
+    "endedAt": "2026-01-01T12:08:02.026Z",
+    "duration": 2055,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Candidate signs up and moves user from RandomUsers to NewUsers",
+        "description": "",
+        "file": "UI/Signup.spec.js",
+        "line": 9,
+        "status": "passed",
+        "duration": 209,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1767203717518,
+    "startedAt": "2025-12-31T17:55:00.762Z",
+    "endedAt": "2025-12-31T17:55:17.518Z",
+    "duration": 16756,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "candidate can update skills section",
+        "description": "",
+        "file": "UI/candidate/UpdateSkill.spec.js",
+        "line": 21,
+        "status": "passed",
+        "duration": 13130,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1767203697078,
+    "startedAt": "2025-12-31T17:54:40.615Z",
+    "endedAt": "2025-12-31T17:54:57.078Z",
+    "duration": 16463,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "candidate can update about section",
+        "description": "",
+        "file": "UI/candidate/UpdateAbout.spec.js",
+        "line": 19,
+        "status": "passed",
+        "duration": 11001,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1767203675707,
+    "startedAt": "2025-12-31T17:54:05.096Z",
+    "endedAt": "2025-12-31T17:54:35.707Z",
+    "duration": 30611,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Candidate info, profile picture, and banner update",
+        "description": "",
+        "file": "UI/candidate/UpdateInfo.spec.js",
+        "line": 23,
+        "status": "passed",
+        "duration": 27516,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1767203641980,
+    "startedAt": "2025-12-31T17:53:56.535Z",
+    "endedAt": "2025-12-31T17:54:01.979Z",
+    "duration": 5444,
+    "summary": {
+      "total": 1,
+      "passed": 0,
+      "failed": 1,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Recruiter updates company details and logo",
+        "description": "",
+        "file": "UI/Recruiter/UpdateCompany.spec.js",
+        "line": 23,
+        "status": "failed",
+        "duration": 1739,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": "Error: page.goto: net::ERR_NAME_NOT_RESOLVED at https://recruitai-web-production.up.railway.app/auth\nCall log:\n\u001b[2m  - navigating to \"https://recruitai-web-production.up.railway.app/auth\", waiting until \"load\"\u001b[22m\n",
+        "stack": "Error: page.goto: net::ERR_NAME_NOT_RESOLVED at https://recruitai-web-production.up.railway.app/auth\nCall log:\n\u001b[2m  - navigating to \"https://recruitai-web-production.up.railway.app/auth\", waiting until \"load\"\u001b[22m\n\n    at Login.goto (C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\Pages\\Login.js:14:25)\n    at C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\UI\\Recruiter\\UpdateCompany.spec.js:26:19",
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1767203633044,
+    "startedAt": "2025-12-31T17:53:32.982Z",
+    "endedAt": "2025-12-31T17:53:53.044Z",
+    "duration": 20062,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "recruiter can update about section",
+        "description": "",
+        "file": "UI/Recruiter/UpdateAbout.spec.js",
+        "line": 19,
+        "status": "passed",
+        "duration": 16387,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1767203609929,
+    "startedAt": "2025-12-31T17:53:10.339Z",
+    "endedAt": "2025-12-31T17:53:29.929Z",
+    "duration": 19590,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Recruiter info, profile picture, and banner",
+        "description": "",
+        "file": "UI/Recruiter/UpdateInfo.spec.js",
+        "line": 23,
+        "status": "passed",
+        "duration": 16697,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1767203587465,
+    "startedAt": "2025-12-31T17:52:45.601Z",
+    "endedAt": "2025-12-31T17:53:07.464Z",
+    "duration": 21863,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Recruiter logs in successfully",
+        "description": "",
+        "file": "UI/Login.spec.js",
+        "line": 4,
+        "status": "passed",
+        "duration": 16461,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1767203562502,
+    "startedAt": "2025-12-31T17:52:15.323Z",
+    "endedAt": "2025-12-31T17:52:42.502Z",
+    "duration": 27179,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Candidate changes password",
+        "description": "",
+        "file": "UI/candidate/ChangePassword.spec.js",
+        "line": 19,
+        "status": "passed",
+        "duration": 23283,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1767203531990,
+    "startedAt": "2025-12-31T17:52:01.285Z",
+    "endedAt": "2025-12-31T17:52:11.990Z",
+    "duration": 10705,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Candidate can log in using phone number",
+        "description": "",
+        "file": "UI/candidate/PhoneLogin.spec.js",
+        "line": 18,
+        "status": "passed",
+        "duration": 6959,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1767203518342,
+    "startedAt": "2025-12-31T17:51:39.598Z",
+    "endedAt": "2025-12-31T17:51:58.342Z",
+    "duration": 18744,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Recruiter forget password flow",
+        "description": "",
+        "file": "UI/Recruiter/ForgetPassword.spec.js",
+        "line": 28,
+        "status": "passed",
+        "duration": 15046,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1767203497570,
+    "startedAt": "2025-12-31T17:51:34.591Z",
+    "endedAt": "2025-12-31T17:51:37.570Z",
+    "duration": 2979,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Candidate signs up and moves user from RandomUsers to NewUsers",
+        "description": "",
+        "file": "UI/Signup.spec.js",
+        "line": 9,
+        "status": "passed",
+        "duration": 210,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1767203457369,
+    "startedAt": "2025-12-31T17:50:56.931Z",
+    "endedAt": "2025-12-31T17:50:57.369Z",
+    "duration": 438,
+    "summary": {
+      "total": 0,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": []
+  },
+  {
+    "id": 1767203425489,
+    "startedAt": "2025-12-31T17:50:24.883Z",
+    "endedAt": "2025-12-31T17:50:25.489Z",
+    "duration": 606,
+    "summary": {
+      "total": 0,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": []
+  },
+  {
     "id": 1767203176201,
     "startedAt": "2025-12-31T17:46:12.120Z",
     "endedAt": "2025-12-31T17:46:16.201Z",
