@@ -1,5 +1,39 @@
 [
   {
+    "id": 1767356955212,
+    "startedAt": "2026-01-02T12:28:11.974Z",
+    "endedAt": "2026-01-02T12:29:15.212Z",
+    "duration": 63238,
+    "summary": {
+      "total": 1,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 1,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Apply for latest job (users from JSON)",
+        "description": "",
+        "file": "UI/candidate/jobApply.spec.js",
+        "line": 101,
+        "status": "timedOut",
+        "duration": 60007,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+        "stack": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+        "attachments": [
+          {
+            "name": "error-context",
+            "path": "D:\\ReelRecruite-testing\\test-results\\UI-candidate-jobApply-Apply-for-latest-job-users-from-JSON-\\error-context.md",
+            "contentType": "text/markdown"
+          }
+        ]
+      }
+    ]
+  },
+  {
     "id": 1767356787028,
     "startedAt": "2026-01-02T12:26:26.848Z",
     "endedAt": "2026-01-02T12:26:27.028Z",
