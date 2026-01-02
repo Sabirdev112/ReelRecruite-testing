@@ -58,18 +58,30 @@ app.post('/api/rerun-test', (req, res) => {
   console.log(`   Title: "${title}"`);
   console.log(`   File : ${safeFile}\n`);
 
-  const child = spawn('node', [
+  // Escape regex metacharacters so Playwright's --grep receives a literal match
+  const escapedGrep = safeTitle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  // For debugging, print the final grep string
+  console.log('   Grep :', escapedGrep);
+
+  const spawnArgs = [
     playwrightCliPath,
     'test',
     safeFile,
     '--grep',
-    `"${safeTitle}"`,
+    escapedGrep,
     '--retries=0',
     '--workers=1'
-  ], {
+  ];
+
+  console.log('Spawning:', 'node', spawnArgs.join(' '));
+
+  const child = spawn('node', spawnArgs, {
     cwd: process.cwd(),
     stdio: 'inherit'
   });
+
+    // expose single-run process so it can be stopped via /api/stop-run
+    currentRunProcess = child;
 
   child.on('close', (code) => {
     // The rerun was executed successfully, regardless of test result
@@ -212,7 +224,8 @@ app.post('/api/stop-run', (req, res) => {
     console.warn('Failed to send SIGINT:', e.message);
   }
 
-  currentRunProcess = null;
+    // Clear current process reference
+    currentRunProcess = null;
 
   res.json({
     success: true,
