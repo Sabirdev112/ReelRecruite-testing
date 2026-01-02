@@ -72,13 +72,21 @@ app.post('/api/rerun-test', (req, res) => {
   });
 
   child.on('close', (code) => {
-    if (code === 0) {
-      console.log('✅ Single test passed\n');
-      res.json({ success: true });
-    } else {
-      console.log(`❌ Single test failed (exit code ${code})\n`);
-      res.json({ success: false, code });
-    }
+    // The rerun was executed successfully, regardless of test result
+    // Wait for the reporter to write the results to runs.json
+    // The reporter's onEnd() is called when the process closes, but file write is async
+    setTimeout(() => {
+      if (code === 0) {
+        console.log('✅ Single test passed\n');
+        res.json({ success: true, passed: true, code: 0 });
+      } else {
+        console.log(`❌ Single test failed (exit code ${code})`);
+        console.log(`   Note: Rerun executed successfully. Test result saved to dashboard.\n`);
+        // Still return success: true because the rerun executed successfully
+        // The test result (pass/fail) is separate from execution success
+        res.json({ success: true, passed: false, code });
+      }
+    }, 1000); // Increased delay to ensure reporter finishes writing
   });
 
   child.on('error', (err) => {
