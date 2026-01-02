@@ -80,6 +80,11 @@ async function loadDashboard(silent = false) {
     document.getElementById('totalTests').textContent = overall.totalTests;
     const passRate = overall.totalTests ? Math.round((overall.passed / overall.totalTests) * 100) : 0;
     document.getElementById('passRate').textContent = passRate + '%';
+    // Add "passed out of total" format
+    const passRateSub = overall.totalTests 
+      ? `${overall.passed} out of ${overall.totalTests} tests`
+      : '0 out of 0 tests';
+    document.getElementById('passRateSub').textContent = passRateSub;
     const avgDur = overall.totalTests ? (overall.duration / overall.totalTests / 1000).toFixed(2) + 's' : '0s';
     document.getElementById('avgDuration').textContent = avgDur;
 
@@ -378,7 +383,28 @@ function renderRunsPerDayChart(runs) {
   const data = recentDays.map(day => runsByDay[day]);
 
   const isDark = document.body.classList.contains('dark');
-  const barColor = isDark ? '#ffffff' : '#1e293b';
+  
+  // Modern design system colors
+  const primaryColor = '#6366f1'; // accent-primary
+  const secondaryColor = '#8b5cf6'; // accent-secondary
+  const gridColor = isDark ? 'rgba(55, 65, 81, 0.3)' : 'rgba(226, 232, 240, 0.6)';
+  const textColor = isDark ? '#e5e7eb' : '#374151';
+  const textMutedColor = isDark ? '#9ca3af' : '#6b7280';
+  const tooltipBg = isDark ? '#1f2937' : '#ffffff';
+  const tooltipBorder = isDark ? '#374151' : '#e5e7eb';
+
+  // Create gradient for bars
+  const chartHeight = ctx.canvas.height || 300;
+  const gradient = ctx.createLinearGradient(0, chartHeight, 0, 0);
+  if (isDark) {
+    gradient.addColorStop(0, 'rgba(99, 102, 241, 0.8)');
+    gradient.addColorStop(0.5, 'rgba(139, 92, 246, 0.7)');
+    gradient.addColorStop(1, 'rgba(99, 102, 241, 0.9)');
+  } else {
+    gradient.addColorStop(0, primaryColor);
+    gradient.addColorStop(0.5, secondaryColor);
+    gradient.addColorStop(1, primaryColor);
+  }
 
   requestAnimationFrame(() => {
     barChart = new Chart(ctx, {
@@ -387,28 +413,115 @@ function renderRunsPerDayChart(runs) {
         labels,
         datasets: [{
           data,
-          backgroundColor: barColor,
-          borderRadius: 8,
+          backgroundColor: gradient,
+          borderRadius: {
+            topLeft: 8,
+            topRight: 8,
+            bottomLeft: 0,
+            bottomRight: 0
+          },
           borderSkipped: false,
-          barPercentage: 0.8,
-          categoryPercentage: 0.9
+          barPercentage: 0.7,
+          categoryPercentage: 0.85,
+          borderWidth: 0
         }]
       },
       options: {
         responsive: true,
         maintainAspectRatio: false,
+        interaction: {
+          intersect: false,
+          mode: 'index'
+        },
         plugins: {
           legend: { display: false },
-          tooltip: { callbacks: { label: item => `Test runs: ${item.raw}` } }
+          tooltip: {
+            backgroundColor: tooltipBg,
+            titleColor: textColor,
+            bodyColor: textMutedColor,
+            borderColor: tooltipBorder,
+            borderWidth: 1,
+            padding: 12,
+            cornerRadius: 8,
+            displayColors: false,
+            titleFont: {
+              size: 13,
+              weight: '600'
+            },
+            bodyFont: {
+              size: 13,
+              weight: '500'
+            },
+            callbacks: {
+              title: (items) => {
+                return items[0].label;
+              },
+              label: (item) => {
+                const count = item.raw;
+                return `${count} ${count === 1 ? 'test run' : 'test runs'}`;
+              }
+            }
+          }
         },
         scales: {
-          x: { ticks: { color: '#64748b' }, grid: { display: false } },
+          x: {
+            ticks: {
+              color: textMutedColor,
+              font: {
+                size: 11,
+                weight: '500'
+              },
+              maxRotation: 45,
+              minRotation: 0,
+              padding: 8
+            },
+            grid: {
+              display: false,
+              drawBorder: false
+            },
+            border: {
+              display: false
+            }
+          },
           y: {
             beginAtZero: true,
-            ticks: { color: '#64748b', stepSize: 1 },
-            grid: { color: '#e2e8f0' },
-            title: { display: true, text: 'Test Runs Per Day', color: '#64748b' }
+            ticks: {
+              color: textMutedColor,
+              font: {
+                size: 11,
+                weight: '500'
+              },
+              stepSize: 1,
+              precision: 0,
+              padding: 10
+            },
+            grid: {
+              color: gridColor,
+              drawBorder: false,
+              lineWidth: 1,
+              tickLength: 0
+            },
+            border: {
+              display: false
+            },
+            title: {
+              display: true,
+              text: 'Test Runs Per Day',
+              color: textMutedColor,
+              font: {
+                size: 12,
+                weight: '600'
+              },
+              padding: {
+                top: 0,
+                bottom: 10
+              }
+            }
           }
+        },
+        animation: {
+          duration: 1200,
+          easing: 'easeOutQuart'
         }
       }
     });
@@ -547,35 +660,61 @@ async function rerunTest(event, file, title, button) {
       body: JSON.stringify({ file, title })
     });
 
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
     const result = await response.json();
 
     if (result.success) {
       // Show stop UI immediately when a rerun is accepted
       setRunUI(true);
 
-      statusEl.textContent = 'Completed! Loading new results...';
-      statusEl.style.color = '#22c55e';
+      // Show appropriate message based on test result
+      if (result.passed) {
+        statusEl.textContent = '✅ Test passed! Loading new results...';
+        statusEl.style.color = '#22c55e';
+      } else {
+        statusEl.textContent = '❌ Test failed. Loading new results...';
+        statusEl.style.color = '#ef4444';
+      }
+
+      // Wait a bit for the reporter to finish writing results
+      await new Promise(resolve => setTimeout(resolve, 1500));
 
       let attempts = 0;
+      const maxAttempts = 30;
       const interval = setInterval(async () => {
         attempts++;
         try {
           const res = await fetch('/api/runs');
+          if (!res.ok) {
+            if (attempts >= maxAttempts) {
+              clearInterval(interval);
+              location.reload();
+            }
+            return;
+          }
           const data = await res.json();
-          const latest = data[0];
+          const latest = Array.isArray(data) ? data[0] : (data.runs || [])[0];
           if (latest && latest.id !== runId) {
             clearInterval(interval);
             window.location.href = `report.html?id=${latest.id}`;
+            return;
           }
-        } catch (e) {}
+        } catch (e) {
+          console.error('Error checking for new run:', e);
+        }
 
-        if (attempts > 20) {
+        if (attempts >= maxAttempts) {
           clearInterval(interval);
-          location.reload();
+          statusEl.textContent = 'Timeout waiting for results. Reloading...';
+          statusEl.style.color = '#f59e0b';
+          setTimeout(() => location.reload(), 1000);
         }
       }, 1000);
     } else {
-      statusEl.textContent = 'Failed';
+      statusEl.textContent = result.error || 'Failed to run test';
       statusEl.style.color = '#ef4444';
     }
   } catch (err) {
