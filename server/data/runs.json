@@ -1,5 +1,277 @@
 [
   {
+    "id": 1767356955212,
+    "startedAt": "2026-01-02T12:28:11.974Z",
+    "endedAt": "2026-01-02T12:29:15.212Z",
+    "duration": 63238,
+    "summary": {
+      "total": 1,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 1,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Apply for latest job (users from JSON)",
+        "description": "",
+        "file": "UI/candidate/jobApply.spec.js",
+        "line": 101,
+        "status": "timedOut",
+        "duration": 60007,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+        "stack": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+        "attachments": [
+          {
+            "name": "error-context",
+            "path": "D:\\ReelRecruite-testing\\test-results\\UI-candidate-jobApply-Apply-for-latest-job-users-from-JSON-\\error-context.md",
+            "contentType": "text/markdown"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1767356787028,
+    "startedAt": "2026-01-02T12:26:26.848Z",
+    "endedAt": "2026-01-02T12:26:27.028Z",
+    "duration": 180,
+    "summary": {
+      "total": 0,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": []
+  },
+  {
+    "id": 1767356699692,
+    "startedAt": "2026-01-02T12:24:05.859Z",
+    "endedAt": "2026-01-02T12:24:59.692Z",
+    "duration": 53833,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Apply for latest job (users from JSON)",
+        "description": "",
+        "file": "UI/candidate/jobApply.spec.js",
+        "line": 101,
+        "status": "passed",
+        "duration": 50413,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1767356483902,
+    "startedAt": "2026-01-02T12:21:14.321Z",
+    "endedAt": "2026-01-02T12:21:23.902Z",
+    "duration": 9581,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Apply Experience Level filter",
+        "description": "",
+        "file": "UI/candidate/experienceLevelFilter.spec.js",
+        "line": 20,
+        "status": "passed",
+        "duration": 7467,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1767356442747,
+    "startedAt": "2026-01-02T12:20:31.111Z",
+    "endedAt": "2026-01-02T12:20:42.746Z",
+    "duration": 11635,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Apply all job filters together",
+        "description": "",
+        "file": "UI/candidate/FIlter.spec.js",
+        "line": 21,
+        "status": "passed",
+        "duration": 8102,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1767356376404,
+    "startedAt": "2026-01-02T12:19:25.613Z",
+    "endedAt": "2026-01-02T12:19:36.403Z",
+    "duration": 10790,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Apply Region filter",
+        "description": "",
+        "file": "UI/candidate/regionFilter.spec.js",
+        "line": 19,
+        "status": "passed",
+        "duration": 8724,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1767356339268,
+    "startedAt": "2026-01-02T12:18:45.059Z",
+    "endedAt": "2026-01-02T12:18:59.268Z",
+    "duration": 14209,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Apply Work Type filter",
+        "description": "",
+        "file": "UI/candidate/workTypeFilter.spec.js",
+        "line": 21,
+        "status": "passed",
+        "duration": 11769,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1767355183839,
+    "startedAt": "2026-01-02T11:59:26.074Z",
+    "endedAt": "2026-01-02T11:59:43.839Z",
+    "duration": 17765,
+    "summary": {
+      "total": 1,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 1
+    },
+    "tests": [
+      {
+        "title": "Apply for latest job (users from JSON)",
+        "description": "",
+        "file": "UI/candidate/jobApply.spec.js",
+        "line": 100,
+        "status": "interrupted",
+        "duration": 14993,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1767355157139,
+    "startedAt": "2026-01-02T11:58:58.686Z",
+    "endedAt": "2026-01-02T11:59:17.139Z",
+    "duration": 18453,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Recruiter login and create a new job",
+        "description": "",
+        "file": "UI/Recruiter/CreateJob.spec.js",
+        "line": 20,
+        "status": "passed",
+        "duration": 14900,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1767355053668,
+    "startedAt": "2026-01-02T11:57:16.099Z",
+    "endedAt": "2026-01-02T11:57:33.668Z",
+    "duration": 17569,
+    "summary": {
+      "total": 1,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 1
+    },
+    "tests": [
+      {
+        "title": "Apply for latest job (users from JSON)",
+        "description": "",
+        "file": "UI/candidate/jobApply.spec.js",
+        "line": 100,
+        "status": "interrupted",
+        "duration": 14811,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
     "id": 1767354860619,
     "startedAt": "2026-01-02T11:54:06.689Z",
     "endedAt": "2026-01-02T11:54:20.619Z",

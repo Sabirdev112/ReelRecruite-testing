@@ -27,6 +27,7 @@ async postJob () {
     await this.postNewJobButton.waitFor({ state: 'visible'});
     await this.postNewJobButton.click();
   }
+  
 async fillBasicInfo() {
     await this.titleInput.fill('Software Quality Assurance Engineer');
     await this.summaryInput.fill('We are looking for a detail-oriented Software Quality Assurance Engineer to join our dynamic team. The ideal candidate will have experience in manual and automated testing, a keen eye for detail, and a passion for ensuring software quality.');
