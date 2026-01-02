@@ -46,6 +46,7 @@ async function userFlow(browser, user, jobUrl) {
   await loginPage.clickSignIn();
   await page.waitForURL('**/jobs');
   console.log('Candidate logged in successfully.');
+  await applyJobPage.handleMaybeLaterIfPresent();
 
   // APPLY JOB
   await page.goto(jobUrl);
@@ -108,5 +109,5 @@ test('Apply for latest job (users from JSON)', async () => {
     }
   }
 
-  await browser.close();
+  
 });

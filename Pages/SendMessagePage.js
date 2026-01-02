@@ -9,7 +9,21 @@ export class SendMessagePage {
     
     // Updated send button selector
     this.sendButton = page.locator('xpath=//*[@id="root"]/div[2]/main/div/div/div[3]/div/div[3]/div/form/button[2]/svg');
+    this.maybeLaterButton = page.getByRole('button', { name: 'Maybe Later' });
   }
+
+  async handleMaybeLaterIfPresent() {
+        try {
+            await this.maybeLaterButton.waitFor({
+                state: 'visible',
+                timeout: 2500
+            });
+            await this.maybeLaterButton.click();
+            await this.maybeLaterButton.waitFor({ state: 'hidden' });
+        } catch {
+            // Modal did not appear — safe to continue
+        }
+    } 
 
   async openMessages() {
     await this.messagesButton.waitFor({ state: 'visible'});
