@@ -1,5 +1,61 @@
 [
   {
+    "id": 1767362692445,
+    "startedAt": "2026-01-02T14:04:44.000Z",
+    "endedAt": "2026-01-02T14:04:52.445Z",
+    "duration": 8445,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Recruiter forget password flow",
+        "description": "",
+        "file": "UI/Recruiter/ForgetPassword.spec.js",
+        "line": 28,
+        "status": "passed",
+        "duration": 6205,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1767362526375,
+    "startedAt": "2026-01-02T14:01:57.076Z",
+    "endedAt": "2026-01-02T14:02:06.375Z",
+    "duration": 9299,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Recruiter forget password flow",
+        "description": "",
+        "file": "UI/Recruiter/ForgetPassword.spec.js",
+        "line": 28,
+        "status": "passed",
+        "duration": 6941,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
     "id": 1767362242358,
     "startedAt": "2026-01-02T13:57:14.317Z",
     "endedAt": "2026-01-02T13:57:22.358Z",
