@@ -679,8 +679,8 @@ async function rerunTest(event, file, title, button) {
     const result = await response.json();
 
     if (result.success) {
-      // Show stop UI immediately when a rerun is accepted
-      setRunUI(true);
+      // For single-test reruns, do NOT enable the global Run/Stop UI or
+      // set persistent locks. Keep feedback local to the rerun button.
 
       // Show appropriate message based on test result
       if (result.passed) {
