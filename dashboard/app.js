@@ -125,11 +125,15 @@ function activateStopButton() {
   if (runAllBtn) {
     runAllBtn.disabled = true;
     runAllBtn.textContent = 'Running All Tests...';
+    runAllBtn.classList.remove('enabled');
+    runAllBtn.classList.add('disabled');
   }
   if (stopBtn) {
     stopBtn.style.display = 'inline-block';
     stopBtn.disabled = false;
     stopBtn.textContent = 'Stop Run';
+    stopBtn.classList.remove('disabled');
+    stopBtn.classList.add('enabled');
   }
 }
 
@@ -141,11 +145,15 @@ function resetRunButtons() {
   if (runAllBtn) {
     runAllBtn.disabled = false;
     runAllBtn.textContent = 'Run All Tests';
+    runAllBtn.classList.remove('disabled');
+    runAllBtn.classList.add('enabled');
   }
   if (stopBtn) {
     stopBtn.style.display = 'inline-block';
     stopBtn.disabled = true;
     stopBtn.textContent = 'Stop Run';
+    stopBtn.classList.remove('enabled');
+    stopBtn.classList.add('disabled');
   }
 }
 
@@ -197,6 +205,9 @@ document.getElementById('stopRun')?.addEventListener('click', async () => {
   const stopBtn = document.getElementById('stopRun');
   stopBtn.disabled = true;
   stopBtn.textContent = 'Stopping...';
+  // visually show disabled state while stopping
+  stopBtn.classList.remove('enabled');
+  stopBtn.classList.add('disabled');
 
   try {
     const response = await fetch('/api/stop-run', { method: 'POST' });
@@ -218,7 +229,8 @@ document.getElementById('stopRun')?.addEventListener('click', async () => {
 window.addEventListener('load', () => {
   // optimistic restore (instant)
   if (localStorage.getItem('fullRunInProgress') === 'true') {
-    setRunUI(true);
+    // show running UI visually but do NOT set the persistent lock here
+    activateStopButton();
   }
 
   // backend confirmation: load dashboard or report after optimistic UI restore
