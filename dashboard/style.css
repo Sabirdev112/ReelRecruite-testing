@@ -400,6 +400,54 @@ body {
   margin-left: var(--space-xs);
 }
 
+/* Run/Stop button styles */
+.run-controls {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.btn-run-all,
+.btn-stop-run {
+  padding: 0.5rem 0.9rem;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--border-light);
+  color: var(--text-muted);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  min-width: 140px;
+}
+
+.btn-run-all.enabled {
+  background: var(--success);
+  border-color: var(--success-dark);
+  color: var(--text-white);
+  box-shadow: 0 4px 10px rgba(5, 150, 105, 0.12);
+}
+
+.btn-stop-run.enabled {
+  background: var(--danger);
+  border-color: var(--danger-dark);
+  color: var(--text-white);
+  box-shadow: 0 4px 10px rgba(220, 38, 38, 0.12);
+}
+
+.btn-run-all.disabled,
+.btn-stop-run.disabled {
+  background: var(--border-light);
+  border-color: var(--border);
+  color: var(--text-muted);
+  cursor: default;
+  box-shadow: none;
+}
+
+.btn-run-all:disabled,
+.btn-stop-run:disabled {
+  pointer-events: none;
+}
+
 /* Dark theme adjustments for legend cards */
 body.dark .legend-item-card.passed {
   background: rgba(26, 255, 1, 0.15);
