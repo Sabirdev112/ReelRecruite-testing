@@ -7,7 +7,22 @@ export class ShortlistCandidatePage {
     this.shortListedButton = page.getByRole('button', { name: '⭐Shortlisted' });
     this.rejectButton = page.getByRole('button', { name: '❌Rejected' });
     this.saveButton = page.locator('xpath=//*[@id="root"]/div[2]/main/div/div[3]/div/form/div[4]/button[2]');
+    this.maybeLaterButton = page.getByRole('button', { name: 'Maybe Later' });
   }
+
+  async handleMaybeLaterIfPresent() {
+        try {
+            await this.maybeLaterButton.waitFor({
+                state: 'visible',
+                timeout: 2500
+            });
+            await this.maybeLaterButton.click();
+            await this.maybeLaterButton.waitFor({ state: 'hidden' });
+        } catch {
+            // Modal did not appear — safe to continue
+        }
+    } 
+    
   async clickViewApplications() {
     await this.viewApplicationButton.waitFor({ state: 'visible' });
     await this.viewApplicationButton.click();

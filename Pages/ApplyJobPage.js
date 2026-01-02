@@ -9,8 +9,21 @@ export class ApplyJobPage {
     this.submitButton = page.getByRole('button', { name: 'Submit Application' });
     this.firstQuestion = page.getByRole('textbox')
     this.secondQuestion = page.getByLabel('Yes');
+    this.maybeLaterButton = page.getByRole('button', { name: 'Maybe Later' });
     
   }
+  async handleMaybeLaterIfPresent() {
+        try {
+            await this.maybeLaterButton.waitFor({
+                state: 'visible',
+                timeout: 2500
+            });
+            await this.maybeLaterButton.click();
+            await this.maybeLaterButton.waitFor({ state: 'hidden' });
+        } catch {
+            // Modal did not appear — safe to continue
+        }
+    } 
 
   async applyNow() {
     await this.applyNowButton.waitFor({ state: 'visible' });
@@ -26,6 +39,7 @@ export class ApplyJobPage {
     await this.stopRecordingButton.click();
     await this.confirmVideoButton.waitFor({ state: 'visible' });
     await this.confirmVideoButton.click();
+    await this.page.waitForLoadState('networkidle');
   }
 
   async answerOne (){

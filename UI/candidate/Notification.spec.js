@@ -28,6 +28,7 @@ test('Notification flow – handle empty & existing notifications', async ({
   await login.clickSignIn();
   await page.waitForURL('**/jobs');
   console.log('Candidate logged in successfully.');
+  await notification.handleMaybeLaterIfPresent();
 
   await notification.handleNotificationsFlow();
 

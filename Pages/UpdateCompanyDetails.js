@@ -19,7 +19,21 @@ export class CompanyDetailsPage{
        this.contactEmailInput = page.getByRole('textbox', { name: 'Contact Email' });
        this.contactNumberInput = page.getByRole('textbox', { name: 'Contact Phone' });
        this.saveButton = page.getByRole('button', { name: 'Save Changes' });
+       this.maybeLaterButton = page.getByRole('button', { name: 'Maybe Later' });
      }
+
+     async handleMaybeLaterIfPresent() {
+        try {
+            await this.maybeLaterButton.waitFor({
+                state: 'visible',
+                timeout: 2500
+            });
+            await this.maybeLaterButton.click();
+            await this.maybeLaterButton.waitFor({ state: 'hidden' });
+        } catch {
+            // Modal did not appear — safe to continue
+        }
+    } 
 
      async openProfileMenu() {
         await this.profileMenu.waitFor({ state: 'visible' });
