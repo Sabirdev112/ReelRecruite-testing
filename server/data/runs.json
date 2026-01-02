@@ -1,5 +1,47 @@
 [
   {
+    "id": 1767357133641,
+    "startedAt": "2026-01-02T12:31:59.711Z",
+    "endedAt": "2026-01-02T12:32:13.641Z",
+    "duration": 13930,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Apply Experience Level filter",
+        "description": "",
+        "file": "UI/candidate/experienceLevelFilter.spec.js",
+        "line": 20,
+        "status": "passed",
+        "duration": 11532,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1767357075512,
+    "startedAt": "2026-01-02T12:31:15.366Z",
+    "endedAt": "2026-01-02T12:31:15.512Z",
+    "duration": 146,
+    "summary": {
+      "total": 0,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": []
+  },
+  {
     "id": 1767356955212,
     "startedAt": "2026-01-02T12:28:11.974Z",
     "endedAt": "2026-01-02T12:29:15.212Z",
