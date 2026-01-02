@@ -325,7 +325,7 @@ function renderDonut(overall) {
 
   const data = [];
   const colors = [];
-  if (overall.passed > 0) { data.push(overall.passed); colors.push('#1aff01ff'); }
+  if (overall.passed > 0) { data.push(overall.passed); colors.push('#22c55e'); }
   if (overall.failed > 0) { data.push(overall.failed); colors.push('#ff5252'); }
   if (overall.skipped > 0) { data.push(overall.skipped); colors.push('#e8f900ff'); }
   if (overall.interrupted > 0) { data.push(overall.interrupted); colors.push('#94a3b8'); }
@@ -352,7 +352,7 @@ function renderRunDonut(summary) {
   if (donutChart) donutChart.destroy();
 
   const data = [summary.passed || 0];
-  const colors = ['#1aff01ff'];
+  const colors = ['#22c55e'];
   if (summary.failed > 0) { data.push(summary.failed); colors.push('#ff5252'); }
   if (summary.skipped > 0) { data.push(summary.skipped); colors.push('#ffd43b'); }
   if (summary.interrupted > 0) { data.push(summary.interrupted); colors.push('#cacacaff'); }
