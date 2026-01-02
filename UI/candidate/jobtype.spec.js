@@ -26,6 +26,7 @@ test('Apply Job Type filter', async ({ page }) => {
   await login.clickSignIn();
   await page.waitForURL('**/jobs');
   console.log('Candidate logged in successfully.');
+  await filter.handleMaybeLaterIfPresent();
 
 
   await filter.applyJobTypeFilter();

@@ -28,9 +28,11 @@ test ('Candidate views applied jobs', async ({ page }) => {
       await loginPage.goto();
       await loginPage.login(candidate.email, candidate.password);
       await loginPage.clickSignIn();
-    
-      
       await page.waitForURL('**/jobs');
+      console.log('Candidate logged in successfully.');
+      await viewAppliedJobs.handleMaybeLaterIfPresent();
+    
+      // VIEW APPLIED JOBS
       await viewAppliedJobs.clickViewAppliedJobs();
       console.log('Navigated to Applied Jobs page successfully');
     

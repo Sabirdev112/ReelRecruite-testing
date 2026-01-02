@@ -28,6 +28,8 @@ test('Search job by name and verify results', async ({ page }) => {
   await page.waitForURL('**/jobs');
   console.log('Candidate logged in successfully.');
 
+  await searchPage.handleMaybeLaterIfPresent();
+
   // Keywords to test (one by one)
   const keywords = ['software','react'];
 

@@ -13,11 +13,22 @@ export class SearchJob {
 
     // Individual job titles
     this.jobTitles = this.resultsContainer.locator('h3');
+    this.maybeLaterButton = page.getByRole('button', { name: 'Maybe Later' });
   }
 
-  // ==========================
-  // Actions
-  // ==========================
+  async handleMaybeLaterIfPresent() {
+        try {
+            await this.maybeLaterButton.waitFor({
+                state: 'visible',
+                timeout: 2500
+            });
+            await this.maybeLaterButton.click();
+            await this.maybeLaterButton.waitFor({ state: 'hidden' });
+        } catch {
+            // Modal did not appear — safe to continue
+        }
+    } 
+  
   async searchJob(keyword) {
     if (typeof keyword !== 'string') {
       throw new Error(`searchJob expects a string, received: ${typeof keyword}`);

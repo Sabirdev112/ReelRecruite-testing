@@ -7,7 +7,21 @@ export class SeeResumePage {
     this.viewProfileButton = page.getByRole('button', { name: 'View Profile' });
     this.ResumeSection = page.getByText('Resume', { exact: true });
     this.clickViewResumeButton = page.locator("body > div:nth-child(1) > div:nth-child(2) > main:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(3) > div:nth-child(3) > div:nth-child(2) > div:nth-child(1) > svg:nth-child(3)");
+    this.maybeLaterButton = page.getByRole('button', { name: 'Maybe Later' }); 
   }
+  async handleMaybeLaterIfPresent() {
+        try {
+            await this.maybeLaterButton.waitFor({
+                state: 'visible',
+                timeout: 2500
+            });
+            await this.maybeLaterButton.click();
+            await this.maybeLaterButton.waitFor({ state: 'hidden' });
+        } catch {
+            // Modal did not appear — safe to continue
+        }
+    } 
+    
   async navigateToApplications() {
     await this.viewApplicationButton.waitFor({ state: 'visible' });
     await this.viewApplicationButton.click();
