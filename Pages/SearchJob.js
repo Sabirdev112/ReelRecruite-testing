@@ -1,4 +1,4 @@
-// Pages/SearchJob.js
+import {expect} from '@playwright/test';
 export class SearchJob {
   constructor(page) {
     this.page = page;

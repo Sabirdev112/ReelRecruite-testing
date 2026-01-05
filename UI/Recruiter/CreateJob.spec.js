@@ -1,69 +1,47 @@
 import { test, expect } from '@playwright/test';
 import { Login } from '../../Pages/Login.js';
 import { CreateJobPage } from '../../Pages/CreateJobPage.js';
-import { runQuery } from '../../utils/db/dbClient.js';
-import fs from 'fs';
-import path from 'path';
-import { fileURLToPath } from 'url';
+import { verifyJobInDb } from '../../support/jobDb.helper.js';
+import { storeJobId } from '../../support/job.helper.js';
+import { loadCredentials } from '../../support/recruiterCredentials.js';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-// Load recruiter credentials
-const recruiter = JSON.parse(
-  fs.readFileSync(
-    path.join(__dirname, '../../fixtures/Recruiter/Credentials.json'),
-    'utf-8'
-  )
-)[0];
+const recruiter = loadCredentials()[0];
 
 test('Recruiter login and create a new job', async ({ page }) => {
   const loginPage = new Login(page);
   const createJob = new CreateJobPage(page);
 
-  // Login
+  // -------- Login --------
   await loginPage.goto();
   await loginPage.login(recruiter.email, recruiter.password);
   await loginPage.clickSignIn();
   await page.waitForURL('**/my-jobs');
   console.log('Recruiter logged in successfully');
 
-  // Job creation flow
+  // -------- Job creation flow --------
   await createJob.openJobForm();
+  console.log('Job form opened successfully');
   await createJob.fillJobDetails();
+  console.log('Job details filled successfully');
   await createJob.fillJobTypeAndCompensation();
+  console.log('Job type and compensation filled successfully');
   await createJob.fillJobDescription();
+  console.log('Job description filled successfully');
   await createJob.addSkills();
+  console.log('Skills added successfully');
   await createJob.fillRequirements();
+  console.log('Requirements filled successfully');
   await createJob.addQuestions();
+  console.log('Questions added successfully');
   await createJob.previewJob();
 
-  // Submit job and capture jobId
+  // -------- Submit job and store jobId --------
   const jobId = await createJob.submitJob();
   expect(jobId).toBeTruthy();
-
   console.log(`Job successfully created with ID: ${jobId}`);
+  storeJobId(jobId);
 
-  /* =========================
-     DB VERIFICATION (READ ONLY)
-     ========================= */
-
-  const jobs = await runQuery(
-    `
-    SELECT j.id, j.title, j.recruiter_id, u.email
-    FROM jobs j
-    JOIN users u ON u.id = j.recruiter_id
-    WHERE j.id = $1
-    `,
-    [jobId]
-  );
-
-  expect(jobs.length).toBe(1);
-  expect(jobs[0].id).toBe(jobId);
-  expect(jobs[0].email).toBe(recruiter.email);
-
-  console.log('DB verification passed: Job exists and recruiter is correct');
-
-  // Navigate to applications
+  
   await createJob.seeAllApplications();
+  await verifyJobInDb(jobId, recruiter.email);
 });

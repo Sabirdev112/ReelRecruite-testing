@@ -1,13 +1,11 @@
 import fs from 'fs';
 import path from 'path';
+import { loadCredentials } from '../../support/recruiterCredentials.js';
 import { test } from '@playwright/test';
 import { SendMessagePage } from '../../Pages/SendMessagePage.js';
 import { Login } from '../../Pages/Login.js';
 
-const CREDENTIALS_FILE = path.join(
-  process.cwd(),
-  'fixtures/Recruiter/Credentials.json'
-);
+const recruiter = loadCredentials()[0];
 
 const RANDOM_MESSAGES_FILE = path.join(
   process.cwd(),
