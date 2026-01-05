@@ -1,3 +1,4 @@
+import {expect} from '@playwright/test';
 export class ForgetPassword {
   constructor(page) {
     this.page = page;

@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-
+import {expect} from '@playwright/test';
 export class CreateJobPage {
   constructor(page) {
     this.page = page;

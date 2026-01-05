@@ -1,20 +1,9 @@
 import { test } from '@playwright/test';
-import fs from 'fs';
-import path from 'path';
-import { fileURLToPath } from 'url';
+import { loadCredentials } from '../../support/candidateCredentials.js';
 import { Login } from '../../Pages/Login.js';
 import { FilterPage } from '../../Pages/Filter.js';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-// Load recruiter credentials
-const candidate = JSON.parse(
-  fs.readFileSync(
-    path.join(__dirname, '../../fixtures/Candidate/Credentials.json'),
-    'utf-8'
-  )
-)[0];
+const candidate = loadCredentials()[0];
 
 
 test('Apply Job Type filter', async ({ page }) => {

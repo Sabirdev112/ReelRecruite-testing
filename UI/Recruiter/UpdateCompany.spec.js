@@ -1,24 +1,10 @@
 import { test } from '@playwright/test';
-import fs from 'fs';
-import path from 'path';
-import { fileURLToPath } from 'url';
-
+import { loadCredentials } from '../../support/recruiterCredentials.js';
 import { Login } from '../../Pages/Login.js';
 import { CompanyDetailsPage } from '../../Pages/UpdateCompanyDetails.js';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const recruiter = loadCredentials()[0];
 
-// Recruiter credentials
-const recruiter = JSON.parse(
-  fs.readFileSync(
-    path.join(__dirname, '../../fixtures/Recruiter/Credentials.json'),
-    'utf-8'
-  )
-)[0];
-
-// Logo path
-const logoPath = path.join(__dirname, '../../fixtures/logo.jpg');
 
 test('Recruiter updates company details and logo', async ({ page }) => {
   // -------- Login --------
@@ -40,7 +26,7 @@ test('Recruiter updates company details and logo', async ({ page }) => {
   await companyPage.clickEditDetails();
   console.log('Editing company details.');
 
-  await companyPage.updateCompanyLogo(logoPath);
+  await companyPage.updateCompanyLogo();
   console.log('Company logo updated.');
   await companyPage.updateCompanyName('Reel Recruit AI');
   console.log('Company name updated.');

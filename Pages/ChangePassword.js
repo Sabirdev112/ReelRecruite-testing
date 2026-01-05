@@ -1,5 +1,5 @@
 import { promises as fs } from 'fs';
-import path from 'path';
+import {expect} from '@playwright/test';
 
 export class ChangePassword {
   constructor(page) {

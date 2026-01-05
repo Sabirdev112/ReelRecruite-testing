@@ -1,79 +1,41 @@
-import { test, expect } from '@playwright/test';
-import fs from 'fs';
-import path from 'path';
-import { fileURLToPath } from 'url';
-import bcrypt from 'bcrypt';
+import { test } from '@playwright/test';
 import { Login } from '../../Pages/Login.js';
 import { ForgetPassword } from '../../Pages/ForgetPassword.js';
-import { runQuery } from '../../utils/db/dbClient.js';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-const recruiter = JSON.parse(
-  fs.readFileSync(
-    path.join(__dirname, '../../fixtures/Recruiter/Credentials.json'),
-    'utf-8'
-  )
-)[0];
-
-const forgetPasswordPath = path.join(
-  __dirname,
-  '../../fixtures/Recruiter/Credentials.json'
-);
-
-const recruiters = JSON.parse(fs.readFileSync(forgetPasswordPath, 'utf-8'));
-const forgetPasswordUser = recruiters[0];
+import { loadCredentials } from '../../support/recruiterCredentials.js';
+import { changeRecruiterPassword, verifyPasswordUpdatedInDb } from '../../support/password.helper.js';
 
 test('Recruiter forget password flow', async ({ page }) => {
-  const otp = '123456';
-  const oldPassword = forgetPasswordUser.password;
-  const newPassword = `${oldPassword}`; // or any new value
+  const recruiters = loadCredentials();
+  const recruiter = recruiters[0];
 
+  const otp = '123456';
+  const oldPassword = recruiter.password;
+  const newPassword = `${oldPassword}`; 
+
+  // -------- Forget Password Flow --------
   const loginPage = new Login(page);
   await loginPage.goto();
 
   const forgetPasswordPage = new ForgetPassword(page);
   await forgetPasswordPage.clickForgetPassword();
+  console.log('Forget password page opened successfully');
   await forgetPasswordPage.enterEmail(recruiter.email);
+  console.log('Email entered successfully');
   await forgetPasswordPage.clickGetCode();
   await forgetPasswordPage.fillOTP(otp);
+  console.log('OTP entered successfully');
   await forgetPasswordPage.clickContinue();
+  console.log('OTP verification successful');
   await forgetPasswordPage.enterNewPassword(newPassword, newPassword);
+  console.log('New password entered successfully');
   await forgetPasswordPage.clickSavePassword();
-  console.log(`Password changed for ${recruiter.email}`);
 
-  // ✅ Verify password change in DB
-  const usersInDb = await runQuery(
-    `SELECT password FROM users WHERE email = $1`,
-    [recruiter.email]
-  );
+  console.log(`Password changed for ${recruiter.email} on UI`);
 
-  expect(usersInDb.length).toBe(1);
+  // -------- DB Verification --------
+  await verifyPasswordUpdatedInDb(recruiter.email, oldPassword, newPassword);
 
-  const hashedPassword = usersInDb[0].password;
-
-  // Old password should NOT match the new hash
-  const isOldPasswordSame = await bcrypt.compare(oldPassword, hashedPassword);
-  expect(isOldPasswordSame).toBe(false);
-
-  // New password should match the hash
-  const isNewPasswordCorrect = await bcrypt.compare(newPassword, hashedPassword);
-  expect(isNewPasswordCorrect).toBe(false);
-
-  console.log('DB verification passed: Password updated successfully');
-
-  // Overwrite password in Credentials.json
-  const updatedRecruiters = recruiters.map(r => ({
-    ...r,
-    password: newPassword
-  }));
-
-  fs.writeFileSync(
-    forgetPasswordPath,
-    JSON.stringify(updatedRecruiters, null, 2),
-    'utf-8'
-  );
-
-  console.log(`Password updated in Credentials.json`, updatedRecruiters);
+  // -------- Update credentials file --------
+  await changeRecruiterPassword(recruiter.email, newPassword);
+  console.log(`Password updated in Credentials.json for ${recruiter.email}`);
 });
