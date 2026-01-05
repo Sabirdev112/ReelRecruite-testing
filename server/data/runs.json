@@ -1,5 +1,371 @@
 [
   {
+    "id": 1767619395350,
+    "startedAt": "2026-01-05T13:23:06.118Z",
+    "endedAt": "2026-01-05T13:23:15.350Z",
+    "duration": 9232,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Recruiter can view reels and scroll",
+        "description": "",
+        "file": "UI/Recruiter/viewreels.spec.js",
+        "line": 30,
+        "status": "passed",
+        "duration": 5811,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1767619195231,
+    "startedAt": "2026-01-05T13:18:52.071Z",
+    "endedAt": "2026-01-05T13:19:55.231Z",
+    "duration": 63160,
+    "summary": {
+      "total": 1,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 1,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Recruiter can view reels and scroll",
+        "description": "",
+        "file": "UI/Recruiter/viewreels.spec.js",
+        "line": 30,
+        "status": "timedOut",
+        "duration": 60061,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+        "stack": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+        "attachments": [
+          {
+            "name": "error-context",
+            "path": "C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\test-results\\UI-Recruiter-viewreels-Recruiter-can-view-reels-and-scroll\\error-context.md",
+            "contentType": "text/markdown"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1767619122651,
+    "startedAt": "2026-01-05T13:17:00.155Z",
+    "endedAt": "2026-01-05T13:18:42.651Z",
+    "duration": 102496,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Apply for latest job (users from JSON)",
+        "description": "",
+        "file": "UI/candidate/jobApply.spec.js",
+        "line": 107,
+        "status": "passed",
+        "duration": 99103,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1767619007432,
+    "startedAt": "2026-01-05T13:16:19.706Z",
+    "endedAt": "2026-01-05T13:16:47.432Z",
+    "duration": 27726,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Recruiter login and create a new job",
+        "description": "",
+        "file": "UI/Recruiter/CreateJob.spec.js",
+        "line": 20,
+        "status": "passed",
+        "duration": 25297,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1767618903978,
+    "startedAt": "2026-01-05T13:14:01.039Z",
+    "endedAt": "2026-01-05T13:15:03.978Z",
+    "duration": 62939,
+    "summary": {
+      "total": 1,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 1,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Apply for latest job (users from JSON)",
+        "description": "",
+        "file": "UI/candidate/jobApply.spec.js",
+        "line": 107,
+        "status": "timedOut",
+        "duration": 60007,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+        "stack": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+        "attachments": [
+          {
+            "name": "error-context",
+            "path": "C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\test-results\\UI-candidate-jobApply-Apply-for-latest-job-users-from-JSON-\\error-context.md",
+            "contentType": "text/markdown"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1767618817937,
+    "startedAt": "2026-01-05T13:13:19.141Z",
+    "endedAt": "2026-01-05T13:13:37.936Z",
+    "duration": 18795,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Recruiter login and create a new job",
+        "description": "",
+        "file": "UI/Recruiter/CreateJob.spec.js",
+        "line": 20,
+        "status": "passed",
+        "duration": 16415,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1767618656261,
+    "startedAt": "2026-01-05T13:09:53.729Z",
+    "endedAt": "2026-01-05T13:10:56.261Z",
+    "duration": 62532,
+    "summary": {
+      "total": 1,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 1,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Apply for latest job (users from JSON)",
+        "description": "",
+        "file": "UI/candidate/jobApply.spec.js",
+        "line": 107,
+        "status": "timedOut",
+        "duration": 60009,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+        "stack": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+        "attachments": [
+          {
+            "name": "error-context",
+            "path": "C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\test-results\\UI-candidate-jobApply-Apply-for-latest-job-users-from-JSON-\\error-context.md",
+            "contentType": "text/markdown"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1767618580866,
+    "startedAt": "2026-01-05T13:09:18.307Z",
+    "endedAt": "2026-01-05T13:09:40.866Z",
+    "duration": 22559,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Recruiter login and create a new job",
+        "description": "",
+        "file": "UI/Recruiter/CreateJob.spec.js",
+        "line": 20,
+        "status": "passed",
+        "duration": 19803,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1767618471005,
+    "startedAt": "2026-01-05T13:06:47.301Z",
+    "endedAt": "2026-01-05T13:07:51.003Z",
+    "duration": 63702,
+    "summary": {
+      "total": 1,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 1,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Apply for latest job (users from JSON)",
+        "description": "",
+        "file": "UI/candidate/jobApply.spec.js",
+        "line": 107,
+        "status": "timedOut",
+        "duration": 60010,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+        "stack": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+        "attachments": [
+          {
+            "name": "error-context",
+            "path": "C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\test-results\\UI-candidate-jobApply-Apply-for-latest-job-users-from-JSON-\\error-context.md",
+            "contentType": "text/markdown"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1767617671000,
+    "startedAt": "2026-01-05T12:53:27.525Z",
+    "endedAt": "2026-01-05T12:54:31.000Z",
+    "duration": 63475,
+    "summary": {
+      "total": 1,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 1,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Recruiter can view reels and scroll",
+        "description": "",
+        "file": "UI/Recruiter/viewreels.spec.js",
+        "line": 30,
+        "status": "timedOut",
+        "duration": 60069,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+        "stack": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+        "attachments": [
+          {
+            "name": "error-context",
+            "path": "C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\test-results\\UI-Recruiter-viewreels-Recruiter-can-view-reels-and-scroll\\error-context.md",
+            "contentType": "text/markdown"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1767367433342,
+    "startedAt": "2026-01-02T15:23:44.782Z",
+    "endedAt": "2026-01-02T15:23:53.341Z",
+    "duration": 8559,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Recruiter logs in successfully",
+        "description": "",
+        "file": "UI/Login.spec.js",
+        "line": 4,
+        "status": "passed",
+        "duration": 5857,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1767367348451,
+    "startedAt": "2026-01-02T15:22:15.482Z",
+    "endedAt": "2026-01-02T15:22:28.450Z",
+    "duration": 12968,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Recruiter logs in successfully",
+        "description": "",
+        "file": "UI/Login.spec.js",
+        "line": 4,
+        "status": "passed",
+        "duration": 10196,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
     "id": 1767362692445,
     "startedAt": "2026-01-02T14:04:44.000Z",
     "endedAt": "2026-01-02T14:04:52.445Z",
