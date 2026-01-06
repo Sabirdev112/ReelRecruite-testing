@@ -35,7 +35,7 @@ export async function getApplicationIdForCandidate(email, jobId) {
   );
 
   expect(answers.length).toBeGreaterThan(0);
-
+  console.log(`Application ID: ${applicationId}`);
   return applicationId;
 }
 
@@ -62,6 +62,6 @@ export async function verifyApplicationWithdrawn(email, applicationId) {
   );
 
   expect(applications.length).toBe(1);
-
+  console.log('DB verification passed: Application is withdrawn');
   return applications[0].id;
 }

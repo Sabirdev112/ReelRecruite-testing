@@ -13,10 +13,6 @@ test('Apply Currency filter', async ({ page }) => {
   await login.goto();
   await login.login(candidate.email, candidate.password);
   await login.clickSignIn();
-  await page.waitForURL('**/jobs');
-  console.log('Candidate logged in successfully.');
-  await filter.handleMaybeLaterIfPresent();
 
   await filter.applyCurrencyFilter();
-  console.log('✅ Currency filter applied');
 });

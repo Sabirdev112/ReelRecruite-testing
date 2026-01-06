@@ -8,17 +8,11 @@ const candidate = loadCredentials()[0];
 test('Search job by name and verify results', async ({ page }) => {
   const loginPage = new Login(page);
   const searchPage = new SearchJob(page);
-
-  // Login
   await loginPage.goto();
   await loginPage.login(candidate.email, candidate.password);
   await loginPage.clickSignIn();
   await page.waitForURL('**/jobs');
-  console.log('Candidate logged in successfully.');
 
-  await searchPage.handleMaybeLaterIfPresent();
-
-  // Keywords to test (one by one)
   const keywords = ['software','react'];
 
   for (const keyword of keywords) {

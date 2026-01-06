@@ -34,6 +34,7 @@ export class ApplyJobPage {
   async recordVideo() {
     await this.recordVideoButton.click();
     await this.startRecordingButton.click();
+    console.log('Video recording started.');
   }
 
   async stopRecording() {
@@ -50,6 +51,7 @@ export class ApplyJobPage {
     await this.confirmVideoButton.waitFor({ state: 'detached' });
     await this.confirmVideoButton.click();
     await this.page.waitForLoadState('networkidle');
+    console.log('Video recording stopped.');
   }
 
   async answerOne() {
@@ -58,16 +60,19 @@ export class ApplyJobPage {
 
     await this.firstQuestion.fill(answer);
     await expect(this.firstQuestion).toHaveValue(answer);
+    console.log('Answer 1 filled.');
 }
 
 
   async answerTwo (){
     await this.secondQuestion.check();
+    console.log('Answer 2 checked.');
   }
   async submitApplication() {
     await this.submitButton.waitFor({ state: 'visible' });
     await this.submitButton.click();
     await this.page.waitForLoadState('networkidle');
+    console.log('Application submitted.');
   }
   
 }

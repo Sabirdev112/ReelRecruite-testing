@@ -29,17 +29,20 @@ export class UpdateCoverVideoResumePage {
   async clickProfile() {
     await this.profileMenu.waitFor({ state: 'visible' });
     await this.profileMenu.click();
+    console.log('Profile button clicked');
   }
 
   async openProfile() {
     await this.profileButton.waitFor({ state: 'visible' });
     await this.profileButton.click();
     await this.page.waitForLoadState('domcontentloaded');
+    console.log('Navigated to Profile page');
   }
 
   async navigateToCoverVideoSection() {
   await this.coverVideoSection.waitFor({state: 'visible'});
   await this.coverVideoSection.scrollIntoViewIfNeeded();
+  console.log('Cover video section opened');
 }
 
   async removeVideoIfExists() {
@@ -51,24 +54,22 @@ export class UpdateCoverVideoResumePage {
       await this.okButton.click();
       await this.removeVideoButton.first().waitFor({ state: 'hidden' });
     }
+    console.log('Video removed successfully');
   }
 
  async uploadVideo(filename = 'sample-video.mp4') {
     await this.handleMaybeLaterIfPresent();
 
-    const videoPath = getVideoPath(filename); // helper used HERE
-
+    const videoPath = getVideoPath(filename);
     await this.uploadVideoInput.waitFor({ state: 'attached' });
-
     await this.uploadVideoInput.setInputFiles(videoPath);
-
-    // Trigger frontend update (React/Vue)
     await this.uploadVideoInput.evaluate(input =>
       input.dispatchEvent(new Event('change', { bubbles: true }))
     );
     await this.handleMaybeLaterIfPresent();
 
     await this.page.waitForLoadState('networkidle');
+    console.log(`Video uploaded successfully: ${videoPath}`); 
   }
 
 

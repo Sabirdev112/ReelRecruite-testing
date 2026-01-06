@@ -35,4 +35,5 @@ export function storeJobId(jobId) {
 
   const data = { jobId };
   fs.writeFileSync(JOB_PATH, JSON.stringify(data, null, 2), 'utf-8');
+  console.log('Job ID stored successfully.', jobId );
 }

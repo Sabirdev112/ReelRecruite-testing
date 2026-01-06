@@ -10,7 +10,20 @@ export class Login {
         this.signInButtonLocator = page.locator('xpath=//*[@id="root"]/div[2]/div[2]/div/div[2]/form/button');
         this.avatar = page.locator("//p[@class='text-xs capitalize text-gray-500']");
         this.signoutButton = page.getByText('Log out', { exact: true });
+        this.maybeLaterButton = page.getByRole('button', { name: 'Maybe Later' });
     }
+    async handleMaybeLaterIfPresent() {
+        try {
+            await this.maybeLaterButton.waitFor({
+                state: 'visible',
+                timeout: 2500
+            });
+            await this.maybeLaterButton.click();
+            await this.maybeLaterButton.waitFor({ state: 'hidden' });
+        } catch {
+            // Modal did not appear — safe to continue
+        }
+    } 
     async goto() {
         await this.page.goto('https://recruitai-web-production.up.railway.app/auth');
     }
@@ -33,10 +46,13 @@ export class Login {
     async clickSignIn() {
         await this.signInButtonLocator.click();
         await this.page.waitForLoadState('networkidle');
+        await this.handleMaybeLaterIfPresent();
+        console.log('Login successful.');
     }
     async logout() {
         await this.avatar.click();
         await this.signoutButton.waitFor({ state: 'visible' });
         await this.signoutButton.click();
+        console.log('Logout successful.');
     }
 };

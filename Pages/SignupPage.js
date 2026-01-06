@@ -9,59 +9,64 @@ export class SignupPage {
     this.otpinput5 = page.getByRole('textbox', { name: 'Digit 5' });
     this.otpinput6 = page.getByRole('textbox', { name: 'Digit 6' });
     this.registerButton = page.getByRole('button', { name: 'Register' });
-
     this.fullNameInput = page.getByRole('textbox', { name: 'Enter full name' });
     this.emailInput = page.getByRole('textbox', { name: 'Enter email' });
     this.phoneInput = page.getByRole('textbox', { name: 'Enter phone number' });
     this.passwordInput = page.getByRole('textbox', { name: 'Create password' });
     this.confirmPasswordInput = page.getByRole('textbox', { name: 'Confirm password' });
-
     this.selectRoleDropdown = page.locator('div.react-select__input-container.css-19bb58m');
     this.selectRoleButton = page.getByRole('option', { name: 'Job Seeker' });
-
     this.signUpButton = page.locator('//*[@id="root"]/div[2]/div[2]/div/div[2]/form/button');
-     this.emailExistsError = page.getByText('An account with this email already exists',{ exact: false });
+    this.emailExistsError = page.getByText('An account with this email already exists',{ exact: false });
   }
 
   async goto() {
     await this.page.goto('https://recruitai-web-production.up.railway.app/auth');
     await this.page.waitForLoadState('domcontentloaded');
+    console.log('Signup page opened');
   }
 
   async register() {
     await this.registerButton.click();
+
   }
 
   async enterFullName(fullName) {
     await this.fullNameInput.waitFor({ state: 'visible' });
     await this.fullNameInput.pressSequentially(fullName);
+    console.log('Full name entered');
   }
   async enterEmail(email) {
     await this.emailInput.waitFor({ state: 'visible' });
     await this.emailInput.pressSequentially(email);
+    console.log('Email entered');
   }
   async enterPhone(phone) {
     await this.phoneInput.waitFor({ state: 'visible' });
     await this.phoneInput.fill(''); 
     await this.phoneInput.pressSequentially(phone);
+    console.log('Phone number entered');
   }
   async enterPassword(password) {
     await this.passwordInput.waitFor({ state: 'visible' });
     await this.passwordInput.pressSequentially(password);
+    console.log('Password entered');
   }
   async enterConfirmPassword(confirmPassword) {
     await this.confirmPasswordInput.waitFor({ state: 'visible' });
     await this.confirmPasswordInput.pressSequentially(confirmPassword);
+    console.log('Confirm password entered');
   }
   async selectRole(role) {
     await this.selectRoleDropdown.click();
     await this.selectRoleButton.click(role);
+    console.log('Role selected');
     
   }
     async createAccount() {
   await this.signUpButton.click();
-  // Wait 3 seconds before next user
   await this.page.waitForLoadState('networkidle');
+  console.log('Account created.');
 }
 async fillOTP(otp) {
     const digits = otp.split('');
@@ -74,5 +79,6 @@ async fillOTP(otp) {
     await this.otpinput4.fill(digits[3]);
     await this.otpinput5.fill(digits[4]);
     await this.otpinput6.fill(digits[5]);
+    console.log('OTP entered');
   }
 }

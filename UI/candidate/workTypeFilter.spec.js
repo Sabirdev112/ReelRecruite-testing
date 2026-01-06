@@ -14,9 +14,7 @@ test('Apply Work Type filter', async ({ page }) => {
   await login.login(candidate.email, candidate.password);
   await login.clickSignIn();
   await page.waitForURL('**/jobs');
-  console.log('Candidate logged in successfully.');
-  await filter.handleMaybeLaterIfPresent();
-
+  
   await filter.applyWorkTypeFilter();
-  console.log('✅ Work Type filter applied successfully');
+  
 });

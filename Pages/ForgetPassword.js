@@ -19,10 +19,12 @@ export class ForgetPassword {
   async clickForgetPassword() {
     await this.forgetPasswordButton.waitFor({ state: 'visible'});
     await this.forgetPasswordButton.click();
+    console.log('clicked on forgot password');
   }
     async enterEmail(email) {
       await this.emailInput.waitFor({ state: 'visible'});
       await this.emailInput.fill(email);
+      console.log('Email entered');
     }
     async clickGetCode() {
       await this.getCodeButton.waitFor({ state: 'visible'});
@@ -39,6 +41,7 @@ export class ForgetPassword {
     await this.otpinput4.fill(digits[3]);
     await this.otpinput5.fill(digits[4]);
     await this.otpinput6.fill(digits[5]);
+    console.log('OTP entered');
   }
     async clickContinue() {
       await this.continueButton.waitFor({ state: 'visible'});
@@ -48,10 +51,12 @@ export class ForgetPassword {
       await this.newPasswordInput.waitFor({ state: 'visible'});
       await this.newPasswordInput.fill(newPassword);
       await this.confirmPasswordInput.fill(confirmPassword);
+      console.log('Password entered');
     }
     async clickSavePassword() {
       await this.resetPasswordButton.waitFor({ state: 'visible'});
       await this.resetPasswordButton.click();
+      console.log('Password saved');
     }
 
 }
