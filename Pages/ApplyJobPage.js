@@ -1,3 +1,4 @@
+import {expect} from '@playwright/test';
 export class ApplyJobPage {
   constructor(page) {
     this.page = page;
@@ -37,14 +38,28 @@ export class ApplyJobPage {
 
   async stopRecording() {
     await this.stopRecordingButton.click();
-    await this.confirmVideoButton.waitFor({ state: 'visible' });
+    await this.confirmVideoButton.waitFor({ state: 'attached' });
+    await this.page.waitForFunction(
+    (selector) => {
+      const btn = document.querySelector(selector);
+      return btn && !btn.disabled;
+    },
+    {},
+    'button:has-text("Use This Video")'
+  );
+    await this.confirmVideoButton.waitFor({ state: 'detached' });
     await this.confirmVideoButton.click();
     await this.page.waitForLoadState('networkidle');
   }
 
-  async answerOne (){
-    await this.firstQuestion.fill('I have 5 years of experience in software testing, specializing in automation and performance testing. I am proficient in tools like Selenium, JIRA, and Postman. I have worked in Agile environments and have a strong understanding of SDLC.');
-  }
+  async answerOne() {
+    const answer =
+        'I have 5 years of experience in software testing, specializing in automation and performance testing. I am proficient in tools like Selenium, JIRA, and Postman. I have worked in Agile environments and have a strong understanding of SDLC.';
+
+    await this.firstQuestion.fill(answer);
+    await expect(this.firstQuestion).toHaveValue(answer);
+}
+
 
   async answerTwo (){
     await this.secondQuestion.check();

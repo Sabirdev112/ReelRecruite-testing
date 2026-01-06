@@ -1,20 +1,9 @@
 import {test} from '@playwright/test';
-import fs from 'fs';
-import path from 'path';
-import {fileURLToPath} from 'url';
 import { Login } from '../../Pages/Login.js';
 import { ArchiveChatPage} from '../../Pages/ArchiveChat.js';
+import { loadCredentials } from '../../support/recruiterCredentials.js';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-// Load recruiter credentials
-const recruiter = JSON.parse(
-  fs.readFileSync(
-    path.join(__dirname, '../../fixtures/Recruiter/Credentials.json'),
-    'utf-8'
-  )
-)[0];
+const recruiter = loadCredentials()[0];
 
 test('Recruiter logs in and archives a chat', async ({ page }) => {
   const loginPage = new Login(page);

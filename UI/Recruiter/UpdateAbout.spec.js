@@ -1,20 +1,10 @@
 import { test, expect } from '@playwright/test';
-import fs from 'fs';
-import path from 'path';
-import { fileURLToPath } from 'url';
+import { loadCredentials } from '../../support/recruiterCredentials.js';
 import { Login } from '../../Pages/Login.js';
 import { UpdateAboutPage } from '../../Pages/UpdateAbout.js';
 
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-const recruiter = JSON.parse(
-  fs.readFileSync(
-    path.join(__dirname, '../../fixtures/Recruiter/Credentials.json'),
-    'utf-8'
-  )
-)[0];
+const recruiter = loadCredentials()[0];
 
 test('recruiter can update about section', async ({ page }) => {
   const loginPage = new Login(page);

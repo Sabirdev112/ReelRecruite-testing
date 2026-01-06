@@ -1,3 +1,4 @@
+import {expect} from '@playwright/test';
 export class viewAppliedJobPage {
         constructor(page) {
             this.page = page;

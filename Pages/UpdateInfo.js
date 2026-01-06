@@ -1,3 +1,5 @@
+import {expect} from '@playwright/test';
+import {getBannerImagePath,getProfileImagePath} from '../support/profileMedia.helper.js';
 export class UpdateInfoPage {
   constructor(page) {
     this.page = page;
@@ -45,16 +47,39 @@ export class UpdateInfoPage {
   }
 
   // ---------- Uploads ----------
-  async uploadCoverImage(bannerPath) {
+  async uploadCoverImage() {
+    await this.handleMaybeLaterIfPresent();
+
+    const bannerPath = getBannerImagePath(); // helper provides path
+
     await this.coverImageInput.waitFor({ state: 'attached' });
     await this.coverImageInput.setInputFiles(bannerPath);
+
+    // Optional: trigger change event to ensure frontend reacts
+    await this.coverImageInput.evaluate(input =>
+      input.dispatchEvent(new Event('change', { bubbles: true }))
+    );
+
+    await this.page.waitForLoadState('networkidle');
   }
 
-  async uploadProfilePicture(profilePath) {
+  // ---------------- Profile Picture ----------------
+  async uploadProfilePicture() {
+    await this.handleMaybeLaterIfPresent();
+
+    const profilePath = getProfileImagePath(); // helper provides path
+
     await this.profilePictureEditButton.waitFor({ state: 'visible' });
     await this.profilePictureEditButton.click(); // open file picker
+
     await this.profilePictureInput.waitFor({ state: 'attached' });
     await this.profilePictureInput.setInputFiles(profilePath);
+
+    await this.profilePictureInput.evaluate(input =>
+      input.dispatchEvent(new Event('change', { bubbles: true }))
+    );
+
+    await this.page.waitForLoadState('networkidle');
   }
 
   // ---------- Form helpers ----------
@@ -77,5 +102,6 @@ export class UpdateInfoPage {
   async clickSaveChanges() {
     await this.saveChangesButton.waitFor({ state: 'visible' });
     await this.saveChangesButton.click();
+    await this.page.waitForTimeout(10000);
   }
 }

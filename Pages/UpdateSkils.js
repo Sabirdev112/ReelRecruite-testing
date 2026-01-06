@@ -1,4 +1,4 @@
-// Pages/UpdateSkils.js
+import {expect} from '@playwright/test';
 
 export class UpdateSkillsPage {
     constructor(page) {

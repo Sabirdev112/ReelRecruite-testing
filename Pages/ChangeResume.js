@@ -1,5 +1,6 @@
-import fs from 'fs';
 
+import { getResumePath } from '../support/resume.helper.js';
+import {expect} from '@playwright/test';
 export class UploadResume {
     constructor(page) { 
         this.page = page;       
@@ -9,7 +10,7 @@ export class UploadResume {
         this.ProfileButton = page.getByText('Profile', { exact: true });
 
         // -------- Resume section --------
-        this.resumeSection = page.getByText('Resume', { exact: true });
+        this.resumeSection = page.getByRole('heading', { name: 'Resume', exact: true });
 
         // -------- Resume actions --------
         this.deleteResumeButton = page.getByRole('button', { name: 'Remove Resume' });
@@ -19,7 +20,7 @@ export class UploadResume {
         this.maybeLaterButton = page.getByRole('button', { name: 'Maybe Later' });
 
         // -------- Upload --------
-        this.uploadInput = page.locator('#resume-upload');;
+        this.uploadInput = page.locator('#resume-upload');
     }
 
     // ---------------- Modal handler ----------------
@@ -40,22 +41,21 @@ export class UploadResume {
     async clickProfileMenu() {
         await this.profileMenu.waitFor({ state: 'visible' });
         await this.profileMenu.click();
+        await this.handleMaybeLaterIfPresent();
     }
 
     async goToProfile() {
         await this.ProfileButton.waitFor({ state: 'visible' });
         await this.ProfileButton.click();
-
-        // Handle modal after profile navigation
         await this.handleMaybeLaterIfPresent();
+        await this.page.waitForLoadState('networkidle');
+
     }
 
     async navigateToResumeSection() {
-        await this.resumeSection.scrollIntoViewIfNeeded();
         await this.resumeSection.waitFor({ state: 'visible' });
-
-        // Handle modal if it appears after scrolling
-        await this.handleMaybeLaterIfPresent();
+        await this.resumeSection.scrollIntoViewIfNeeded();
+    
     }
 
     // ---------------- Resume management ----------------
@@ -84,27 +84,25 @@ export class UploadResume {
         }
     }
 
+
   
 
-async uploadNewResume(resumePath) {
-    // Handle modal if present
+  async uploadNewResume(filename = 'Bold-Poster.pdf') {
     await this.handleMaybeLaterIfPresent();
 
-    // Wait for file input to exist in DOM
+    const resumePath = getResumePath(filename);
+
     await this.uploadInput.waitFor({ state: 'attached' });
-
-    // Verify file exists
-    if (!fs.existsSync(resumePath)) {
-        throw new Error('Resume file not found: ' + resumePath);
-    }
-
-    // Upload the file
     await this.uploadInput.setInputFiles(resumePath);
+    
 
-    // Optional: wait for frontend to process upload
-    await this.page.waitForTimeout(5000);
+    // Trigger frontend update
+    await this.uploadInput.evaluate(input =>
+      input.dispatchEvent(new Event('change', { bubbles: true }))
+    );
+
+    await this.page.waitForTimeout(10000);
+    console.log(`Resume uploaded successfully: ${resumePath}`);
+  }
 }
 
-
-
-}

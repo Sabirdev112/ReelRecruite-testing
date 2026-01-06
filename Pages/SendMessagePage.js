@@ -1,3 +1,4 @@
+import {expect} from '@playwright/test';
 export class SendMessagePage {
   constructor(page) {
     this.page = page;

@@ -1,4 +1,4 @@
-// Pages/Notification.js
+import {expect} from '@playwright/test';
 export class NotificationPage {
   constructor(page) {
     this.page = page;
