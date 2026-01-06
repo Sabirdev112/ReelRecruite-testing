@@ -82,5 +82,11 @@
     "email": "bilawal.qasim124@testmail.dev",
     "phone": "4002000124",
     "password": "Test@1234"
+  },
+  {
+    "fullName": "User One",
+    "email": "user1.test+signup@gmail.com",
+    "phone": "03000000001",
+    "password": "Test@12345"
   }
 ]

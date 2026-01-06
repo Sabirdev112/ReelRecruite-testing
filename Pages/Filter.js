@@ -53,6 +53,7 @@ export class FilterPage {
     await this.filtersButton.waitFor({ state: 'visible' });
     await this.page.waitForTimeout(1000);
     await this.filtersButton.click();
+    console.log('Filters opened');
   }
 
   async selectRandomOption(selectLocator) {
@@ -66,12 +67,14 @@ export class FilterPage {
     const value = await options[randomIndex].getAttribute('value');
 
     await selectLocator.selectOption(value);
+    console.log(`Selected option: ${value}`);
   }
 
   async applyFilters() {
     await this.applyFiltersButton.waitFor({ state: 'visible' });
     await this.applyFiltersButton.click();
     await this.page.waitForLoadState('networkidle');
+    console.log('Filters applied');
   }
 
   // ======================
@@ -82,30 +85,35 @@ export class FilterPage {
     await this.openFilters();
     await this.selectRandomOption(this.jobTypeSelect);
     await this.applyFilters();
+    console.log('Job type filter applied');
   }
 
   async applyWorkTypeFilter() {
     await this.openFilters();
     await this.selectRandomOption(this.workTypeSelect);
     await this.applyFilters();
+    console.log('Work type filter applied');
   }
 
   async applyExperienceLevelFilter() {
     await this.openFilters();
     await this.selectRandomOption(this.experienceLevelSelect);
     await this.applyFilters();
+    console.log('Experience level filter applied');
   }
 
   async applyRegionFilter() {
     await this.openFilters();
     await this.selectRandomOption(this.regionSelect);
     await this.applyFilters();
+    console.log('Region filter applied');
   }
 
   async applyCurrencyFilter() {
     await this.openFilters();
     await this.selectRandomOption(this.currencySelect);
     await this.applyFilters();
+    console.log('Currency filter applied');
   }
 
   async applyAllFilters() {
@@ -116,6 +124,7 @@ export class FilterPage {
     await this.selectRandomOption(this.regionSelect);
     await this.selectRandomOption(this.currencySelect);
     await this.applyFilters();
+    console.log('All filters applied');
   }
 }
 

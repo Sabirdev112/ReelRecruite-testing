@@ -15,19 +15,12 @@ test('Recruiter see Resume', async ({ page }) => {
   await loginPage.goto();
   await loginPage.login(recruiter.email, recruiter.password);
   await loginPage.clickSignIn();
-  await page.waitForTimeout(5000); 
 
   await page.goto(jobUrl);
-  console.log(`Successfully navigated to Job URL: ${jobUrl}`);
 
   await seeResume.navigateToApplications();
-  console.log('Navigated to applications.');
   await seeResume.viewCandidateDetails();
-  console.log('Viewed candidate details.');
   await seeResume.viewCandidateProfile();
-  console.log('Viewed candidate profile.');
   await seeResume.navigateToResumeSection();
-  console.log('Navigated to resume section.');
   await seeResume.clickViewResume();
-  console.log('Resume view completed.');
 });

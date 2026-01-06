@@ -11,24 +11,20 @@ const jobUrl = buildJobUrl(jobId);
 
 
 test('Recruiter delete job', async ({ page }) => {
-  // ----------- Login -----------
+ 
   const loginPage = new Login(page);
   await loginPage.goto();
   await loginPage.login(recruiter.email, recruiter.password);
   await loginPage.clickSignIn();
   await page.waitForURL('**/my-jobs');
-  console.log('Recruiter logged in successfully');
-  
-  await page.goto(jobUrl);
-  console.log(`Successfully navigated to Job URL: ${jobUrl}`);
 
-  // ----------- Delete Job -----------
+  await page.goto(jobUrl);
+
   const deleteJob = new deleteJobPage(page);
   await deleteJob.deleteJob();
   await deleteJob.confirmDelete();
-  console.log('Job deleted successfully, Job ID:', jobId);
 
-   // ----------- DB verification using helper -----------
+  // Verify Db
   await verifyJobDeleted(jobId);
 
 });

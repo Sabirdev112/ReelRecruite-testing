@@ -13,11 +13,7 @@ test('Apply Region filter', async ({ page }) => {
   await login.login(candidate.email, candidate.password);
   await login.clickSignIn();
   await page.waitForURL('**/jobs');
-  console.log('Candidate logged in successfully.');
-  await filter.handleMaybeLaterIfPresent();
 
   await filter.applyRegionFilter();
-
   await expect(page).toHaveURL(/jobs|search/);
-  console.log('✅ Region filter applied');
 });

@@ -19,30 +19,35 @@ export class SeeResumePage {
             await this.maybeLaterButton.click();
             await this.maybeLaterButton.waitFor({ state: 'hidden' });
         } catch {
-            // Modal did not appear — safe to continue
+            
         }
     } 
     
   async navigateToApplications() {
     await this.viewApplicationButton.waitFor({ state: 'visible' });
     await this.viewApplicationButton.click();
+    console.log('Applications opened');
   }
     async viewCandidateDetails() {  
     await this.viewDetailsButton.waitFor({ state: 'visible' });
     await this.viewDetailsButton.click();
+    console.log('Candidate details opened');
   }
     async viewCandidateProfile() {  
     await this.viewProfileButton.waitFor({ state: 'visible' });
     await this.viewProfileButton.click();
+    console.log('Candidate profile opened');
   }
   async navigateToResumeSection() {
     await this.ResumeSection.waitFor({ state: 'visible' });
     await this.ResumeSection.scrollIntoViewIfNeeded();
+    console.log('Scrolled to Resume section');
   }
   async clickViewResume() {
     await this.clickViewResumeButton.waitFor({ state: 'visible' });
     await this.clickViewResumeButton.click();
     await this.page.waitForTimeout(5000);
+    console.log('Resume opened');
   }
 
  

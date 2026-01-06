@@ -21,11 +21,13 @@ export class withdrawPage {
     async withdraw () {
         await this.withdrawButton.waitFor({ state: 'visible' });
         await this.withdrawButton.click();
+        console.log('Withdraw button clicked');
     }
 
     async confirmWithdraw () {
         await this.confirmWithdrawButton.waitFor({ state: 'visible' });
         await this.confirmWithdrawButton.click();
+        console.log('Confirm withdraw button clicked');
     }
 
 }
