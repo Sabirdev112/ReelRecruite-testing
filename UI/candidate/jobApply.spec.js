@@ -23,15 +23,11 @@ test('Apply for latest job (users from JSON)', async () => {
 
     const loginPage = new Login(page);
     const applyJobPage = new ApplyJobPage(page);
-
-    // LOGIN
     await loginPage.goto();
     await loginPage.login(user.email, user.password);
     await loginPage.clickSignIn();
     await page.waitForURL('**/jobs');
-    await applyJobPage.handleMaybeLaterIfPresent();
 
-    // APPLY JOB
     await page.goto(jobUrl);
     await applyJobPage.applyNow();
     await applyJobPage.recordVideo();

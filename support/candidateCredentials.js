@@ -15,7 +15,8 @@ export function loadCredentials() {
 }
 
 export function updatePassword(email, newPassword) {
-  const users = loadCandidateCredentials();
+  const filePath = 'fixtures/Candidate/Credentials.json';
+  const users = loadCredentials(filePath);
 
   const updatedUsers = users.map(user =>
     user.email === email
@@ -24,7 +25,7 @@ export function updatePassword(email, newPassword) {
   );
 
   fs.writeFileSync(
-    CANDIDATE_CREDENTIALS_PATH,
+    filePath,
     JSON.stringify(updatedUsers, null, 2),
     'utf-8'
   );

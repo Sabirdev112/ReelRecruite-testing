@@ -27,26 +27,32 @@ export class ShortlistCandidatePage {
   async clickViewApplications() {
     await this.viewApplicationButton.waitFor({ state: 'visible' });
     await this.viewApplicationButton.click();
+    console.log('Applications opened');
   }
   async clickViewDetails() {
     await this.viewDetailsButton.waitFor({ state: 'visible' });
     await this.viewDetailsButton.click();
+    console.log('Candidate details opened');
   }
   async updateStatus() {
     await this.changeStatusButton.waitFor({ state: 'visible' });
     await this.changeStatusButton.click();
+    console.log('Status updated'); 
   }
   async clickShortListed() {
     await this.shortListedButton.waitFor({ state: 'visible' });
     await this.shortListedButton.click();
+    console.log('Shortlisted');
   }
   async clickSave() {
     await this.saveButton.waitFor({ state: 'visible' });
     await this.saveButton.click();
+    console.log('Status saved');
   }
   
   async clickReject() {
     await this.rejectButton.waitFor({ state: 'visible' });
     await this.rejectButton.click();
+    console.log('changed status to Rejected');
   }
 }

@@ -20,8 +20,6 @@ test ('Recruiter saves a job draft', async ({page}) => {
   
   await saveDraft.postJob();
   await saveDraft.fillBasicInfo();
-  console.log('Filled basic info');
   await saveDraft.saveDraft();
-  console.log('Saved draft');
   
 });

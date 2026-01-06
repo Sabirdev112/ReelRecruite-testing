@@ -3,15 +3,8 @@ export class SearchJob {
   constructor(page) {
     this.page = page;
 
-    // Search input
     this.searchInput = page.getByRole('textbox', { name: 'Search jobs' });
-
-    // Job results container
-    this.resultsContainer = page.locator(
-      'div.max-w-7xl.mx-auto.px-4.sm\\:px-6.lg\\:px-8.py-6'
-    );
-
-    // Individual job titles
+    this.resultsContainer = page.locator('div.max-w-7xl.mx-auto.px-4.sm\\:px-6.lg\\:px-8.py-6');
     this.jobTitles = this.resultsContainer.locator('h3');
     this.maybeLaterButton = page.getByRole('button', { name: 'Maybe Later' });
   }
@@ -37,7 +30,8 @@ export class SearchJob {
     await this.searchInput.waitFor({ state: 'visible' });
     await this.searchInput.fill('');
     await this.searchInput.fill(keyword);
-    await this.page.waitForTimeout(1500); // debounce / API wait
+    await this.page.waitForTimeout(1500);
+    console.log('Keyword entered'); 
   }
 
   // ==========================
@@ -53,6 +47,7 @@ export class SearchJob {
         return false;
       }
     }
+    console.log('Results contain keyword');
     return true;
   }
 }

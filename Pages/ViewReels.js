@@ -8,9 +8,11 @@ export class ViewReelsPage {
     async navigateToViewReels() {
         await this.viewReelsButton.waitFor({ state: 'visible' });
         await this.viewReelsButton.click();
+        console.log('Navigated to View Reels page');
     }
 
     async scrollToReel(locator) {
         await locator.scrollIntoViewIfNeeded();
+        console.log('Scrolling reels');
     }
 }

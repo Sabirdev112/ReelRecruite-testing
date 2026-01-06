@@ -2,6 +2,7 @@ import { test, expect } from '@playwright/test';
 import { loadCandidateCredentials } from '../../support/candidateCredentials.js';
 import { Login } from '../../Pages/Login.js';
 import { UpdateWorkPage } from '../../Pages/UpdateWork.js';
+import { getCandidateWorkExperience, getCandidateProfileByEmail } from '../../support/candidateDb.helper.js';
 
 
 const candidate = loadCandidateCredentials()[0];
@@ -9,52 +10,32 @@ const candidate = loadCandidateCredentials()[0];
 test('Candidate deletes existing work (if any) and adds new experience', async ({ page }) => {
   const loginPage = new Login(page);
   const updateWorkPage = new UpdateWorkPage(page);
-
-  /* ---------- LOGIN ---------- */
   await loginPage.goto();
   await loginPage.login(candidate.email, candidate.password);
   await loginPage.clickSignIn();
   await page.waitForURL('**/jobs');
-  await updateWorkPage.handleMaybeLaterIfPresent();
 
-
-  /* ---------- PROFILE ---------- */
   await updateWorkPage.openProfileDropdown();
   await updateWorkPage.openProfile();
   await updateWorkPage.navigateToWorkSection();
-
-  /* ---------- DELETE IF EXISTS ---------- */
   await updateWorkPage.deleteIfVisibleAndProceed();
-  console.log('Existing work experience deleted if it existed.');
-
-  /* ---------- ADD EXPERIENCE ---------- */
   await updateWorkPage.clickAddWork();
-  console.log('Adding new work experience...');
   await updateWorkPage.addCompany('Tech Solutions Inc');
-  console.log('Company added.');
   await updateWorkPage.addPosition('Senior Software Engineer');
-  console.log('Position added.');
   await updateWorkPage.addEmploymentType('Full-time');
-  console.log('Employment type added.');
   await updateWorkPage.addLocationType('On-site');
-  console.log('Location type added.');
   await updateWorkPage.addStartDate('2021-01-01');
-  console.log('Start date added.');
   await updateWorkPage.addEndDate();
-  console.log('End date added.');
-  await updateWorkPage.addDescription(
-    'Led QA automation initiatives and improved delivery quality'
-  );
-
+  await updateWorkPage.addDescription('Led QA automation initiatives and improved delivery quality');
   await updateWorkPage.addAchievement('Reduced regression failures by 40%');
   await updateWorkPage.addAchievement('Introduced Playwright automation');
-
   await updateWorkPage.addSkill('Playwright');
   await updateWorkPage.addSkill('JavaScript');
-
   await updateWorkPage.saveChanges();
-  console.log('New work experience added and changes saved.');
 
-  /* ---------- ASSERT ---------- */
-  await expect(page.getByText('Tech Solutions Inc')).toBeVisible();
+  // Verify DB using helper
+  const profile = await getCandidateProfileByEmail(candidate.email);
+  const userId = profile ? (profile.user_id || profile.userId) : null;
+  const work = userId ? await getCandidateWorkExperience(userId) : null;
+  expect(JSON.stringify(work)).toContain('Tech Solutions Inc');
 });

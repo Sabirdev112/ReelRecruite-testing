@@ -2,6 +2,7 @@ import { test, expect } from '@playwright/test';
 import { loadCandidateCredentials } from '../../support/candidateCredentials.js';
 import { Login } from '../../Pages/Login.js';
 import { UpdateSkillsPage } from '../../Pages/UpdateSkils.js';
+import { getCandidateSkills, getCandidateProfileByEmail } from '../../support/candidateDb.helper.js';
 
 
 const candidate = loadCandidateCredentials()[0];
@@ -15,21 +16,21 @@ test('candidate can update skills section', async ({ page }) => {
   await loginPage.login(candidate.email, candidate.password);
   await loginPage.clickSignIn();
   await page.waitForURL('**/jobs');
-  console.log('Candidate logged in successfully.');
-  await updateSkills.handleMaybeLaterIfPresent();
-
   
   await updateSkills.clickProfile();
   await updateSkills.openProfile();
   await updateSkills.clickEditSkills();
-
-  // Add multiple skills
   await updateSkills.updateSkills([
     'JavaScript',
     'Playwright',
     'Selenium',
-    'Test Automation'
-  ]);
+    'Test Automation']);
+
+  // Verify DB using helper
+  const profile = await getCandidateProfileByEmail(candidate.email);
+  const userId = profile ? (profile.user_id || profile.userId) : null;
+  const skills = userId ? await getCandidateSkills(userId) : null;
+  expect(skills).toEqual(expect.arrayContaining(['JavaScript','Playwright','Selenium','Test Automation']));
 });
 
 

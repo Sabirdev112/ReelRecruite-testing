@@ -9,7 +9,6 @@ const jobId = getLatestJobId();
 const jobUrl = buildJobUrl(jobId);
 
 test('Recruiter view all applications for a job', async ({ page }) => {
-  // ----------- Login -----------
   const loginPage = new Login(page);
   await loginPage.goto();
   await loginPage.login(recruiter.email, recruiter.password);
@@ -17,10 +16,6 @@ test('Recruiter view all applications for a job', async ({ page }) => {
   await page.waitForURL('**/my-jobs');
 
   await page.goto(jobUrl, { waitUntil: 'domcontentloaded' });
-  console.log(`Successfully navigated to Job URL: ${jobUrl}`);
-
-  // ----------- View reels & shortlist -----------
   const shortlistPage = new ShortlistCandidatePage(page);
   await shortlistPage.clickViewApplications();
-  console.log('Viewed all applications successfully');
 });
