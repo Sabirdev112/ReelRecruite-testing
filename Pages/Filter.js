@@ -1,4 +1,4 @@
-// Pages/Filter.js
+import {expect} from '@playwright/test';
 export class FilterPage {
   constructor(page) {
     this.page = page;

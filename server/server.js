@@ -150,6 +150,7 @@ app.post('/api/run-all-tests', (req, res) => {
     'UI/Recruiter/sendMessage.spec.js',
     'UI/Recruiter/ArchiveChat.spec.js',
     'UI/Recruiter/UnArchiveChat.spec.js',
+    'UI/Candidate/withdrawApplication.spec.js',
     'UI/Recruiter/RejectCandidate.spec.js',
     'UI/candidate/ViewAppliedJobs.spec.js',
     'UI/Recruiter/DeleteJob.spec.js'

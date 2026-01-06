@@ -1,3 +1,5 @@
+import {expect} from '@playwright/test';
+import { getBannerImagePath } from '../support/profileMedia.helper';
 export class CompanyDetailsPage{
     constructor(page) {
         this.page = page;
@@ -53,9 +55,10 @@ export class CompanyDetailsPage{
             await this.EditDetailsButton.first().waitFor({ state: 'visible' });
             await this.EditDetailsButton.first().click();
         }
-        async updateCompanyLogo(logoPath) {
+        async updateCompanyLogo() {
+            const bannerPath = getBannerImagePath();
             await this.addLogoButton.waitFor({ state: 'attached' });
-            await this.addLogoButton.setInputFiles(logoPath);
+            await this.addLogoButton.setInputFiles(bannerPath);
         }
         async clearAndTypeUsingKeyboard(locator, value) {
             await locator.waitFor({ state: 'visible' });

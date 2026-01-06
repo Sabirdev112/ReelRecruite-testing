@@ -1,31 +1,12 @@
 import { test } from '@playwright/test';
-import fs from 'fs';
-import path from 'path';
-import { fileURLToPath } from 'url';
+import { loadCredentials } from '../../support/recruiterCredentials.js';
+import { getLatestJobId, buildJobUrl } from '../../support/job.helper.js';
 import { Login } from '../../Pages/Login.js';
 import { ShortlistCandidatePage } from '../../Pages/ShortListCandidate.js';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-// Load recruiter credentials
-const recruiter = JSON.parse(
-  fs.readFileSync(
-    path.join(__dirname, '../../fixtures/Recruiter/Credentials.json'),
-    'utf-8'
-  )
-)[0];
-
-// Load job ID
-const { jobId } = JSON.parse(
-  fs.readFileSync(
-    path.join(__dirname, '../../fixtures/Recruiter/jobid.json'),
-    'utf-8'
-  )
-);
-
-// Construct job URL
-const jobUrl = `https://recruitai-web-production.up.railway.app/jobs/${jobId}`;
+const recruiter = loadCredentials()[0];
+const jobId = getLatestJobId();
+const jobUrl = buildJobUrl(jobId);
 
 test('Recruiter shortlists candidate from Applications', async ({ page }) => {
   // ----------- Login -----------

@@ -1,20 +1,10 @@
 import { test, expect } from '@playwright/test';
-import fs from 'fs';
-import path from 'path';
-import { fileURLToPath } from 'url';
+import { loadCandidateCredentials } from '../../support/candidateCredentials.js';
 import { Login } from '../../Pages/Login.js';
 import { UpdateWorkPage } from '../../Pages/UpdateWork.js';
 
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-const candidate = JSON.parse(
-  fs.readFileSync(
-    path.join(__dirname, '../../fixtures/Candidate/Credentials.json'),
-    'utf-8'
-  )
-)[0];
+const candidate = loadCandidateCredentials()[0];
 
 test('Candidate deletes existing work (if any) and adds new experience', async ({ page }) => {
   const loginPage = new Login(page);

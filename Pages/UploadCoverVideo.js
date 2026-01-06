@@ -1,3 +1,5 @@
+import {expect} from '@playwright/test';
+import {getVideoPath} from '../support/resume.helper.js';
 export class UpdateCoverVideoResumePage {
   constructor(page) {
     this.page = page;
@@ -51,20 +53,23 @@ export class UpdateCoverVideoResumePage {
     }
   }
 
-  async uploadVideo(videoPath) {
-  await this.handleMaybeLaterIfPresent();
+ async uploadVideo(filename = 'sample-video.mp4') {
+    await this.handleMaybeLaterIfPresent();
 
-  
-  await this.uploadVideoInput.waitFor({ state: 'visible' });
-  await this.uploadVideoInput.click();
+    const videoPath = getVideoPath(filename); // helper used HERE
 
-  await this.uploadVideoInput.waitFor({ state: 'attached' });
+    await this.uploadVideoInput.waitFor({ state: 'attached' });
 
-  await this.uploadVideoInput.setInputFiles(videoPath);
-  await this.uploadVideoInput.evaluate(input =>
-    input.dispatchEvent(new Event('change', { bubbles: true }))
-  );
-}
+    await this.uploadVideoInput.setInputFiles(videoPath);
+
+    // Trigger frontend update (React/Vue)
+    await this.uploadVideoInput.evaluate(input =>
+      input.dispatchEvent(new Event('change', { bubbles: true }))
+    );
+    await this.handleMaybeLaterIfPresent();
+
+    await this.page.waitForLoadState('networkidle');
+  }
 
 
 }

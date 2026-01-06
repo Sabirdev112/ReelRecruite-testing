@@ -1,31 +1,9 @@
-import { test, expect } from '@playwright/test';
+import { test, } from '@playwright/test';
 import { Login } from '../../Pages/Login.js';
-import fs from 'fs';
-import path from 'path';
-import { fileURLToPath } from 'url';
+import { loadCredentials } from '../../support/candidateCredentials.js';
 import { UpdateEducationPage } from '../../Pages/UpdateEducation.js';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-// Load candidate credentials
-const candidate = JSON.parse(
-  fs.readFileSync(
-    path.join(__dirname, '../../fixtures/Candidate/Credentials.json'),
-    'utf-8'
-  )
-)[0];
-
-// Sample updated education data
-const updatedEducation = {
-  school: 'Harvard University',
-  degree: 'Bachelor of Science',
-  fieldOfStudy: 'Computer Science',
-  gpa: '3.9',
-  location: 'Cambridge, MA',
-  startDate: '2021-01-01',
-  description: 'Updated description of studies and achievements.'
-};
+const candidate = loadCredentials()[0];
 
 test('candidate can update education', async ({ page }) => {
   const loginPage = new Login(page);
@@ -50,21 +28,21 @@ test('candidate can update education', async ({ page }) => {
   console.log('Education deleted.');
   await educationPage.clickAddEducation();
   console.log('Add education clicked.');
-  await educationPage.updateSchool(updatedEducation.school);
+  await educationPage.updateSchool('Harvard University');
   console.log('School updated.');
-  await educationPage.updateDegree(updatedEducation.degree);
+  await educationPage.updateDegree('Bachelor of Science');
   console.log('Degree updated.');
-  await educationPage.updateFieldOfStudy(updatedEducation.fieldOfStudy);
+  await educationPage.updateFieldOfStudy('Computer Science');
   console.log('Field of study updated.');
-  await educationPage.updateGPA(updatedEducation.gpa);
+  await educationPage.updateGPA('4.0');
   console.log('GPA updated.');
-  await educationPage.updateLocation(updatedEducation.location);
+  await educationPage.updateLocation('Boston, MA');
   console.log('Location updated.');
-  await educationPage.updateStartDate(updatedEducation.startDate);
+  await educationPage.updateStartDate('2021-01-01');
   console.log('Start date updated.');
   await educationPage.updateEndDate(); 
   console.log('End date updated.');
-  await educationPage.updateDescription(updatedEducation.description);
+  await educationPage.updateDescription('Graduated with honors.');
   console.log('Description updated.');
   await educationPage.saveChanges();
   console.log('Education updated successfully.');

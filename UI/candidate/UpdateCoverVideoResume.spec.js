@@ -1,27 +1,10 @@
 import { test, expect } from '@playwright/test';
 import { Login } from '../../Pages/Login.js';
-import fs from 'fs';
-import { fileURLToPath } from 'url';
-import path from 'path';
+import { loadCandidateCredentials } from '../../support/candidateCredentials.js';
 import {UpdateCoverVideoResumePage} from '../../Pages/UploadCoverVideo.js';
 
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-const candidate = JSON.parse(
-  fs.readFileSync(
-    path.join(__dirname, '../../fixtures/Candidate/Credentials.json'),
-    'utf-8'
-  )
-)[0];
-
-const VideoPath = path.join(
-  __dirname,
-  '../../fixtures/sample-video.mp4'
-);
-
-
+const candidate = loadCandidateCredentials()[0];
   
 
   test('candidate can upload a video resume', async ({ page }) => {
@@ -42,7 +25,7 @@ const VideoPath = path.join(
   await coverVideoPage.removeVideoIfExists();
   console.log('Existing video removed if present.');
 
-  await coverVideoPage.uploadVideo(VideoPath);
+  await coverVideoPage.uploadVideo();
   console.log('Video uploaded successfully.');
 
 });
