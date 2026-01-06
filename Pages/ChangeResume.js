@@ -1,91 +1,76 @@
-
 import { getResumePath } from '../support/resume.helper.js';
-import {expect} from '@playwright/test';
+import { expect } from '@playwright/test';
+
 export class UploadResume {
-    constructor(page) { 
-        this.page = page;       
+  constructor(page) {
+    this.page = page;
 
-        // -------- Profile navigation --------
-        this.profileMenu = page.locator('//*[@id="root"]/div[2]/header/div/div[2]/div[2]/div[1]/div/div[1]/div');
-        this.ProfileButton = page.getByText('Profile', { exact: true });
+    this.profileMenu = page.locator('//*[@id="root"]/div[2]/header/div/div[2]/div[2]/div[1]/div/div[1]/div');
+    this.ProfileButton = page.getByText('Profile', { exact: true });
 
-        // -------- Resume section --------
-        this.resumeSection = page.getByRole('heading', { name: 'Resume', exact: true });
+    this.resumeSection = page.getByRole('heading', { name: 'Resume', exact: true });
 
-        // -------- Resume actions --------
-        this.deleteResumeButton = page.getByRole('button', { name: 'Remove Resume' });
-        this.confirmDeleteButton = page.getByRole('button', { name: 'Ok' });
+    this.deleteResumeButton = page.getByRole('button', { name: 'Remove Resume' });
+    this.confirmDeleteButton = page.getByRole('button', { name: 'Ok' });
 
-        // -------- Modal --------
-        this.maybeLaterButton = page.getByRole('button', { name: 'Maybe Later' });
+    this.maybeLaterButton = page.getByRole('button', { name: 'Maybe Later' });
 
-        // -------- Upload --------
-        this.uploadInput = page.locator('#resume-upload');
+    this.uploadInput = page.locator('#resume-upload');
+  }
+
+  async handleMaybeLaterIfPresent() {
+    if (await this.maybeLaterButton.isVisible()) {
+      await expect(this.maybeLaterButton).toBeVisible();
+      await this.maybeLaterButton.click();
+      await expect(this.maybeLaterButton).toBeHidden();
+      console.log('Handled Maybe Later modal');
+    }
+  }
+
+  async clickProfileMenu() {
+    await expect(this.profileMenu).toBeVisible();
+    await this.profileMenu.click();
+    await this.handleMaybeLaterIfPresent();
+    console.log('Profile menu clicked');
+  }
+
+  async goToProfile() {
+    await expect(this.ProfileButton).toBeVisible();
+    await this.ProfileButton.click();
+    await this.handleMaybeLaterIfPresent();
+    await this.page.waitForLoadState('networkidle');
+    console.log('Navigated to Profile page');
+  }
+
+  async navigateToResumeSection() {
+    await expect(this.resumeSection).toBeVisible();
+    await this.resumeSection.scrollIntoViewIfNeeded();
+    console.log('Scrolled to Resume section');
+  }
+
+  async deleteExistingResume() {
+    if (await this.uploadInput.isVisible()) {
+      console.log('No existing resume to delete');
+      return;
     }
 
-    // ---------------- Modal handler ----------------
-    async handleMaybeLaterIfPresent() {
-        try {
-            await this.maybeLaterButton.waitFor({
-                state: 'visible',
-                timeout: 2500
-            });
-            await this.maybeLaterButton.click();
-            await this.maybeLaterButton.waitFor({ state: 'hidden' });
-        } catch {
-            // Modal did not appear — safe to continue
-        }
+    if (await this.deleteResumeButton.isVisible()) {
+      await expect(this.deleteResumeButton).toBeVisible();
+      await this.deleteResumeButton.click();
+      await this.handleMaybeLaterIfPresent();
+      await this.confirmDelete();
+      console.log('Existing resume deleted');
     }
+  }
 
-    // ---------------- Profile navigation ----------------
-    async clickProfileMenu() {
-        await this.profileMenu.waitFor({ state: 'visible' });
-        await this.profileMenu.click();
-        await this.handleMaybeLaterIfPresent();
+  async confirmDelete() {
+    if (await this.confirmDeleteButton.isVisible()) {
+      await expect(this.confirmDeleteButton).toBeVisible();
+      await this.confirmDeleteButton.click();
+      await this.page.waitForLoadState('networkidle');
+      console.log('Confirmed resume deletion');
     }
-
-    async goToProfile() {
-        await this.ProfileButton.waitFor({ state: 'visible' });
-        await this.ProfileButton.click();
-        await this.handleMaybeLaterIfPresent();
-        await this.page.waitForLoadState('networkidle');
-
-    }
-
-    async navigateToResumeSection() {
-        await this.resumeSection.waitFor({ state: 'visible' });
-        await this.resumeSection.scrollIntoViewIfNeeded();
-    
-    }
-
-    // ---------------- Resume management ----------------
-    async deleteExistingResume() {
-        // If upload button is already visible, skip delete
-        if (await this.uploadInput.isVisible()) {
-            return;
-        }
-
-        if (await this.deleteResumeButton.isVisible()) {
-            await this.deleteResumeButton.click();
-            await this.page.waitForTimeout(500);
-
-            // Handle modal that may appear after delete
-            await this.handleMaybeLaterIfPresent();
-
-            // Confirm deletion
-            await this.confirmDelete();
-        }
-    }
-
-    async confirmDelete() {
-        if (await this.confirmDeleteButton.isVisible()) {
-            await this.confirmDeleteButton.click();
-            await this.page.waitForLoadState('networkidle');
-        }
-    }
-
-
-  
+  }
 
   async uploadNewResume(filename = 'Bold-Poster.pdf') {
     await this.handleMaybeLaterIfPresent();
@@ -101,8 +86,7 @@ export class UploadResume {
       input.dispatchEvent(new Event('change', { bubbles: true }))
     );
 
-    await this.page.waitForTimeout(10000);
+    await this.page.waitForLoadState('networkidle');
     console.log(`Resume uploaded successfully: ${resumePath}`);
   }
 }
-

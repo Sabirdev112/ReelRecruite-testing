@@ -10,21 +10,17 @@ const jobUrl = buildJobUrl(jobId);
 
 
 test('Recruiter Edits Job', async ({ page }) => {
-  // ----------- Login -----------
   const loginPage = new Login(page);
-  await loginPage.goto();
-  await loginPage.login(recruiter.email, recruiter.password);
-  await loginPage.clickSignIn();
-  await page.waitForURL('**/my-jobs');
+    await loginPage.goto();
+    await loginPage.login(recruiter.email, recruiter.password);
+    await loginPage.clickSignIn();
+    await page.waitForURL('**/my-jobs');
   
-  await page.goto(jobUrl);
-  console.log(`Successfully navigated to Job URL: ${jobUrl}`);
+    await page.goto(jobUrl);
 
-  const editJob = new EditJobPage(page);
+    const editJob = new EditJobPage(page);
     await editJob.editJob();
     await editJob.updateDetails();
-    console.log('Job details updated successfully');
     await editJob.clickCustomFields();
     await editJob.saveChanges();
-    console.log('Job edited successfully, Job ID:', jobId);
 });

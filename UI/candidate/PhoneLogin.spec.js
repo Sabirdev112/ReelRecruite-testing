@@ -10,5 +10,4 @@ test('Candidate can log in using phone number', async ({ page }) => {
     await loginPage.goto();
     await loginPage.phoneLogin(recruiter.phone);
     await loginPage.clickSignIn();
-    console.log('Candidate logged in successfully using phone number');
 }); 

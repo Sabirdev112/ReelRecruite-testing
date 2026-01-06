@@ -26,6 +26,7 @@ export class EditJobPage {
     async editJob(){
         await this.editButton.waitFor({ state: 'visible' });
         await this.editButton.click();
+        console.log('clicked on edit job button');
     }
 
      async clearAndTypeUsingKeyboard(locator, value) {
@@ -38,16 +39,19 @@ export class EditJobPage {
 
    async updateDetails() {
        await this.clearAndTypeUsingKeyboard(this.summaryInput, 'Updated job summary for testing purposes.');
-}
+       console.log('Job details updated.');
+    }
 
     async clickCustomFields(){
         await this.customFields.waitFor({ state: 'visible' });
         await this.customFields.click();
+        console.log('clicked on custom fields');
     }
     async saveChanges(){
         await this.saveChangesButton.waitFor({ state: 'visible' });
         await this.saveChangesButton.click();
         await this.page.waitForLoadState('networkidle');
+        console.log('Changes saved.');
     }
 
 }

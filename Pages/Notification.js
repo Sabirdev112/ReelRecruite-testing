@@ -5,25 +5,12 @@ export class NotificationPage {
 
     this.notificationButton = page.getByRole('button', { name: 'Notifications' });
     this.viewAllButton = page.getByText('View all', { exact: true });
-
-
     this.statusLabel = page.getByText('Status', { exact: true });
     this.readTab = page.getByRole('button', { name: 'Read', exact: true });
     this.unreadTab = page.getByRole('button', { name: 'Unread', exact: true });
-
-
     this.firstNotification = page.locator('[role="listitem"]').first();
-
-
-    this.markAsReadButton = page
-      .locator('button')
-      .filter({ hasText: 'Mark as read' })
-      .first();
-
-    this.markAllReadButton = page.getByRole('button', {
-      name: 'Mark All as Read',
-      exact: true,
-    });
+    this.markAsReadButton = page.locator('button').filter({ hasText: 'Mark as read' }).first();
+    this.markAllReadButton = page.getByRole('button', {name: 'Mark All as Read',exact: true,});
     this.maybeLaterButton = page.getByRole('button', { name: 'Maybe Later' });
 
   }
@@ -44,6 +31,7 @@ export class NotificationPage {
 
   async openNotifications() {
     await this.notificationButton.click();
+    console.log('Notifications opened');
   }
 
   async openViewAll() {
@@ -56,6 +44,7 @@ export class NotificationPage {
 
     await this.readTab.click();
     await this.unreadTab.click();
+    console.log('Status tabs checked');
   }
 
 

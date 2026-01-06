@@ -1,5 +1,6 @@
-import {expect} from '@playwright/test';
-import {getBannerImagePath,getProfileImagePath} from '../support/profileMedia.helper.js';
+import { expect } from '@playwright/test';
+import { getBannerImagePath, getProfileImagePath } from '../support/profileMedia.helper.js';
+
 export class UpdateInfoPage {
   constructor(page) {
     this.page = page;
@@ -16,92 +17,97 @@ export class UpdateInfoPage {
 
     this.saveChangesButton = page.getByRole('button', { name: /Save Changes/i });
     this.cancelButton = page.getByRole('button', { name: /Cancel/i });
-    this.maybeLaterButton = page.getByRole('button', { name: 'Maybe Later' });
   }
+
   async handleMaybeLaterIfPresent() {
-        try {
-            await this.maybeLaterButton.waitFor({
-                state: 'visible',
-                timeout: 2500
-            });
-            await this.maybeLaterButton.click();
-            await this.maybeLaterButton.waitFor({ state: 'hidden' });
-        } catch {
-            // Modal did not appear — safe to continue
-        }
-    }
+    try {
+      await this.maybeLaterButton.waitFor({ state: 'visible', timeout: 2500 });
+      await expect(this.maybeLaterButton).toBeVisible();
+      await this.maybeLaterButton.click();
+      await expect(this.maybeLaterButton).toBeHidden();
+    } catch {}
+  }
 
   async openProfileMenu() {
     await this.profileMenu.waitFor({ state: 'visible' });
+    await expect(this.profileMenu).toBeVisible();
     await this.profileMenu.click();
+    console.log('Profile menu opened');
   }
+
   async clickProfile() {
     await this.profileButton.waitFor({ state: 'visible' });
+    await expect(this.profileButton).toBeVisible();
     await this.profileButton.click();
     await this.page.waitForLoadState('networkidle');
+    console.log('Navigated to profile page');
   }
 
   async clickEditProfile() {
     await this.editProfileButton.waitFor({ state: 'visible' });
+    await expect(this.editProfileButton).toBeVisible();
     await this.editProfileButton.click();
+    console.log('Edit profile button clicked');
   }
 
-  // ---------- Uploads ----------
   async uploadCoverImage() {
     await this.handleMaybeLaterIfPresent();
-
-    const bannerPath = getBannerImagePath(); // helper provides path
+    const bannerPath = getBannerImagePath();
 
     await this.coverImageInput.waitFor({ state: 'attached' });
     await this.coverImageInput.setInputFiles(bannerPath);
-
-    // Optional: trigger change event to ensure frontend reacts
     await this.coverImageInput.evaluate(input =>
       input.dispatchEvent(new Event('change', { bubbles: true }))
     );
-
     await this.page.waitForLoadState('networkidle');
+    console.log('Cover image uploaded:', bannerPath);
   }
 
-  // ---------------- Profile Picture ----------------
   async uploadProfilePicture() {
     await this.handleMaybeLaterIfPresent();
-
-    const profilePath = getProfileImagePath(); // helper provides path
+    const profilePath = getProfileImagePath();
 
     await this.profilePictureEditButton.waitFor({ state: 'visible' });
-    await this.profilePictureEditButton.click(); // open file picker
+    await expect(this.profilePictureEditButton).toBeVisible();
+    await this.profilePictureEditButton.click();
 
     await this.profilePictureInput.waitFor({ state: 'attached' });
     await this.profilePictureInput.setInputFiles(profilePath);
-
     await this.profilePictureInput.evaluate(input =>
       input.dispatchEvent(new Event('change', { bubbles: true }))
     );
-
     await this.page.waitForLoadState('networkidle');
+    console.log('Profile picture uploaded:', profilePath);
   }
 
-  // ---------- Form helpers ----------
   async clearAndTypeUsingKeyboard(locator, value) {
     await locator.waitFor({ state: 'visible' });
+    await expect(locator).toBeEnabled();
     await locator.click();
     await locator.press('Control+A');
     await locator.press('Backspace');
     await locator.type(value);
+    const typedValue = await locator.inputValue();
+    expect(typedValue).toBe(value);
   }
 
   async fillFullName(name) {
     await this.clearAndTypeUsingKeyboard(this.fullNameTextbox, name);
+    await expect(this.fullNameTextbox).toHaveValue(name);
+    console.log('Full name updated:', name);
   }
 
   async fillProfessionalTitle(title) {
     await this.clearAndTypeUsingKeyboard(this.professionalTitleTextbox, title);
+    await expect(this.professionalTitleTextbox).toHaveValue(title);
+    console.log('Professional title updated:', title);
   }
 
   async clickSaveChanges() {
     await this.saveChangesButton.waitFor({ state: 'visible' });
+    await expect(this.saveChangesButton).toBeVisible();
     await this.saveChangesButton.click();
-    await this.page.waitForTimeout(10000);
+    await this.page.waitForLoadState('networkidle');
+    console.log('Changes saved');
   }
 }

@@ -13,8 +13,6 @@ test('Apply Experience Level filter', async ({ page }) => {
   await login.login(candidate.email, candidate.password);
   await login.clickSignIn();
   await page.waitForURL('**/jobs');
-  console.log('Candidate logged in successfully.');
-  await filter.handleMaybeLaterIfPresent();
+ 
   await filter.applyExperienceLevelFilter();
-  console.log('✅ Experience Level filter applied');
 });

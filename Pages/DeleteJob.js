@@ -1,4 +1,4 @@
-import {expect} from '@playwright/test';
+
 export class deleteJobPage{
     constructor(page) { 
         this.page = page;
@@ -8,10 +8,12 @@ export class deleteJobPage{
     async deleteJob() {
         await this.deleteJobButton.waitFor({ state: 'visible' });
         await this.deleteJobButton.click();
+        
     }
     async confirmDelete() {
         await this.confirmDeleteButton.waitFor({ state: 'visible' });
         await this.confirmDeleteButton.click();
         await this.page.waitForLoadState('networkidle');
+        console.log('Job deleted.');
     }   
 }

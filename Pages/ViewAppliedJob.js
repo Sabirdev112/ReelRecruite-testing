@@ -19,5 +19,6 @@ export class viewAppliedJobPage {
     } 
         async clickViewAppliedJobs() {  
             await this.viewAppliedJobsButton.click();
+            console.log('Navigated to View Applied Jobs page');
         }
 }
