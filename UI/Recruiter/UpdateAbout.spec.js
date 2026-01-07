@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 import { loadCredentials } from '../../support/recruiterCredentials.js';
 import { Login } from '../../Pages/Login.js';
 import { UpdateAboutPage } from '../../Pages/UpdateAbout.js';
-import { getUserByEmail } from '../../support/db.helper.js';
+import { getUserByEmail } from '../../support/recruiterDb.helper.js';
 
 
 const recruiter = loadCredentials()[0];
