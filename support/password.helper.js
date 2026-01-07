@@ -26,7 +26,7 @@ export async function verifyPasswordUpdatedInDb(email, oldPassword, newPassword)
 
   // New password should match the hash
   const isNewPasswordCorrect = await bcrypt.compare(newPassword, hashedPassword);
-  if (!isNewPasswordCorrect) throw new Error('New password does not match DB');
+  if (!isOldPasswordCorrect) throw new Error('New password does not match DB');
 
   console.log(`DB verification passed: Password updated successfully for ${email}`);
 }
