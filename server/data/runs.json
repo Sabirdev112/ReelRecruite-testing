@@ -1,5 +1,201 @@
 [
   {
+    "id": 1767804598967,
+    "startedAt": "2026-01-07T16:49:28.198Z",
+    "endedAt": "2026-01-07T16:49:58.967Z",
+    "duration": 30769,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Candidate signs up and moves user from RandomUsers to NewUsers",
+        "description": "",
+        "file": "UI/Signup.spec.js",
+        "line": 6,
+        "status": "passed",
+        "duration": 28337,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1767804560305,
+    "startedAt": "2026-01-07T16:48:46.609Z",
+    "endedAt": "2026-01-07T16:49:20.305Z",
+    "duration": 33696,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Candidate signs up and moves user from RandomUsers to NewUsers",
+        "description": "",
+        "file": "UI/Signup.spec.js",
+        "line": 6,
+        "status": "passed",
+        "duration": 30601,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1767804442004,
+    "startedAt": "2026-01-07T16:46:36.698Z",
+    "endedAt": "2026-01-07T16:47:22.004Z",
+    "duration": 45306,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Candidate signs up and moves user from RandomUsers to NewUsers",
+        "description": "",
+        "file": "UI/Signup.spec.js",
+        "line": 6,
+        "status": "passed",
+        "duration": 42447,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1767804385064,
+    "startedAt": "2026-01-07T16:44:21.195Z",
+    "endedAt": "2026-01-07T16:46:25.064Z",
+    "duration": 123869,
+    "summary": {
+      "total": 1,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 1,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Candidate signs up and moves user from RandomUsers to NewUsers",
+        "description": "",
+        "file": "UI/Signup.spec.js",
+        "line": 6,
+        "status": "timedOut",
+        "duration": 120107,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": "\u001b[31mTest timeout of 120000ms exceeded.\u001b[39m",
+        "stack": "\u001b[31mTest timeout of 120000ms exceeded.\u001b[39m",
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1767804141637,
+    "startedAt": "2026-01-07T16:41:42.806Z",
+    "endedAt": "2026-01-07T16:42:21.637Z",
+    "duration": 38831,
+    "summary": {
+      "total": 1,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 1
+    },
+    "tests": [
+      {
+        "title": "Candidate signs up and moves user from RandomUsers to NewUsers",
+        "description": "",
+        "file": "UI/Signup.spec.js",
+        "line": 6,
+        "status": "interrupted",
+        "duration": 36053,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1767804095898,
+    "startedAt": "2026-01-07T16:40:12.674Z",
+    "endedAt": "2026-01-07T16:41:35.898Z",
+    "duration": 83224,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Candidate signs up and moves user from RandomUsers to NewUsers",
+        "description": "",
+        "file": "UI/Signup.spec.js",
+        "line": 6,
+        "status": "passed",
+        "duration": 80009,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1767803731645,
+    "startedAt": "2026-01-07T16:34:49.581Z",
+    "endedAt": "2026-01-07T16:35:31.645Z",
+    "duration": 42064,
+    "summary": {
+      "total": 1,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 1
+    },
+    "tests": [
+      {
+        "title": "Candidate signs up and moves user from RandomUsers to NewUsers",
+        "description": "",
+        "file": "UI/Signup.spec.js",
+        "line": 6,
+        "status": "interrupted",
+        "duration": 38631,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
     "id": 1767802830466,
     "startedAt": "2026-01-07T16:18:26.178Z",
     "endedAt": "2026-01-07T16:20:30.465Z",

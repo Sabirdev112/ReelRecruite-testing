@@ -88,5 +88,23 @@
     "email": "user1.test+signup@gmail.com",
     "phone": "03000000001",
     "password": "Test@12345"
+  },
+  {
+    "fullName": "User Two",
+    "email": "user2.test+signup@gmail.com",
+    "phone": "03000000002",
+    "password": "Test@12345"
+  },
+  {
+    "fullName": "User Six",
+    "email": "user6.test+signup@gmail.com",
+    "phone": "3000000006",
+    "password": "Test@12345"
+  },
+  {
+    "fullName": "User Seven",
+    "email": "user7.test+signup@gmail.com",
+    "phone": "3000000007",
+    "password": "Test@12345"
   }
 ]
