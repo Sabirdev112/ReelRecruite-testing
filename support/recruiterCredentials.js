@@ -14,5 +14,9 @@ export function loadCredentials() {
   );
 }
 export function saveCredentials(updatedUsers) {
+  const credentialsPath = path.join(
+    __dirname,
+    '../fixtures/Recruiter/Credentials.json'
+  )
   fs.writeFileSync(credentialsPath, JSON.stringify(updatedUsers, null, 2), 'utf-8');
 }
