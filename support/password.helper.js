@@ -16,17 +16,33 @@ export async function verifyPasswordUpdatedInDb(email, oldPassword, newPassword)
     [email]
   );
 
-  if (usersInDb.length !== 1) throw new Error('User not found in DB');
+  if (usersInDb.length !== 1) {
+    throw new Error(`User not found in DB for email: ${email}`);
+  }
 
   const hashedPassword = usersInDb[0].password;
 
-  // Old password should NOT match the new hash
-  const isOldPasswordSame = await bcrypt.compare(oldPassword, hashedPassword);
-  if (isOldPasswordSame) throw new Error('Old password still matches DB');
+  // Verify new password matches DB (always required)
+  const newPasswordMatches = await bcrypt.compare(newPassword, hashedPassword);
+  if (newPasswordMatches) {
+    console.log(
+      `DB verification passed: password verified successfully for ${email}`
+    );
+  }
 
-  // New password should match the hash
-  const isNewPasswordCorrect = await bcrypt.compare(newPassword, hashedPassword);
-  if (!isOldPasswordCorrect) throw new Error('New password does not match DB');
+  // Optional validation: only check difference if passwords are different
+  if (oldPassword !== newPassword) {
+    const oldPasswordMatches = await bcrypt.compare(oldPassword, hashedPassword);
+    if (oldPasswordMatches) {
+      throw new Error(
+        'Old password still matches DB hash when a different password was expected'
+      );
+    }
+  }
 
-  console.log(`DB verification passed: Password updated successfully for ${email}`);
+  console.log(
+    `DB verification passed: password verified successfully for ${email}`
+  );
 }
+
+

@@ -1,5 +1,135 @@
 [
   {
+    "id": 1767806323166,
+    "startedAt": "2026-01-07T17:18:08.804Z",
+    "endedAt": "2026-01-07T17:18:43.166Z",
+    "duration": 34362,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Recruiter forget password flow",
+        "description": "",
+        "file": "UI/Recruiter/ForgetPassword.spec.js",
+        "line": 7,
+        "status": "passed",
+        "duration": 30687,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1767806181530,
+    "startedAt": "2026-01-07T17:15:47.513Z",
+    "endedAt": "2026-01-07T17:16:21.530Z",
+    "duration": 34017,
+    "summary": {
+      "total": 1,
+      "passed": 0,
+      "failed": 1,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Recruiter forget password flow",
+        "description": "",
+        "file": "UI/Recruiter/ForgetPassword.spec.js",
+        "line": 7,
+        "status": "failed",
+        "duration": 31243,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": "ReferenceError: credentialsPath is not defined",
+        "stack": "ReferenceError: credentialsPath is not defined\n    at saveCredentials (D:\\ReelRecruite-testing\\support\\recruiterCredentials.js:17:20)\n    at changeRecruiterPassword (D:\\ReelRecruite-testing\\support\\password.helper.js:10:3)\n    at D:\\ReelRecruite-testing\\UI\\Recruiter\\ForgetPassword.spec.js:30:9",
+        "attachments": [
+          {
+            "name": "error-context",
+            "path": "D:\\ReelRecruite-testing\\test-results\\UI-Recruiter-ForgetPassword-Recruiter-forget-password-flow\\error-context.md",
+            "contentType": "text/markdown"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1767806005903,
+    "startedAt": "2026-01-07T17:12:55.961Z",
+    "endedAt": "2026-01-07T17:13:25.903Z",
+    "duration": 29942,
+    "summary": {
+      "total": 1,
+      "passed": 0,
+      "failed": 1,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Recruiter forget password flow",
+        "description": "",
+        "file": "UI/Recruiter/ForgetPassword.spec.js",
+        "line": 7,
+        "status": "failed",
+        "duration": 27158,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": "Error: Password in DB does not match expected password",
+        "stack": "Error: Password in DB does not match expected password\n    at verifyPasswordUpdatedInDb (D:\\ReelRecruite-testing\\support\\password.helper.js:28:11)\n    at D:\\ReelRecruite-testing\\UI\\Recruiter\\ForgetPassword.spec.js:27:3",
+        "attachments": [
+          {
+            "name": "error-context",
+            "path": "D:\\ReelRecruite-testing\\test-results\\UI-Recruiter-ForgetPassword-Recruiter-forget-password-flow\\error-context.md",
+            "contentType": "text/markdown"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1767805892016,
+    "startedAt": "2026-01-07T17:10:56.029Z",
+    "endedAt": "2026-01-07T17:11:32.014Z",
+    "duration": 35985,
+    "summary": {
+      "total": 1,
+      "passed": 0,
+      "failed": 1,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Recruiter forget password flow",
+        "description": "",
+        "file": "UI/Recruiter/ForgetPassword.spec.js",
+        "line": 7,
+        "status": "failed",
+        "duration": 33215,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": "Error: New password does not match DB hash",
+        "stack": "Error: New password does not match DB hash\n    at verifyPasswordUpdatedInDb (D:\\ReelRecruite-testing\\support\\password.helper.js:34:11)\n    at D:\\ReelRecruite-testing\\UI\\Recruiter\\ForgetPassword.spec.js:27:3",
+        "attachments": [
+          {
+            "name": "error-context",
+            "path": "D:\\ReelRecruite-testing\\test-results\\UI-Recruiter-ForgetPassword-Recruiter-forget-password-flow\\error-context.md",
+            "contentType": "text/markdown"
+          }
+        ]
+      }
+    ]
+  },
+  {
     "id": 1767804598967,
     "startedAt": "2026-01-07T16:49:28.198Z",
     "endedAt": "2026-01-07T16:49:58.967Z",
