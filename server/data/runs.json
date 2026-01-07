@@ -1,5 +1,39 @@
 [
   {
+    "id": 1767802830466,
+    "startedAt": "2026-01-07T16:18:26.178Z",
+    "endedAt": "2026-01-07T16:20:30.465Z",
+    "duration": 124287,
+    "summary": {
+      "total": 1,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 1,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Candidate signs up and moves user from RandomUsers to NewUsers",
+        "description": "",
+        "file": "UI/Signup.spec.js",
+        "line": 6,
+        "status": "timedOut",
+        "duration": 120057,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": "\u001b[31mTest timeout of 120000ms exceeded.\u001b[39m",
+        "stack": "\u001b[31mTest timeout of 120000ms exceeded.\u001b[39m",
+        "attachments": [
+          {
+            "name": "error-context",
+            "path": "D:\\ReelRecruite-testing\\test-results\\UI-Signup-Candidate-signs--b3499-rom-RandomUsers-to-NewUsers\\error-context.md",
+            "contentType": "text/markdown"
+          }
+        ]
+      }
+    ]
+  },
+  {
     "id": 1767619395350,
     "startedAt": "2026-01-05T13:23:06.118Z",
     "endedAt": "2026-01-05T13:23:15.350Z",
@@ -295,7 +329,6 @@
       }
     ]
   },
-  
   {
     "id": 1767203641980,
     "startedAt": "2025-12-31T17:53:56.535Z",
