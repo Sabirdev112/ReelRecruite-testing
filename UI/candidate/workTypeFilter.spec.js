@@ -1,10 +1,10 @@
 import { test } from '@playwright/test';
-import { loadCandidateCredentials } from '../../support/candidateCredentials.js';
+import { loadCredentials } from '../../support/candidateCredentials.js';
 import { Login } from '../../Pages/Login.js';
 import { FilterPage } from '../../Pages/Filter.js';
 
 
-const candidate = loadCandidateCredentials()[0];
+const candidate = loadCredentials()[0];
 
 test('Apply Work Type filter', async ({ page }) => {
   const login = new Login(page);

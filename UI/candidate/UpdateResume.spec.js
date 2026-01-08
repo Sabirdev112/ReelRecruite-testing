@@ -2,9 +2,9 @@ import { test, expect } from '@playwright/test';
 import { loadCredentials } from '../../support/candidateCredentials.js';
 import { Login } from '../../Pages/Login.js';
 import { UploadResume } from '../../Pages/ChangeResume.js';
-import { getCandidateProfileByEmail } from '../../support/candidateDb.helper.js';
+import { getCandidateProfileByEmail, getCandidateResumeUrl } from '../../support/candidateDb.helper.js';
 
-// Load candidate credentials
+
 const candidate = loadCredentials()[0];
 
 test('Candidate deletes and uploads resume', async ({ page }) => {
@@ -26,5 +26,6 @@ test('Candidate deletes and uploads resume', async ({ page }) => {
   // Verify DB
   const profile = await getCandidateProfileByEmail(candidate.email);
   expect(profile).toBeTruthy();
-  expect(profile.resume_url).toBeTruthy();
+  const resume = await getCandidateResumeUrl(profile.user_id);
+  expect(resume).toBeTruthy();
 });

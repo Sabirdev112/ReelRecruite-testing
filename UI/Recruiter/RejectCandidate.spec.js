@@ -10,7 +10,7 @@ const jobUrl = buildJobUrl(jobId);
 
 
 test('Recruiter Reject candidate from applications', async ({ page }) => {
-  // ----------- Login -----------
+  
   const loginPage = new Login(page);
   await loginPage.goto();
   await loginPage.login(recruiter.email, recruiter.password);

@@ -57,20 +57,27 @@ export class UpdateCoverVideoResumePage {
     console.log('Video removed successfully');
   }
 
- async uploadVideo(filename = 'sample-video.mp4') {
-    await this.handleMaybeLaterIfPresent();
+async uploadVideo(filename = 'sample-video.mp4') {
+  await this.handleMaybeLaterIfPresent();
 
-    const videoPath = getVideoPath(filename);
-    await this.uploadVideoInput.waitFor({ state: 'attached' });
-    await this.uploadVideoInput.setInputFiles(videoPath);
-    await this.uploadVideoInput.evaluate(input =>
-      input.dispatchEvent(new Event('change', { bubbles: true }))
-    );
-    await this.handleMaybeLaterIfPresent();
+  const videoPath = getVideoPath(filename);
+  await this.uploadVideoInput.waitFor({ state: 'attached' });
 
-    await this.page.waitForLoadState('networkidle');
-    console.log(`Video uploaded successfully: ${videoPath}`); 
-  }
+  await Promise.all([
+    this.page.waitForResponse(
+      r =>
+        r.request().method() === 'POST' &&
+        r.status() === 200,
+      { timeout: 200_000 }
+    ),
+    this.uploadVideoInput.setInputFiles(videoPath)
+  ]);
+
+  await this.handleMaybeLaterIfPresent();
+
+  console.log(`Video upload completed: ${videoPath}`);
+}
+
 
 
 }
