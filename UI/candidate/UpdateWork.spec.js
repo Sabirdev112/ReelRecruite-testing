@@ -1,11 +1,11 @@
 import { test, expect } from '@playwright/test';
-import { loadCandidateCredentials } from '../../support/candidateCredentials.js';
+import { loadCredentials } from '../../support/candidateCredentials.js';
 import { Login } from '../../Pages/Login.js';
 import { UpdateWorkPage } from '../../Pages/UpdateWork.js';
 import { getCandidateWorkExperience, getCandidateProfileByEmail } from '../../support/candidateDb.helper.js';
 
 
-const candidate = loadCandidateCredentials()[0];
+const candidate = loadCredentials()[0];
 
 test('Candidate deletes existing work (if any) and adds new experience', async ({ page }) => {
   const loginPage = new Login(page);

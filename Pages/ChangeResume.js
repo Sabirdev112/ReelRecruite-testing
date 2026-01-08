@@ -73,20 +73,24 @@ export class UploadResume {
   }
 
   async uploadNewResume(filename = 'Bold-Poster.pdf') {
-    await this.handleMaybeLaterIfPresent();
+  await this.handleMaybeLaterIfPresent();
 
-    const resumePath = getResumePath(filename);
+  const resumePath = getResumePath(filename);
+  await this.uploadInput.waitFor({ state: 'attached' });
 
-    await this.uploadInput.waitFor({ state: 'attached' });
-    await this.uploadInput.setInputFiles(resumePath);
-    
+  await Promise.all([
+    this.page.waitForResponse(
+      r =>
+        r.request().method() === 'POST' &&
+        r.status() === 200,
+      { timeout: 20_0000 }
+    ),
+    this.uploadInput.setInputFiles(resumePath)
+  ]);
 
-    // Trigger frontend update
-    await this.uploadInput.evaluate(input =>
-      input.dispatchEvent(new Event('change', { bubbles: true }))
-    );
+  await this.handleMaybeLaterIfPresent();
 
-    await this.page.waitForLoadState('networkidle');
-    console.log(`Resume uploaded successfully: ${resumePath}`);
-  }
+  console.log(`Resume upload completed: ${resumePath}`);
+}
+
 }
