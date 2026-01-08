@@ -16,6 +16,7 @@ test('Recruiter see cover video', async ({ page }) => {
   await loginPage.goto();
   await loginPage.login(recruiter.email, recruiter.password);
   await loginPage.clickSignIn(); 
+  await page.waitForURL('**/my-jobs');
 
   await page.goto(jobUrl);
 

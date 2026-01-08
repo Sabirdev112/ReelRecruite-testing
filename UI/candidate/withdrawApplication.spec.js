@@ -1,11 +1,11 @@
 import { test } from '@playwright/test';
 import { Login } from '../../Pages/Login.js';
 import { withdrawPage } from '../../Pages/withdrawApplication.js';
-import { loadCandidateCredentials } from '../../support/candidateCredentials.js';
+import { loadCredentials } from '../../support/candidateCredentials.js';
 import { getApplicationId, buildApplicationUrl } from '../../support/application.helper.js';
 import { verifyApplicationWithdrawn } from '../../support/applicationDb.helper.js';
 
-const candidate = loadCandidateCredentials()[0];
+const candidate = loadCredentials()[0];
 const applicationId = getApplicationId();
 
 test('Candidate withdraw application', async ({ page }) => {

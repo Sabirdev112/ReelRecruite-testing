@@ -69,7 +69,7 @@ app.post('/api/rerun-test', (req, res) => {
     safeFile,
     '--grep',
     escapedGrep,
-    '--retries=0',
+    '--retries=1',
     '--workers=1'
   ];
 

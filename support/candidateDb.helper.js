@@ -62,11 +62,41 @@ export async function getCandidateWorkExperience(userId) {
 }
 
 export async function getCandidateResumeUrl(userId) {
-  const rows = await runQuery(`SELECT resume_url FROM candidate_profiles WHERE user_id = $1`, [userId]);
-  const resume = rows[0] ? rows[0].resume_url : null;
-  console.log('[candidateDb] getCandidateResumeUrl:', { userId, resume });
-  return resume;
+  if (!userId) {
+    throw new Error(
+      `[candidateDb] getCandidateResumeUrl called with invalid userId: ${userId}`
+    );
+  }
+
+  const rows = await runQuery(
+    `SELECT user_id, resume_url 
+     FROM candidate_profiles 
+     WHERE user_id = $1`,
+    [userId]
+  );
+
+  if (!rows.length) {
+    throw new Error(
+      `[candidateDb] No candidate_profile found for user_id=${userId}`
+    );
+  }
+
+  const { resume_url } = rows[0];
+
+  if (!resume_url) {
+    throw new Error(
+      `[candidateDb] resume_url is NULL for user_id=${userId}`
+    );
+  }
+
+  console.log('[candidateDb] getCandidateResumeUrl:', {
+    userId,
+    resume_url
+  });
+
+  return resume_url;
 }
+
 
 export async function getCandidateCoverVideo(userId) {
   const rows = await runQuery(`SELECT cover_video FROM candidate_profiles WHERE user_id = $1`, [userId]);

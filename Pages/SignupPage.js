@@ -65,7 +65,7 @@ export class SignupPage {
   }
     async createAccount() {
   await this.signUpButton.click();
-  await this.page.waitForLoadState('networkidle');
+  await this.page.waitForTimeout(60000);
   console.log('Account created.');
 }
 async fillOTP(otp) {

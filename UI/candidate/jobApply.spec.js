@@ -1,12 +1,12 @@
 import { test, chromium } from '@playwright/test';
 import { Login } from '../../Pages/Login.js';
 import { ApplyJobPage } from '../../Pages/ApplyJobPage.js';
-import { loadCandidateCredentials } from '../../support/candidateCredentials.js';
+import { loadCredentials } from '../../support/candidateCredentials.js';
 import { getLatestJobId, buildJobUrl } from '../../support/job.helper.js';
 import { storeApplicationId } from '../../support/application.helper.js';
 import { getApplicationIdForCandidate } from '../../support/applicationDb.helper.js';
 
-const users = loadCandidateCredentials().slice(0, 3);
+const users = loadCredentials().slice(0, 3);
 const jobId = getLatestJobId();
 const jobUrl = buildJobUrl(jobId);
 
