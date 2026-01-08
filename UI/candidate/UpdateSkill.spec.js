@@ -1,11 +1,11 @@
 import { test, expect } from '@playwright/test';
-import { loadCandidateCredentials } from '../../support/candidateCredentials.js';
+import { loadCredentials } from '../../support/candidateCredentials.js';
 import { Login } from '../../Pages/Login.js';
 import { UpdateSkillsPage } from '../../Pages/UpdateSkils.js';
 import { getCandidateSkills, getCandidateProfileByEmail } from '../../support/candidateDb.helper.js';
 
 
-const candidate = loadCandidateCredentials()[0];
+const candidate = loadCredentials()[0];
 
 
 test('candidate can update skills section', async ({ page }) => {
