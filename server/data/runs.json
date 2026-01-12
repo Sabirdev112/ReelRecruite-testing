@@ -1,5 +1,131 @@
 [
   {
+    "id": 1768222106430,
+    "startedAt": "2026-01-12T12:47:12.032Z",
+    "endedAt": "2026-01-12T12:48:26.430Z",
+    "duration": 74398,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Candidate signs up and moves user from RandomUsers to NewUsers",
+        "description": "",
+        "file": "UI/Signup.spec.js",
+        "line": 6,
+        "status": "passed",
+        "duration": 69160,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1768221750027,
+    "startedAt": "2026-01-12T12:42:29.342Z",
+    "endedAt": "2026-01-12T12:42:30.027Z",
+    "duration": 685,
+    "summary": {
+      "total": 0,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": []
+  },
+  {
+    "id": 1768221682269,
+    "startedAt": "2026-01-12T12:41:21.570Z",
+    "endedAt": "2026-01-12T12:41:22.269Z",
+    "duration": 699,
+    "summary": {
+      "total": 0,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": []
+  },
+  {
+    "id": 1768221669498,
+    "startedAt": "2026-01-12T12:40:59.223Z",
+    "endedAt": "2026-01-12T12:41:09.498Z",
+    "duration": 10275,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Candidate can log in using phone number",
+        "description": "",
+        "file": "UI/candidate/PhoneLogin.spec.js",
+        "line": 8,
+        "status": "passed",
+        "duration": 5912,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1768221656379,
+    "startedAt": "2026-01-12T12:40:40.170Z",
+    "endedAt": "2026-01-12T12:40:56.379Z",
+    "duration": 16209,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Recruiter forget password flow",
+        "description": "",
+        "file": "UI/Recruiter/ForgetPassword.spec.js",
+        "line": 7,
+        "status": "passed",
+        "duration": 12484,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1768221636634,
+    "startedAt": "2026-01-12T12:40:36.392Z",
+    "endedAt": "2026-01-12T12:40:36.634Z",
+    "duration": 242,
+    "summary": {
+      "total": 0,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": []
+  },
+  {
     "id": 1767877805288,
     "startedAt": "2026-01-08T13:07:57.661Z",
     "endedAt": "2026-01-08T13:10:05.288Z",

@@ -106,5 +106,11 @@
     "email": "user7.test+signup@gmail.com",
     "phone": "3000000007",
     "password": "Test@12345"
+  },
+  {
+    "fullName": "User 6435",
+    "email": "user176822203676435.test+signup@gmail.com",
+    "phone": "3203676435",
+    "password": "Test@12345"
   }
 ]
