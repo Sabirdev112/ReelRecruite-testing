@@ -1,6 +1,6 @@
 import { test } from '@playwright/test';
 import { SignupPage } from '../Pages/SignupPage.js';
-import {getRandomUser,moveUserAfterSuccess} from '../support/signupCredentials.helper.js';
+import {getRandomUser,storeNewUser} from '../support/signupCredentials.helper.js';
 import { verifyUserCreated } from '../support/signupDb.helper.js';
 
 test('Candidate signs up and moves user from RandomUsers to NewUsers', async ({ page }) => {
@@ -27,7 +27,7 @@ test('Candidate signs up and moves user from RandomUsers to NewUsers', async ({ 
 
     // DB verification
     await verifyUserCreated(user.email);
-    moveUserAfterSuccess(user);
+    storeNewUser(user);
 
   } catch (error) {
     console.log(`Signup failed for ${user.email}: ${error.message}`);

@@ -66,7 +66,7 @@ export class SignupPage {
     async createAccount() {
   await this.signUpButton.click();
   await this.page.waitForTimeout(60000);
-  console.log('Account created.');
+  console.log('clicked on create account.');
 }
 async fillOTP(otp) {
     const digits = otp.split('');
