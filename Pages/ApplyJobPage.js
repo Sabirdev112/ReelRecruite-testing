@@ -37,22 +37,19 @@ export class ApplyJobPage {
     console.log('Video recording started.');
   }
 
-  async stopRecording() {
-    await this.stopRecordingButton.click();
-    await this.confirmVideoButton.waitFor({ state: 'attached' });
-    await this.page.waitForFunction(
-    (selector) => {
-      const btn = document.querySelector(selector);
-      return btn && !btn.disabled;
-    },
-    {},
-    'button:has-text("Use This Video")'
-  );
-    await this.confirmVideoButton.waitFor({ state: 'detached' });
-    await this.confirmVideoButton.click();
-    await this.page.waitForLoadState('networkidle');
-    console.log('Video recording stopped.');
-  }
+ async stopRecording() {
+  await this.stopRecordingButton.click();
+
+  await this.confirmVideoButton.waitFor({ state: 'visible' });
+  await this.confirmVideoButton.click();
+
+  await this.confirmVideoButton.waitFor({ state: 'detached' });
+
+  await this.page.waitForLoadState('networkidle');
+
+  console.log('Video recording stopped.');
+}
+
 
   async answerOne() {
     const answer =

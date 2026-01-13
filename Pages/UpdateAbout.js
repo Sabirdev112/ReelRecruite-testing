@@ -70,7 +70,7 @@ export class UpdateAboutPage {
 
   async updateLocation(location) {
     await this.clearAndTypeUsingKeyboard(this.locationTextbox, location);
-    console.log('Location updated successfully');
+    console.log('Location updated successfully',location);
   }
 
   async saveChanges() {
