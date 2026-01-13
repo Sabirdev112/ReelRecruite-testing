@@ -112,5 +112,23 @@
     "email": "user176822203676435.test+signup@gmail.com",
     "phone": "3203676435",
     "password": "Test@12345"
+  },
+  {
+    "fullName": "User 8805",
+    "email": "user1768222656868805@gmail.com",
+    "phone": "3656868805",
+    "password": "Test@12345"
+  },
+  {
+    "fullName": "User 5883",
+    "email": "user1768229331895883@gmail.com",
+    "phone": "3331895883",
+    "password": "Test@12345"
+  },
+  {
+    "fullName": "User 3734",
+    "email": "user1768309014973734@gmail.com",
+    "phone": "3014973734",
+    "password": "Test@12345"
   }
 ]

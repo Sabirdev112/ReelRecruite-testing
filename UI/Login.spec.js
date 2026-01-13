@@ -7,7 +7,6 @@ test ('Recruiter logs in successfully', async ({page}) => {
   await login.goto();
   await login.login('carlos@gmail.com', 'Carlos@123');
   await login.clickSignIn();
-  console.log('Login successful');
 
   // Verify user exists in DB
   const users = await runQuery(

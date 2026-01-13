@@ -2,13 +2,16 @@ import { runQuery } from "../utils/db/dbClient.js";
 
 export async function getUserByEmail(email) {
   const rows = await runQuery(
-    `SELECT id, email, full_name, title, bio, avatar_url, cover_url, location, phone, updated_at FROM users WHERE email = $1`,
+    `SELECT id, email, full_name, title, bio, avatar_url, cover_url, location, phone, country, updated_at
+     FROM users
+     WHERE email = $1`,
     [email]
   );
   const result = rows[0];
-  console.log('[recruiterDb] getUserByEmail:', { email, id: result && result.id, full_name: result && result.full_name });
+  console.log('[candidateDb] getUserByEmail:', { email, id: result && result.id, full_name: result && result.full_name, country: result && result.country });
   return result;
 }
+
 
 export async function getUserById(userId) {
   const rows = await runQuery(

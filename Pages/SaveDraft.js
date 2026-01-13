@@ -16,12 +16,22 @@ export class SaveDraft {
   
 
    async clickIfVisible(locator) {
-  if (await locator.isVisible().catch(() => false)) {
-    await locator.click();
-    return true;
+  if (!locator) {
+    return false;
   }
+
+  try {
+    if (await locator.isVisible()) {
+      await locator.click();
+      return true;
+    }
+  } catch {
+    // Swallow errors caused by detached DOM / timing
+  }
+
   return false;
 }
+
 
 async postJob () {
     await this.clickIfVisible(this.cancelButton);
