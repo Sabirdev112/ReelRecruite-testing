@@ -68,9 +68,6 @@ export class UpdateInfoPage {
     const profilePath = getProfileImagePath();
 
     await this.profilePictureEditButton.waitFor({ state: 'visible' });
-    await expect(this.profilePictureEditButton).toBeVisible();
-    await this.profilePictureEditButton.click();
-
     await this.profilePictureInput.waitFor({ state: 'attached' });
     await this.profilePictureInput.setInputFiles(profilePath);
     await this.profilePictureInput.evaluate(input =>
@@ -107,7 +104,7 @@ export class UpdateInfoPage {
     await this.saveChangesButton.waitFor({ state: 'visible' });
     await expect(this.saveChangesButton).toBeVisible();
     await this.saveChangesButton.click();
-    await this.page.waitForLoadState('networkidle');
+    await this.page.waitForTimeout(240000);
     console.log('Changes saved');
   }
 }

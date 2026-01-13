@@ -27,5 +27,6 @@ test('recruiter can update about section', async ({ page }) => {
   // Verify DB
   const db = await getUserByEmail(recruiter.email);
   expect(db.bio).toContain('Experienced software engineer');
+  expect(db.country).toBe('United States');
   expect(db.location).toBe('San Francisco, CA');
 });
