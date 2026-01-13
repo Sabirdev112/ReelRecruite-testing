@@ -8,7 +8,7 @@ const recruiter = loadCredentials()[0];
 
 
 
-test('Candidate info, profile picture, and banner update', async ({ page }) => {
+test('recruuiter info, profile picture, and banner update', async ({ page }) => {
   const loginPage = new Login(page);
   const updateInfoPage = new UpdateInfoPage(page);
   await loginPage.goto();
@@ -29,4 +29,6 @@ test('Candidate info, profile picture, and banner update', async ({ page }) => {
   const db = await getRecruiterPublicFieldsByEmail(recruiter.email);
   expect(db.full_name).toBe('Sabir-SQA');
   expect(db.title).toBe('Senior QA Engineer');
+  expect(db.cover_image).toBeTruthy();
+  expect (db.profile_image).toBeTruthy();
 });
