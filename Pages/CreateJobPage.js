@@ -32,8 +32,15 @@ export class CreateJobPage {
     this.requiredCheckbox = page.getByRole('checkbox', { name: 'This question is required' });
     this.responseType = page.getByRole('combobox');
 
-    this.previewButton = page.locator('button.bg-primary:has-text("Preview")');
+    this.previewButton = page.locator("//button[contains(text(),'Preview')]");
     this.seeAllButton = page.getByRole('button', { name: 'See All' });
+
+    // AI Generation locators
+    this.generateWithAIButton = page.getByRole('button', { name: 'Generate with AI' });
+    this.generateButton = page.getByText('Generate', { exact: true });
+    this.applyButton = page.getByRole('button', { name: 'Apply' });
+    this.closeButton = page.locator("//button[@aria-label='Close']//*[name()='svg']");
+    this.aiPromptTextarea = page.locator('textarea.w-full.px-4.py-3.border.border-gray-300.rounded-lg.focus\\:ring-2.focus\\:ring-primary.focus\\:border-transparent.resize-none');
   }
 
   async handleCancelIfPresent() {
@@ -116,7 +123,6 @@ export class CreateJobPage {
     await this.educationInput.press('Enter');
     await this.cultureInput.fill('SQA');
     await this.cultureInput.press('Enter');
-    await this.nextButton.click();
     console.log('Requirements filled');
   }
 
@@ -157,5 +163,45 @@ export class CreateJobPage {
   async seeAllApplications() {
     await this.seeAllButton.click();
     console.log('See all applications clicked');
+  }
+
+  async generateSummaryWithAI() {
+    await this.generateWithAIButton.click();
+    console.log('Generate with AI button clicked for summary');
+  }
+
+  async applyGeneratedSummary() {
+    await this.applyButton.click();
+    console.log('Applied generated summary');
+  }
+
+  async generateDescriptionWithAI() {
+    await this.generateWithAIButton.click();
+    console.log('Generate with AI button clicked for description');
+  }
+
+  async applyGeneratedDescription() {
+    await this.applyButton.click();
+    console.log('Applied generated description');
+  }
+
+  async closeAIModal() {
+    await this.closeButton.click();
+    console.log('Closed AI modal');
+  }
+
+  async fillAIPrompt(prompt) {
+    await this.aiPromptTextarea.fill(prompt);
+    console.log(`Filled AI prompt: ${prompt}`);
+  }
+
+  async generateWithPrompt(prompt) {
+    await this.fillAIPrompt(prompt);
+    await Promise.all([
+      this.page.waitForLoadState('networkidle', { timeout: 30000 }),
+      this.generateButton.click()
+    ]);
+    console.log('Generated content with AI prompt');
+    await this.page.waitForLoadState('networkidle', { timeout: 30000 });
   }
 }
