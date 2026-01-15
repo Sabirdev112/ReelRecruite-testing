@@ -1,5 +1,691 @@
 [
   {
+    "id": 1768490550664,
+    "startedAt": "2026-01-15T15:21:48.604Z",
+    "endedAt": "2026-01-15T15:22:30.664Z",
+    "duration": 42060,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Recruiter login and create a new job with AI generation",
+        "description": "",
+        "file": "UI/Recruiter/AIjob.spec.js",
+        "line": 10,
+        "status": "passed",
+        "duration": 39984,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1768490492469,
+    "startedAt": "2026-01-15T15:20:47.250Z",
+    "endedAt": "2026-01-15T15:21:32.469Z",
+    "duration": 45219,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Recruiter login and create a new job with AI generation",
+        "description": "",
+        "file": "UI/Recruiter/AIjob.spec.js",
+        "line": 10,
+        "status": "passed",
+        "duration": 43102,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1768490372696,
+    "startedAt": "2026-01-15T15:18:48.852Z",
+    "endedAt": "2026-01-15T15:19:32.696Z",
+    "duration": 43844,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Recruiter login and create a new job with AI generation",
+        "description": "",
+        "file": "UI/Recruiter/AIjob.spec.js",
+        "line": 10,
+        "status": "passed",
+        "duration": 41522,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1768490298154,
+    "startedAt": "2026-01-15T15:15:14.322Z",
+    "endedAt": "2026-01-15T15:18:18.154Z",
+    "duration": 183832,
+    "summary": {
+      "total": 1,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 1,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Recruiter login and create a new job with AI generation",
+        "description": "",
+        "file": "UI/Recruiter/AIjob.spec.js",
+        "line": 10,
+        "status": "timedOut",
+        "duration": 180105,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": "\u001b[31mTest timeout of 180000ms exceeded.\u001b[39m",
+        "stack": "\u001b[31mTest timeout of 180000ms exceeded.\u001b[39m",
+        "attachments": [
+          {
+            "name": "error-context",
+            "path": "C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\test-results\\UI-Recruiter-AIjob-Recruit-310ad--new-job-with-AI-generation\\error-context.md",
+            "contentType": "text/markdown"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1768489921576,
+    "startedAt": "2026-01-15T15:11:05.380Z",
+    "endedAt": "2026-01-15T15:12:01.575Z",
+    "duration": 56195,
+    "summary": {
+      "total": 1,
+      "passed": 0,
+      "failed": 1,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Recruiter login and create a new job with AI generation",
+        "description": "",
+        "file": "UI/Recruiter/AIjob.spec.js",
+        "line": 10,
+        "status": "failed",
+        "duration": 52029,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": "Error: locator.waitFor: Unexpected token \"/\" while parsing css selector \"button.flex.items-center.justify-center.font-semibold.transition-all.duration-200.ease-in-out.focus:outline-none.focus:ring-2.focus:ring-offset-2.focus:ring-offset-background.active:scale-[0.98].whitespace-nowrap.bg-secondary.text-text-light.hover:bg-secondary/90.focus:ring-focus.shadow-md.hover:shadow-lg.h-10.px-4.text-sm.rounded-xl.gap-2\". Did you mean to CSS.escape it?\nCall log:\n\u001b[2m  - waiting for button.flex.items-center.justify-center.font-semibold.transition-all.duration-200.ease-in-out.focus:outline-none.focus:ring-2.focus:ring-offset-2.focus:ring-offset-background.active:scale-[0.98].whitespace-nowrap.bg-secondary.text-text-light.hover:bg-secondary/90.focus:ring-focus.shadow-md.hover:shadow-lg.h-10.px-4.text-sm.rounded-xl.gap-2 to be visible\u001b[22m\n",
+        "stack": "Error: locator.waitFor: Unexpected token \"/\" while parsing css selector \"button.flex.items-center.justify-center.font-semibold.transition-all.duration-200.ease-in-out.focus:outline-none.focus:ring-2.focus:ring-offset-2.focus:ring-offset-background.active:scale-[0.98].whitespace-nowrap.bg-secondary.text-text-light.hover:bg-secondary/90.focus:ring-focus.shadow-md.hover:shadow-lg.h-10.px-4.text-sm.rounded-xl.gap-2\". Did you mean to CSS.escape it?\nCall log:\n\u001b[2m  - waiting for button.flex.items-center.justify-center.font-semibold.transition-all.duration-200.ease-in-out.focus:outline-none.focus:ring-2.focus:ring-offset-2.focus:ring-offset-background.active:scale-[0.98].whitespace-nowrap.bg-secondary.text-text-light.hover:bg-secondary/90.focus:ring-focus.shadow-md.hover:shadow-lg.h-10.px-4.text-sm.rounded-xl.gap-2 to be visible\u001b[22m\n\n    at CreateJobPage.previewJob (C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\Pages\\CreateJobPage.js:141:30)\n    at C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\UI\\Recruiter\\AIjob.spec.js:57:19",
+        "attachments": [
+          {
+            "name": "error-context",
+            "path": "C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\test-results\\UI-Recruiter-AIjob-Recruit-310ad--new-job-with-AI-generation\\error-context.md",
+            "contentType": "text/markdown"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1768489732886,
+    "startedAt": "2026-01-15T15:07:08.160Z",
+    "endedAt": "2026-01-15T15:08:52.886Z",
+    "duration": 104726,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Recruiter login and create a new job with AI generation",
+        "description": "",
+        "file": "UI/Recruiter/AIjob.spec.js",
+        "line": 10,
+        "status": "passed",
+        "duration": 100300,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1768489575991,
+    "startedAt": "2026-01-15T15:05:08.254Z",
+    "endedAt": "2026-01-15T15:06:15.991Z",
+    "duration": 67737,
+    "summary": {
+      "total": 1,
+      "passed": 0,
+      "failed": 1,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Recruiter login and create a new job with AI generation",
+        "description": "",
+        "file": "UI/Recruiter/AIjob.spec.js",
+        "line": 10,
+        "status": "failed",
+        "duration": 65363,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": "TimeoutError: locator.waitFor: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: 'Next' }) to be visible\u001b[22m\n",
+        "stack": "TimeoutError: locator.waitFor: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: 'Next' }) to be visible\u001b[22m\n\n    at C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\UI\\Recruiter\\AIjob.spec.js:60:30",
+        "attachments": [
+          {
+            "name": "error-context",
+            "path": "C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\test-results\\UI-Recruiter-AIjob-Recruit-310ad--new-job-with-AI-generation\\error-context.md",
+            "contentType": "text/markdown"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1768488669364,
+    "startedAt": "2026-01-15T14:48:03.993Z",
+    "endedAt": "2026-01-15T14:51:09.363Z",
+    "duration": 185370,
+    "summary": {
+      "total": 1,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 1,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Recruiter login and create a new job with AI generation",
+        "description": "",
+        "file": "UI/Recruiter/AIjob.spec.js",
+        "line": 10,
+        "status": "timedOut",
+        "duration": 180106,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": "\u001b[31mTest timeout of 180000ms exceeded.\u001b[39m",
+        "stack": "\u001b[31mTest timeout of 180000ms exceeded.\u001b[39m",
+        "attachments": [
+          {
+            "name": "error-context",
+            "path": "C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\test-results\\UI-Recruiter-AIjob-Recruit-310ad--new-job-with-AI-generation\\error-context.md",
+            "contentType": "text/markdown"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1768488372550,
+    "startedAt": "2026-01-15T14:43:07.929Z",
+    "endedAt": "2026-01-15T14:46:12.549Z",
+    "duration": 184620,
+    "summary": {
+      "total": 1,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 1,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Recruiter login and create a new job with AI generation",
+        "description": "",
+        "file": "UI/Recruiter/AIjob.spec.js",
+        "line": 10,
+        "status": "timedOut",
+        "duration": 180163,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": "\u001b[31mTest timeout of 180000ms exceeded.\u001b[39m",
+        "stack": "\u001b[31mTest timeout of 180000ms exceeded.\u001b[39m",
+        "attachments": [
+          {
+            "name": "error-context",
+            "path": "C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\test-results\\UI-Recruiter-AIjob-Recruit-310ad--new-job-with-AI-generation\\error-context.md",
+            "contentType": "text/markdown"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1768488128492,
+    "startedAt": "2026-01-15T14:41:02.827Z",
+    "endedAt": "2026-01-15T14:42:08.492Z",
+    "duration": 65665,
+    "summary": {
+      "total": 1,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 1
+    },
+    "tests": [
+      {
+        "title": "Recruiter login and create a new job",
+        "description": "",
+        "file": "UI/Recruiter/CreateJob.spec.js",
+        "line": 10,
+        "status": "interrupted",
+        "duration": 61467,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": "Error: locator.click: Test ended.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: 'Add Question' })\u001b[22m\n",
+        "stack": "Error: locator.click: Test ended.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: 'Add Question' })\u001b[22m\n\n    at CreateJobPage.addQuestions (C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\Pages\\CreateJobPage.js:130:34)\n    at C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\UI\\Recruiter\\CreateJob.spec.js:25:19",
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1768487692447,
+    "startedAt": "2026-01-15T14:33:39.112Z",
+    "endedAt": "2026-01-15T14:34:52.447Z",
+    "duration": 73335,
+    "summary": {
+      "total": 1,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 1
+    },
+    "tests": [
+      {
+        "title": "Recruiter login and create a new job with AI generation",
+        "description": "",
+        "file": "UI/Recruiter/AIjob.spec.js",
+        "line": 10,
+        "status": "interrupted",
+        "duration": 69444,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": "Error: page.waitForResponse: Test ended.",
+        "stack": "Error: page.waitForResponse: Test ended.\n    at CreateJobPage.submitJob (C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\Pages\\CreateJobPage.js:164:17)\n    at C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\UI\\Recruiter\\AIjob.spec.js:59:17",
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1768487613228,
+    "startedAt": "2026-01-15T14:31:03.930Z",
+    "endedAt": "2026-01-15T14:33:33.228Z",
+    "duration": 149298,
+    "summary": {
+      "total": 1,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 1
+    },
+    "tests": [
+      {
+        "title": "Recruiter login and create a new job with AI generation",
+        "description": "",
+        "file": "UI/Recruiter/AIjob.spec.js",
+        "line": 10,
+        "status": "interrupted",
+        "duration": 145514,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": "Error: locator.click: Test ended.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: 'Next' })\u001b[22m\n",
+        "stack": "Error: locator.click: Test ended.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: 'Next' })\u001b[22m\n\n    at CreateJobPage.addQuestions (C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\Pages\\CreateJobPage.js:142:23)\n    at C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\UI\\Recruiter\\AIjob.spec.js:55:3",
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1768487458213,
+    "startedAt": "2026-01-15T14:29:42.117Z",
+    "endedAt": "2026-01-15T14:30:58.213Z",
+    "duration": 76096,
+    "summary": {
+      "total": 1,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 1
+    },
+    "tests": [
+      {
+        "title": "Recruiter login and create a new job with AI generation",
+        "description": "",
+        "file": "UI/Recruiter/AIjob.spec.js",
+        "line": 10,
+        "status": "interrupted",
+        "duration": 72100,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": "Error: locator.click: Test ended.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: 'Add Question' })\u001b[22m\n",
+        "stack": "Error: locator.click: Test ended.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: 'Add Question' })\u001b[22m\n\n    at CreateJobPage.addQuestions (C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\Pages\\CreateJobPage.js:130:34)\n    at C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\UI\\Recruiter\\AIjob.spec.js:45:19",
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1768487373496,
+    "startedAt": "2026-01-15T14:28:29.420Z",
+    "endedAt": "2026-01-15T14:29:33.496Z",
+    "duration": 64076,
+    "summary": {
+      "total": 1,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 1
+    },
+    "tests": [
+      {
+        "title": "Recruiter login and create a new job with AI generation",
+        "description": "",
+        "file": "UI/Recruiter/AIjob.spec.js",
+        "line": 10,
+        "status": "interrupted",
+        "duration": 60098,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": "Error: locator.click: Test ended.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: 'Add Question' })\u001b[22m\n",
+        "stack": "Error: locator.click: Test ended.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: 'Add Question' })\u001b[22m\n\n    at CreateJobPage.addQuestions (C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\Pages\\CreateJobPage.js:130:34)\n    at C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\UI\\Recruiter\\AIjob.spec.js:51:19",
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1768487303569,
+    "startedAt": "2026-01-15T14:27:15.780Z",
+    "endedAt": "2026-01-15T14:28:23.568Z",
+    "duration": 67788,
+    "summary": {
+      "total": 1,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 1
+    },
+    "tests": [
+      {
+        "title": "Recruiter login and create a new job with AI generation",
+        "description": "",
+        "file": "UI/Recruiter/AIjob.spec.js",
+        "line": 10,
+        "status": "interrupted",
+        "duration": 63821,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": "Error: locator.click: Test ended.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: 'Add Question' })\u001b[22m\n",
+        "stack": "Error: locator.click: Test ended.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: 'Add Question' })\u001b[22m\n\n    at CreateJobPage.addQuestions (C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\Pages\\CreateJobPage.js:130:34)\n    at C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\UI\\Recruiter\\AIjob.spec.js:45:19",
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1768487228836,
+    "startedAt": "2026-01-15T14:25:47.448Z",
+    "endedAt": "2026-01-15T14:27:08.836Z",
+    "duration": 81388,
+    "summary": {
+      "total": 1,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 1
+    },
+    "tests": [
+      {
+        "title": "Recruiter login and create a new job with AI generation",
+        "description": "",
+        "file": "UI/Recruiter/AIjob.spec.js",
+        "line": 10,
+        "status": "interrupted",
+        "duration": 77365,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": "Error: locator.click: Test ended.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: 'Next' })\u001b[22m\n",
+        "stack": "Error: locator.click: Test ended.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: 'Next' })\u001b[22m\n\n    at CreateJobPage.addQuestions (C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\Pages\\CreateJobPage.js:142:23)\n    at C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\UI\\Recruiter\\AIjob.spec.js:55:3",
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1768487031845,
+    "startedAt": "2026-01-15T14:22:40.448Z",
+    "endedAt": "2026-01-15T14:23:51.844Z",
+    "duration": 71396,
+    "summary": {
+      "total": 1,
+      "passed": 0,
+      "failed": 1,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Recruiter login and create a new job with AI generation",
+        "description": "",
+        "file": "UI/Recruiter/AIjob.spec.js",
+        "line": 10,
+        "status": "failed",
+        "duration": 66726,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": "TimeoutError: locator.waitFor: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('button.bg-primary:has-text(\"Preview\")') to be visible\u001b[22m\n",
+        "stack": "TimeoutError: locator.waitFor: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('button.bg-primary:has-text(\"Preview\")') to be visible\u001b[22m\n\n    at CreateJobPage.previewJob (C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\Pages\\CreateJobPage.js:142:30)\n    at C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\UI\\Recruiter\\AIjob.spec.js:53:19",
+        "attachments": [
+          {
+            "name": "error-context",
+            "path": "C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\test-results\\UI-Recruiter-AIjob-Recruit-310ad--new-job-with-AI-generation\\error-context.md",
+            "contentType": "text/markdown"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1768486885062,
+    "startedAt": "2026-01-15T14:18:22.544Z",
+    "endedAt": "2026-01-15T14:21:25.062Z",
+    "duration": 182518,
+    "summary": {
+      "total": 1,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 1,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Recruiter login and create a new job with AI generation",
+        "description": "",
+        "file": "UI/Recruiter/AIjob.spec.js",
+        "line": 10,
+        "status": "timedOut",
+        "duration": 180188,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": "\u001b[31mTest timeout of 180000ms exceeded.\u001b[39m",
+        "stack": "\u001b[31mTest timeout of 180000ms exceeded.\u001b[39m",
+        "attachments": [
+          {
+            "name": "error-context",
+            "path": "C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\test-results\\UI-Recruiter-AIjob-Recruit-310ad--new-job-with-AI-generation\\error-context.md",
+            "contentType": "text/markdown"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1768486697770,
+    "startedAt": "2026-01-15T14:16:52.346Z",
+    "endedAt": "2026-01-15T14:18:17.770Z",
+    "duration": 85424,
+    "summary": {
+      "total": 1,
+      "passed": 0,
+      "failed": 1,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Recruiter login and create a new job with AI generation",
+        "description": "",
+        "file": "UI/Recruiter/AIjob.spec.js",
+        "line": 10,
+        "status": "failed",
+        "duration": 83065,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": "Error: locator.click: Target page, context or browser has been closed\nCall log:\n\u001b[2m  - waiting for locator('button.bg-primary:has-text(\"Preview\")')\u001b[22m\n",
+        "stack": "Error: locator.click: Target page, context or browser has been closed\nCall log:\n\u001b[2m  - waiting for locator('button.bg-primary:has-text(\"Preview\")')\u001b[22m\n\n    at CreateJobPage.previewJob (C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\Pages\\CreateJobPage.js:142:30)\n    at C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\UI\\Recruiter\\AIjob.spec.js:46:19",
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1768486307408,
+    "startedAt": "2026-01-15T14:11:21.641Z",
+    "endedAt": "2026-01-15T14:11:47.408Z",
+    "duration": 25767,
+    "summary": {
+      "total": 1,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 1
+    },
+    "tests": [
+      {
+        "title": "Recruiter login and create a new job with AI generation",
+        "description": "",
+        "file": "UI/Recruiter/AIjob.spec.js",
+        "line": 10,
+        "status": "interrupted",
+        "duration": 21743,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": "Error: page.waitForTimeout: Test ended.",
+        "stack": "Error: page.waitForTimeout: Test ended.\n    at C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\UI\\Recruiter\\AIjob.spec.js:26:14",
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1768486275473,
+    "startedAt": "2026-01-15T14:09:56.509Z",
+    "endedAt": "2026-01-15T14:11:15.473Z",
+    "duration": 78964,
+    "summary": {
+      "total": 1,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 1
+    },
+    "tests": [
+      {
+        "title": "Recruiter login and create a new job with AI generation",
+        "description": "",
+        "file": "UI/Recruiter/AIjob.spec.js",
+        "line": 10,
+        "status": "interrupted",
+        "duration": 75415,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": "Error: locator.click: Test ended.\nCall log:\n\u001b[2m  - waiting for locator('.react-select__input-container').first()\u001b[22m\n",
+        "stack": "Error: locator.click: Test ended.\nCall log:\n\u001b[2m  - waiting for locator('.react-select__input-container').first()\u001b[22m\n\n    at CreateJobPage.fillJobTypeAndCompensation (C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\Pages\\CreateJobPage.js:88:35)\n    at C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\UI\\Recruiter\\AIjob.spec.js:27:19",
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1768486190682,
+    "startedAt": "2026-01-15T14:08:50.194Z",
+    "endedAt": "2026-01-15T14:09:50.682Z",
+    "duration": 60488,
+    "summary": {
+      "total": 1,
+      "passed": 0,
+      "failed": 1,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Recruiter login and create a new job with AI generation",
+        "description": "",
+        "file": "UI/Recruiter/AIjob.spec.js",
+        "line": 10,
+        "status": "failed",
+        "duration": 55834,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": "Error: locator.fill: Target page, context or browser has been closed\nCall log:\n\u001b[2m  - waiting for getByRole('textbox', { name: 'e.g., React, TypeScript' })\u001b[22m\n",
+        "stack": "Error: locator.fill: Target page, context or browser has been closed\nCall log:\n\u001b[2m  - waiting for getByRole('textbox', { name: 'e.g., React, TypeScript' })\u001b[22m\n\n    at CreateJobPage.addSkills (C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\Pages\\CreateJobPage.js:115:29)\n    at C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\UI\\Recruiter\\AIjob.spec.js:34:19",
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1768485888026,
+    "startedAt": "2026-01-15T14:04:06.591Z",
+    "endedAt": "2026-01-15T14:04:48.026Z",
+    "duration": 41435,
+    "summary": {
+      "total": 1,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 1
+    },
+    "tests": [
+      {
+        "title": "Recruiter login and create a new job with AI generation",
+        "description": "",
+        "file": "UI/Recruiter/AIjob.spec.js",
+        "line": 10,
+        "status": "interrupted",
+        "duration": 36960,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": "Error: locator.click: Test ended.\nCall log:\n\u001b[2m  - waiting for locator('button.bg-primary:has-text(\"Preview\")')\u001b[22m\n",
+        "stack": "Error: locator.click: Test ended.\nCall log:\n\u001b[2m  - waiting for locator('button.bg-primary:has-text(\"Preview\")')\u001b[22m\n\n    at CreateJobPage.previewJob (C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\Pages\\CreateJobPage.js:141:30)\n    at C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\UI\\Recruiter\\AIjob.spec.js:26:19",
+        "attachments": []
+      }
+    ]
+  },
+  {
     "id": 1768310194423,
     "startedAt": "2026-01-13T13:14:31.799Z",
     "endedAt": "2026-01-13T13:16:34.423Z",
