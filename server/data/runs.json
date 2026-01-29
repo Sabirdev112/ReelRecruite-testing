@@ -41,12 +41,12 @@
     },
     "tests": [
       {
-        "title": "Recruiter login and create a new job with AI generation",
+        "title": "Recruiter logs in successfully",
         "description": "",
-        "file": "UI/Recruiter/AIjob.spec.js",
-        "line": 10,
+        "file": "UI/Login.spec.js",
+        "line": 4,
         "status": "passed",
-        "duration": 43102,
+        "duration": 9955,
         "retries": 0,
         "wasFlaky": false,
         "error": null,
@@ -56,15 +56,15 @@
     ]
   },
   {
-    "id": 1768490372696,
-    "startedAt": "2026-01-15T15:18:48.852Z",
-    "endedAt": "2026-01-15T15:19:32.696Z",
-    "duration": 43844,
+    "id": 1769444056028,
+    "startedAt": "2026-01-26T16:12:09.725Z",
+    "endedAt": "2026-01-26T16:14:16.028Z",
+    "duration": 126303,
     "summary": {
       "total": 1,
-      "passed": 1,
+      "passed": 0,
       "failed": 0,
-      "skipped": 0,
+      "skipped": 1,
       "interrupted": 0
     },
     "tests": [

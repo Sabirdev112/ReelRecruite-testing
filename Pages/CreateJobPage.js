@@ -5,125 +5,110 @@ export class CreateJobPage {
   constructor(page) {
     this.page = page;
     this.createdJobId = null;
+    this.postNewJobButton = page.getByTestId('post-new-job-button'); 
+    this.nextButton = page.getByTestId('next-step-button'); 
 
-    this.cancelButton = page.getByRole('button', { name: 'Cancel' });
-    this.postNewJobButton = page.getByRole('button', { name: 'Post New Job' });
-    this.nextButton = page.getByRole('button', { name: 'Next' });
-    this.createJobButton = page.getByRole('button', { name: 'Confirm & publish job' });
+    this.titleInput = page.getByTestId('job-title-input');
+    this.summaryInput = page.getByTestId('job-highlight-textarea');
+    this.generateHighlightButton = page.getByTestId('generate-highlight-ai-button');
+    this.generateInput = page.getByTestId('ai-prompt-textarea');
+    this.confirmGenerateButton = page.getByTestId('ai-generate-button');
+    this.applyAiButton = page.getByTestId('ai-apply-generated-button');
+    this.generatedescriptionbutton = page.getByTestId('generate-description-ai-button');
+    this.regionInput = page.getByTestId('job-region-input');
+    this.locationInput = page.getByTestId('job-location-input');
+    this.jobTypeDropdown = page.getByTestId('job-type-dropdown');
+    this.workTypeDropdown = page.getByTestId('work-type-dropdown');
+    this.experienceDropdown = page.getByTestId('experience-level-dropdown');
+    this.salaryInput = page.getByTestId('salary-range-input');
+    this.currencySelectControl = page.getByTestId('currency-dropdown');
+    this.addQuestionButton = page.getByTestId('add-question-button');
+    this.questionBox = page.getByTestId('question-input-0');
+    this.questionBox2 = page.getByTestId('question-input-1');
+    this.requiredCheckbox = page.getByTestId('question-required-checkbox-0');
+    this.questionType = page.getByTestId('question-type-select-1');
 
-    this.titleInput = page.getByRole('textbox', { name: 'e.g., Senior React Developer' });
-    this.summaryInput = page.getByRole('textbox', { name: 'Brief summary that attracts' });
-    this.regionInput = page.getByRole('textbox', { name: 'e.g., North America, Europe,' });
-    this.locationInput = page.getByRole('textbox', { name: 'e.g., San Francisco, CA' });
-
-    this.salaryInput = page.getByRole('textbox', { name: 'e.g., $80,000 - $' });
-    this.currencySelectControl = page.locator('.w-32 > div > .react-select-container > .react-select__control');
-
-    this.expirationDateInput = page.getByPlaceholder('Select expiration date');
-    this.descriptionBox = page.locator('.ql-editor');
-
-    this.skillInput = page.getByRole('textbox', { name: 'e.g., React, TypeScript' });
-
-    this.educationInput = page.getByRole('textbox', { name: "e.g., Bachelor's degree in CS" });
-    this.cultureInput = page.getByRole('textbox', { name: 'e.g., startup, fast-growing' });
-
-    this.addQuestionButton = page.getByRole('button', { name: 'Add Question' });
-    this.questionBox = page.getByRole('textbox', { name: 'e.g., Why are you interested' });
-    this.requiredCheckbox = page.getByRole('checkbox', { name: 'This question is required' });
-    this.responseType = page.getByRole('combobox');
-
-    this.previewButton = page.locator("//button[contains(text(),'Preview')]");
-    this.seeAllButton = page.getByRole('button', { name: 'See All' });
-
-    // AI Generation locators
-    this.generateWithAIButton = page.getByRole('button', { name: 'Generate with AI' });
-    this.generateButton = page.getByText('Generate', { exact: true });
-    this.applyButton = page.getByRole('button', { name: 'Apply' });
-    this.closeButton = page.locator("//button[@aria-label='Close']//*[name()='svg']");
-    this.aiPromptTextarea = page.locator('textarea.w-full.px-4.py-3.border.border-gray-300.rounded-lg.focus\\:ring-2.focus\\:ring-primary.focus\\:border-transparent.resize-none');
+    this.previewButton = page.getByTestId('preview-step-button');
+    this.seeAllButton = page.getByTestId('candidate-count-see-all-button');
+    this.confirmPostButton = page.getByTestId('publish-job-button');
   }
 
-  async handleCancelIfPresent() {
-    if (await this.cancelButton.isVisible()) {
-      await expect(this.cancelButton).toBeVisible();
-      await this.cancelButton.click();
-      await expect(this.cancelButton).toBeHidden();
-    }
-    console.log('Handled Cancel if present');
-  }
+  // async handleCancelIfPresent() {
+  //   if (await this.cancelButton.isVisible()) {
+  //     await expect(this.cancelButton).toBeVisible();
+  //     await this.cancelButton.click();
+  //     await expect(this.cancelButton).toBeHidden();
+  //   }
+  //   console.log('Handled Cancel if present');
+  // }
 
     async openJobForm() {
-    await this.handleCancelIfPresent();
     await this.postNewJobButton.waitFor({ state: 'visible' });
     await this.postNewJobButton.click();
-    await this.handleCancelIfPresent();
     await this.titleInput.waitFor({ state: 'visible' });
     console.log('Job form opened');
 }
 
-  async fillJobDetails() {
-    await this.titleInput.fill('Software Quality Assurance Engineer');
-    await this.summaryInput.fill('We need a Software QA Engineer skilled in Playwright and automation testing.');
-    await this.regionInput.fill('South America');
-    await this.locationInput.fill('Pakistan');
-    await this.nextButton.click();
-    console.log('Job details filled');
-  }
+ async fillTitle(title){
+  await this.titleInput.waitFor({ state: 'visible' });
+  await this.titleInput.fill(title);
+  console.log('Title filled');
+ }
 
-  async fillJobTypeAndCompensation({
-    jobType = 'Internship',
-    workType = 'On-site',
-    experience = 'Executive',
-    salaryRange = '50000-70000',
-    currency = 'pkr (₨)',
-    expirationDate
-  } = {}) {
-    const inputContainers = this.page.locator('.react-select__input-container');
-    const controls = this.page.locator('.react-select__control');
+ async generateHighlight(){
+  await this.generateHighlightButton.waitFor({ state: 'visible' });
+  await this.generateHighlightButton.click();
+  await this.generateInput.waitFor({ state: 'visible' });
+  await this.generateInput.fill('React developer');
+  await this.confirmGenerateButton.waitFor({ state: 'visible' });
+  await this.confirmGenerateButton.click();
+  await this.applyAiButton.waitFor({ state: 'visible' });
+  await this.applyAiButton.click();
+  console.log('Highlight generated');
+ }
+ async addRegionAndLocation(region,location){
+  await this.regionInput.waitFor({ state: 'visible' });
+  await this.regionInput.fill(region);
+  await this.locationInput.waitFor({ state: 'visible' });
+  await this.locationInput.fill(location);
+  await this.nextButton.click();
+  console.log('Region and location added');
+ }
 
-    const baseDate = expirationDate ? new Date(expirationDate) : new Date();
-    baseDate.setDate(baseDate.getDate() + 2);
-    const formattedExpirationDate = baseDate.toISOString().split('T')[0];
-
-    await inputContainers.first().click();
-    await this.page.getByRole('option', { name: jobType }).click();
-
-    await controls.nth(1).locator('.react-select__input-container').click();
-    await this.page.getByRole('option', { name: workType }).click();
-
-    await controls.nth(2).locator('.react-select__input-container').click();
-    await this.page.getByRole('option', { name: experience }).click();
-
-    await this.salaryInput.fill(salaryRange);
+  async fillJobTypeAndCompensation(){
+    await this.jobTypeDropdown.waitFor({ state: 'visible' });
+    await this.jobTypeDropdown.click();
+    await this.page.getByRole('option', { name: 'Internship' }).click();
+    await this.workTypeDropdown.waitFor({ state: 'visible' });
+    await this.workTypeDropdown.click();
+    await this.page.getByRole('option', { name: 'On-site' }).click();
+    await this.experienceDropdown.waitFor({ state: 'visible' });
+    await this.experienceDropdown.click();
+    await this.page.getByRole('option', { name: 'Executive' }).click();
+    await this.salaryInput.fill('50000-70000');
     await this.currencySelectControl.click();
-    await this.page.getByRole('option', { name: currency }).click();
+    await this.page.getByRole('option', { name: 'pkr (₨)' }).click();
 
-    await this.expirationDateInput.fill(formattedExpirationDate);
     await this.nextButton.click();
     console.log('Job type and compensation filled');
   }
 
   async fillJobDescription() {
-    await this.descriptionBox.fill('Responsible for testing web applications and automating tests using Playwright.');
+    await this.generatedescriptionbutton.click();
+    await this.generateInput.waitFor({ state: 'visible' });
+    await this.generateInput.fill('React developer');
+    await this.confirmGenerateButton.waitFor({ state: 'visible' });
+    await this.confirmGenerateButton.click();
+    await this.applyAiButton.waitFor({ state: 'visible' });
+    await this.applyAiButton.click();
     await this.nextButton.click();
     console.log('Job description filled');
   }
 
-  async addSkills() {
-    const skills = ['Playwright', 'Postman', 'JMeter'];
-    for (const skill of skills) {
-      await this.skillInput.fill(skill);
-      await this.skillInput.press('Enter');
-    }
-    console.log('Skills added');
-  }
-
-  async fillRequirements() {
-    await this.educationInput.fill('BSCS');
-    await this.educationInput.press('Enter');
-    await this.cultureInput.fill('SQA');
-    await this.cultureInput.press('Enter');
-    console.log('Requirements filled');
+  async clickNext(){
+    await this.nextButton.waitFor({ state: 'visible' });
+    await this.nextButton.click();
+    console.log('Next button clicked');
   }
 
   async addQuestions() {
@@ -132,8 +117,8 @@ export class CreateJobPage {
     await this.requiredCheckbox.check();
 
     await this.addQuestionButton.click();
-    await this.questionBox.fill('Are you a CS graduate?');
-    await this.responseType.selectOption('boolean');
+    await this.questionBox2.fill('Are you a CS graduate?');
+    await this.questionType.selectOption('boolean');
     console.log('Questions added');
   }
 
@@ -143,22 +128,40 @@ export class CreateJobPage {
   }
 
   async submitJob() {
-    await expect(this.createJobButton).toBeVisible();
-    const [response] = await Promise.all([
-      this.page.waitForResponse(
-        (res) => res.request().method() === 'POST' && res.url().includes('/v1/jobs/create'),
-        { timeout: 15000 }
-      ),
-      this.createJobButton.click()
-    ]);
+  await this.confirmPostButton.waitFor({ state: 'visible' });
+  await expect(this.confirmPostButton).toBeEnabled();
 
-    const responseBody = await response.json();
-    this.createdJobId = responseBody?.job?.id;
-    expect(this.createdJobId).toBeTruthy();
+  const jobRequestPromise = this.page.waitForRequest(req =>
+    req.method() === 'POST' &&
+    req.url() === 'https://recruitai-backend-production.up.railway.app/v1/jobs/create'
+  );
 
-    storeJobId(this.createdJobId);
-    return this.createdJobId;
+  await this.confirmPostButton.click();
+
+  const jobRequest = await jobRequestPromise;
+  const response = await jobRequest.response();
+
+  if (!response) {
+    throw new Error('No response returned from job create API');
   }
+
+  const responseBody = await response.json();
+
+  console.log('JOB CREATE RESPONSE:', responseBody);
+
+  this.createdJobId = responseBody?.job?.id;
+
+  if (!this.createdJobId) {
+    throw new Error(`Job ID missing: ${JSON.stringify(responseBody)}`);
+  }
+
+  storeJobId(this.createdJobId);
+
+  console.log('Job stored successfully:', this.createdJobId);
+
+  return this.createdJobId;
+}
+
 
   async seeAllApplications() {
     await this.seeAllButton.click();

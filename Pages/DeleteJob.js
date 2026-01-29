@@ -2,7 +2,7 @@
 export class deleteJobPage{
     constructor(page) { 
         this.page = page;
-        this.deleteJobButton = page.getByRole('button', { name: 'Delete' });
+        this.deleteJobButton = page.getByTestId('job-delete-button').first();
         this.confirmDeleteButton = page.getByRole('button', { name: 'Ok' });
     }
     async deleteJob() {
@@ -13,7 +13,6 @@ export class deleteJobPage{
     async confirmDelete() {
         await this.confirmDeleteButton.waitFor({ state: 'visible' });
         await this.confirmDeleteButton.click();
-        await this.page.waitForLoadState('networkidle');
         console.log('Job deleted.');
     }   
 }

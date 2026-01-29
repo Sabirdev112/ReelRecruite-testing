@@ -8,13 +8,11 @@ export class withdrawPage {
     async handleMaybeLaterIfPresent() {
         try {
             await this.maybeLaterButton.waitFor({
-                state: 'visible',
-                timeout: 2500
+                state: 'visible'
             });
             await this.maybeLaterButton.click();
             await this.maybeLaterButton.waitFor({ state: 'hidden' });
         } catch {
-            // Modal did not appear — safe to continue
         }
     } 
 

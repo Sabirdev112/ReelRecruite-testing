@@ -27,8 +27,8 @@ test('recruuiter info, profile picture, and banner update', async ({ page }) => 
 
   // Verify DB changes
   const db = await getRecruiterPublicFieldsByEmail(recruiter.email);
-  expect(db.full_name).toBe('Sabir-SQA');
+  expect(db.full_name).toBe('Sabir SQA');
   expect(db.title).toBe('Senior QA Engineer');
-  expect(db.cover_image).toBeTruthy();
-  expect (db.profile_image).toBeTruthy();
+  expect(db.avatar_url).toBeTruthy();
+  expect (db.cover_url).toBeTruthy();
 });

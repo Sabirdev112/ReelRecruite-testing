@@ -2,26 +2,26 @@ import {expect} from '@playwright/test';
 export class SignupPage {
   constructor(page) {
     this.page = page;
-    this.otpinput1 = page.getByRole('textbox', { name: 'Digit 1' });
-    this.otpinput2 = page.getByRole('textbox', { name: 'Digit 2' });
-    this.otpinput3 = page.getByRole('textbox', { name: 'Digit 3' });
-    this.otpinput4 = page.getByRole('textbox', { name: 'Digit 4' });
-    this.otpinput5 = page.getByRole('textbox', { name: 'Digit 5' });
-    this.otpinput6 = page.getByRole('textbox', { name: 'Digit 6' });
-    this.registerButton = page.getByRole('button', { name: 'Register' });
-    this.fullNameInput = page.getByRole('textbox', { name: 'Enter full name' });
-    this.emailInput = page.getByRole('textbox', { name: 'Enter email' });
+    this.otpinput1 = page.getByTestId('signup-otp-input-0');
+    this.otpinput2 = page.getByTestId('signup-otp-input-1');
+    this.otpinput3 = page.getByTestId('signup-otp-input-2');
+    this.otpinput4 = page.getByTestId('signup-otp-input-3');
+    this.otpinput5 = page.getByTestId('signup-otp-input-4');
+    this.otpinput6 = page.getByTestId('signup-otp-input-5');
+    this.registerButton = page.getByTestId('auth-tab-register');
+    this.fullNameInput = page.getByTestId('signup-full-name');
+    this.emailInput = page.getByTestId('signup-email');
     this.phoneInput = page.getByRole('textbox', { name: 'Enter phone number' });
-    this.passwordInput = page.getByRole('textbox', { name: 'Create password' });
-    this.confirmPasswordInput = page.getByRole('textbox', { name: 'Confirm password' });
-    this.selectRoleDropdown = page.locator('div.react-select__input-container.css-19bb58m');
-    this.selectRoleButton = page.getByRole('option', { name: 'Job Seeker' });
-    this.signUpButton = page.locator('//*[@id="root"]/div[2]/div[2]/div/div[2]/form/button');
+    this.passwordInput = page.getByTestId('signup-password');
+    this.confirmPasswordInput = page.getByTestId('signup-confirm-password');
+    this.selectRoleDropdown = page.getByTestId('signup-user-type');
+    this.selectRoleButton = page.getByRole('option', { name: 'Job Seeker' }); 
+    this.signUpButton = page.getByTestId('signup-submit-button');
     this.emailExistsError = page.getByText('An account with this email already exists',{ exact: false });
   }
 
   async goto() {
-    await this.page.goto('https://recruitai-web-production.up.railway.app/auth');
+    await this.page.goto('http://localhost:5173/auth');
     await this.page.waitForLoadState('domcontentloaded');
     console.log('Signup page opened');
   }
@@ -65,7 +65,6 @@ export class SignupPage {
   }
     async createAccount() {
   await this.signUpButton.click();
-  await this.page.waitForTimeout(60000);
   console.log('clicked on create account.');
 }
 async fillOTP(otp) {
@@ -73,6 +72,7 @@ async fillOTP(otp) {
     if (digits.length !== 6) {
       throw new Error('OTP must be exactly 6 digits.');
     }
+    await this.otpinput1.waitFor({ state: 'visible' });
     await this.otpinput1.fill(digits[0]);
     await this.otpinput2.fill(digits[1]);
     await this.otpinput3.fill(digits[2]);

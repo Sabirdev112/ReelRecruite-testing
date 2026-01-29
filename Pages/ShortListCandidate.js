@@ -2,12 +2,12 @@ import {expect} from '@playwright/test';
 export class ShortlistCandidatePage {
   constructor(page) {
     this.page = page;
-    this.viewApplicationButton = page.locator('button').filter({ hasText: 'View All Applications' }).first();
-    this.viewDetailsButton = page.locator('xpath=//*[@id="root"]/div[2]/main/div/div[2]/div[3]/div[1]/div/div[2]/button/span');
-    this.changeStatusButton = page.getByRole('button', { name: 'Update Status' });
+    this.viewApplicationButton = page.getByTestId('view-applications-button');
+    this.viewDetailsButton = page.locator('[data-testid^="application-card-view-details-"]').first();
+    this.changeStatusButton = page.getByTestId('application-update-status-trigger');
     this.shortListedButton = page.getByRole('button', { name: '⭐Shortlisted' });
     this.rejectButton = page.getByRole('button', { name: '❌Rejected' });
-    this.saveButton = page.locator('xpath=//*[@id="root"]/div[2]/main/div/div[3]/div/form/div[4]/button[2]');
+    this.saveButton = page.getByTestId('application-update-status-submit');
     this.maybeLaterButton = page.getByRole('button', { name: 'Maybe Later' });
   }
 

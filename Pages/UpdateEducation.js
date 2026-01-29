@@ -4,24 +4,23 @@ export class UpdateEducationPage {
   constructor(page) {
     this.page = page;
 
-    this.profileMenu = page.locator('//*[@id="root"]/div[2]/header/div/div[2]/div[2]/div[1]/div/div[1]/div');
-    this.ProfileButton = page.getByText('Profile', { exact: true });
+    this.profileMenu = page.getByTestId('navbar-user-menu-trigger').first();
+    this.ProfileButton = page.getByTestId('navbar-user-menu-item-profile').first();
 
-    this.educationSection = page.getByRole('heading', { name: 'Education' });
-    this.deleteEduButton = page.locator('xpath=//*[@id="root"]/div[2]/main/div/div/div[3]/div[3]/div[2]/div/div/div[2]/div[1]/div[2]/div/button[2]');
+    this.educationSection = page.getByTestId('education-section');
+    this.deleteEduButton = page.getByTestId('delete-education-button');
     this.confirmDeleteButton = page.getByRole('button', { name: 'Ok' });
-    this.addEducationButton = page.locator('xpath=//*[@id="root"]/div[2]/main/div/div/div[3]/div[3]/div[2]/button');
+    this.addEducationButton = page.getByTestId('add-education-button-empty');
 
-    this.schoolTextbox = page.getByRole('textbox', { name: /e\.g\., Harvard University/i });
-    this.degreeTextbox = page.getByRole('textbox', { name: /e\.g\., Bachelor of Science/i });
-    this.fieldOfStudyTextbox = page.getByRole('textbox', { name: 'e.g., Computer Science' });
-    this.gpaTextbox = page.getByRole('textbox', { name: /e\.g\., 3\.8 GPA/i });
-    this.locationTextbox = page.getByRole('textbox', { name: /e\.g\., Cambridge, MA/i });
-    this.startDateInput = page.getByRole('textbox', { name: /Start Date \*/i });
-    this.endDateTextbox = page.getByLabel('I am currently studying here');
-    this.descriptionTextbox = page.getByRole('textbox', { name: /Describe your studies, achievements, activities\.\.\./i });
-
-    this.saveChangesButton = page.locator('xpath=//*[@id="root"]/div[2]/main/div/div/div[4]/div/form/div[2]/button[1]');
+    this.schoolTextbox = page.getByTestId('education-institution-input-0');
+    this.degreeTextbox = page.getByTestId('education-degree-input-0');
+    this.fieldOfStudyTextbox = page.getByTestId('education-field-input-0');
+    this.gpaTextbox = page.getByTestId('education-grade-input-0');
+    this.locationTextbox = page.getByTestId('education-location-input-0');
+    this.startDateInput = page.getByTestId('education-start-date-input-0');
+    this.endDateTextbox = page.getByTestId('education-current-checkbox-0');
+    this.descriptionTextbox = page.getByTestId('education-description-input-0');
+    this.saveChangesButton = page.getByRole('button', { name: 'Add Education' }).last();
     this.maybeLaterButton = page.getByRole('button', { name: 'Maybe Later' });
   }
 
@@ -47,13 +46,6 @@ export class UpdateEducationPage {
     console.log(`Typed value: "${value}"`);
   }
 
-  async selectDropdownByLabel(dropdown, label) {
-    await dropdown.waitFor({ state: 'visible' });
-    await expect(dropdown).toBeEnabled();
-    await dropdown.selectOption({ label });
-    console.log(`Dropdown selected: "${label}"`);
-  }
-
   async clickProfile() {
     await this.profileMenu.waitFor({ state: 'visible', timeout: 10000 });
     await expect(this.profileMenu).toBeVisible();
@@ -77,14 +69,12 @@ export class UpdateEducationPage {
 
   async deleteEducation() {
     await this.deleteEduButton.waitFor({ state: 'visible' });
-    await expect(this.deleteEduButton).toBeVisible();
     await this.deleteEduButton.click();
     console.log('Clicked delete education');
   }
 
   async confirmDelete() {
     await this.confirmDeleteButton.waitFor({ state: 'visible' });
-    await expect(this.confirmDeleteButton).toBeVisible();
     await this.confirmDeleteButton.click();
     console.log('Confirmed delete');
   }
@@ -93,9 +83,8 @@ export class UpdateEducationPage {
     const isDeleteVisible = await this.deleteEduButton.isVisible().catch(() => false);
     if (isDeleteVisible) {
       await this.deleteEduButton.click({ force: true });
-      await expect(this.confirmDeleteButton).toBeVisible();
+      await this.confirmDeleteButton.waitFor({ state: 'visible' });
       await this.confirmDeleteButton.click();
-      await this.page.reload({ waitUntil: 'networkidle' });
       await this.handleMaybeLaterIfPresent();
       console.log('Deleted existing education entry');
     } else {
@@ -157,9 +146,7 @@ export class UpdateEducationPage {
 
   async saveChanges() {
     await this.saveChangesButton.waitFor({ state: 'visible' });
-    await expect(this.saveChangesButton).toBeVisible();
     await this.saveChangesButton.click();
-    await this.page.waitForLoadState('networkidle');
     console.log('Saved education changes');
   }
 }

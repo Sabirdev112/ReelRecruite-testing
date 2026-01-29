@@ -4,22 +4,23 @@ export class UpdateWorkPage {
   constructor(page) {
     this.page = page;
 
-    this.profileMenu = page.locator('//*[@id="root"]/div[2]/header/div/div[2]/div[2]/div[1]/div/div[1]/div');
-    this.profileButton = page.getByText('Profile', { exact: true });
-    this.workExperienceSection = page.getByRole('heading', { name: 'Work Experience' });
-    this.deleteWorkButton = page.locator('xpath=//*[@id="root"]/div[2]/main/div/div/div[3]/div[2]/div[2]/div/div/div[2]/div[1]/div[2]/div/button[2]');
+    this.profileMenu = page.getByTestId('navbar-user-menu-trigger').first();
+    this.profileButton = page.getByTestId('navbar-user-menu-item-profile').first();
+    this.workExperienceSection = page.getByTestId('work-experience-header');
+    this.deleteWorkButton = page.getByTestId('delete-experience-button');
     this.confirmDeleteButton = page.getByRole('button', { name: 'Ok' });
-    this.addWorkButton = this.addWorkButton = page.getByText('Add Work Experience', { exact: true });
-    this.companyInput = page.getByRole('textbox', { name: 'e.g., Google' });
-    this.positionInput = page.getByRole('textbox', {name: /Senior Software Engineer/i,});
-    this.employmentTypeDropdown = page.getByRole('combobox', { name: 'Employment Type' });
-    this.locationTypeDropdown = page.getByRole('combobox', { name: 'Location Type' });
-    this.startDateInput = page.getByRole('textbox', { name: 'Start Date *' });
-    this.endDateInput = page.getByLabel('I currently work here');
-    this.descriptionInput = page.getByRole('textbox', {name: /Describe your responsibilities/i,});
-    this.achievementInput = page.getByRole('textbox', {name: /add achievement/i,});
-    this.skillInput = page.getByRole('textbox', {name: /add skill/i,});
-    this.saveButton = page.locator('xpath=//*[@id="root"]/div[2]/main/div/div/div[4]/div/form/div[2]/button[1]');
+    this.addWorkButton = page.getByTestId('add-work-experience-button-empty');
+    this.companyInput = page.getByTestId('experience-company-input-0');
+    this.positionInput = page.getByTestId('experience-position-input-0');
+    this.employmentTypeDropdown = page.getByTestId('experience-employment-type-select-0');
+    this.locationTypeDropdown = page.getByTestId('experience-location-type-select-0');
+    this.locationInput = page.getByTestId('experience-location-input-0');
+    this.startDateInput = page.getByTestId('experience-start-date-input-0');
+    this.endDateInput = page.getByTestId('experience-current-checkbox-0');
+    this.descriptionInput = page.getByTestId('experience-description-input-0');
+    this.achievementInput = page.getByTestId('experience-achievement-input-0');
+    this.skillInput = page.getByTestId('experience-skill-input-0');
+    this.saveButton = page.getByRole('button', { name: 'Add Experience' }).last();
     this.maybeLaterButton = page.getByRole('button', { name: 'Maybe Later' });
   }
   async handleMaybeLaterIfPresent() {
@@ -129,6 +130,11 @@ async deleteIfVisibleAndProceed() {
     console.log('added location type');
   }
 
+  async addLocation(location){
+    await this.clearAndTypeUsingKeyboard(this.locationInput, location);
+    console.log('added location');
+  }
+
 
   async addStartDate(startDate){
     await this.startDateInput.waitFor({ state: 'visible' });
@@ -150,18 +156,22 @@ async deleteIfVisibleAndProceed() {
   }
 
 
-  async addAchievement(achievement){
-    await this.achievementInput.waitFor({ state: 'visible' });
-    await this.achievementInput.fill(achievement);
-    await this.achievementInput.press('Enter');
+  async addAchievement(achievements){
+    for (const achievement of achievements) {
+      await this.achievementInput.waitFor({ state: 'visible' });
+      await this.achievementInput.fill(achievement);
+      await this.achievementInput.press('Enter');
+    }
     console.log('added achievement');
   }
 
 
-  async addSkill(skill){
-    await this.skillInput.waitFor({ state: 'visible' });
-    await this.skillInput.fill(skill);
-    await this.skillInput.press('Enter');
+  async addSkill(skills){
+    for (const skill of skills) {
+      await this.skillInput.waitFor({ state: 'visible' });
+      await this.skillInput.fill(skill);
+      await this.skillInput.press('Enter');
+    }
     console.log('added skill');
   }
 

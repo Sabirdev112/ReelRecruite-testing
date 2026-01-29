@@ -4,24 +4,25 @@ export class CompanyDetailsPage{
     constructor(page) {
         this.page = page;
 
-       this.profileMenu = page.locator('//*[@id="root"]/div[2]/header/div/div[2]/div[2]/div[1]/div/div[1]/div');
-       this.ProfileButton = page.getByText('Profile', { exact: true });
-       this.companyDetailsSection = page.getByRole('heading', {name: 'Company Details',});
-       this.EditDetailsButton = page.locator("body > div:nth-child(1) > div:nth-child(2) > main:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(3) > div:nth-child(1) > button:nth-child(2) > span:nth-child(1) > svg:nth-child(1)");
-       this.addLogoButton = page.locator( 'input[type="file"][accept="image/*"]');
-       this.companyNameInput = page.getByRole('textbox', { name: 'Company Name*' });
-       this.TagLineInput = page.getByRole('textbox', { name: 'Tagline' });
-       this.descriptionInput = page.getByRole('textbox', { name: 'Description*' });
-       this.industryInput = page.getByRole('textbox', { name: 'Industry' });
-       this.companySizeInput = page.getByRole('textbox', { name: 'Company Size' });
-       this.locationInput = page.getByRole('textbox', { name: 'Add location and press Enter' });
-       this.websiteInput = page.getByRole('textbox', { name: 'Website' });
-       this.LinkedInInput = page.getByRole('textbox', { name: 'LinkedIn' });
-       this.twitterInput = page.getByRole('textbox', { name: 'Twitter' });
-       this.FacebookInput = page.getByRole('textbox', { name: 'Facebook' });
-       this.contactEmailInput = page.getByRole('textbox', { name: 'Contact Email' });
-       this.contactNumberInput = page.getByRole('textbox', { name: 'Contact Phone' });
-       this.saveButton = page.getByRole('button', { name: 'Save Changes' });
+       this.profileMenu = page.getByTestId('navbar-user-menu-trigger').first();
+       this.ProfileButton = page.getByTestId('navbar-user-menu-item-profile').first();
+       this.companyDetailsSection = page.getByTestId('company-profile-section');
+       this.EditDetailsButton = page.getByTestId('edit-company-profile-button');
+       this.addLogoButton = page.getByTestId('company-logo-upload-button');
+       this.companyNameInput = page.locator('#companyName');
+       this.TagLineInput = page.locator('#tagline');
+       this.descriptionInput = page.locator('#description');
+       this.industryInput = page.locator('#industry');
+       this.companySizeInput = page.locator('#companySize');
+       this.locationInput = page.locator('#headquarters');
+       this.companylocationInput = page.getByTestId('company-locations-multi-input');
+       this.websiteInput = page.locator('#website');
+       this.LinkedInInput = page.locator('#linkedinUrl');
+       this.twitterInput = page.locator('#twitterUrl');
+       this.FacebookInput = page.locator('#facebookUrl');
+       this.contactEmailInput = page.locator('#contactEmail');
+       this.contactNumberInput = page.locator('#contactPhone');
+       this.saveButton = page.getByTestId('company-save-changes-button');
        this.maybeLaterButton = page.getByRole('button', { name: 'Maybe Later' });
      }
 
@@ -63,8 +64,10 @@ export class CompanyDetailsPage{
         }
         async updateCompanyLogo() {
             const bannerPath = getBannerImagePath();
-            await this.addLogoButton.waitFor({ state: 'attached' });
-            await this.addLogoButton.setInputFiles(bannerPath);
+            await this.page.locator('input[type="file"]').setInputFiles(bannerPath);
+            await this.page.locator('input[type="file"]').evaluate(input =>
+            input.dispatchEvent(new Event('change', { bubbles: true }))
+            );
             console.log('Company logo updated');
         }
         async clearAndTypeUsingKeyboard(locator, value) {
@@ -96,8 +99,12 @@ export class CompanyDetailsPage{
         }
         async updateLocation(newText) {
                 await this.clearAndTypeUsingKeyboard(this.locationInput, newText);
-                await this.locationInput.press('Enter');
                 console.log('Location updated');
+        }
+        async updateCompanyLocation(newText){
+            await this.clearAndTypeUsingKeyboard(this.companylocationInput, newText);
+            await this.companylocationInput.press('Enter');
+            console.log('Company location updated');
         }
         async updateWebsite(newText) {
                 await this.clearAndTypeUsingKeyboard(this.websiteInput, newText);

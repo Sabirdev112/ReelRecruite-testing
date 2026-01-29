@@ -10,7 +10,7 @@ let currentRunProcess = null; // Active process for the current test file
 let isRunStopped = false;    // Flag to abort the remaining files in a full run
 
 const app = express();
-const PORT = 5173;
+const PORT = 5000;
 
 const dashboardPath = path.join(process.cwd(), 'dashboard');
 
