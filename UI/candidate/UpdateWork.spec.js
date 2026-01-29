@@ -27,10 +27,8 @@ test('Candidate deletes existing work (if any) and adds new experience', async (
   await updateWorkPage.addStartDate('2021-01-01');
   await updateWorkPage.addEndDate();
   await updateWorkPage.addDescription('Led QA automation initiatives and improved delivery quality');
-  await updateWorkPage.addAchievement('Reduced regression failures by 40%');
-  await updateWorkPage.addAchievement('Introduced Playwright automation');
-  await updateWorkPage.addSkill('Playwright');
-  await updateWorkPage.addSkill('JavaScript');
+  await updateWorkPage.addAchievement(['Reduced regression failures by 40%','Introduced Playwright automation']);
+  await updateWorkPage.addSkill(['Playwright','JavaScript']);
   await updateWorkPage.saveChanges();
 
   // Verify DB using helper

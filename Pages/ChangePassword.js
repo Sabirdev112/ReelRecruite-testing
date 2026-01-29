@@ -5,11 +5,11 @@ export class ChangePassword {
   constructor(page) {
     this.page = page;
 
-    this.profileMenu = page.locator('//*[@id="root"]/div[2]/header/div/div[2]/div[2]/div[1]/div/div[1]/div');
-    this.settingsButton = page.getByText('Settings', { exact: true });
-    this.oldPasswordInput = page.getByRole('textbox', { name: 'Enter your existing password' });
-    this.newPasswordInput = page.getByRole('textbox', { name: 'New password' });
-    this.saveChangesButton = page.getByRole('button', { name: 'Update password' });
+    this.profileMenu = page.getByTestId('navbar-user-menu-trigger').first();
+    this.settingsButton = page.getByTestId('navbar-user-menu-item-settings').first();
+    this.oldPasswordInput = page.getByTestId('current-password-input');
+    this.newPasswordInput = page.getByTestId('new-password-input');
+    this.saveChangesButton = page.getByTestId('update-password-submit');
     this.maybeLaterButton = page.getByRole('button', { name: 'Maybe Later' });
   }
 
@@ -23,31 +23,26 @@ export class ChangePassword {
   }
 
   async openProfileMenu() {
-    await expect(this.profileMenu).toBeVisible();
+    await this.profileMenu.waitFor({ state: 'visible' });
     await this.profileMenu.click();
-    await expect(this.profileMenu).toBeVisible();
     console.log('Profile menu opened.');
   }
 
   async navigateToSettings() {
-    await expect(this.settingsButton).toBeVisible();
+    await this.settingsButton.waitFor({ state: 'visible' });
     await this.settingsButton.click();
-    await this.page.waitForLoadState('networkidle');
-    await expect(this.settingsButton).toBeVisible();
     console.log('Navigated to Settings.');
   }
 
  async changePassword(oldPassword, newPassword) {
 
-  await expect(this.oldPasswordInput).toBeVisible();
-  await expect(this.oldPasswordInput).toBeEnabled();
+  await this.oldPasswordInput.waitFor({ state: 'visible' });
   await this.oldPasswordInput.fill(oldPassword);
   const filledOldPassword = await this.oldPasswordInput.inputValue();
   expect(filledOldPassword).toBe(oldPassword);
   await this.oldPasswordInput.blur();
 
-  await expect(this.newPasswordInput).toBeVisible();
-  await expect(this.newPasswordInput).toBeEnabled();
+  await this.newPasswordInput.waitFor({ state: 'visible' });
   await this.newPasswordInput.fill(newPassword);
   const filledNewPassword = await this.newPasswordInput.inputValue();
   expect(filledNewPassword).toBe(newPassword);
@@ -57,10 +52,8 @@ export class ChangePassword {
 }
 
   async saveChanges() {
-    await expect(this.saveChangesButton).toBeVisible();
-    await expect(this.saveChangesButton).toBeEnabled();
+    await this.saveChangesButton.waitFor({ state: 'visible' });
     await this.saveChangesButton.click();
-    await this.page.waitForLoadState('networkidle');
     console.log('Changes saved.');
   }
 

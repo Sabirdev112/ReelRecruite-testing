@@ -3,14 +3,13 @@ export class UpdateAboutPage {
     constructor(page) {
       this.page = page;
   
-      this.profileMenu = page.locator('//*[@id="root"]/div[2]/header/div/div[2]/div[2]/div[1]/div/div[1]/div');
-      this.ProfileButton = page.getByText('Profile', { exact: true });
-      this.editAboutButton = page.locator('xpath=//*[@id="root"]/div[2]/main/div/div/div[2]/div[1]/button');
-      this.bioTextbox = page.getByRole('textbox', { name: 'Bio*' });
-      this.countryTextbox = page.getByRole('textbox', { name: 'Country*' });
-      this.phoneTextbox = page.getByRole('textbox', { name: 'Phone Number *' });
-      this.locationTextbox = page.getByRole('textbox', { name: 'Location*' });
-      this.saveChangesButton = page.getByRole('button', { name: 'Save Changes' });
+      this.profileMenu = page.getByTestId('navbar-user-menu-trigger').first();
+      this.ProfileButton = page.getByTestId('navbar-user-menu-item-profile').first();
+      this.editAboutButton = page.getByTestId('edit-about-button').first();
+      this.bioTextbox = page.locator('#bio');
+      this.countryTextbox = page.locator('#country');
+      this.locationTextbox = page.locator('#location');
+      this.saveChangesButton = page.getByTestId('about-save-button');
       this.maybeLaterButton = page.getByRole('button', { name: 'Maybe Later' });
     }
  
@@ -62,12 +61,7 @@ export class UpdateAboutPage {
     await this.clearAndTypeUsingKeyboard(this.countryTextbox, country);
     console.log('Country updated successfully');
   }
-  
-  async updatePhone(phone) {
-    await this.clearAndTypeUsingKeyboard(this.phoneTextbox, phone);
-    console.log('Phone number updated successfully');
-  }
-
+ 
   async updateLocation(location) {
     await this.clearAndTypeUsingKeyboard(this.locationTextbox, location);
     console.log('Location updated successfully',location);

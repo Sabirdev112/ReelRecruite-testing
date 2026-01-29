@@ -17,11 +17,12 @@ test('Recruiter login and create a new job', async ({ page }) => {
   await page.waitForURL('**/my-jobs');
 
   await createJob.openJobForm();
-  await createJob.fillJobDetails();
+  await createJob.fillTitle('React Developer');
+  await createJob.generateHighlight();
+  await createJob.addRegionAndLocation('asia','pakistan');
   await createJob.fillJobTypeAndCompensation();
   await createJob.fillJobDescription();
-  await createJob.addSkills();
-  await createJob.fillRequirements();
+  await createJob.clickNext();
   await createJob.addQuestions();
   await createJob.previewJob();
   
