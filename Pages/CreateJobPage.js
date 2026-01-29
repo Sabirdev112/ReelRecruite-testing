@@ -167,4 +167,44 @@ export class CreateJobPage {
     await this.seeAllButton.click();
     console.log('See all applications clicked');
   }
+
+  async generateSummaryWithAI() {
+    await this.generateWithAIButton.click();
+    console.log('Generate with AI button clicked for summary');
+  }
+
+  async applyGeneratedSummary() {
+    await this.applyButton.click();
+    console.log('Applied generated summary');
+  }
+
+  async generateDescriptionWithAI() {
+    await this.generateWithAIButton.click();
+    console.log('Generate with AI button clicked for description');
+  }
+
+  async applyGeneratedDescription() {
+    await this.applyButton.click();
+    console.log('Applied generated description');
+  }
+
+  async closeAIModal() {
+    await this.closeButton.click();
+    console.log('Closed AI modal');
+  }
+
+  async fillAIPrompt(prompt) {
+    await this.aiPromptTextarea.fill(prompt);
+    console.log(`Filled AI prompt: ${prompt}`);
+  }
+
+  async generateWithPrompt(prompt) {
+    await this.fillAIPrompt(prompt);
+    await Promise.all([
+      this.page.waitForLoadState('networkidle', { timeout: 30000 }),
+      this.generateButton.click()
+    ]);
+    console.log('Generated content with AI prompt');
+    await this.page.waitForLoadState('networkidle', { timeout: 30000 });
+  }
 }
