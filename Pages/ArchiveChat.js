@@ -3,16 +3,10 @@ import { expect } from '@playwright/test';
 export class ArchiveChatPage {
   constructor(page) {
     this.page = page;
-    this.messagesButton = page.locator('span').filter({ hasText: 'Messages' }).first();
-    this.ChatBox = page.locator(
-      "//body/div[@id='root']/div[contains(@class,'min-h-screen bg-gray-50')]/main[contains(@class,'h-screen pt-16')]/div[contains(@class,'w-full h-full overflow-hidden flex flex-col bg-gray-100')]/div[contains(@class,'flex-1 overflow-hidden flex min-h-0')]/div[contains(@class,'w-full md:w-80 lg:w-96 flex flex-col overflow-hidden bg-white border-r border-gray-300')]/div[contains(@class,'flex-1 overflow-y-auto')]/div/div[2]"
-    );
-    this.archiveButton = page.locator(
-      "//div[contains(@class,'flex-1 hidden md:flex flex-col overflow-hidden bg-gray-50')]//button[contains(@title,'Archive')]//*[name()='svg']//*[name()='path' and contains(@fill,'currentCol')]"
-    );
-    this.unArchiveButton = page.locator(
-      "//div[@class='flex-1 hidden md:flex flex-col overflow-hidden bg-gray-50']//button[@title='Unarchive']//*[name()='svg']//*[name()='path' and contains(@fill,'currentCol')]"
-    );
+    this.messagesButton = page.getByTestId('navbar-nav-item-messages');
+    this.ChatBox = page.getByTestId('chat-item-5ebf38d4-6aed-4b5e-b68b-4067040e03e7');
+    this.archiveButton = page.getByTestId('chat-archive-button').first();
+    this.unArchiveButton = page.getByTestId('chat-realunarchive-button').first();
     this.maybeLaterButton = page.getByRole('button', { name: 'Maybe Later' });
   }
 

@@ -3,13 +3,13 @@ export class Login {
     constructor(page) {
         this.page = page;
         
-        this.usernameInput = page.getByRole('textbox', { name: 'Enter your email' });
-        this.phonePage = page.getByLabel('Phone');
-        this.phoneInput = page.getByRole('textbox', { name: 'Enter phone number' });
-        this.passwordInput = page.getByRole('textbox', { name: 'Enter your password' });
-        this.signInButtonLocator = page.locator('xpath=//*[@id="root"]/div[2]/div[2]/div/div[2]/form/button');
-        this.avatar = page.locator("//p[@class='text-xs capitalize text-gray-500']");
-        this.signoutButton = page.getByText('Log out', { exact: true });
+        this.usernameInput = page.getByTestId('signin-email');
+        this.phonePage = page.getByTestId('login-type-phone');
+        this.phoneInput = page.getByTestId('signin-phone');
+        this.passwordInput = page.getByTestId('signin-password');
+        this.signInButtonLocator = page.getByTestId('signin-submit-button');
+        this.avatar = page.getByTestId('navbar-user-avatar');
+        this.signoutButton = page.getByTestId('navbar-user-menu-item-logout');
         this.maybeLaterButton = page.getByRole('button', { name: 'Maybe Later' });
     }
     async handleMaybeLaterIfPresent() {
@@ -21,11 +21,10 @@ export class Login {
             await this.maybeLaterButton.click();
             await this.maybeLaterButton.waitFor({ state: 'hidden' });
         } catch {
-            // Modal did not appear — safe to continue
         }
     } 
     async goto() {
-        await this.page.goto('https://recruitai-web-production.up.railway.app/auth');
+        await this.page.goto('http://localhost:5173/auth');
     }
 
     async phoneLogin(phone) {
@@ -44,6 +43,7 @@ export class Login {
         await this.passwordInput.blur();
     }
     async clickSignIn() {
+        await this.signInButtonLocator.waitFor({ state: 'visible' });
         await this.signInButtonLocator.click();
         await this.page.waitForLoadState('networkidle');
         await this.handleMaybeLaterIfPresent();

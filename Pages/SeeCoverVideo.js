@@ -3,11 +3,11 @@ export class SeeCoverVideoPage {
   constructor(page) {
     this.page = page;
 
-    this.viewApplicationButton = page.getByRole('button', { name: 'View All Applications' });
-    this.viewDetailsButton = page.locator('button', { hasText: 'View Details' }).first();
-    this.viewProfileButton = page.getByRole('button', { name: 'View Profile' });
-    this.coverVideoSection = page.locator('h2:text("Video Resume")');
-    this.video = page.locator('video');
+    this.viewApplicationButton = page.getByTestId('view-applications-button');
+    this.viewDetailsButton = page.getByTestId('application-card-view-details-3c12b014-f16c-43bd-abc2-3d1535620620').first();
+    this.viewProfileButton = page.getByTestId('application-view-profile-button');
+    this.coverVideoSection = page.getByTestId('video-resume-header');
+    this.video = page.getByTestId('video-resume-player');
     this.maybeLaterButton = page.getByRole('button', { name: 'Maybe Later' });
   }
   async handleMaybeLaterIfPresent() {

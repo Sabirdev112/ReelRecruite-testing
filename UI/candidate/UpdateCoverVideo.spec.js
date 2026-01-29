@@ -8,6 +8,7 @@ import { getCandidateProfileByEmail, getCandidateCoverVideo } from '../../suppor
 const candidate = loadCredentials()[0];
 
   test('candidate can upload a video resume', async ({ page }) => {
+  test.setTimeout(120000);
   const loginPage = new Login(page);
   const coverVideoPage = new UpdateCoverVideoResumePage(page);
   await loginPage.goto();

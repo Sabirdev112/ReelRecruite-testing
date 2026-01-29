@@ -28,5 +28,5 @@ export function getApplicationId() {
 }
 
 export function buildApplicationUrl(applicationId) {
-  return `https://recruitai-web-production.up.railway.app/applications/${applicationId}`;
+  return `https://localhost:5173/applications/${applicationId}`;
 }

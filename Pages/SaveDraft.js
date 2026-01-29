@@ -4,10 +4,10 @@ export class SaveDraft {
     this.page = page;
     this.cancelButton = page.getByRole('button', { name: 'Cancel' });
     this.postNewJobButton = page.getByRole('button', { name: 'Post New Job' });
-    this.titleInput = page.getByRole('textbox', { name: 'e.g., Senior React Developer' });
-    this.summaryInput = page.getByRole('textbox', { name: 'Brief summary that attracts' });
-    this.regionInput = page.getByRole('textbox', { name: 'e.g., North America, Europe,' });
-    this.saveDraftButton = page.getByRole('button', { name: 'Save Draft' });
+    this.titleInput = page.getByTestId('job-title-input');
+    this.summaryInput = page.getByTestId('job-highlight-textarea');
+    this.regionInput = page.getByTestId('job-region-input');
+    this.saveDraftButton = page.getByTestId('undefined-action-wrapper');
     this.draftSavedMessage = page.getByText('Draft saved successfully');
   }
    async Cancel() {
@@ -26,7 +26,6 @@ export class SaveDraft {
       return true;
     }
   } catch {
-    // Swallow errors caused by detached DOM / timing
   }
 
   return false;
