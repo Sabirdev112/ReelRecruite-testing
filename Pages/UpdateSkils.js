@@ -4,12 +4,11 @@ export class UpdateSkillsPage {
     constructor(page) {
       this.page = page;
 
-      this.profileMenu = page.locator('//*[@id="root"]/div[2]/header/div/div[2]/div[2]/div[1]/div/div[1]/div');
-      this.ProfileButton = page.getByText('Profile', { exact: true });
-      this.editSkillsButton = page.locator("//button[@title='Edit Skills']//*[name()='svg']//*[name()='path' and contains(@fill,'currentCol')]");
-      this.skillsTextbox = page.getByRole('textbox', { name: 'Type a skill and press Enter' });
-      this.saveChangesButton = page.getByRole('button', { name: /Save Changes/i });
-      this.cancelButton = page.getByRole('button', { name: 'Cancel' });
+      this.profileMenu = page.getByTestId('navbar-user-menu-trigger').first();
+      this.ProfileButton = page.getByTestId('navbar-user-menu-item-profile').first();
+      this.editSkillsButton = page.getByTestId('edit-skills-button');
+      this.skillsTextbox = page.getByTestId('skills-input-field');
+      this.saveChangesButton = page.getByTestId('skills-save-button');
       this.maybeLaterButton = page.getByRole('button', { name: 'Maybe Later' });
     }
 
@@ -68,9 +67,6 @@ export class UpdateSkillsPage {
       console.log('Changes saved');
     }
   
-    async clickCancel() {
-      await this.cancelButton.click();
-    }
   
     async updateSkills(skills) {
       await this.clickEditSkills();

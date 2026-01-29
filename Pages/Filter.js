@@ -3,35 +3,14 @@ export class FilterPage {
   constructor(page) {
     this.page = page;
 
-    // Open Filters modal
-    this.filtersButton = page.locator('button:has-text("Filters")');
-
-    // Job Type
-    this.jobTypeSelect = page.locator(
-      '//*[@id="root"]/div[2]/div[2]/div/div[2]/section[1]/div[2]/div[1]/select'
-    );
-
-    // Work Type
-    this.workTypeSelect = page.locator(
-      'body > div:nth-child(1) > div:nth-child(2) > div:nth-child(3) > div:nth-child(1) > div:nth-child(2) > section:nth-child(1) > div:nth-child(2) > div:nth-child(2) > select:nth-child(2)'
-    );
-
-    // Experience Level
-    this.experienceLevelSelect = page.locator('//div[3]//select[1]');
-
-    // Region
-    this.regionSelect = page.locator(
-      "//div[@class='relative bg-white rounded-lg shadow-lg mx-auto animate-in fade-in-0 zoom-in-95 duration-200 max-h-[90vh] overflow-y-auto w-full max-w-3xl p-0']//div[1]//div[1]//select[1]"
-    );
-
-    // Currency
-    this.currencySelect = page.locator(
-      "//div[@class='relative bg-white rounded-lg shadow-lg mx-auto animate-in fade-in-0 zoom-in-95 duration-200 max-h-[90vh] overflow-y-auto w-full max-w-3xl p-0']//div[1]//div[2]//select[1]"
-    );
-
-    // Buttons
-    this.applyFiltersButton = page.getByRole('button', { name: 'Apply filters' });
-    this.removeFiltersButton = page.getByRole('button', { name: 'Remove filters' });
+    this.filtersButton = page.getByTestId('navbar-filters-button');
+    this.jobTypeSelect = page.getByTestId('job-filter-jobType-select');
+    this.workTypeSelect = page.getByTestId('job-filter-workType-select');
+    this.experienceLevelSelect = page.getByTestId('job-filter-experienceLevel-select');
+    this.regionSelect = page.getByTestId('job-filter-region-select');
+    this.currencySelect = page.getByTestId('job-filter-currency-select');
+    this.applyFiltersButton = page.getByTestId('job-filter-apply-button');
+    this.removeFiltersButton = page.getByTestId('job-filter-remove-all-button');
     this.maybeLaterButton = page.getByRole('button', { name: 'Maybe Later' });
   }
 
@@ -51,7 +30,6 @@ export class FilterPage {
   
   async openFilters() {
     await this.filtersButton.waitFor({ state: 'visible' });
-    await this.page.waitForTimeout(1000);
     await this.filtersButton.click();
     console.log('Filters opened');
   }

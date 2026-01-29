@@ -3,10 +3,10 @@ export class SendMessagePage {
   constructor(page) {
     this.page = page;
 
-    this.messagesButton = page.getByRole('button', { name: 'Messages' });
-    this.messageLocator = page.locator('xpath=//*[@id="root"]/div[2]/main/div/div/div[1]/div[3]/div/div[3]/div[2]/div[1]/div');
-    this.messageInput = page.locator('xpath=//*[@id="root"]/div[2]/main/div/div/div[2]/div/div[3]/div/form/div/input');
-    this.sendButton = page.locator('xpath=//*[@id="root"]/div[2]/main/div/div/div[3]/div/div[3]/div/form/button[2]/svg');
+    this.messagesButton = page.getByTestId('navbar-nav-item-messages');
+    this.messageLocator = page.getByTestId('chat-item-5ebf38d4-6aed-4b5e-b68b-4067040e03e7');
+    this.messageInput = page.getByTestId('chat-message-input').first();
+    this.sendButton = page.getByTestId('chat-send-button');
     this.maybeLaterButton = page.getByRole('button', { name: 'Maybe Later' });
   }
 

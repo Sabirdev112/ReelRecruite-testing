@@ -8,11 +8,6 @@ test('Candidate signs up and moves user from RandomUsers to NewUsers', async ({ 
 
   const user = getRandomUser();
 
-  if (!user) {
-    console.log('No users left in RandomUsers.json');
-    return;}
-
-  try {
     await signupPage.goto();
     await signupPage.register();
 
@@ -29,9 +24,4 @@ test('Candidate signs up and moves user from RandomUsers to NewUsers', async ({ 
     await verifyUserCreated(user.email);
     storeNewUser(user);
 
-  } catch (error) {
-    console.log(`Signup failed for ${user.email}: ${error.message}`);
-  } finally {
-    await page.context().close();
-  }
 });

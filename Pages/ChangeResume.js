@@ -5,22 +5,18 @@ export class UploadResume {
   constructor(page) {
     this.page = page;
 
-    this.profileMenu = page.locator('//*[@id="root"]/div[2]/header/div/div[2]/div[2]/div[1]/div/div[1]/div');
-    this.ProfileButton = page.getByText('Profile', { exact: true });
-
-    this.resumeSection = page.getByRole('heading', { name: 'Resume', exact: true });
-
-    this.deleteResumeButton = page.getByRole('button', { name: 'Remove Resume' });
-    this.confirmDeleteButton = page.getByRole('button', { name: 'Ok' });
-
+    this.profileMenu = page.getByTestId('navbar-user-menu-trigger').first();
+    this.ProfileButton = page.getByTestId('navbar-user-menu-item-profile').first();
+    this.resumeSection = page.getByTestId('resume-header').first();
+    this.deleteResumeButton = page.getByTestId('remove-resume-button');
+    this.confirmDeleteButton = page.getByTestId('remove-resume-confirm-button');
     this.maybeLaterButton = page.getByRole('button', { name: 'Maybe Later' });
-
-    this.uploadInput = page.locator('#resume-upload');
+    this.uploadInput = page.getByTestId('upload-resume-label');
   }
 
   async handleMaybeLaterIfPresent() {
     if (await this.maybeLaterButton.isVisible()) {
-      await expect(this.maybeLaterButton).toBeVisible();
+      await this.maybeLaterButton.waitFor({ state: 'visible' });
       await this.maybeLaterButton.click();
       await expect(this.maybeLaterButton).toBeHidden();
       console.log('Handled Maybe Later modal');
@@ -28,21 +24,22 @@ export class UploadResume {
   }
 
   async clickProfileMenu() {
+    await this.profileMenu.waitFor({ state: 'visible' });
     await expect(this.profileMenu).toBeVisible();
     await this.profileMenu.click();
-    await this.handleMaybeLaterIfPresent();
     console.log('Profile menu clicked');
   }
 
   async goToProfile() {
+    await this.ProfileButton.waitFor({ state: 'visible' });
     await expect(this.ProfileButton).toBeVisible();
     await this.ProfileButton.click();
     await this.handleMaybeLaterIfPresent();
-    await this.page.waitForLoadState('networkidle');
     console.log('Navigated to Profile page');
   }
 
   async navigateToResumeSection() {
+    await this.resumeSection.waitFor({ state: 'visible' });
     await expect(this.resumeSection).toBeVisible();
     await this.resumeSection.scrollIntoViewIfNeeded();
     console.log('Scrolled to Resume section');
@@ -55,26 +52,26 @@ export class UploadResume {
     }
 
     if (await this.deleteResumeButton.isVisible()) {
+      await this.deleteResumeButton.waitFor({ state: 'visible' });
       await expect(this.deleteResumeButton).toBeVisible();
       await this.deleteResumeButton.click();
       await this.handleMaybeLaterIfPresent();
-      await this.confirmDelete();
       console.log('Existing resume deleted');
     }
   }
 
   async confirmDelete() {
     if (await this.confirmDeleteButton.isVisible()) {
-      await expect(this.confirmDeleteButton).toBeVisible();
+      await this.confirmDeleteButton.waitFor({ state: 'visible' });
       await this.confirmDeleteButton.click();
-      await this.page.waitForLoadState('networkidle');
+      await this.handleMaybeLaterIfPresent();
       console.log('Confirmed resume deletion');
     }
   }
 
   async uploadNewResume(filename = 'Bold-Poster.pdf') {
+  
   await this.handleMaybeLaterIfPresent();
-
   const resumePath = getResumePath(filename);
   await this.uploadInput.waitFor({ state: 'attached' });
 
@@ -87,9 +84,6 @@ export class UploadResume {
     ),
     this.uploadInput.setInputFiles(resumePath)
   ]);
-
-  await this.handleMaybeLaterIfPresent();
-
   console.log(`Resume upload completed: ${resumePath}`);
 }
 

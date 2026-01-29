@@ -5,18 +5,16 @@ export class UpdateInfoPage {
   constructor(page) {
     this.page = page;
     this.maybeLaterButton = page.getByRole('button', { name: 'Maybe Later' });
-    this.profileMenu = page.locator('//*[@id="root"]/div[2]/header/div/div[2]/div[2]/div[1]/div/div[1]/div');
-    this.profileButton = page.getByText('Profile', { exact: true });
-    this.editProfileButton = page.locator('button.absolute.top-4.right-4');
-    this.coverImageInput = page.locator('input[type="file"][accept="image/*"]').first();
-    this.profilePictureInput = page.locator('input[type="file"][accept="image/*"]').nth(1);
-    this.profilePictureEditButton = page.locator('button.absolute.bottom-2.right-2');
+    this.profileMenu = page.getByTestId('navbar-user-menu-trigger').first();
+    this.profileButton = page.getByTestId('navbar-user-menu-item-profile').first();
+    this.editProfileButton = page.getByTestId('edit-profile-info-button');
+    this.coverImageButton = page.getByTestId('edit-profile-cover-upload-button');
+    this.profilePictureEditButton = page.getByTestId('edit-profile-avatar-upload-button');
+    this.fullNameTextbox = page.locator('#fullName');
+    this.professionalTitleTextbox = page.locator('#title');
 
-    this.fullNameTextbox = page.getByRole('textbox', { name: /Full Name\*/i });
-    this.professionalTitleTextbox = page.getByRole('textbox', { name: /Professional Title\*/i });
-
-    this.saveChangesButton = page.getByRole('button', { name: /Save Changes/i });
-    this.cancelButton = page.getByRole('button', { name: /Cancel/i });
+    this.saveChangesButton = page.getByTestId('profile-save-changes-button');
+    this.cancelButton = page.getByRole('button', { name: 'Cancel' });
   }
 
   async handleMaybeLaterIfPresent() {
@@ -39,7 +37,6 @@ export class UpdateInfoPage {
     await this.profileButton.waitFor({ state: 'visible' });
     await expect(this.profileButton).toBeVisible();
     await this.profileButton.click();
-    await this.page.waitForLoadState('networkidle');
     console.log('Navigated to profile page');
   }
 
@@ -54,26 +51,24 @@ export class UpdateInfoPage {
     await this.handleMaybeLaterIfPresent();
     const bannerPath = getBannerImagePath();
 
-    await this.coverImageInput.waitFor({ state: 'attached' });
-    await this.coverImageInput.setInputFiles(bannerPath);
-    await this.coverImageInput.evaluate(input =>
+    await this.coverImageButton.waitFor({ state: 'visible' });
+    await this.page.locator('input[type="file"]').first().waitFor({ state: 'attached' });
+    await this.page.locator('input[type="file"]').first().setInputFiles(bannerPath);
+    await this.page.locator('input[type="file"]').first().evaluate(input =>
       input.dispatchEvent(new Event('change', { bubbles: true }))
     );
-    await this.page.waitForLoadState('networkidle');
     console.log('Cover image uploaded:', bannerPath);
   }
 
   async uploadProfilePicture() {
     await this.handleMaybeLaterIfPresent();
     const profilePath = getProfileImagePath();
-
     await this.profilePictureEditButton.waitFor({ state: 'visible' });
-    await this.profilePictureInput.waitFor({ state: 'attached' });
-    await this.profilePictureInput.setInputFiles(profilePath);
-    await this.profilePictureInput.evaluate(input =>
+    await this.page.locator('input[type="file"]').last().waitFor({ state: 'attached' });
+    await this.page.locator('input[type="file"]').last().setInputFiles(profilePath);
+    await this.page.locator('input[type="file"]').last().evaluate(input =>
       input.dispatchEvent(new Event('change', { bubbles: true }))
     );
-    await this.page.waitForLoadState('networkidle');
     console.log('Profile picture uploaded:', profilePath);
   }
 
@@ -102,9 +97,8 @@ export class UpdateInfoPage {
 
   async clickSaveChanges() {
     await this.saveChangesButton.waitFor({ state: 'visible' });
-    await expect(this.saveChangesButton).toBeVisible();
     await this.saveChangesButton.click();
-    await this.page.waitForTimeout(240000);
+
     console.log('Changes saved');
   }
 }

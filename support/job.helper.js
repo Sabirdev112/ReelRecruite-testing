@@ -20,12 +20,9 @@ export function getLatestJobId() {
 }
 
 export function buildJobUrl(jobId) {
-  return `https://recruitai-web-production.up.railway.app/jobs/${jobId}`;
+  return `https://localhost:5173/jobs/create/${jobId}`;
 }
-/**
- * Store job ID to fixture file
- * @param {string} jobId
- */
+
 export function storeJobId(jobId) {
    const JOB_PATH = path.join(
     __dirname,

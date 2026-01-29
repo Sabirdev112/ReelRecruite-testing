@@ -2,10 +2,10 @@ import {expect} from '@playwright/test';
 export class EditJobPage {
     constructor(page) {
         this.page = page;
-        this.summaryInput = page.getByRole('textbox', { name: 'Brief summary that attracts' });
-        this.editButton = page.getByRole('button', { name: 'Edit' });
-        this.customFields = page.getByText('Custom Fields', { exact: true });
-        this.saveChangesButton = page.getByRole('button', { name: 'Update Job' });
+        this.summaryInput = page.getByTestId('job-highlight-textarea');
+        this.editButton = page.getByTestId('job-edit-button');
+        this.customFields = page.getByTestId('edit-job-tab-label-custom');
+        this.saveChangesButton = page.getByTestId('update-job-button');
         this.maybeLaterButton = page.getByRole('button', { name: 'Maybe Later' });
 
     }
@@ -50,7 +50,6 @@ export class EditJobPage {
     async saveChanges(){
         await this.saveChangesButton.waitFor({ state: 'visible' });
         await this.saveChangesButton.click();
-        await this.page.waitForLoadState('networkidle');
         console.log('Changes saved.');
     }
 

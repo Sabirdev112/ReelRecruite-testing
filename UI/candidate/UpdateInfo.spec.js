@@ -26,4 +26,6 @@ test('Candidate info, profile picture, and banner update', async ({ page }) => {
   const db = await getUserByEmail(candidate.email);
   expect(db.full_name).toBe('Sabir SQA');
   expect(db.title).toBe('Senior QA Engineer');
+  expect(db.avatar_url).toBeTruthy();
+  expect(db.cover_url).toBeTruthy();
 });
