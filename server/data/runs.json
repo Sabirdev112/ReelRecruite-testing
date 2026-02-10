@@ -1,5 +1,3971 @@
 [
   {
+    "id": 1770745566574,
+    "startedAt": "2026-02-10T17:45:02.815Z",
+    "endedAt": "2026-02-10T17:46:06.574Z",
+    "duration": 63759,
+    "summary": {
+      "total": 1,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 1,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Recruiter see Resume",
+        "description": "",
+        "file": "UI/Recruiter/SeeResume.spec.js",
+        "line": 11,
+        "status": "timedOut",
+        "duration": 60134,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+        "stack": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+        "attachments": [
+          {
+            "name": "error-context",
+            "path": "C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\test-results\\UI-Recruiter-SeeResume-Recruiter-see-Resume\\error-context.md",
+            "contentType": "text/markdown"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1770745498206,
+    "startedAt": "2026-02-10T17:43:55.011Z",
+    "endedAt": "2026-02-10T17:44:58.206Z",
+    "duration": 63195,
+    "summary": {
+      "total": 1,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 1,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Recruiter shortlists candidate from Applications",
+        "description": "",
+        "file": "UI/Recruiter/ShortlistCandidate.spec.js",
+        "line": 11,
+        "status": "timedOut",
+        "duration": 60090,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+        "stack": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+        "attachments": [
+          {
+            "name": "error-context",
+            "path": "C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\test-results\\UI-Recruiter-ShortlistCand-54fbb-candidate-from-Applications\\error-context.md",
+            "contentType": "text/markdown"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1770745430175,
+    "startedAt": "2026-02-10T17:43:35.188Z",
+    "endedAt": "2026-02-10T17:43:50.174Z",
+    "duration": 14986,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Recruiter view all applications for a job",
+        "description": "",
+        "file": "UI/Recruiter/viewApplications.spec.js",
+        "line": 11,
+        "status": "passed",
+        "duration": 11629,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1770745410050,
+    "startedAt": "2026-02-10T17:41:18.323Z",
+    "endedAt": "2026-02-10T17:43:30.050Z",
+    "duration": 131727,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Apply for latest job (users from JSON)",
+        "description": "",
+        "file": "UI/candidate/jobApply.spec.js",
+        "line": 13,
+        "status": "passed",
+        "duration": 128634,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1770745273306,
+    "startedAt": "2026-02-10T17:41:01.238Z",
+    "endedAt": "2026-02-10T17:41:13.306Z",
+    "duration": 12068,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Recruiter Edits Job",
+        "description": "",
+        "file": "UI/Recruiter/EditJob.spec.js",
+        "line": 12,
+        "status": "passed",
+        "duration": 9053,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1770745256870,
+    "startedAt": "2026-02-10T17:40:23.016Z",
+    "endedAt": "2026-02-10T17:40:56.870Z",
+    "duration": 33854,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Recruiter login and create a new job",
+        "description": "",
+        "file": "UI/Recruiter/CreateJob.spec.js",
+        "line": 10,
+        "status": "passed",
+        "duration": 30735,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1770745087740,
+    "startedAt": "2026-02-10T17:36:02.512Z",
+    "endedAt": "2026-02-10T17:38:07.740Z",
+    "duration": 125228,
+    "summary": {
+      "total": 1,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 1
+    },
+    "tests": [
+      {
+        "title": "Apply for latest job (users from JSON)",
+        "description": "",
+        "file": "UI/candidate/jobApply.spec.js",
+        "line": 13,
+        "status": "interrupted",
+        "duration": 121787,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1770744957777,
+    "startedAt": "2026-02-10T17:35:12.427Z",
+    "endedAt": "2026-02-10T17:35:57.777Z",
+    "duration": 45350,
+    "summary": {
+      "total": 1,
+      "passed": 0,
+      "failed": 1,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Recruiter Edits Job",
+        "description": "",
+        "file": "UI/Recruiter/EditJob.spec.js",
+        "line": 12,
+        "status": "failed",
+        "duration": 41613,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": "Error: page.goto: net::ERR_CONNECTION_RESET at https://recruitai-web-production.up.railway.app/auth\nCall log:\n\u001b[2m  - navigating to \"https://recruitai-web-production.up.railway.app/auth\", waiting until \"load\"\u001b[22m\n",
+        "stack": "Error: page.goto: net::ERR_CONNECTION_RESET at https://recruitai-web-production.up.railway.app/auth\nCall log:\n\u001b[2m  - navigating to \"https://recruitai-web-production.up.railway.app/auth\", waiting until \"load\"\u001b[22m\n\n    at Login.goto (C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\Pages\\Login.js:27:25)\n    at C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\UI\\Recruiter\\EditJob.spec.js:14:21",
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1770744906109,
+    "startedAt": "2026-02-10T17:34:32.217Z",
+    "endedAt": "2026-02-10T17:35:06.109Z",
+    "duration": 33892,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Recruiter login and create a new job",
+        "description": "",
+        "file": "UI/Recruiter/CreateJob.spec.js",
+        "line": 10,
+        "status": "passed",
+        "duration": 30217,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1770744848952,
+    "startedAt": "2026-02-10T17:33:50.551Z",
+    "endedAt": "2026-02-10T17:34:08.952Z",
+    "duration": 18401,
+    "summary": {
+      "total": 1,
+      "passed": 0,
+      "failed": 1,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Apply for latest job (users from JSON)",
+        "description": "",
+        "file": "UI/candidate/jobApply.spec.js",
+        "line": 13,
+        "status": "failed",
+        "duration": 14675,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": "Error: locator.waitFor: Target page, context or browser has been closed\nCall log:\n\u001b[2m  - waiting for getByTestId('job-apply-button') to be visible\u001b[22m\n",
+        "stack": "Error: locator.waitFor: Target page, context or browser has been closed\nCall log:\n\u001b[2m  - waiting for getByTestId('job-apply-button') to be visible\u001b[22m\n\n    at ApplyJobPage.applyNow (C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\Pages\\ApplyJobPage.js:30:31)\n    at C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\UI\\candidate\\jobApply.spec.js:33:24",
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1770644157918,
+    "startedAt": "2026-02-09T13:35:37.047Z",
+    "endedAt": "2026-02-09T13:35:57.918Z",
+    "duration": 20871,
+    "summary": {
+      "total": 1,
+      "passed": 0,
+      "failed": 1,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Recruiter login and create a new job",
+        "description": "",
+        "file": "UI/Recruiter/CreateJob.spec.js",
+        "line": 10,
+        "status": "failed",
+        "duration": 18727,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": "Error: Job ID missing: {\"code\":4108,\"message\":\"You have reached your subscription limit. Please upgrade your plan to continue.\"}",
+        "stack": "Error: Job ID missing: {\"code\":4108,\"message\":\"You have reached your subscription limit. Please upgrade your plan to continue.\"}\n    at CreateJobPage.submitJob (C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\Pages\\CreateJobPage.js:155:11)\n    at C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\UI\\Recruiter\\CreateJob.spec.js:30:17",
+        "attachments": [
+          {
+            "name": "error-context",
+            "path": "C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\test-results\\UI-Recruiter-CreateJob-Recruiter-login-and-create-a-new-job\\error-context.md",
+            "contentType": "text/markdown"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1770644093562,
+    "startedAt": "2026-02-09T13:34:33.630Z",
+    "endedAt": "2026-02-09T13:34:53.561Z",
+    "duration": 19931,
+    "summary": {
+      "total": 1,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 1
+    },
+    "tests": [
+      {
+        "title": "Recruiter Edits Job",
+        "description": "",
+        "file": "UI/Recruiter/EditJob.spec.js",
+        "line": 12,
+        "status": "interrupted",
+        "duration": 18306,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": "Error: locator.waitFor: Target page, context or browser has been closed\nCall log:\n\u001b[2m  - waiting for getByTestId('job-edit-button') to be visible\u001b[22m\n",
+        "stack": "Error: locator.waitFor: Target page, context or browser has been closed\nCall log:\n\u001b[2m  - waiting for getByTestId('job-edit-button') to be visible\u001b[22m\n\n    at EditJobPage.editJob (C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\Pages\\EditJob.js:27:31)\n    at C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\UI\\Recruiter\\EditJob.spec.js:22:19",
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1770644071212,
+    "startedAt": "2026-02-09T13:34:07.368Z",
+    "endedAt": "2026-02-09T13:34:31.212Z",
+    "duration": 23844,
+    "summary": {
+      "total": 1,
+      "passed": 0,
+      "failed": 1,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Recruiter login and create a new job",
+        "description": "",
+        "file": "UI/Recruiter/CreateJob.spec.js",
+        "line": 10,
+        "status": "failed",
+        "duration": 22143,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": "Error: Job ID missing: {\"code\":4108,\"message\":\"You have reached your subscription limit. Please upgrade your plan to continue.\"}",
+        "stack": "Error: Job ID missing: {\"code\":4108,\"message\":\"You have reached your subscription limit. Please upgrade your plan to continue.\"}\n    at CreateJobPage.submitJob (C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\Pages\\CreateJobPage.js:155:11)\n    at C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\UI\\Recruiter\\CreateJob.spec.js:30:17",
+        "attachments": [
+          {
+            "name": "error-context",
+            "path": "C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\test-results\\UI-Recruiter-CreateJob-Recruiter-login-and-create-a-new-job\\error-context.md",
+            "contentType": "text/markdown"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1770643967940,
+    "startedAt": "2026-02-09T13:32:38.596Z",
+    "endedAt": "2026-02-09T13:32:47.940Z",
+    "duration": 9344,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Recruiter delete job",
+        "description": "",
+        "file": "UI/Recruiter/DeleteJob.spec.js",
+        "line": 13,
+        "status": "passed",
+        "duration": 7599,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1770643956293,
+    "startedAt": "2026-02-09T13:32:27.847Z",
+    "endedAt": "2026-02-09T13:32:36.293Z",
+    "duration": 8446,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Candidate views applied jobs",
+        "description": "",
+        "file": "UI/candidate/ViewAppliedJobs.spec.js",
+        "line": 9,
+        "status": "passed",
+        "duration": 6751,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1770643944814,
+    "startedAt": "2026-02-09T13:31:22.973Z",
+    "endedAt": "2026-02-09T13:32:24.813Z",
+    "duration": 61840,
+    "summary": {
+      "total": 1,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 1,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Recruiter Reject candidate from applications",
+        "description": "",
+        "file": "UI/Recruiter/RejectCandidate.spec.js",
+        "line": 12,
+        "status": "timedOut",
+        "duration": 60043,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+        "stack": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+        "attachments": [
+          {
+            "name": "error-context",
+            "path": "C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\test-results\\UI-Recruiter-RejectCandida-c0b1e-candidate-from-applications\\error-context.md",
+            "contentType": "text/markdown"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1770643880472,
+    "startedAt": "2026-02-09T13:31:11.136Z",
+    "endedAt": "2026-02-09T13:31:20.471Z",
+    "duration": 9335,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Recruiter logs in and Unarchives a chat",
+        "description": "",
+        "file": "UI/Recruiter/UnArchiveChat.spec.js",
+        "line": 8,
+        "status": "passed",
+        "duration": 7685,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1770643868730,
+    "startedAt": "2026-02-09T13:30:59.071Z",
+    "endedAt": "2026-02-09T13:31:08.730Z",
+    "duration": 9659,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Recruiter logs in and archives a chat",
+        "description": "",
+        "file": "UI/Recruiter/ArchiveChat.spec.js",
+        "line": 8,
+        "status": "passed",
+        "duration": 8064,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1770643856201,
+    "startedAt": "2026-02-09T13:30:43.577Z",
+    "endedAt": "2026-02-09T13:30:56.201Z",
+    "duration": 12624,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "recruiter logs in and sends a message",
+        "description": "",
+        "file": "UI/Recruiter/sendMessage.spec.js",
+        "line": 9,
+        "status": "passed",
+        "duration": 10332,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1770643840621,
+    "startedAt": "2026-02-09T13:29:38.902Z",
+    "endedAt": "2026-02-09T13:30:40.621Z",
+    "duration": 61719,
+    "summary": {
+      "total": 1,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 1,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Recruiter see cover video",
+        "description": "",
+        "file": "UI/Recruiter/SeeCoverVideo.spec.js",
+        "line": 12,
+        "status": "timedOut",
+        "duration": 60091,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+        "stack": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+        "attachments": [
+          {
+            "name": "error-context",
+            "path": "C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\test-results\\UI-Recruiter-SeeCoverVideo-Recruiter-see-cover-video\\error-context.md",
+            "contentType": "text/markdown"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1770643776432,
+    "startedAt": "2026-02-09T13:28:34.907Z",
+    "endedAt": "2026-02-09T13:29:36.432Z",
+    "duration": 61525,
+    "summary": {
+      "total": 1,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 1,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Recruiter see Resume",
+        "description": "",
+        "file": "UI/Recruiter/SeeResume.spec.js",
+        "line": 11,
+        "status": "timedOut",
+        "duration": 60051,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+        "stack": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+        "attachments": [
+          {
+            "name": "error-context",
+            "path": "C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\test-results\\UI-Recruiter-SeeResume-Recruiter-see-Resume\\error-context.md",
+            "contentType": "text/markdown"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1770643712576,
+    "startedAt": "2026-02-09T13:27:30.878Z",
+    "endedAt": "2026-02-09T13:28:32.576Z",
+    "duration": 61698,
+    "summary": {
+      "total": 1,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 1,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Recruiter shortlists candidate from Applications",
+        "description": "",
+        "file": "UI/Recruiter/ShortlistCandidate.spec.js",
+        "line": 11,
+        "status": "timedOut",
+        "duration": 60114,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+        "stack": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+        "attachments": [
+          {
+            "name": "error-context",
+            "path": "C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\test-results\\UI-Recruiter-ShortlistCand-54fbb-candidate-from-Applications\\error-context.md",
+            "contentType": "text/markdown"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1770643648557,
+    "startedAt": "2026-02-09T13:27:20.677Z",
+    "endedAt": "2026-02-09T13:27:28.557Z",
+    "duration": 7880,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Recruiter view all applications for a job",
+        "description": "",
+        "file": "UI/Recruiter/viewApplications.spec.js",
+        "line": 11,
+        "status": "passed",
+        "duration": 6163,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1770643638093,
+    "startedAt": "2026-02-09T13:24:16.273Z",
+    "endedAt": "2026-02-09T13:27:18.092Z",
+    "duration": 181819,
+    "summary": {
+      "total": 1,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 1,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Apply for latest job (users from JSON)",
+        "description": "",
+        "file": "UI/candidate/jobApply.spec.js",
+        "line": 13,
+        "status": "timedOut",
+        "duration": 180002,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": "\u001b[31mTest timeout of 180000ms exceeded.\u001b[39m",
+        "stack": "\u001b[31mTest timeout of 180000ms exceeded.\u001b[39m",
+        "attachments": [
+          {
+            "name": "error-context",
+            "path": "C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\test-results\\UI-candidate-jobApply-Apply-for-latest-job-users-from-JSON-\\error-context.md",
+            "contentType": "text/markdown"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1770643453914,
+    "startedAt": "2026-02-09T13:24:05.871Z",
+    "endedAt": "2026-02-09T13:24:13.913Z",
+    "duration": 8042,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Recruiter Edits Job",
+        "description": "",
+        "file": "UI/Recruiter/EditJob.spec.js",
+        "line": 12,
+        "status": "passed",
+        "duration": 6464,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1770643443442,
+    "startedAt": "2026-02-09T13:23:36.811Z",
+    "endedAt": "2026-02-09T13:24:03.442Z",
+    "duration": 26631,
+    "summary": {
+      "total": 1,
+      "passed": 0,
+      "failed": 1,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Recruiter login and create a new job",
+        "description": "",
+        "file": "UI/Recruiter/CreateJob.spec.js",
+        "line": 10,
+        "status": "failed",
+        "duration": 24631,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": "Error: Job ID missing: {\"code\":4108,\"message\":\"You have reached your subscription limit. Please upgrade your plan to continue.\"}",
+        "stack": "Error: Job ID missing: {\"code\":4108,\"message\":\"You have reached your subscription limit. Please upgrade your plan to continue.\"}\n    at CreateJobPage.submitJob (C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\Pages\\CreateJobPage.js:155:11)\n    at C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\UI\\Recruiter\\CreateJob.spec.js:30:17",
+        "attachments": [
+          {
+            "name": "error-context",
+            "path": "C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\test-results\\UI-Recruiter-CreateJob-Recruiter-login-and-create-a-new-job\\error-context.md",
+            "contentType": "text/markdown"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1770643377036,
+    "startedAt": "2026-02-09T13:21:07.823Z",
+    "endedAt": "2026-02-09T13:22:57.036Z",
+    "duration": 109213,
+    "summary": {
+      "total": 1,
+      "passed": 0,
+      "failed": 1,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Apply for latest job (users from JSON)",
+        "description": "",
+        "file": "UI/candidate/jobApply.spec.js",
+        "line": 13,
+        "status": "failed",
+        "duration": 107373,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": "Error: locator.waitFor: Target page, context or browser has been closed\nCall log:\n\u001b[2m  - waiting for getByTestId('job-apply-button') to be visible\u001b[22m\n",
+        "stack": "Error: locator.waitFor: Target page, context or browser has been closed\nCall log:\n\u001b[2m  - waiting for getByTestId('job-apply-button') to be visible\u001b[22m\n\n    at ApplyJobPage.applyNow (C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\Pages\\ApplyJobPage.js:30:31)\n    at C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\UI\\candidate\\jobApply.spec.js:33:24",
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1770643145251,
+    "startedAt": "2026-02-09T13:17:15.873Z",
+    "endedAt": "2026-02-09T13:19:05.251Z",
+    "duration": 109378,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Apply for latest job (users from JSON)",
+        "description": "",
+        "file": "UI/candidate/jobApply.spec.js",
+        "line": 13,
+        "status": "passed",
+        "duration": 107537,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1770642914103,
+    "startedAt": "2026-02-09T13:14:12.060Z",
+    "endedAt": "2026-02-09T13:15:14.103Z",
+    "duration": 62043,
+    "summary": {
+      "total": 1,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 1,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Apply for latest job (users from JSON)",
+        "description": "",
+        "file": "UI/candidate/jobApply.spec.js",
+        "line": 13,
+        "status": "timedOut",
+        "duration": 60009,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+        "stack": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+        "attachments": [
+          {
+            "name": "error-context",
+            "path": "C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\test-results\\UI-candidate-jobApply-Apply-for-latest-job-users-from-JSON-\\error-context.md",
+            "contentType": "text/markdown"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1770642746483,
+    "startedAt": "2026-02-09T13:12:02.755Z",
+    "endedAt": "2026-02-09T13:12:26.483Z",
+    "duration": 23728,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "candidate can upload a video resume",
+        "description": "",
+        "file": "UI/candidate/UpdateCoverVideo.spec.js",
+        "line": 10,
+        "status": "passed",
+        "duration": 21464,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1770642673900,
+    "startedAt": "2026-02-09T13:10:49.416Z",
+    "endedAt": "2026-02-09T13:11:13.900Z",
+    "duration": 24484,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "candidate can upload a video resume",
+        "description": "",
+        "file": "UI/candidate/UpdateCoverVideo.spec.js",
+        "line": 10,
+        "status": "passed",
+        "duration": 21396,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1770642450330,
+    "startedAt": "2026-02-09T13:07:05.054Z",
+    "endedAt": "2026-02-09T13:07:30.330Z",
+    "duration": 25276,
+    "summary": {
+      "total": 1,
+      "passed": 0,
+      "failed": 1,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "candidate can upload a video resume",
+        "description": "",
+        "file": "UI/candidate/UpdateCoverVideo.spec.js",
+        "line": 10,
+        "status": "failed",
+        "duration": 22959,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": "TimeoutError: locator.waitFor: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('input[type=\"file\"]').last()\u001b[22m\n",
+        "stack": "TimeoutError: locator.waitFor: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('input[type=\"file\"]').last()\u001b[22m\n\n    at UpdateCoverVideoResumePage.uploadVideo (C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\Pages\\UploadCoverVideo.js:78:23)\n    at C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\UI\\candidate\\UpdateCoverVideo.spec.js:23:3",
+        "attachments": [
+          {
+            "name": "error-context",
+            "path": "C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\test-results\\UI-candidate-UpdateCoverVi-d5e73-e-can-upload-a-video-resume\\error-context.md",
+            "contentType": "text/markdown"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1770642404021,
+    "startedAt": "2026-02-09T13:06:43.897Z",
+    "endedAt": "2026-02-09T13:06:44.021Z",
+    "duration": 124,
+    "summary": {
+      "total": 0,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": []
+  },
+  {
+    "id": 1770642373932,
+    "startedAt": "2026-02-09T13:05:59.651Z",
+    "endedAt": "2026-02-09T13:06:13.932Z",
+    "duration": 14281,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "candidate can update education",
+        "description": "",
+        "file": "UI/candidate/UpdateEducation.spec.js",
+        "line": 9,
+        "status": "passed",
+        "duration": 11716,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1770642326362,
+    "startedAt": "2026-02-09T13:05:17.393Z",
+    "endedAt": "2026-02-09T13:05:26.362Z",
+    "duration": 8969,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Candidate changes password",
+        "description": "",
+        "file": "UI/candidate/ChangePassword.spec.js",
+        "line": 8,
+        "status": "passed",
+        "duration": 6824,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1770642231590,
+    "startedAt": "2026-02-09T13:03:43.869Z",
+    "endedAt": "2026-02-09T13:03:51.590Z",
+    "duration": 7721,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Candidate can log in using phone number",
+        "description": "",
+        "file": "UI/candidate/PhoneLogin.spec.js",
+        "line": 8,
+        "status": "passed",
+        "duration": 5413,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1770642182515,
+    "startedAt": "2026-02-09T13:02:54.317Z",
+    "endedAt": "2026-02-09T13:03:02.515Z",
+    "duration": 8198,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Candidate can log in using phone number",
+        "description": "",
+        "file": "UI/candidate/PhoneLogin.spec.js",
+        "line": 8,
+        "status": "passed",
+        "duration": 6117,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1770642011511,
+    "startedAt": "2026-02-09T12:59:55.011Z",
+    "endedAt": "2026-02-09T13:00:11.510Z",
+    "duration": 16499,
+    "summary": {
+      "total": 1,
+      "passed": 0,
+      "failed": 1,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Candidate can log in using phone number",
+        "description": "",
+        "file": "UI/candidate/PhoneLogin.spec.js",
+        "line": 8,
+        "status": "failed",
+        "duration": 14661,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": "TimeoutError: locator.waitFor: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByTestId('signin-phone') to be visible\u001b[22m\n",
+        "stack": "TimeoutError: locator.waitFor: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByTestId('signin-phone') to be visible\u001b[22m\n\n    at Login.phoneLogin (C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\Pages\\Login.js:39:31)\n    at C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\UI\\candidate\\PhoneLogin.spec.js:11:5",
+        "attachments": [
+          {
+            "name": "error-context",
+            "path": "C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\test-results\\UI-candidate-PhoneLogin-Ca-ff50c-n-log-in-using-phone-number\\error-context.md",
+            "contentType": "text/markdown"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1770641935076,
+    "startedAt": "2026-02-09T12:57:52.967Z",
+    "endedAt": "2026-02-09T12:58:55.076Z",
+    "duration": 62109,
+    "summary": {
+      "total": 1,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 1,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Candidate can log in using phone number",
+        "description": "",
+        "file": "UI/candidate/PhoneLogin.spec.js",
+        "line": 8,
+        "status": "timedOut",
+        "duration": 60051,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+        "stack": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+        "attachments": [
+          {
+            "name": "error-context",
+            "path": "C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\test-results\\UI-candidate-PhoneLogin-Ca-ff50c-n-log-in-using-phone-number\\error-context.md",
+            "contentType": "text/markdown"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1770641740483,
+    "startedAt": "2026-02-09T12:54:38.114Z",
+    "endedAt": "2026-02-09T12:55:40.483Z",
+    "duration": 62369,
+    "summary": {
+      "total": 1,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 1,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Candidate can log in using phone number",
+        "description": "",
+        "file": "UI/candidate/PhoneLogin.spec.js",
+        "line": 8,
+        "status": "timedOut",
+        "duration": 60109,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+        "stack": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+        "attachments": [
+          {
+            "name": "error-context",
+            "path": "C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\test-results\\UI-candidate-PhoneLogin-Ca-ff50c-n-log-in-using-phone-number\\error-context.md",
+            "contentType": "text/markdown"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1770641649714,
+    "startedAt": "2026-02-09T12:54:04.474Z",
+    "endedAt": "2026-02-09T12:54:09.714Z",
+    "duration": 5240,
+    "summary": {
+      "total": 1,
+      "passed": 0,
+      "failed": 1,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Candidate can log in using phone number",
+        "description": "",
+        "file": "UI/candidate/PhoneLogin.spec.js",
+        "line": 8,
+        "status": "failed",
+        "duration": 2868,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": "Error: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5173/auth\nCall log:\n\u001b[2m  - navigating to \"http://localhost:5173/auth\", waiting until \"load\"\u001b[22m\n",
+        "stack": "Error: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5173/auth\nCall log:\n\u001b[2m  - navigating to \"http://localhost:5173/auth\", waiting until \"load\"\u001b[22m\n\n    at Login.goto (C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\Pages\\Login.js:27:25)\n    at C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\UI\\candidate\\PhoneLogin.spec.js:10:21",
+        "attachments": [
+          {
+            "name": "error-context",
+            "path": "C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\test-results\\UI-candidate-PhoneLogin-Ca-ff50c-n-log-in-using-phone-number\\error-context.md",
+            "contentType": "text/markdown"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1770641607845,
+    "startedAt": "2026-02-09T12:53:05.699Z",
+    "endedAt": "2026-02-09T12:53:27.845Z",
+    "duration": 22146,
+    "summary": {
+      "total": 1,
+      "passed": 0,
+      "failed": 1,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Candidate can log in using phone number",
+        "description": "",
+        "file": "UI/candidate/PhoneLogin.spec.js",
+        "line": 8,
+        "status": "failed",
+        "duration": 20222,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": "TimeoutError: locator.waitFor: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByTestId('signin-phone') to be visible\u001b[22m\n",
+        "stack": "TimeoutError: locator.waitFor: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByTestId('signin-phone') to be visible\u001b[22m\n\n    at Login.phoneLogin (C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\Pages\\Login.js:44:35)\n    at C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\UI\\candidate\\PhoneLogin.spec.js:11:5",
+        "attachments": [
+          {
+            "name": "error-context",
+            "path": "C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\test-results\\UI-candidate-PhoneLogin-Ca-ff50c-n-log-in-using-phone-number\\error-context.md",
+            "contentType": "text/markdown"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1770641071955,
+    "startedAt": "2026-02-09T12:43:29.674Z",
+    "endedAt": "2026-02-09T12:44:31.955Z",
+    "duration": 62281,
+    "summary": {
+      "total": 1,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 1,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Candidate can log in using phone number",
+        "description": "",
+        "file": "UI/candidate/PhoneLogin.spec.js",
+        "line": 8,
+        "status": "timedOut",
+        "duration": 60047,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+        "stack": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+        "attachments": [
+          {
+            "name": "error-context",
+            "path": "C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\test-results\\UI-candidate-PhoneLogin-Ca-ff50c-n-log-in-using-phone-number\\error-context.md",
+            "contentType": "text/markdown"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1770640520539,
+    "startedAt": "2026-02-09T12:34:18.660Z",
+    "endedAt": "2026-02-09T12:35:20.538Z",
+    "duration": 61878,
+    "summary": {
+      "total": 1,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 1,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Candidate can log in using phone number",
+        "description": "",
+        "file": "UI/candidate/PhoneLogin.spec.js",
+        "line": 8,
+        "status": "timedOut",
+        "duration": 60042,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+        "stack": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+        "attachments": [
+          {
+            "name": "error-context",
+            "path": "C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\test-results\\UI-candidate-PhoneLogin-Ca-ff50c-n-log-in-using-phone-number\\error-context.md",
+            "contentType": "text/markdown"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1770640345176,
+    "startedAt": "2026-02-09T12:31:22.551Z",
+    "endedAt": "2026-02-09T12:32:25.176Z",
+    "duration": 62625,
+    "summary": {
+      "total": 1,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 1,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Candidate can log in using phone number",
+        "description": "",
+        "file": "UI/candidate/PhoneLogin.spec.js",
+        "line": 8,
+        "status": "timedOut",
+        "duration": 60053,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+        "stack": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+        "attachments": [
+          {
+            "name": "error-context",
+            "path": "C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\test-results\\UI-candidate-PhoneLogin-Ca-ff50c-n-log-in-using-phone-number\\error-context.md",
+            "contentType": "text/markdown"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1770640119462,
+    "startedAt": "2026-02-09T12:27:37.438Z",
+    "endedAt": "2026-02-09T12:28:39.462Z",
+    "duration": 62024,
+    "summary": {
+      "total": 1,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 1,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Candidate can log in using phone number",
+        "description": "",
+        "file": "UI/candidate/PhoneLogin.spec.js",
+        "line": 8,
+        "status": "timedOut",
+        "duration": 60115,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+        "stack": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+        "attachments": [
+          {
+            "name": "error-context",
+            "path": "C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\test-results\\UI-candidate-PhoneLogin-Ca-ff50c-n-log-in-using-phone-number\\error-context.md",
+            "contentType": "text/markdown"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1770639949283,
+    "startedAt": "2026-02-09T12:24:47.278Z",
+    "endedAt": "2026-02-09T12:25:49.283Z",
+    "duration": 62005,
+    "summary": {
+      "total": 1,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 1,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Candidate can log in using phone number",
+        "description": "",
+        "file": "UI/candidate/PhoneLogin.spec.js",
+        "line": 8,
+        "status": "timedOut",
+        "duration": 60047,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+        "stack": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+        "attachments": [
+          {
+            "name": "error-context",
+            "path": "C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\test-results\\UI-candidate-PhoneLogin-Ca-ff50c-n-log-in-using-phone-number\\error-context.md",
+            "contentType": "text/markdown"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1770218034551,
+    "startedAt": "2026-02-04T15:12:51.090Z",
+    "endedAt": "2026-02-04T15:13:54.551Z",
+    "duration": 63461,
+    "summary": {
+      "total": 1,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 1,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Apply for latest job (users from JSON)",
+        "description": "",
+        "file": "UI/candidate/jobApply.spec.js",
+        "line": 13,
+        "status": "timedOut",
+        "duration": 60012,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+        "stack": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+        "attachments": [
+          {
+            "name": "error-context",
+            "path": "C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\test-results\\UI-candidate-jobApply-Apply-for-latest-job-users-from-JSON-\\error-context.md",
+            "contentType": "text/markdown"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1770217846989,
+    "startedAt": "2026-02-04T15:09:43.126Z",
+    "endedAt": "2026-02-04T15:10:46.989Z",
+    "duration": 63863,
+    "summary": {
+      "total": 1,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 1,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Apply for latest job (users from JSON)",
+        "description": "",
+        "file": "UI/candidate/jobApply.spec.js",
+        "line": 13,
+        "status": "timedOut",
+        "duration": 60010,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+        "stack": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+        "attachments": [
+          {
+            "name": "error-context",
+            "path": "C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\test-results\\UI-candidate-jobApply-Apply-for-latest-job-users-from-JSON-\\error-context.md",
+            "contentType": "text/markdown"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1770217581359,
+    "startedAt": "2026-02-04T15:06:05.890Z",
+    "endedAt": "2026-02-04T15:06:21.359Z",
+    "duration": 15469,
+    "summary": {
+      "total": 1,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 1
+    },
+    "tests": [
+      {
+        "title": "Recruiter view all applications for a job",
+        "description": "",
+        "file": "UI/Recruiter/viewApplications.spec.js",
+        "line": 11,
+        "status": "interrupted",
+        "duration": 11499,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": "Error: browserContext.close: Test ended.\nBrowser logs:\n\n<launching> C:\\Users\\LENOVO\\AppData\\Local\\ms-playwright\\chromium_headless_shell-1200\\chrome-headless-shell-win64\\chrome-headless-shell.exe --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-extensions --disable-features=AcceptCHFrame,AvoidUnnecessaryBeforeUnloadCheckSync,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,Translate,AutoDeElevate,RenderDocument,OptimizationHints --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --enable-automation --disable-infobars --disable-search-engine-choice-screen --disable-sync --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --user-data-dir=C:\\Users\\LENOVO\\AppData\\Local\\Temp\\playwright_chromiumdev_profile-lze4Vg --remote-debugging-pipe --no-startup-window\n<launched> pid=17716",
+        "stack": "Error: browserContext.close: Test ended.\nBrowser logs:\n\n<launching> C:\\Users\\LENOVO\\AppData\\Local\\ms-playwright\\chromium_headless_shell-1200\\chrome-headless-shell-win64\\chrome-headless-shell.exe --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-extensions --disable-features=AcceptCHFrame,AvoidUnnecessaryBeforeUnloadCheckSync,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,Translate,AutoDeElevate,RenderDocument,OptimizationHints --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --enable-automation --disable-infobars --disable-search-engine-choice-screen --disable-sync --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --user-data-dir=C:\\Users\\LENOVO\\AppData\\Local\\Temp\\playwright_chromiumdev_profile-lze4Vg --remote-debugging-pipe --no-startup-window\n<launched> pid=17716",
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1770217560634,
+    "startedAt": "2026-02-04T15:05:10.762Z",
+    "endedAt": "2026-02-04T15:06:00.633Z",
+    "duration": 49871,
+    "summary": {
+      "total": 1,
+      "passed": 0,
+      "failed": 1,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Apply for latest job (users from JSON)",
+        "description": "",
+        "file": "UI/candidate/jobApply.spec.js",
+        "line": 13,
+        "status": "failed",
+        "duration": 45653,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": "Error: locator.waitFor: Target page, context or browser has been closed\nCall log:\n\u001b[2m  - waiting for getByTestId('job-apply-button') to be visible\u001b[22m\n",
+        "stack": "Error: locator.waitFor: Target page, context or browser has been closed\nCall log:\n\u001b[2m  - waiting for getByTestId('job-apply-button') to be visible\u001b[22m\n\n    at ApplyJobPage.applyNow (C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\Pages\\ApplyJobPage.js:30:31)\n    at C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\UI\\candidate\\jobApply.spec.js:32:24",
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1770217505315,
+    "startedAt": "2026-02-04T15:04:02.078Z",
+    "endedAt": "2026-02-04T15:05:05.315Z",
+    "duration": 63237,
+    "summary": {
+      "total": 1,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 1,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Recruiter Edits Job",
+        "description": "",
+        "file": "UI/Recruiter/EditJob.spec.js",
+        "line": 12,
+        "status": "timedOut",
+        "duration": 60085,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+        "stack": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+        "attachments": [
+          {
+            "name": "error-context",
+            "path": "C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\test-results\\UI-Recruiter-EditJob-Recruiter-Edits-Job\\error-context.md",
+            "contentType": "text/markdown"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1770217437493,
+    "startedAt": "2026-02-04T15:03:20.441Z",
+    "endedAt": "2026-02-04T15:03:57.492Z",
+    "duration": 37051,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Recruiter login and create a new job",
+        "description": "",
+        "file": "UI/Recruiter/CreateJob.spec.js",
+        "line": 10,
+        "status": "passed",
+        "duration": 33229,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1770217395276,
+    "startedAt": "2026-02-04T15:03:03.789Z",
+    "endedAt": "2026-02-04T15:03:15.276Z",
+    "duration": 11487,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Recruiter saves a job draft",
+        "description": "",
+        "file": "UI/Recruiter/SaveDraft.spec.js",
+        "line": 11,
+        "status": "passed",
+        "duration": 7584,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1770217378573,
+    "startedAt": "2026-02-04T15:02:46.247Z",
+    "endedAt": "2026-02-04T15:02:58.572Z",
+    "duration": 12325,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Apply Currency filter",
+        "description": "",
+        "file": "UI/candidate/currencyFilter.spec.js",
+        "line": 9,
+        "status": "passed",
+        "duration": 8238,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1770217361262,
+    "startedAt": "2026-02-04T15:02:29.393Z",
+    "endedAt": "2026-02-04T15:02:41.262Z",
+    "duration": 11869,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Apply Experience Level filter",
+        "description": "",
+        "file": "UI/candidate/experienceLevelFilter.spec.js",
+        "line": 8,
+        "status": "passed",
+        "duration": 8441,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1770217342867,
+    "startedAt": "2026-02-04T15:02:10.660Z",
+    "endedAt": "2026-02-04T15:02:22.866Z",
+    "duration": 12206,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Apply Job Type filter",
+        "description": "",
+        "file": "UI/candidate/jobtype.spec.js",
+        "line": 9,
+        "status": "passed",
+        "duration": 8124,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1770217325069,
+    "startedAt": "2026-02-04T15:01:52.321Z",
+    "endedAt": "2026-02-04T15:02:05.069Z",
+    "duration": 12748,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Notification flow – handle empty & existing notifications",
+        "description": "",
+        "file": "UI/candidate/Notification.spec.js",
+        "line": 8,
+        "status": "passed",
+        "duration": 9123,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1770217307373,
+    "startedAt": "2026-02-04T15:01:34.875Z",
+    "endedAt": "2026-02-04T15:01:47.373Z",
+    "duration": 12498,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Apply Region filter",
+        "description": "",
+        "file": "UI/candidate/regionFilter.spec.js",
+        "line": 8,
+        "status": "passed",
+        "duration": 8494,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1770217288826,
+    "startedAt": "2026-02-04T15:01:17.104Z",
+    "endedAt": "2026-02-04T15:01:28.826Z",
+    "duration": 11722,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Search job by name and verify results",
+        "description": "",
+        "file": "UI/candidate/SearchJob.spec.js",
+        "line": 8,
+        "status": "passed",
+        "duration": 8437,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1770217272448,
+    "startedAt": "2026-02-04T15:01:01.287Z",
+    "endedAt": "2026-02-04T15:01:12.448Z",
+    "duration": 11161,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Apply Work Type filter",
+        "description": "",
+        "file": "UI/candidate/workTypeFilter.spec.js",
+        "line": 9,
+        "status": "passed",
+        "duration": 7787,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1770217257158,
+    "startedAt": "2026-02-04T15:00:45.704Z",
+    "endedAt": "2026-02-04T15:00:57.157Z",
+    "duration": 11453,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Apply all job filters together",
+        "description": "",
+        "file": "UI/candidate/FIlter.spec.js",
+        "line": 9,
+        "status": "passed",
+        "duration": 8485,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1770217241141,
+    "startedAt": "2026-02-04T15:00:40.845Z",
+    "endedAt": "2026-02-04T15:00:41.141Z",
+    "duration": 296,
+    "summary": {
+      "total": 0,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": []
+  },
+  {
+    "id": 1770217236367,
+    "startedAt": "2026-02-04T15:00:18.124Z",
+    "endedAt": "2026-02-04T15:00:36.367Z",
+    "duration": 18243,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Candidate deletes and uploads resume",
+        "description": "",
+        "file": "UI/candidate/UpdateResume.spec.js",
+        "line": 10,
+        "status": "passed",
+        "duration": 15258,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1770217213826,
+    "startedAt": "2026-02-04T14:59:59.201Z",
+    "endedAt": "2026-02-04T15:00:13.826Z",
+    "duration": 14625,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "candidate can update education",
+        "description": "",
+        "file": "UI/candidate/UpdateEducation.spec.js",
+        "line": 9,
+        "status": "passed",
+        "duration": 11538,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1770217194870,
+    "startedAt": "2026-02-04T14:59:39.062Z",
+    "endedAt": "2026-02-04T14:59:54.869Z",
+    "duration": 15807,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Candidate deletes existing work (if any) and adds new experience",
+        "description": "",
+        "file": "UI/candidate/UpdateWork.spec.js",
+        "line": 10,
+        "status": "passed",
+        "duration": 12724,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1770217174893,
+    "startedAt": "2026-02-04T14:59:21.533Z",
+    "endedAt": "2026-02-04T14:59:34.893Z",
+    "duration": 13360,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "candidate can update skills section",
+        "description": "",
+        "file": "UI/candidate/UpdateSkill.spec.js",
+        "line": 11,
+        "status": "passed",
+        "duration": 10070,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1770217157703,
+    "startedAt": "2026-02-04T14:59:03.804Z",
+    "endedAt": "2026-02-04T14:59:17.702Z",
+    "duration": 13898,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "candidate can update about section",
+        "description": "",
+        "file": "UI/candidate/UpdateAbout.spec.js",
+        "line": 10,
+        "status": "passed",
+        "duration": 10743,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1770217139619,
+    "startedAt": "2026-02-04T14:58:39.074Z",
+    "endedAt": "2026-02-04T14:58:59.619Z",
+    "duration": 20545,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Candidate info, profile picture, and banner update",
+        "description": "",
+        "file": "UI/candidate/UpdateInfo.spec.js",
+        "line": 9,
+        "status": "passed",
+        "duration": 17219,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1770217114599,
+    "startedAt": "2026-02-04T14:58:12.039Z",
+    "endedAt": "2026-02-04T14:58:34.599Z",
+    "duration": 22560,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Recruiter updates company details and logo",
+        "description": "",
+        "file": "UI/Recruiter/UpdateCompany.spec.js",
+        "line": 10,
+        "status": "passed",
+        "duration": 19532,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1770217087368,
+    "startedAt": "2026-02-04T14:57:54.656Z",
+    "endedAt": "2026-02-04T14:58:07.368Z",
+    "duration": 12712,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "recruiter can update about section",
+        "description": "",
+        "file": "UI/Recruiter/UpdateAbout.spec.js",
+        "line": 10,
+        "status": "passed",
+        "duration": 9039,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1770217068980,
+    "startedAt": "2026-02-04T14:57:30.560Z",
+    "endedAt": "2026-02-04T14:57:48.980Z",
+    "duration": 18420,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "recruuiter info, profile picture, and banner update",
+        "description": "",
+        "file": "UI/Recruiter/UpdateInfo.spec.js",
+        "line": 11,
+        "status": "passed",
+        "duration": 14036,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1770217046267,
+    "startedAt": "2026-02-04T14:57:14.992Z",
+    "endedAt": "2026-02-04T14:57:26.267Z",
+    "duration": 11275,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Recruiter logs in successfully",
+        "description": "",
+        "file": "UI/Login.spec.js",
+        "line": 4,
+        "status": "passed",
+        "duration": 7841,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1770217029710,
+    "startedAt": "2026-02-04T14:56:57.992Z",
+    "endedAt": "2026-02-04T14:57:09.710Z",
+    "duration": 11718,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Candidate changes password",
+        "description": "",
+        "file": "UI/candidate/ChangePassword.spec.js",
+        "line": 8,
+        "status": "passed",
+        "duration": 8227,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1770217013526,
+    "startedAt": "2026-02-04T14:55:48.883Z",
+    "endedAt": "2026-02-04T14:56:53.526Z",
+    "duration": 64643,
+    "summary": {
+      "total": 1,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 1,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Candidate can log in using phone number",
+        "description": "",
+        "file": "UI/candidate/PhoneLogin.spec.js",
+        "line": 8,
+        "status": "timedOut",
+        "duration": 60112,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+        "stack": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+        "attachments": [
+          {
+            "name": "error-context",
+            "path": "C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\test-results\\UI-candidate-PhoneLogin-Ca-ff50c-n-log-in-using-phone-number\\error-context.md",
+            "contentType": "text/markdown"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1770216944468,
+    "startedAt": "2026-02-04T14:55:34.778Z",
+    "endedAt": "2026-02-04T14:55:44.468Z",
+    "duration": 9690,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Recruiter forget password flow",
+        "description": "",
+        "file": "UI/Recruiter/ForgetPassword.spec.js",
+        "line": 7,
+        "status": "passed",
+        "duration": 6019,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1770216930667,
+    "startedAt": "2026-02-04T14:55:21.625Z",
+    "endedAt": "2026-02-04T14:55:30.667Z",
+    "duration": 9042,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Candidate signs up and moves user from RandomUsers to NewUsers",
+        "description": "",
+        "file": "UI/Signup.spec.js",
+        "line": 6,
+        "status": "passed",
+        "duration": 5682,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1770127896503,
+    "startedAt": "2026-02-03T14:10:34.797Z",
+    "endedAt": "2026-02-03T14:11:36.503Z",
+    "duration": 61706,
+    "summary": {
+      "total": 1,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 1,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Recruiter delete job",
+        "description": "",
+        "file": "UI/Recruiter/DeleteJob.spec.js",
+        "line": 13,
+        "status": "timedOut",
+        "duration": 60073,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+        "stack": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+        "attachments": [
+          {
+            "name": "error-context",
+            "path": "C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\test-results\\UI-Recruiter-DeleteJob-Recruiter-delete-job\\error-context.md",
+            "contentType": "text/markdown"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1770127832686,
+    "startedAt": "2026-02-03T14:10:23.802Z",
+    "endedAt": "2026-02-03T14:10:32.686Z",
+    "duration": 8884,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Candidate views applied jobs",
+        "description": "",
+        "file": "UI/candidate/ViewAppliedJobs.spec.js",
+        "line": 9,
+        "status": "passed",
+        "duration": 6651,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1770127821269,
+    "startedAt": "2026-02-03T14:09:19.598Z",
+    "endedAt": "2026-02-03T14:10:21.269Z",
+    "duration": 61671,
+    "summary": {
+      "total": 1,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 1,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Recruiter Reject candidate from applications",
+        "description": "",
+        "file": "UI/Recruiter/RejectCandidate.spec.js",
+        "line": 12,
+        "status": "timedOut",
+        "duration": 60068,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+        "stack": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+        "attachments": [
+          {
+            "name": "error-context",
+            "path": "C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\test-results\\UI-Recruiter-RejectCandida-c0b1e-candidate-from-applications\\error-context.md",
+            "contentType": "text/markdown"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1770127757470,
+    "startedAt": "2026-02-03T14:09:08.241Z",
+    "endedAt": "2026-02-03T14:09:17.470Z",
+    "duration": 9229,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Recruiter logs in and Unarchives a chat",
+        "description": "",
+        "file": "UI/Recruiter/UnArchiveChat.spec.js",
+        "line": 8,
+        "status": "passed",
+        "duration": 7511,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1770127746009,
+    "startedAt": "2026-02-03T14:08:56.488Z",
+    "endedAt": "2026-02-03T14:09:06.009Z",
+    "duration": 9521,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Recruiter logs in and archives a chat",
+        "description": "",
+        "file": "UI/Recruiter/ArchiveChat.spec.js",
+        "line": 8,
+        "status": "passed",
+        "duration": 7926,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1770127734363,
+    "startedAt": "2026-02-03T14:08:42.994Z",
+    "endedAt": "2026-02-03T14:08:54.363Z",
+    "duration": 11369,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "recruiter logs in and sends a message",
+        "description": "",
+        "file": "UI/Recruiter/sendMessage.spec.js",
+        "line": 9,
+        "status": "passed",
+        "duration": 9761,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1770127720891,
+    "startedAt": "2026-02-03T14:07:39.074Z",
+    "endedAt": "2026-02-03T14:08:40.891Z",
+    "duration": 61817,
+    "summary": {
+      "total": 1,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 1,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Recruiter see cover video",
+        "description": "",
+        "file": "UI/Recruiter/SeeCoverVideo.spec.js",
+        "line": 12,
+        "status": "timedOut",
+        "duration": 60081,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+        "stack": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+        "attachments": [
+          {
+            "name": "error-context",
+            "path": "C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\test-results\\UI-Recruiter-SeeCoverVideo-Recruiter-see-cover-video\\error-context.md",
+            "contentType": "text/markdown"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1770127656722,
+    "startedAt": "2026-02-03T14:06:35.096Z",
+    "endedAt": "2026-02-03T14:07:36.722Z",
+    "duration": 61626,
+    "summary": {
+      "total": 1,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 1,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Recruiter see Resume",
+        "description": "",
+        "file": "UI/Recruiter/SeeResume.spec.js",
+        "line": 11,
+        "status": "timedOut",
+        "duration": 60092,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+        "stack": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+        "attachments": [
+          {
+            "name": "error-context",
+            "path": "C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\test-results\\UI-Recruiter-SeeResume-Recruiter-see-Resume\\error-context.md",
+            "contentType": "text/markdown"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1770127593008,
+    "startedAt": "2026-02-03T14:05:31.281Z",
+    "endedAt": "2026-02-03T14:06:33.008Z",
+    "duration": 61727,
+    "summary": {
+      "total": 1,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 1,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Recruiter shortlists candidate from Applications",
+        "description": "",
+        "file": "UI/Recruiter/ShortlistCandidate.spec.js",
+        "line": 11,
+        "status": "timedOut",
+        "duration": 60084,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+        "stack": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+        "attachments": [
+          {
+            "name": "error-context",
+            "path": "C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\test-results\\UI-Recruiter-ShortlistCand-54fbb-candidate-from-Applications\\error-context.md",
+            "contentType": "text/markdown"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1770127529072,
+    "startedAt": "2026-02-03T14:04:26.869Z",
+    "endedAt": "2026-02-03T14:05:29.072Z",
+    "duration": 62203,
+    "summary": {
+      "total": 1,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 1,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Recruiter view all applications for a job",
+        "description": "",
+        "file": "UI/Recruiter/viewApplications.spec.js",
+        "line": 11,
+        "status": "timedOut",
+        "duration": 60075,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+        "stack": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+        "attachments": [
+          {
+            "name": "error-context",
+            "path": "C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\test-results\\UI-Recruiter-viewApplicati-74249--all-applications-for-a-job\\error-context.md",
+            "contentType": "text/markdown"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1770127464203,
+    "startedAt": "2026-02-03T14:03:21.459Z",
+    "endedAt": "2026-02-03T14:04:24.202Z",
+    "duration": 62743,
+    "summary": {
+      "total": 1,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 1,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Apply for latest job (users from JSON)",
+        "description": "",
+        "file": "UI/candidate/jobApply.spec.js",
+        "line": 13,
+        "status": "timedOut",
+        "duration": 60003,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+        "stack": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+        "attachments": [
+          {
+            "name": "error-context",
+            "path": "C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\test-results\\UI-candidate-jobApply-Apply-for-latest-job-users-from-JSON-\\error-context.md",
+            "contentType": "text/markdown"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1770127398504,
+    "startedAt": "2026-02-03T14:02:15.153Z",
+    "endedAt": "2026-02-03T14:03:18.504Z",
+    "duration": 63351,
+    "summary": {
+      "total": 1,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 1,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Recruiter Edits Job",
+        "description": "",
+        "file": "UI/Recruiter/EditJob.spec.js",
+        "line": 12,
+        "status": "timedOut",
+        "duration": 60031,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+        "stack": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+        "attachments": [
+          {
+            "name": "error-context",
+            "path": "C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\test-results\\UI-Recruiter-EditJob-Recruiter-Edits-Job\\error-context.md",
+            "contentType": "text/markdown"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1770127331747,
+    "startedAt": "2026-02-03T14:01:37.091Z",
+    "endedAt": "2026-02-03T14:02:11.747Z",
+    "duration": 34656,
+    "summary": {
+      "total": 1,
+      "passed": 0,
+      "failed": 1,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Recruiter login and create a new job",
+        "description": "",
+        "file": "UI/Recruiter/CreateJob.spec.js",
+        "line": 10,
+        "status": "failed",
+        "duration": 32643,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": "Error: Job ID missing: {\"code\":4108,\"message\":\"You have reached your subscription limit. Please upgrade your plan to continue.\"}",
+        "stack": "Error: Job ID missing: {\"code\":4108,\"message\":\"You have reached your subscription limit. Please upgrade your plan to continue.\"}\n    at CreateJobPage.submitJob (C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\Pages\\CreateJobPage.js:155:11)\n    at C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\UI\\Recruiter\\CreateJob.spec.js:30:17",
+        "attachments": [
+          {
+            "name": "error-context",
+            "path": "C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\test-results\\UI-Recruiter-CreateJob-Recruiter-login-and-create-a-new-job\\error-context.md",
+            "contentType": "text/markdown"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1770127295024,
+    "startedAt": "2026-02-03T14:01:26.934Z",
+    "endedAt": "2026-02-03T14:01:35.024Z",
+    "duration": 8090,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Recruiter saves a job draft",
+        "description": "",
+        "file": "UI/Recruiter/SaveDraft.spec.js",
+        "line": 11,
+        "status": "passed",
+        "duration": 6103,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1770127284979,
+    "startedAt": "2026-02-03T14:01:16.675Z",
+    "endedAt": "2026-02-03T14:01:24.979Z",
+    "duration": 8304,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Apply Currency filter",
+        "description": "",
+        "file": "UI/candidate/currencyFilter.spec.js",
+        "line": 9,
+        "status": "passed",
+        "duration": 6653,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1770127274716,
+    "startedAt": "2026-02-03T14:01:05.925Z",
+    "endedAt": "2026-02-03T14:01:14.715Z",
+    "duration": 8790,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Apply Experience Level filter",
+        "description": "",
+        "file": "UI/candidate/experienceLevelFilter.spec.js",
+        "line": 8,
+        "status": "passed",
+        "duration": 7182,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1770127263872,
+    "startedAt": "2026-02-03T14:00:55.545Z",
+    "endedAt": "2026-02-03T14:01:03.872Z",
+    "duration": 8327,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Apply Job Type filter",
+        "description": "",
+        "file": "UI/candidate/jobtype.spec.js",
+        "line": 9,
+        "status": "passed",
+        "duration": 6817,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1770127253505,
+    "startedAt": "2026-02-03T14:00:44.638Z",
+    "endedAt": "2026-02-03T14:00:53.505Z",
+    "duration": 8867,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Notification flow – handle empty & existing notifications",
+        "description": "",
+        "file": "UI/candidate/Notification.spec.js",
+        "line": 8,
+        "status": "passed",
+        "duration": 7287,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1770127242471,
+    "startedAt": "2026-02-03T14:00:34.160Z",
+    "endedAt": "2026-02-03T14:00:42.471Z",
+    "duration": 8311,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Apply Region filter",
+        "description": "",
+        "file": "UI/candidate/regionFilter.spec.js",
+        "line": 8,
+        "status": "passed",
+        "duration": 6764,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1770127232016,
+    "startedAt": "2026-02-03T14:00:23.767Z",
+    "endedAt": "2026-02-03T14:00:32.016Z",
+    "duration": 8249,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Search job by name and verify results",
+        "description": "",
+        "file": "UI/candidate/SearchJob.spec.js",
+        "line": 8,
+        "status": "passed",
+        "duration": 6634,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1770127221647,
+    "startedAt": "2026-02-03T14:00:13.440Z",
+    "endedAt": "2026-02-03T14:00:21.647Z",
+    "duration": 8207,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Apply Work Type filter",
+        "description": "",
+        "file": "UI/candidate/workTypeFilter.spec.js",
+        "line": 9,
+        "status": "passed",
+        "duration": 6672,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1770127211329,
+    "startedAt": "2026-02-03T14:00:02.447Z",
+    "endedAt": "2026-02-03T14:00:11.329Z",
+    "duration": 8882,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Apply all job filters together",
+        "description": "",
+        "file": "UI/candidate/FIlter.spec.js",
+        "line": 9,
+        "status": "passed",
+        "duration": 7129,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1770127199732,
+    "startedAt": "2026-02-03T13:59:59.616Z",
+    "endedAt": "2026-02-03T13:59:59.732Z",
+    "duration": 116,
+    "summary": {
+      "total": 0,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": []
+  },
+  {
+    "id": 1770127197525,
+    "startedAt": "2026-02-03T13:59:36.654Z",
+    "endedAt": "2026-02-03T13:59:57.525Z",
+    "duration": 20871,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Candidate deletes and uploads resume",
+        "description": "",
+        "file": "UI/candidate/UpdateResume.spec.js",
+        "line": 10,
+        "status": "passed",
+        "duration": 19129,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1770127174694,
+    "startedAt": "2026-02-03T13:59:21.548Z",
+    "endedAt": "2026-02-03T13:59:34.694Z",
+    "duration": 13146,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "candidate can update education",
+        "description": "",
+        "file": "UI/candidate/UpdateEducation.spec.js",
+        "line": 9,
+        "status": "passed",
+        "duration": 11391,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1770127159439,
+    "startedAt": "2026-02-03T13:59:06.505Z",
+    "endedAt": "2026-02-03T13:59:19.439Z",
+    "duration": 12934,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Candidate deletes existing work (if any) and adds new experience",
+        "description": "",
+        "file": "UI/candidate/UpdateWork.spec.js",
+        "line": 10,
+        "status": "passed",
+        "duration": 11180,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1770127144488,
+    "startedAt": "2026-02-03T13:58:54.664Z",
+    "endedAt": "2026-02-03T13:59:04.488Z",
+    "duration": 9824,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "candidate can update skills section",
+        "description": "",
+        "file": "UI/candidate/UpdateSkill.spec.js",
+        "line": 11,
+        "status": "passed",
+        "duration": 8151,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1770127132602,
+    "startedAt": "2026-02-03T13:58:41.443Z",
+    "endedAt": "2026-02-03T13:58:52.602Z",
+    "duration": 11159,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "candidate can update about section",
+        "description": "",
+        "file": "UI/candidate/UpdateAbout.spec.js",
+        "line": 10,
+        "status": "passed",
+        "duration": 9477,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1770127119457,
+    "startedAt": "2026-02-03T13:58:23.732Z",
+    "endedAt": "2026-02-03T13:58:39.456Z",
+    "duration": 15724,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Candidate info, profile picture, and banner update",
+        "description": "",
+        "file": "UI/candidate/UpdateInfo.spec.js",
+        "line": 9,
+        "status": "passed",
+        "duration": 14271,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1770127101646,
+    "startedAt": "2026-02-03T13:58:02.459Z",
+    "endedAt": "2026-02-03T13:58:21.646Z",
+    "duration": 19187,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Recruiter updates company details and logo",
+        "description": "",
+        "file": "UI/Recruiter/UpdateCompany.spec.js",
+        "line": 10,
+        "status": "passed",
+        "duration": 17630,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1770127080491,
+    "startedAt": "2026-02-03T13:57:50.371Z",
+    "endedAt": "2026-02-03T13:58:00.490Z",
+    "duration": 10119,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "recruiter can update about section",
+        "description": "",
+        "file": "UI/Recruiter/UpdateAbout.spec.js",
+        "line": 10,
+        "status": "passed",
+        "duration": 8637,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1770127068369,
+    "startedAt": "2026-02-03T13:57:33.757Z",
+    "endedAt": "2026-02-03T13:57:48.369Z",
+    "duration": 14612,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "recruuiter info, profile picture, and banner update",
+        "description": "",
+        "file": "UI/Recruiter/UpdateInfo.spec.js",
+        "line": 11,
+        "status": "passed",
+        "duration": 13000,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1770127051653,
+    "startedAt": "2026-02-03T13:57:19.308Z",
+    "endedAt": "2026-02-03T13:57:31.653Z",
+    "duration": 12345,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Recruiter logs in successfully",
+        "description": "",
+        "file": "UI/Login.spec.js",
+        "line": 4,
+        "status": "passed",
+        "duration": 10793,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1770127037153,
+    "startedAt": "2026-02-03T13:57:07.289Z",
+    "endedAt": "2026-02-03T13:57:17.153Z",
+    "duration": 9864,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Candidate changes password",
+        "description": "",
+        "file": "UI/candidate/ChangePassword.spec.js",
+        "line": 8,
+        "status": "passed",
+        "duration": 8347,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1770127024824,
+    "startedAt": "2026-02-03T13:56:03.136Z",
+    "endedAt": "2026-02-03T13:57:04.824Z",
+    "duration": 61688,
+    "summary": {
+      "total": 1,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 1,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Candidate can log in using phone number",
+        "description": "",
+        "file": "UI/candidate/PhoneLogin.spec.js",
+        "line": 8,
+        "status": "timedOut",
+        "duration": 60061,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+        "stack": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+        "attachments": [
+          {
+            "name": "error-context",
+            "path": "C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\test-results\\UI-candidate-PhoneLogin-Ca-ff50c-n-log-in-using-phone-number\\error-context.md",
+            "contentType": "text/markdown"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1770126961004,
+    "startedAt": "2026-02-03T13:55:54.991Z",
+    "endedAt": "2026-02-03T13:56:01.004Z",
+    "duration": 6013,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Recruiter forget password flow",
+        "description": "",
+        "file": "UI/Recruiter/ForgetPassword.spec.js",
+        "line": 7,
+        "status": "passed",
+        "duration": 4422,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1770126952748,
+    "startedAt": "2026-02-03T13:55:42.394Z",
+    "endedAt": "2026-02-03T13:55:52.748Z",
+    "duration": 10354,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Candidate signs up and moves user from RandomUsers to NewUsers",
+        "description": "",
+        "file": "UI/Signup.spec.js",
+        "line": 6,
+        "status": "passed",
+        "duration": 8627,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1770126098244,
+    "startedAt": "2026-02-03T13:41:23.029Z",
+    "endedAt": "2026-02-03T13:41:38.244Z",
+    "duration": 15215,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "recruuiter info, profile picture, and banner update",
+        "description": "",
+        "file": "UI/Recruiter/UpdateInfo.spec.js",
+        "line": 11,
+        "status": "passed",
+        "duration": 13366,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1770126068957,
+    "startedAt": "2026-02-03T13:40:58.868Z",
+    "endedAt": "2026-02-03T13:41:08.957Z",
+    "duration": 10089,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "recruiter can update about section",
+        "description": "",
+        "file": "UI/Recruiter/UpdateAbout.spec.js",
+        "line": 10,
+        "status": "passed",
+        "duration": 8513,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1770125914448,
+    "startedAt": "2026-02-03T13:38:26.013Z",
+    "endedAt": "2026-02-03T13:38:34.448Z",
+    "duration": 8435,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Recruiter logs in successfully",
+        "description": "",
+        "file": "UI/Login.spec.js",
+        "line": 4,
+        "status": "passed",
+        "duration": 6775,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1770125903686,
+    "startedAt": "2026-02-03T13:38:15.373Z",
+    "endedAt": "2026-02-03T13:38:23.686Z",
+    "duration": 8313,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Candidate changes password",
+        "description": "",
+        "file": "UI/candidate/ChangePassword.spec.js",
+        "line": 8,
+        "status": "passed",
+        "duration": 6885,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1770125893112,
+    "startedAt": "2026-02-03T13:37:11.479Z",
+    "endedAt": "2026-02-03T13:38:13.111Z",
+    "duration": 61632,
+    "summary": {
+      "total": 1,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 1,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Candidate can log in using phone number",
+        "description": "",
+        "file": "UI/candidate/PhoneLogin.spec.js",
+        "line": 8,
+        "status": "timedOut",
+        "duration": 60033,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+        "stack": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+        "attachments": [
+          {
+            "name": "error-context",
+            "path": "C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\test-results\\UI-candidate-PhoneLogin-Ca-ff50c-n-log-in-using-phone-number\\error-context.md",
+            "contentType": "text/markdown"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1770125828776,
+    "startedAt": "2026-02-03T13:36:58.499Z",
+    "endedAt": "2026-02-03T13:37:08.776Z",
+    "duration": 10277,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Recruiter forget password flow",
+        "description": "",
+        "file": "UI/Recruiter/ForgetPassword.spec.js",
+        "line": 7,
+        "status": "passed",
+        "duration": 8197,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1770125815797,
+    "startedAt": "2026-02-03T13:36:47.947Z",
+    "endedAt": "2026-02-03T13:36:55.797Z",
+    "duration": 7850,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Candidate signs up and moves user from RandomUsers to NewUsers",
+        "description": "",
+        "file": "UI/Signup.spec.js",
+        "line": 6,
+        "status": "passed",
+        "duration": 6177,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1770125558940,
+    "startedAt": "2026-02-03T13:31:37.067Z",
+    "endedAt": "2026-02-03T13:32:38.940Z",
+    "duration": 61873,
+    "summary": {
+      "total": 1,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 1,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Recruiter updates company details and logo",
+        "description": "",
+        "file": "UI/Recruiter/UpdateCompany.spec.js",
+        "line": 10,
+        "status": "timedOut",
+        "duration": 60062,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+        "stack": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+        "attachments": [
+          {
+            "name": "error-context",
+            "path": "C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\test-results\\UI-Recruiter-UpdateCompany-a7d64-es-company-details-and-logo\\error-context.md",
+            "contentType": "text/markdown"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1770125494832,
+    "startedAt": "2026-02-03T13:30:33.028Z",
+    "endedAt": "2026-02-03T13:31:34.832Z",
+    "duration": 61804,
+    "summary": {
+      "total": 1,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 1,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "recruiter can update about section",
+        "description": "",
+        "file": "UI/Recruiter/UpdateAbout.spec.js",
+        "line": 10,
+        "status": "timedOut",
+        "duration": 60059,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+        "stack": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+        "attachments": [
+          {
+            "name": "error-context",
+            "path": "C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\test-results\\UI-Recruiter-UpdateAbout-recruiter-can-update-about-section\\error-context.md",
+            "contentType": "text/markdown"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1770125430451,
+    "startedAt": "2026-02-03T13:29:28.249Z",
+    "endedAt": "2026-02-03T13:30:30.451Z",
+    "duration": 62202,
+    "summary": {
+      "total": 1,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 1,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "recruuiter info, profile picture, and banner update",
+        "description": "",
+        "file": "UI/Recruiter/UpdateInfo.spec.js",
+        "line": 11,
+        "status": "timedOut",
+        "duration": 60047,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+        "stack": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+        "attachments": [
+          {
+            "name": "error-context",
+            "path": "C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\test-results\\UI-Recruiter-UpdateInfo-re-ad591-e-picture-and-banner-update\\error-context.md",
+            "contentType": "text/markdown"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1770125365868,
+    "startedAt": "2026-02-03T13:28:24.209Z",
+    "endedAt": "2026-02-03T13:29:25.868Z",
+    "duration": 61659,
+    "summary": {
+      "total": 1,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 1,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Recruiter logs in successfully",
+        "description": "",
+        "file": "UI/Login.spec.js",
+        "line": 4,
+        "status": "timedOut",
+        "duration": 60046,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+        "stack": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+        "attachments": [
+          {
+            "name": "error-context",
+            "path": "C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\test-results\\UI-Login-Recruiter-logs-in-successfully\\error-context.md",
+            "contentType": "text/markdown"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1770125301957,
+    "startedAt": "2026-02-03T13:27:20.598Z",
+    "endedAt": "2026-02-03T13:28:21.957Z",
+    "duration": 61359,
+    "summary": {
+      "total": 1,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 1,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Candidate changes password",
+        "description": "",
+        "file": "UI/candidate/ChangePassword.spec.js",
+        "line": 8,
+        "status": "timedOut",
+        "duration": 60039,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+        "stack": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+        "attachments": [
+          {
+            "name": "error-context",
+            "path": "C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\test-results\\UI-candidate-ChangePassword-Candidate-changes-password\\error-context.md",
+            "contentType": "text/markdown"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1770125238460,
+    "startedAt": "2026-02-03T13:26:16.777Z",
+    "endedAt": "2026-02-03T13:27:18.460Z",
+    "duration": 61683,
+    "summary": {
+      "total": 1,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 1,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Candidate can log in using phone number",
+        "description": "",
+        "file": "UI/candidate/PhoneLogin.spec.js",
+        "line": 8,
+        "status": "timedOut",
+        "duration": 60031,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+        "stack": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+        "attachments": [
+          {
+            "name": "error-context",
+            "path": "C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\test-results\\UI-candidate-PhoneLogin-Ca-ff50c-n-log-in-using-phone-number\\error-context.md",
+            "contentType": "text/markdown"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1770125174161,
+    "startedAt": "2026-02-03T13:25:12.192Z",
+    "endedAt": "2026-02-03T13:26:14.161Z",
+    "duration": 61969,
+    "summary": {
+      "total": 1,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 1,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Recruiter forget password flow",
+        "description": "",
+        "file": "UI/Recruiter/ForgetPassword.spec.js",
+        "line": 7,
+        "status": "timedOut",
+        "duration": 60055,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+        "stack": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+        "attachments": [
+          {
+            "name": "error-context",
+            "path": "C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\test-results\\UI-Recruiter-ForgetPassword-Recruiter-forget-password-flow\\error-context.md",
+            "contentType": "text/markdown"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1770125110000,
+    "startedAt": "2026-02-03T13:24:08.239Z",
+    "endedAt": "2026-02-03T13:25:09.999Z",
+    "duration": 61760,
+    "summary": {
+      "total": 1,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 1,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Candidate signs up and moves user from RandomUsers to NewUsers",
+        "description": "",
+        "file": "UI/Signup.spec.js",
+        "line": 6,
+        "status": "timedOut",
+        "duration": 60083,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+        "stack": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+        "attachments": [
+          {
+            "name": "error-context",
+            "path": "C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\test-results\\UI-Signup-Candidate-signs--b3499-rom-RandomUsers-to-NewUsers\\error-context.md",
+            "contentType": "text/markdown"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1770124890073,
+    "startedAt": "2026-02-03T13:21:30.015Z",
+    "endedAt": "2026-02-03T13:21:30.073Z",
+    "duration": 58,
+    "summary": {
+      "total": 0,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": []
+  },
+  {
+    "id": 1770124887480,
+    "startedAt": "2026-02-03T13:21:21.726Z",
+    "endedAt": "2026-02-03T13:21:27.480Z",
+    "duration": 5754,
+    "summary": {
+      "total": 1,
+      "passed": 0,
+      "failed": 1,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Candidate changes password",
+        "description": "",
+        "file": "UI/candidate/ChangePassword.spec.js",
+        "line": 8,
+        "status": "failed",
+        "duration": 3648,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": "Error: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5173/auth\nCall log:\n\u001b[2m  - navigating to \"http://localhost:5173/auth\", waiting until \"load\"\u001b[22m\n",
+        "stack": "Error: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5173/auth\nCall log:\n\u001b[2m  - navigating to \"http://localhost:5173/auth\", waiting until \"load\"\u001b[22m\n\n    at Login.goto (C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\Pages\\Login.js:27:25)\n    at C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\UI\\candidate\\ChangePassword.spec.js:15:19",
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1770124879074,
+    "startedAt": "2026-02-03T13:21:13.392Z",
+    "endedAt": "2026-02-03T13:21:19.074Z",
+    "duration": 5682,
+    "summary": {
+      "total": 1,
+      "passed": 0,
+      "failed": 1,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Candidate can log in using phone number",
+        "description": "",
+        "file": "UI/candidate/PhoneLogin.spec.js",
+        "line": 8,
+        "status": "failed",
+        "duration": 3573,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": "Error: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5173/auth\nCall log:\n\u001b[2m  - navigating to \"http://localhost:5173/auth\", waiting until \"load\"\u001b[22m\n",
+        "stack": "Error: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5173/auth\nCall log:\n\u001b[2m  - navigating to \"http://localhost:5173/auth\", waiting until \"load\"\u001b[22m\n\n    at Login.goto (C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\Pages\\Login.js:27:25)\n    at C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\UI\\candidate\\PhoneLogin.spec.js:10:21",
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1770124871130,
+    "startedAt": "2026-02-03T13:21:05.301Z",
+    "endedAt": "2026-02-03T13:21:11.130Z",
+    "duration": 5829,
+    "summary": {
+      "total": 1,
+      "passed": 0,
+      "failed": 1,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Recruiter forget password flow",
+        "description": "",
+        "file": "UI/Recruiter/ForgetPassword.spec.js",
+        "line": 7,
+        "status": "failed",
+        "duration": 3639,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": "Error: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5173/auth\nCall log:\n\u001b[2m  - navigating to \"http://localhost:5173/auth\", waiting until \"load\"\u001b[22m\n",
+        "stack": "Error: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5173/auth\nCall log:\n\u001b[2m  - navigating to \"http://localhost:5173/auth\", waiting until \"load\"\u001b[22m\n\n    at Login.goto (C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\Pages\\Login.js:27:25)\n    at C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\UI\\Recruiter\\ForgetPassword.spec.js:15:19",
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1770124861746,
+    "startedAt": "2026-02-03T13:20:55.694Z",
+    "endedAt": "2026-02-03T13:21:01.746Z",
+    "duration": 6052,
+    "summary": {
+      "total": 1,
+      "passed": 0,
+      "failed": 1,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Candidate signs up and moves user from RandomUsers to NewUsers",
+        "description": "",
+        "file": "UI/Signup.spec.js",
+        "line": 6,
+        "status": "failed",
+        "duration": 3860,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": "Error: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5173/auth\nCall log:\n\u001b[2m  - navigating to \"http://localhost:5173/auth\", waiting until \"load\"\u001b[22m\n",
+        "stack": "Error: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5173/auth\nCall log:\n\u001b[2m  - navigating to \"http://localhost:5173/auth\", waiting until \"load\"\u001b[22m\n\n    at SignupPage.goto (C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\Pages\\SignupPage.js:24:21)\n    at C:\\Users\\LENOVO\\Desktop\\ReelRecruite-testing\\UI\\Signup.spec.js:11:22",
+        "attachments": []
+      }
+    ]
+  },
+  {
     "id": 1768490550664,
     "startedAt": "2026-01-15T15:21:48.604Z",
     "endedAt": "2026-01-15T15:22:30.664Z",
