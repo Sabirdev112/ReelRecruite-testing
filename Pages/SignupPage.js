@@ -21,7 +21,7 @@ export class SignupPage {
   }
 
   async goto() {
-    await this.page.goto('http://localhost:5173/auth');
+    await this.page.goto('https://recruitai-web-production.up.railway.app/auth');
     await this.page.waitForLoadState('domcontentloaded');
     console.log('Signup page opened');
   }
