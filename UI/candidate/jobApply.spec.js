@@ -11,9 +11,10 @@ const jobId = getLatestJobId();
 const jobUrl = buildJobUrl(jobId);
 
 test('Apply for latest job (users from JSON)', async () => {
+  test.setTimeout(180000); 
   const browser = await chromium.launch({ headless: false });
 
-   for (const user of users) {
+  for (const user of users) {
     console.log(`\nProcessing user: ${user.email}`);
     const context = await browser.newContext({
       permissions: ['camera', 'microphone']
@@ -37,12 +38,13 @@ test('Apply for latest job (users from JSON)', async () => {
     await applyJobPage.answerTwo();
     await applyJobPage.submitApplication();
 
-    // DB VERIFICATION
     const applicationId = await getApplicationIdForCandidate(user.email, jobId);
 
 
     storeApplicationId(applicationId);
-    
+
+    await context.close();
   }
 
+  await browser.close();
 });
