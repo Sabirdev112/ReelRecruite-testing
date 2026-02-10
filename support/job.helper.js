@@ -20,7 +20,7 @@ export function getLatestJobId() {
 }
 
 export function buildJobUrl(jobId) {
-  return `https://localhost:5173/jobs/create/${jobId}`;
+  return `https://recruitai-web-production.up.railway.app/jobs/${jobId}`;
 }
 
 export function storeJobId(jobId) {
