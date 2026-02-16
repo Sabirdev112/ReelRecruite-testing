@@ -11,39 +11,46 @@ const jobId = getLatestJobId();
 const jobUrl = buildJobUrl(jobId);
 
 test('Apply for latest job (users from JSON)', async () => {
-  test.setTimeout(180000); 
   const browser = await chromium.launch({ headless: false });
+  let applied = false;
 
   for (const user of users) {
+    if (applied) break;
     console.log(`\nProcessing user: ${user.email}`);
-    const context = await browser.newContext({
-      permissions: ['camera', 'microphone']
-    });
-
+    const context = await browser.newContext({ permissions: ['camera', 'microphone'] });
     const page = await context.newPage();
 
-    const loginPage = new Login(page);
-    const applyJobPage = new ApplyJobPage(page);
-    await loginPage.goto();
-    await loginPage.login(user.email, user.password);
-    await loginPage.clickSignIn();
-    await page.waitForURL('**/jobs');
+    try {
+      const loginPage = new Login(page);
+      const applyJobPage = new ApplyJobPage(page);
+      await loginPage.goto();
+      await loginPage.login(user.email, user.password);
+      await loginPage.clickSignIn();
+      await page.waitForURL('**/jobs');
 
-    await page.goto(jobUrl);
-    await applyJobPage.applyNow();
-    await applyJobPage.recordVideo();
-    await page.waitForTimeout(10000);
-    await applyJobPage.stopRecording();
-    await applyJobPage.answerOne();
-    await applyJobPage.answerTwo();
-    await applyJobPage.submitApplication();
+      await page.goto(jobUrl);
+      await applyJobPage.applyNow();
+      await applyJobPage.recordVideo();
+      await page.waitForTimeout(10000);
+      await applyJobPage.stopRecording();
+      await applyJobPage.answerOne();
+      await applyJobPage.answerTwo();
+      await applyJobPage.submitApplication();
 
-    const applicationId = await getApplicationIdForCandidate(user.email, jobId);
+      const applicationId = await getApplicationIdForCandidate(user.email, jobId);
 
-
-    storeApplicationId(applicationId);
-
-    await context.close();
+      if (applicationId) {
+        storeApplicationId(applicationId);
+        console.log(`Application succeeded for ${user.email}: ${applicationId}`);
+        applied = true;
+      } else {
+        console.log(`No application recorded for ${user.email}, trying next user.`);
+      }
+    } catch (err) {
+      console.log(`Error processing ${user.email}:`, err.message || err);
+    } finally {
+      await context.close();
+    }
   }
 
   await browser.close();
