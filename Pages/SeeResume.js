@@ -4,7 +4,7 @@ export class SeeResumePage {
     this.page = page;
 
     this.viewApplicationButton = page.getByTestId('view-applications-button');
-    this.viewDetailsButton = page.getByTestId('application-card-view-details-3c12b014-f16c-43bd-abc2-3d1535620620').first();
+    this.viewDetailsButton = page.locator('[data-testid^="application-card-view-details-"]').first();
     this.viewProfileButton = page.getByTestId('application-view-profile-button');
     this.ResumeSection = page.getByTestId('resume-section');
     this.clickViewResumeButton = page.getByTestId('view-resume-card');
