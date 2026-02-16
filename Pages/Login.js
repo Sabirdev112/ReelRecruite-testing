@@ -28,7 +28,6 @@ export class Login {
     }
 
     async phoneLogin(phone) {
-        await this.page.waitForLoadState('domcontentloaded');
         await this.phonePage.waitFor({ state: 'visible' });
         await this.phonePage.click();
         await this.phoneInput.waitFor({ state: 'visible', timeout: 10000 });

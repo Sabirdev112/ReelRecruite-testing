@@ -1,5 +1,581 @@
 [
   {
+    "id": 1771243766158,
+    "startedAt": "2026-02-16T12:09:17.988Z",
+    "endedAt": "2026-02-16T12:09:26.158Z",
+    "duration": 8170,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Recruiter can view reels and scroll",
+        "description": "",
+        "file": "UI/Recruiter/viewreels.spec.js",
+        "line": 9,
+        "status": "passed",
+        "duration": 6619,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1771243714135,
+    "startedAt": "2026-02-16T12:08:24.059Z",
+    "endedAt": "2026-02-16T12:08:34.135Z",
+    "duration": 10076,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Recruiter see cover video",
+        "description": "",
+        "file": "UI/Recruiter/SeeCoverVideo.spec.js",
+        "line": 9,
+        "status": "passed",
+        "duration": 8680,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1771243655412,
+    "startedAt": "2026-02-16T12:07:19.217Z",
+    "endedAt": "2026-02-16T12:07:35.412Z",
+    "duration": 16195,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Recruiter see Resume",
+        "description": "",
+        "file": "UI/Recruiter/SeeResume.spec.js",
+        "line": 9,
+        "status": "passed",
+        "duration": 14690,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1771243636641,
+    "startedAt": "2026-02-16T12:06:19.333Z",
+    "endedAt": "2026-02-16T12:07:16.641Z",
+    "duration": 57308,
+    "summary": {
+      "total": 1,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 1
+    },
+    "tests": [
+      {
+        "title": "Recruiter see Resume",
+        "description": "",
+        "file": "UI/Recruiter/SeeResume.spec.js",
+        "line": 9,
+        "status": "interrupted",
+        "duration": 55898,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": "Error: locator.waitFor: Test ended.\nCall log:\n\u001b[2m  - waiting for getByTestId('application-card-view-details-3c12b014-f16c-43bd-abc2-3d1535620620').first() to be visible\u001b[22m\n",
+        "stack": "Error: locator.waitFor: Test ended.\nCall log:\n\u001b[2m  - waiting for getByTestId('application-card-view-details-3c12b014-f16c-43bd-abc2-3d1535620620').first() to be visible\u001b[22m\n\n    at SeeResumePage.viewCandidateDetails (C:\\projects\\ReelRecruite-testing\\Pages\\SeeResume.js:32:34)\n    at C:\\projects\\ReelRecruite-testing\\UI\\Recruiter\\SeeResume.spec.js:22:19",
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1771243548412,
+    "startedAt": "2026-02-16T12:05:39.328Z",
+    "endedAt": "2026-02-16T12:05:48.412Z",
+    "duration": 9084,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Recruiter Reject candidate from applications",
+        "description": "",
+        "file": "UI/Recruiter/RejectCandidate.spec.js",
+        "line": 9,
+        "status": "passed",
+        "duration": 7642,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1771243455219,
+    "startedAt": "2026-02-16T12:04:06.904Z",
+    "endedAt": "2026-02-16T12:04:15.219Z",
+    "duration": 8315,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Recruiter Reject candidate from applications",
+        "description": "",
+        "file": "UI/Recruiter/RejectCandidate.spec.js",
+        "line": 9,
+        "status": "passed",
+        "duration": 7071,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1771243435569,
+    "startedAt": "2026-02-16T12:03:46.278Z",
+    "endedAt": "2026-02-16T12:03:55.569Z",
+    "duration": 9291,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Recruiter shortlists candidate from Applications",
+        "description": "",
+        "file": "UI/Recruiter/ShortlistCandidate.spec.js",
+        "line": 9,
+        "status": "passed",
+        "duration": 7768,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1771243423356,
+    "startedAt": "2026-02-16T12:03:03.261Z",
+    "endedAt": "2026-02-16T12:03:43.356Z",
+    "duration": 40095,
+    "summary": {
+      "total": 1,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 1
+    },
+    "tests": [
+      {
+        "title": "Recruiter Reject candidate from applications",
+        "description": "",
+        "file": "UI/Recruiter/RejectCandidate.spec.js",
+        "line": 9,
+        "status": "interrupted",
+        "duration": 38785,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": "Error: locator.waitFor: Test ended.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: /❌Rejected/i }) to be visible\u001b[22m\n",
+        "stack": "Error: locator.waitFor: Test ended.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: /❌Rejected/i }) to be visible\u001b[22m\n\n    at ShortlistCandidatePage.clickReject (C:\\projects\\ReelRecruite-testing\\Pages\\ShortListCandidate.js:54:29)\n    at C:\\projects\\ReelRecruite-testing\\UI\\Recruiter\\RejectCandidate.spec.js:26:23",
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1771243372874,
+    "startedAt": "2026-02-16T12:02:23.369Z",
+    "endedAt": "2026-02-16T12:02:52.874Z",
+    "duration": 29505,
+    "summary": {
+      "total": 1,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 1
+    },
+    "tests": [
+      {
+        "title": "Recruiter shortlists candidate from Applications",
+        "description": "",
+        "file": "UI/Recruiter/ShortlistCandidate.spec.js",
+        "line": 9,
+        "status": "interrupted",
+        "duration": 28150,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": "Error: locator.waitFor: Test ended.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: /⭐Shortlisted/i }).first() to be visible\u001b[22m\n",
+        "stack": "Error: locator.waitFor: Test ended.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: /⭐Shortlisted/i }).first() to be visible\u001b[22m\n\n    at ShortlistCandidatePage.clickShortListed (C:\\projects\\ReelRecruite-testing\\Pages\\ShortListCandidate.js:43:34)\n    at C:\\projects\\ReelRecruite-testing\\UI\\Recruiter\\ShortlistCandidate.spec.js:25:23",
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1771243331181,
+    "startedAt": "2026-02-16T12:01:09.796Z",
+    "endedAt": "2026-02-16T12:02:11.181Z",
+    "duration": 61385,
+    "summary": {
+      "total": 1,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 1,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Recruiter shortlists candidate from Applications",
+        "description": "",
+        "file": "UI/Recruiter/ShortlistCandidate.spec.js",
+        "line": 9,
+        "status": "timedOut",
+        "duration": 60043,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+        "stack": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+        "attachments": [
+          {
+            "name": "error-context",
+            "path": "C:\\projects\\ReelRecruite-testing\\test-results\\UI-Recruiter-ShortlistCand-54fbb-candidate-from-Applications\\error-context.md",
+            "contentType": "text/markdown"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1771243183875,
+    "startedAt": "2026-02-16T11:58:42.310Z",
+    "endedAt": "2026-02-16T11:59:43.875Z",
+    "duration": 61565,
+    "summary": {
+      "total": 1,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 1,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Recruiter shortlists candidate from Applications",
+        "description": "",
+        "file": "UI/Recruiter/ShortlistCandidate.spec.js",
+        "line": 9,
+        "status": "timedOut",
+        "duration": 60048,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+        "stack": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+        "attachments": [
+          {
+            "name": "error-context",
+            "path": "C:\\projects\\ReelRecruite-testing\\test-results\\UI-Recruiter-ShortlistCand-54fbb-candidate-from-Applications\\error-context.md",
+            "contentType": "text/markdown"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1771243018464,
+    "startedAt": "2026-02-16T11:56:21.704Z",
+    "endedAt": "2026-02-16T11:56:58.464Z",
+    "duration": 36760,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Apply for latest job (users from JSON)",
+        "description": "",
+        "file": "UI/candidate/jobApply.spec.js",
+        "line": 11,
+        "status": "passed",
+        "duration": 35807,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1771242919513,
+    "startedAt": "2026-02-16T11:52:18.159Z",
+    "endedAt": "2026-02-16T11:55:19.513Z",
+    "duration": 181354,
+    "summary": {
+      "total": 1,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 1,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Apply for latest job (users from JSON)",
+        "description": "",
+        "file": "UI/candidate/jobApply.spec.js",
+        "line": 11,
+        "status": "timedOut",
+        "duration": 180004,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": "\u001b[31mTest timeout of 180000ms exceeded.\u001b[39m",
+        "stack": "\u001b[31mTest timeout of 180000ms exceeded.\u001b[39m",
+        "attachments": [
+          {
+            "name": "error-context",
+            "path": "C:\\projects\\ReelRecruite-testing\\test-results\\UI-candidate-jobApply-Apply-for-latest-job-users-from-JSON-\\error-context.md",
+            "contentType": "text/markdown"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1771242795017,
+    "startedAt": "2026-02-16T11:52:45.431Z",
+    "endedAt": "2026-02-16T11:53:15.017Z",
+    "duration": 29586,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Recruiter login and create a new job",
+        "description": "",
+        "file": "UI/Recruiter/CreateJob.spec.js",
+        "line": 8,
+        "status": "passed",
+        "duration": 28265,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1771242585905,
+    "startedAt": "2026-02-16T11:46:44.586Z",
+    "endedAt": "2026-02-16T11:49:45.905Z",
+    "duration": 181319,
+    "summary": {
+      "total": 1,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 1,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Apply for latest job (users from JSON)",
+        "description": "",
+        "file": "UI/candidate/jobApply.spec.js",
+        "line": 11,
+        "status": "timedOut",
+        "duration": 180007,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": "\u001b[31mTest timeout of 180000ms exceeded.\u001b[39m",
+        "stack": "\u001b[31mTest timeout of 180000ms exceeded.\u001b[39m",
+        "attachments": [
+          {
+            "name": "error-context",
+            "path": "C:\\projects\\ReelRecruite-testing\\test-results\\UI-candidate-jobApply-Apply-for-latest-job-users-from-JSON-\\error-context.md",
+            "contentType": "text/markdown"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1771242396437,
+    "startedAt": "2026-02-16T11:46:36.396Z",
+    "endedAt": "2026-02-16T11:46:36.437Z",
+    "duration": 41,
+    "summary": {
+      "total": 0,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": []
+  },
+  {
+    "id": 1771242378422,
+    "startedAt": "2026-02-16T11:45:47.371Z",
+    "endedAt": "2026-02-16T11:46:18.422Z",
+    "duration": 31051,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Recruiter login and create a new job",
+        "description": "",
+        "file": "UI/Recruiter/CreateJob.spec.js",
+        "line": 8,
+        "status": "passed",
+        "duration": 27369,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1771242342498,
+    "startedAt": "2026-02-16T11:44:52.664Z",
+    "endedAt": "2026-02-16T11:45:42.498Z",
+    "duration": 49834,
+    "summary": {
+      "total": 1,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 1
+    },
+    "tests": [
+      {
+        "title": "Recruiter login and create a new job",
+        "description": "",
+        "file": "UI/Recruiter/CreateJob.spec.js",
+        "line": 8,
+        "status": "interrupted",
+        "duration": 48550,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": "Error: page.waitForURL: Test ended.\n=========================== logs ===========================\nwaiting for navigation to \"**/my-jobs\" until \"load\"\n============================================================",
+        "stack": "Error: page.waitForURL: Test ended.\n=========================== logs ===========================\nwaiting for navigation to \"**/my-jobs\" until \"load\"\n============================================================\n    at C:\\projects\\ReelRecruite-testing\\UI\\Recruiter\\CreateJob.spec.js:17:14",
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1771242214717,
+    "startedAt": "2026-02-16T11:43:25.375Z",
+    "endedAt": "2026-02-16T11:43:34.717Z",
+    "duration": 9342,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Recruiter logs in successfully",
+        "description": "",
+        "file": "UI/Login.spec.js",
+        "line": 4,
+        "status": "passed",
+        "duration": 8246,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": null,
+        "stack": null,
+        "attachments": []
+      }
+    ]
+  },
+  {
+    "id": 1771241916126,
+    "startedAt": "2026-02-16T11:38:15.978Z",
+    "endedAt": "2026-02-16T11:38:36.126Z",
+    "duration": 20148,
+    "summary": {
+      "total": 1,
+      "passed": 0,
+      "failed": 1,
+      "skipped": 0,
+      "interrupted": 0
+    },
+    "tests": [
+      {
+        "title": "Recruiter logs in successfully",
+        "description": "",
+        "file": "UI/Login.spec.js",
+        "line": 4,
+        "status": "failed",
+        "duration": 19052,
+        "retries": 0,
+        "wasFlaky": false,
+        "error": "Error: The server does not support SSL connections",
+        "stack": "Error: The server does not support SSL connections\n    at C:\\projects\\ReelRecruite-testing\\node_modules\\pg-pool\\index.js:45:11\n    at runQuery (C:\\projects\\ReelRecruite-testing\\utils\\db\\dbClient.js:22:18)\n    at C:\\projects\\ReelRecruite-testing\\UI\\Login.spec.js:12:17",
+        "attachments": [
+          {
+            "name": "error-context",
+            "path": "C:\\projects\\ReelRecruite-testing\\test-results\\UI-Login-Recruiter-logs-in-successfully\\error-context.md",
+            "contentType": "text/markdown"
+          }
+        ]
+      }
+    ]
+  },
+  {
     "id": 1770745566574,
     "startedAt": "2026-02-10T17:45:02.815Z",
     "endedAt": "2026-02-10T17:46:06.574Z",

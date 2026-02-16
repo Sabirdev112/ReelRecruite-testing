@@ -5,8 +5,8 @@ export class ShortlistCandidatePage {
     this.viewApplicationButton = page.getByTestId('view-applications-button');
     this.viewDetailsButton = page.locator('[data-testid^="application-card-view-details-"]').first();
     this.changeStatusButton = page.getByTestId('application-update-status-trigger');
-    this.shortListedButton = page.getByRole('button', { name: '⭐Shortlisted' });
-    this.rejectButton = page.getByRole('button', { name: '❌Rejected' });
+    this.shortListedButton = page.getByRole('button', { name: "Shortlisted" });
+    this.rejectButton = page.getByRole('button', { name: "Rejected" });
     this.saveButton = page.getByTestId('application-update-status-submit');
     this.maybeLaterButton = page.getByRole('button', { name: 'Maybe Later' });
   }
@@ -47,6 +47,7 @@ export class ShortlistCandidatePage {
   async clickSave() {
     await this.saveButton.waitFor({ state: 'visible' });
     await this.saveButton.click();
+    await expect(this.saveButton).toBeHidden();
     console.log('Status saved');
   }
   
