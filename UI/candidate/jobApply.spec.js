@@ -6,16 +6,18 @@ import { getLatestJobId, buildJobUrl } from '../../support/job.helper.js';
 import { storeApplicationId } from '../../support/application.helper.js';
 import { getApplicationIdForCandidate } from '../../support/applicationDb.helper.js';
 
-const users = loadCredentials().slice(0, 3);
+const users = loadCredentials();
 const jobId = getLatestJobId();
 const jobUrl = buildJobUrl(jobId);
 
+// bump test timeout locally to avoid hitting playwright.config.js limit
+// especially since we loop through multiple users and record videos
+test.setTimeout(600_000);
+
 test('Apply for latest job (users from JSON)', async () => {
   const browser = await chromium.launch({ headless: false });
-  let applied = false;
 
   for (const user of users) {
-    if (applied) break;
     console.log(`\nProcessing user: ${user.email}`);
     const context = await browser.newContext({ permissions: ['camera', 'microphone'] });
     const page = await context.newPage();
@@ -42,9 +44,8 @@ test('Apply for latest job (users from JSON)', async () => {
       if (applicationId) {
         storeApplicationId(applicationId);
         console.log(`Application succeeded for ${user.email}: ${applicationId}`);
-        applied = true;
       } else {
-        console.log(`No application recorded for ${user.email}, trying next user.`);
+        console.log(`No application recorded for ${user.email}.`);
       }
     } catch (err) {
       console.log(`Error processing ${user.email}:`, err.message || err);
