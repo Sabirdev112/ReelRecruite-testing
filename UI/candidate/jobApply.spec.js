@@ -16,8 +16,14 @@ test.setTimeout(600_000);
 
 test('Apply for latest job (users from JSON)', async () => {
   const browser = await chromium.launch({ headless: false });
+  let successFlag = false;
 
   for (const user of users) {
+    if (successFlag) {
+      console.log('Application already successful. Exiting test.');
+      break;
+    }
+
     console.log(`\nProcessing user: ${user.email}`);
     const context = await browser.newContext({ permissions: ['camera', 'microphone'] });
     const page = await context.newPage();
@@ -43,15 +49,22 @@ test('Apply for latest job (users from JSON)', async () => {
 
       if (applicationId) {
         storeApplicationId(applicationId);
-        console.log(`Application succeeded for ${user.email}: ${applicationId}`);
+        console.log(`✓ Application succeeded for ${user.email}: ${applicationId}`);
+        successFlag = true;
+        await context.close();
+        break;
       } else {
-        console.log(`No application recorded for ${user.email}.`);
+        console.log(`✗ No application recorded for ${user.email}. Moving to next user.`);
       }
     } catch (err) {
-      console.log(`Error processing ${user.email}:`, err.message || err);
+      console.log(`✗ Error processing ${user.email}: ${err.message || err}. Moving to next user.`);
     } finally {
       await context.close();
     }
+  }
+
+  if (!successFlag) {
+    throw new Error('Failed to apply for job with any user from the JSON list.');
   }
 
   await browser.close();
