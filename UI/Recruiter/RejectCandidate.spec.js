@@ -17,7 +17,7 @@ test('Recruiter Reject candidate from applications', async ({ page }) => {
   await loginPage.clickSignIn();
   await page.waitForURL('**/my-jobs');
 
-  await page.goto(jobUrl, { waitUntil: 'domcontentloaded' });
+  await page.goto(jobUrl, { waitUntil: 'networkidle' });
 
   const shortlistPage = new ShortlistCandidatePage(page);
   await shortlistPage.clickViewApplications();
