@@ -131,14 +131,23 @@ export class CreateJobPage {
   await this.confirmPostButton.waitFor({ state: 'visible' });
   await expect(this.confirmPostButton).toBeEnabled();
 
-  const jobRequestPromise = this.page.waitForRequest(req =>
-    req.method() === 'POST' &&
-    req.url() === 'https://recruitai-backend-production.up.railway.app/v1/jobs/create'
+  const jobRequestPromise = this.page.waitForRequest(
+    req =>
+      req.method() === 'POST' &&
+      req.url().includes('/v1/jobs/create'),
+    { timeout: 30000 }
   );
 
   await this.confirmPostButton.click();
 
-  const jobRequest = await jobRequestPromise;
+  let jobRequest;
+  try {
+    jobRequest = await jobRequestPromise;
+  } catch (error) {
+    console.error('Failed to intercept job creation request:', error);
+    throw new Error(`Job creation request not intercepted. Error: ${error.message}`);
+  }
+
   const response = await jobRequest.response();
 
   if (!response) {
@@ -166,45 +175,5 @@ export class CreateJobPage {
   async seeAllApplications() {
     await this.seeAllButton.click();
     console.log('See all applications clicked');
-  }
-
-  async generateSummaryWithAI() {
-    await this.generateWithAIButton.click();
-    console.log('Generate with AI button clicked for summary');
-  }
-
-  async applyGeneratedSummary() {
-    await this.applyButton.click();
-    console.log('Applied generated summary');
-  }
-
-  async generateDescriptionWithAI() {
-    await this.generateWithAIButton.click();
-    console.log('Generate with AI button clicked for description');
-  }
-
-  async applyGeneratedDescription() {
-    await this.applyButton.click();
-    console.log('Applied generated description');
-  }
-
-  async closeAIModal() {
-    await this.closeButton.click();
-    console.log('Closed AI modal');
-  }
-
-  async fillAIPrompt(prompt) {
-    await this.aiPromptTextarea.fill(prompt);
-    console.log(`Filled AI prompt: ${prompt}`);
-  }
-
-  async generateWithPrompt(prompt) {
-    await this.fillAIPrompt(prompt);
-    await Promise.all([
-      this.page.waitForLoadState('networkidle', { timeout: 30000 }),
-      this.generateButton.click()
-    ]);
-    console.log('Generated content with AI prompt');
-    await this.page.waitForLoadState('networkidle', { timeout: 30000 });
   }
 }
