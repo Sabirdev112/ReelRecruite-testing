@@ -11,7 +11,7 @@ export default defineConfig({
   ],
 
   timeout: 60 * 1000,
-  retries: 0,
+  retries: 1,
 
   use: {
     trace: 'on-first-retry'

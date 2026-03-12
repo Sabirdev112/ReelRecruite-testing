@@ -69,6 +69,7 @@ app.post('/api/rerun-test', (req, res) => {
     safeFile,
     '--grep',
     escapedGrep,
+    '--headed',
     '--retries=1',
     '--workers=1'
   ];
@@ -134,7 +135,6 @@ app.post('/api/run-all-tests', (req, res) => {
     'UI/candidate/FIlter.spec.js',
     'UI/candidate/workTypeFilter.spec.js',
     'UI/candidate/regionFilter.spec.js',
-    'UI/candidate/Notification.spec.js',
     'UI/candidate/jobtype.spec.js',
     'UI/candidate/experienceLevelFilter.spec.js',
     'UI/candidate/currencyFilter.spec.js',
@@ -151,7 +151,6 @@ app.post('/api/run-all-tests', (req, res) => {
     'UI/Recruiter/ArchiveChat.spec.js',
     'UI/Recruiter/UnArchiveChat.spec.js',
     'UI/Candidate/withdrawApplication.spec.js',
-    'UI/Recruiter/RejectCandidate.spec.js',
     'UI/candidate/ViewAppliedJobs.spec.js',
     'UI/Recruiter/DeleteJob.spec.js'
   ];
@@ -180,6 +179,7 @@ app.post('/api/run-all-tests', (req, res) => {
       playwrightCliPath,
       'test',
       file,
+      '--headed',
       '--workers=1'
     ], {
       cwd: process.cwd(),

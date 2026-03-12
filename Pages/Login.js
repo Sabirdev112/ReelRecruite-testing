@@ -30,7 +30,7 @@ export class Login {
     async phoneLogin(phone) {
         await this.phonePage.waitFor({ state: 'visible' });
         await this.phonePage.click();
-        await this.phoneInput.waitFor({ state: 'visible', timeout: 10000 });
+        await this.phoneInput.waitFor({ state: 'visible' });
         await this.phoneInput.click();
         await this.phoneInput.pressSequentially(phone, { delay: 40 });
         await this.phoneInput.blur();
@@ -48,7 +48,6 @@ export class Login {
     async clickSignIn() {
         await this.signInButtonLocator.waitFor({ state: 'visible' });
         await this.signInButtonLocator.click();
-        await this.page.waitForLoadState('networkidle');
         await this.handleMaybeLaterIfPresent();
         console.log('Login successful.');
     }
