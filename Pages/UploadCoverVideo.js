@@ -30,7 +30,6 @@ export class UpdateCoverVideoResumePage {
   async openProfile() {
     await this.profileButton.waitFor({ state: 'visible' });
     await this.profileButton.click();
-    await this.page.waitForLoadState('domcontentloaded');
     console.log('Navigated to Profile page');
   }
 

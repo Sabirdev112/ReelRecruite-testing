@@ -46,24 +46,4 @@ export class SeeCoverVideoPage {
     
   }
 
-  async playVideo() {
-    await this.video.waitFor({ state: 'visible' });
-
-    const videoHandle = await this.video.elementHandle();
-
-    await this.page.evaluate(video => {
-      video.muted = true; // required to bypass autoplay restrictions
-      video.play();
-    }, videoHandle);
-    console.log('Video play started');
-  }
-
-  async isVideoPlaying() {
-    const videoHandle = await this.video.elementHandle();
-
-    return await this.page.evaluate(video => {
-      return !video.paused && video.currentTime > 0;
-    }, videoHandle);
-    console.log('Video is playing');
-  }
 }

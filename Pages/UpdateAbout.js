@@ -35,8 +35,7 @@ export class UpdateAboutPage {
   async openProfile() {
     await this.ProfileButton.waitFor({ state: 'visible' });
     await this.ProfileButton.click();
-     await this.page.waitForLoadState('networkidle');
-     console.log('Navigated to Profile page');
+    console.log('Navigated to Profile page');
   }
 
   async clickEditAbout() {
