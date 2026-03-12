@@ -33,7 +33,6 @@ export class UpdateSkillsPage {
   
     async openProfile() {
       await this.ProfileButton.waitFor({ state: 'visible' });
-      await this.page.waitForLoadState('networkidle');
       await this.ProfileButton.click();
       console.log('Navigated to Profile page');
     }
@@ -63,7 +62,6 @@ export class UpdateSkillsPage {
     async clickSaveChanges() {
       await this.saveChangesButton.waitFor({ state: 'visible' });
       await this.saveChangesButton.click();
-      await this.page.waitForLoadState('networkidle');
       console.log('Changes saved');
     }
   

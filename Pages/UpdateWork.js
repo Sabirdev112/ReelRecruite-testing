@@ -57,7 +57,6 @@ export class UpdateWorkPage {
   async openProfile() {
     await this.profileButton.waitFor({ state: 'visible' });
     await this.profileButton.click();
-    await this.page.waitForLoadState('networkidle');
     console.log('Navigated to Profile page');
   }
 
@@ -76,7 +75,6 @@ async navigateToWorkSection() {
   async confirmDelete() {
     await this.confirmDeleteButton.waitFor({ state: 'visible' });
     await this.confirmDeleteButton.click();
-    await this.page.waitForLoadState('networkidle');
     console.log('Confirmed delete');
   }
   
@@ -88,7 +86,6 @@ async deleteIfVisibleAndProceed() {
     await this.deleteWorkButton.click();
     await this.confirmDeleteButton.waitFor({ state: 'visible' });
     await this.confirmDeleteButton.click();
-    await this.page.waitForLoadState('networkidle');
   }
 }
 
