@@ -51,7 +51,6 @@ export class FilterPage {
   async applyFilters() {
     await this.applyFiltersButton.waitFor({ state: 'visible' });
     await this.applyFiltersButton.click();
-    await this.page.waitForLoadState('networkidle');
     console.log('Filters applied');
   }
 

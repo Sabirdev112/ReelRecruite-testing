@@ -9,7 +9,6 @@ export class viewAppliedJobPage {
         try {
             await this.maybeLaterButton.waitFor({state: 'visible'});
             await this.maybeLaterButton.click();
-            await this.maybeLaterButton.waitFor({state: 'hidden'});
         } catch {
             
         }
