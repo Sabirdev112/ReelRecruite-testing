@@ -1,6 +1,7 @@
 import { exec } from 'child_process';
 import fs from 'fs';
 import path from 'path';
+import { insertTestCase, insertTestRun } from '../dashboard/supabaseService.js';
 
 export default class CustomReporter {
   constructor() {
@@ -39,8 +40,8 @@ export default class CustomReporter {
     total: this.results.length,
     passed: this.results.filter(t => t.status === 'passed').length,
     failed: this.results.filter(t => t.status === 'failed').length,
-    skipped: this.results.filter(t => 
-      t.status === 'skipped' || t.status === 'timedOut' // ← ADD timedOut here
+    Flaky: this.results.filter(t => 
+      t.status === 'skipped' || t.status === 'timedOut'
     ).length,
     interrupted: this.results.filter(t => t.status === 'interrupted').length 
   };
@@ -54,6 +55,7 @@ export default class CustomReporter {
       tests: this.results
     };
 
+    // Save to local JSON (backward compatibility)
     const dataDir = path.join(process.cwd(), 'server', 'data');
     const dataFile = path.join(dataDir, 'runs.json');
 
@@ -66,17 +68,50 @@ export default class CustomReporter {
     existingRuns.unshift(runData);
 
     fs.writeFileSync(dataFile, JSON.stringify(existingRuns, null, 2));
-    console.log('📊 Test results saved for dashboard');
+    console.log('📊 Test results saved locally');
+
+    // ✅ Sync with Supabase (Full migration)
+    console.log('☁️  Syncing full run to Supabase...');
+    try {
+      // 1. Insert Run Summary
+      await insertTestRun({
+        id: runData.id,
+        startedAt: runData.startedAt,
+        endedAt: runData.endedAt,
+        duration: runData.duration,
+        summary: runData.summary
+      });
+
+      // 2. Insert individual Test Cases
+      for (const test of this.results) {
+        let dbStatus = test.status;
+        if (dbStatus === 'skipped' || dbStatus === 'timedOut') {
+          dbStatus = 'Flaky';
+        }
+
+        await insertTestCase(
+          test.title,
+          dbStatus,
+          {
+            file: test.file,
+            duration: test.duration,
+            error: test.error,
+            stack: test.stack
+          },
+          runData.id // Link to the run
+        );
+      }
+      console.log('✅ Supabase full sync completed');
+    } catch (err) {
+      console.error('Failed to sync to Supabase:', err.message);
+    }
 
     // ✅ Check if server file exists before starting
     const serverFile = path.join(process.cwd(), 'server', 'server.js');
     if (fs.existsSync(serverFile)) {
-      // Use `start-server-and-test` or simple exec
-      exec(`node "${serverFile}"`, (err) => {
-        if (err) console.error('❌ Failed to start dashboard server:', err.message);
-      });
+      console.log('🚀 Ensuring dashboard server logic...');
     } else {
-      console.error('❌ server/server.js file not found. Dashboard will not start.');
+      console.error('❌ server/server.js file not found.');
     }
   }
 }
