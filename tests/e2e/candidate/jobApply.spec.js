@@ -1,0 +1,75 @@
+import { test, chromium } from '../../fixtures/base.fixtures.js';
+import { Login } from '../../pages/Login.js';
+import { ApplyJobPage } from '../../pages/ApplyJobPage.js';
+
+
+import { loadCredentials } from '../../utils/candidateCredentials.js';
+import { getLatestJobId, buildJobUrl } from '../../utils/job.helper.js';
+import { storeApplicationId } from '../../utils/application.helper.js';
+import { getApplicationIdForCandidate } from '../../utils/applicationDb.helper.js';
+
+const users = loadCredentials();
+const jobId = getLatestJobId();
+const jobUrl = buildJobUrl(jobId);
+
+// bump test timeout locally to avoid hitting playwright.config.js limit
+// especially since we loop through multiple users and record videos
+test.setTimeout(600_000);
+
+test('Apply for latest job (users from JSON)', async () => {
+  const browser = await chromium.launch({ headless: false });
+  let successFlag = false;
+
+  for (const user of users) {
+    if (successFlag) {
+      console.log('Application already successful. Exiting test.');
+      break;
+    }
+
+    console.log(`\nProcessing user: ${user.email}`);
+    const context = await browser.newContext({ permissions: ['camera', 'microphone'] });
+    const page = await context.newPage();
+    const loginPage = new Login(page);
+    const applyJobPage = new ApplyJobPage(page);
+
+    try {
+      await loginPage.goto();
+      await loginPage.login(user.email, user.password);
+      await loginPage.clickSignIn();
+      await page.waitForURL('**/jobs');
+
+      await page.goto(jobUrl);
+      await applyJobPage.applyNow();
+      await applyJobPage.recordVideo();
+      await page.waitForTimeout(10000);
+      await applyJobPage.stopRecording();
+      await applyJobPage.answerOne();
+      await applyJobPage.answerTwo();
+      await applyJobPage.submitApplication();
+
+      const applicationId = await getApplicationIdForCandidate(user.email, jobId);
+
+      if (applicationId) {
+        storeApplicationId(applicationId);
+        console.log(`✓ Application succeeded for ${user.email}: ${applicationId}`);
+        successFlag = true;
+        await context.close();
+        break;
+      } else {
+        console.log(`✗ No application recorded for ${user.email}. Moving to next user.`);
+      }
+    } catch (err) {
+      console.log(`✗ Error processing ${user.email}: ${err.message || err}. Moving to next user.`);
+    } finally {
+      await context.close();
+    }
+  }
+
+  if (!successFlag) {
+    throw new Error('Failed to apply for job with any user from the JSON list.');
+  }
+
+  await browser.close();
+});
+
+

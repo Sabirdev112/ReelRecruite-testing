@@ -4,6 +4,31 @@ let donutChart, barChart;
 let currentPage = 1;
 let pageSize = 25;
 
+/** 
+ * UI Toast Notification System 
+ */
+function showToast(message, type = 'info') {
+  const container = document.getElementById('notification-container');
+  if (!container) return;
+
+  const toast = document.createElement('div');
+  toast.className = `notification ${type}`;
+  
+  let icon = 'ℹ️';
+  if (type === 'success') icon = '✅';
+  if (type === 'error') icon = '❌';
+  if (type === 'warning') icon = '⚠️';
+
+  toast.innerHTML = `<span>${icon}</span> <p>${message}</p>`;
+  container.appendChild(toast);
+
+  // Auto remove after 5 seconds
+  setTimeout(() => {
+    toast.classList.add('fade-out');
+    setTimeout(() => toast.remove(), 300);
+  }, 5000);
+}
+
 function setRunUI(isRunning, { force = false } = {}) {
   if (isRunning) {
     activateStopButton();
@@ -57,81 +82,89 @@ async function loadDashboard(silent = false) {
     const data = await res.json();
     runsData = Array.isArray(data) ? data : data.runs || [];
 
-    if (runsData.length === 0) {
-      document.getElementById('runsBody').innerHTML = '<tr><td colspan="8" class="text-center py-8">No runs yet</td></tr>';
-      document.getElementById('paginationInfo').textContent = 'Showing 0 to 0 of 0 entries';
-      document.getElementById('pagination').innerHTML = '';
-      return;
-    }
-
-    // Calculate overall stats
+    // ... (stats calculation logic)
     const overall = runsData.reduce((acc, run) => {
       const s = run.summary || {};
       acc.totalTests += s.total || 0;
       acc.passed += s.passed || 0;
       acc.failed += s.failed || 0;
-      acc.skipped += s.skipped || 0;
+      acc.Flaky += s.Flaky || 0;
       acc.interrupted += s.interrupted || 0;
-      acc.duration += run.duration || 0;
+      // Cap each run's duration to 10 minutes to filter corrupt/legacy data
+      const runDur = run.duration || 0;
+      acc.duration += (runDur > 0 && runDur < 600000) ? runDur : 0;
       return acc;
-    }, { totalTests: 0, passed: 0, failed: 0, skipped: 0, interrupted: 0, duration: 0 });
+    }, { totalTests: 0, passed: 0, failed: 0, Flaky: 0, interrupted: 0, duration: 0 });
 
-    document.getElementById('totalRuns').textContent = runsData.length;
-    document.getElementById('totalTests').textContent = overall.totalTests;
-    const passRate = overall.totalTests ? Math.round((overall.passed / overall.totalTests) * 100) : 0;
-    document.getElementById('passRate').textContent = passRate + '%';
-    // Add "passed out of total" format
-    const passRateSub = overall.totalTests 
-      ? `${overall.passed} out of ${overall.totalTests} tests`
-      : '0 out of 0 tests';
-    document.getElementById('passRateSub').textContent = passRateSub;
-    const avgDur = overall.totalTests ? (overall.duration / overall.totalTests / 1000).toFixed(2) + 's' : '0s';
-    document.getElementById('avgDuration').textContent = avgDur;
+    if (runsData.length > 0) {
+      document.getElementById('totalRuns').textContent = runsData.length;
+      document.getElementById('totalTests').textContent = overall.totalTests;
+      const passRate = overall.totalTests ? Math.round((overall.passed / overall.totalTests) * 100) : 0;
+      document.getElementById('passRate').textContent = passRate + '%';
+      const passRateSub = overall.totalTests 
+        ? `${overall.passed} out of ${overall.totalTests} tests`
+        : '0 out of 0 tests';
+      document.getElementById('passRateSub').textContent = passRateSub;
+      const avgDurMs = overall.totalTests ? (overall.duration / overall.totalTests) : 0;
+      document.getElementById('avgDuration').textContent = formatDurationMs(avgDurMs);
 
-    renderDonut(overall);
-    renderRunsPerDayChart(runsData);
+      renderDonut(overall);
+      renderRunsPerDayChart(runsData);
 
-    const totalRuns = runsData.length;
-    const totalPages = Math.ceil(totalRuns / pageSize);
+      const totalRuns = runsData.length;
+      const totalPages = Math.ceil(totalRuns / pageSize);
+      renderTablePage(currentPage, pageSize);
+      renderPagination(currentPage, totalPages);
+      updatePaginationInfo(currentPage, pageSize, totalRuns);
+    } else {
+      document.getElementById('runsBody').innerHTML = '<tr><td colspan="8" class="text-center py-8">No runs yet</td></tr>';
+    }
 
-    renderTablePage(currentPage, pageSize);
-    renderPagination(currentPage, totalPages);
-    updatePaginationInfo(currentPage, pageSize, totalRuns);
+    // Check server status for running tests
+    const statusRes = await fetch('/api/status');
+    const statusData = await statusRes.json();
+    const isCurrentlyRunning = statusData.running;
 
-    // Determine if a full run is currently running
-    const latestRun = runsData[0];
-    const isCurrentlyRunning =
-      latestRun &&
-      (latestRun.endedAt == null || latestRun.status === 'running');
-
-    console.debug('[dashboard] latestRun:', latestRun ? { id: latestRun.id, status: latestRun.status, endedAt: latestRun.endedAt } : null);
-    console.debug('[dashboard] isCurrentlyRunning:', isCurrentlyRunning, 'runLocked:', !!localStorage.getItem('runLocked'));
-
-    // Only enable the running UI when a run is detected. Do not automatically clear the locked state
-    // on refresh — keep the Run button disabled until the user explicitly presses Stop.
-    if (isCurrentlyRunning) setRunUI(true);
+    // Update UI based on run status
+    if (isCurrentlyRunning) {
+      setRunUI(true);
+    } else {
+      // If we thought we were running but the server says we aren't
+      if (localStorage.getItem('fullRunInProgress') === 'true') {
+        setRunUI(false, { force: true });
+        showToast('All scheduled tests have completed execution.', 'success');
+      } else {
+        setRunUI(false);
+      }
+    }
 
   } catch (err) {
     console.error('Dashboard load error:', err);
-    // Do nothing — preserve current button state on error
   }
 }
 
 // Activate "running" UI
 function activateStopButton() {
   const runAllBtn = document.getElementById('runAllTests');
+  const runLoadBtn = document.getElementById('runLoadTests');
   const stopBtn = document.getElementById('stopRun');
 
   if (runAllBtn) {
     runAllBtn.disabled = true;
-    runAllBtn.textContent = 'Running All Tests...';
+    runAllBtn.innerHTML = '🧪 Running...';
     runAllBtn.classList.remove('enabled');
     runAllBtn.classList.add('disabled');
+  }
+  if (runLoadBtn) {
+    runLoadBtn.disabled = true;
+    runLoadBtn.innerHTML = '⚡ Running...';
+    runLoadBtn.classList.remove('enabled');
+    runLoadBtn.classList.add('disabled');
   }
   if (stopBtn) {
     stopBtn.style.display = 'inline-block';
     stopBtn.disabled = false;
-    stopBtn.textContent = 'Stop Run';
+    stopBtn.innerHTML = '🛑 Stop Run';
     stopBtn.classList.remove('disabled');
     stopBtn.classList.add('enabled');
   }
@@ -140,18 +173,25 @@ function activateStopButton() {
 // Reset to idle state
 function resetRunButtons() {
   const runAllBtn = document.getElementById('runAllTests');
+  const runLoadBtn = document.getElementById('runLoadTests');
   const stopBtn = document.getElementById('stopRun');
 
   if (runAllBtn) {
     runAllBtn.disabled = false;
-    runAllBtn.textContent = 'Run All Tests';
+    runAllBtn.innerHTML = '🧪 Run All Tests';
     runAllBtn.classList.remove('disabled');
     runAllBtn.classList.add('enabled');
   }
+  if (runLoadBtn) {
+    runLoadBtn.disabled = false;
+    runLoadBtn.innerHTML = '⚡ Run Load Test';
+    runLoadBtn.classList.remove('disabled');
+    runLoadBtn.classList.add('enabled');
+  }
   if (stopBtn) {
-    stopBtn.style.display = 'inline-block';
+    stopBtn.style.display = 'none';
     stopBtn.disabled = true;
-    stopBtn.textContent = 'Stop Run';
+    stopBtn.innerHTML = '🛑 Stop Run';
     stopBtn.classList.remove('enabled');
     stopBtn.classList.add('disabled');
   }
@@ -160,11 +200,10 @@ function resetRunButtons() {
 // Run All Tests — only alert on real failure
 document.getElementById('runAllTests')?.addEventListener('click', async () => {
   const runAllBtn = document.getElementById('runAllTests');
-  const stopBtn = document.getElementById('stopRun');
-
   if (runAllBtn.disabled) return;
 
   // set UI state immediately and persist
+  localStorage.setItem('runClickTime', Date.now().toString());
   setRunUI(true);
 
   try {
@@ -200,6 +239,32 @@ document.getElementById('runAllTests')?.addEventListener('click', async () => {
   }
 });
 
+// Run Load Tests
+document.getElementById('runLoadTests')?.addEventListener('click', async () => {
+  const runLoadBtn = document.getElementById('runLoadTests');
+  if (runLoadBtn.disabled) return;
+
+  // set UI state immediately and persist
+  localStorage.setItem('runClickTime', Date.now().toString());
+  setRunUI(true);
+
+  try {
+    const response = await fetch('/api/run-load-tests', { method: 'POST' });
+    if (!response.ok) throw new Error('Failed');
+
+    // For load tests, we might not have a reporter that updates /api/runs immediately
+    // or at all, but we want to keep the UI in "running" state until the request finishes.
+    // The request to /api/run-load-tests will stay open until all tests are done or stopped.
+    
+    // Once finished:
+    setRunUI(false, { force: true });
+    showToast('Load tests completed.', 'success');
+  } catch (err) {
+    console.error('Failed to start load tests', err);
+    setRunUI(false, { force: true });
+  }
+});
+
 // Stop Run
 document.getElementById('stopRun')?.addEventListener('click', async () => {
   const stopBtn = document.getElementById('stopRun');
@@ -212,12 +277,12 @@ document.getElementById('stopRun')?.addEventListener('click', async () => {
   try {
     const response = await fetch('/api/stop-run', { method: 'POST' });
     if (response.ok) {
-      alert('Test run stopped successfully');
+      showToast('Test run stopped successfully', 'success');
     } else {
-      alert('Stop command sent, but response was not OK');
+      showToast('Stop command sent, but server responded with an error', 'warning');
     }
   } catch (err) {
-    alert('Failed to send stop command');
+    showToast('Failed to connect to server to stop tests', 'error');
   } finally {
     await loadDashboard();
     // user pressed Stop — force UI reset
@@ -250,15 +315,12 @@ window.addEventListener('load', () => {
 
 async function loadRunReport(runId) {
   try {
-    const res = await fetch('/api/runs');
-    const data = await res.json();
-    const allRuns = Array.isArray(data) ? data : data.runs || [];
-    const run = allRuns.find(r => String(r.id) === String(runId));
-
-    if (!run) {
+    const res = await fetch(`/api/run-details/${runId}`);
+    if (!res.ok) {
       document.getElementById('runSummary').textContent = 'Run not found';
       return;
     }
+    const run = await res.json();
 
     document.getElementById('runSummary').textContent = 
       `Total duration: ${(run.duration / 1000).toFixed(2)}s | Executed on: ${new Date(run.startedAt).toLocaleString()}`;
@@ -267,13 +329,13 @@ async function loadRunReport(runId) {
     document.getElementById('totalTests').textContent = s.total || 0;
     document.getElementById('passedTests').textContent = s.passed || 0;
     document.getElementById('failedTests').textContent = s.failed || 0;
-    document.getElementById('skippedTests').textContent = s.skipped || 0;
+    document.getElementById('FlakyTests').textContent = s.Flaky || 0;
     document.getElementById('interruptedTests').textContent = s.interrupted || 0;
 
     const total = s.total || 1;
     document.getElementById('passedFill').style.width = `${(s.passed / total) * 100}%`;
     document.getElementById('failedFill').style.width = `${(s.failed / total) * 100}%`;
-    document.getElementById('skippedFill').style.width = `${(s.skipped / total) * 100}%`;
+    document.getElementById('FlakyFill').style.width = `${(s.Flaky / total) * 100}%`;
     document.getElementById('interruptedFill').style.width = `${((s.interrupted || 0) / total) * 100}%`;
 
     renderRunDonut(s);
@@ -327,7 +389,7 @@ function renderDonut(overall) {
   const colors = [];
   if (overall.passed > 0) { data.push(overall.passed); colors.push('#22c55e'); }
   if (overall.failed > 0) { data.push(overall.failed); colors.push('#ff5252'); }
-  if (overall.skipped > 0) { data.push(overall.skipped); colors.push('#e8f900ff'); }
+  if (overall.Flaky > 0) { data.push(overall.Flaky); colors.push('#e8f900ff'); }
   if (overall.interrupted > 0) { data.push(overall.interrupted); colors.push('#94a3b8'); }
   if (data.length === 0) { data.push(1); colors.push('#e9ecef'); }
 
@@ -354,7 +416,7 @@ function renderRunDonut(summary) {
   const data = [summary.passed || 0];
   const colors = ['#22c55e'];
   if (summary.failed > 0) { data.push(summary.failed); colors.push('#ff5252'); }
-  if (summary.skipped > 0) { data.push(summary.skipped); colors.push('#ffd43b'); }
+  if (summary.Flaky > 0) { data.push(summary.Flaky); colors.push('#ffd43b'); }
   if (summary.interrupted > 0) { data.push(summary.interrupted); colors.push('#cacacaff'); }
 
   requestAnimationFrame(() => {
@@ -432,7 +494,7 @@ function renderRunsPerDayChart(runs) {
             bottomLeft: 0,
             bottomRight: 0
           },
-          borderSkipped: false,
+          borderFlaky: false,
           barPercentage: 0.7,
           categoryPercentage: 0.85,
           borderWidth: 0
@@ -557,7 +619,7 @@ function renderTablePage(page, size) {
       <td>${s.total || 0}</td>
       <td><span class="status-circle passed"></span> ${s.passed || 0}</td>
       <td><span class="status-circle failed"></span> ${s.failed || 0}</td>
-      <td><span class="status-circle skipped"></span> ${s.skipped || 0}</td>
+      <td><span class="status-circle Flaky"></span> ${s.Flaky || 0}</td>
       <td><span class="status-circle interrupted"></span> ${s.interrupted || 0}</td>
       <td><a href="report.html?id=${run.id}" class="btn-view">View Report →</a></td>
     `;
@@ -741,8 +803,24 @@ async function rerunTest(event, file, title, button) {
   }
 }
 
+
+/** Format milliseconds into a human-readable duration */
+function formatDurationMs(ms) {
+  if (!ms || ms <= 0) return '0s';
+  const totalSec = Math.round(ms / 1000);
+  if (totalSec < 60) return totalSec + 's';
+  const mins = Math.floor(totalSec / 60);
+  const secs = totalSec % 60;
+  return secs > 0 ? `${mins}m ${secs}s` : `${mins}m`;
+}
+
 function formatDuration(ms) {
-  return ms ? (ms / 1000).toFixed(2) + 's' : '0s';
+  if (!ms || ms <= 0) return '0s';
+  const totalSec = Math.round(ms / 1000);
+  if (totalSec < 60) return totalSec + 's';
+  const mins = Math.floor(totalSec / 60);
+  const secs = totalSec % 60;
+  return secs > 0 ? `${mins}m ${secs}s` : `${mins}m`;
 }
 
 function escapeHtml(text) {

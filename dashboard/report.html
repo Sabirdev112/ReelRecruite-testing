@@ -38,9 +38,9 @@
             <span class="legend-dot failed"></span>
             <span class="legend-text">Failed</span>
           </div>
-          <div class="legend-item-card skipped">
-            <span class="legend-dot skipped"></span>
-            <span class="legend-text">Skipped</span>
+          <div class="legend-item-card Flaky">
+            <span class="legend-dot Flaky"></span>
+            <span class="legend-text">Flaky</span>
           </div>
           <div class="legend-item-card interrupted">
             <span class="legend-dot interrupted"></span>
@@ -62,8 +62,8 @@
             <div class="bar"><div class="bar-fill failed" id="failedFill"></div></div>
           </div>
           <div class="bar-row">
-            <span>Skipped</span>
-            <div class="bar"><div class="bar-fill skipped" id="skippedFill"></div></div>
+            <span>Flaky</span>
+            <div class="bar"><div class="bar-fill Flaky" id="FlakyFill"></div></div>
           </div>
           <div class="bar-row">
             <span>Interrupted</span>
@@ -89,9 +89,9 @@
         <div class="value" id="failedTests">0</div>
         <div class="icon">✗</div>
       </div>
-      <div class="status-card skipped">
-        <div class="label">Skipped</div>
-        <div class="value" id="skippedTests">0</div>
+      <div class="status-card Flaky">
+        <div class="label">Flaky</div>
+        <div class="value" id="FlakyTests">0</div>
         <div class="icon">↷</div>
       </div>
       <div class="status-card interrupted">
