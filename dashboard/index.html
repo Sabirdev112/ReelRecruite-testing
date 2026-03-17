@@ -7,8 +7,10 @@
   <link rel="stylesheet" href="style.css">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
 </head>
 <body>
+  <div id="notification-container" class="notification-container"></div>
   <div class="container">
     <header class="header">
       <h1 class="header-title">Playwright Report Dashboard</h1>
@@ -54,9 +56,9 @@
             <span class="legend-dot failed"></span>
             <span class="legend-text">Failed</span>
           </div>
-          <div class="legend-item-card skipped">
-            <span class="legend-dot skipped"></span>
-            <span class="legend-text">Skipped</span>
+          <div class="legend-item-card Flaky">
+            <span class="legend-dot Flaky"></span>
+            <span class="legend-text">Flaky</span>
           </div>
           <div class="legend-item-card interrupted">
             <span class="legend-dot interrupted"></span>
@@ -80,7 +82,8 @@
   <div class="pagination-info" id="paginationInfo">Showing 1 to 25 of 0 entries</div>
     <div class="run-controls">
     <button id="runAllTests" class="btn-run-all enabled">Run All Tests</button>
-    <button id="stopRun" class="btn-stop-run disabled" disabled>Stop Run</button>
+    <button id="runLoadTests" class="btn-run-load enabled">Run Load Test</button>
+    <button id="stopRun" class="btn-stop-run disabled" disabled style="display: none;">Stop Run</button>
   </div>
   <div class="page-size">
     <label>Show</label>
@@ -103,7 +106,7 @@
           <th>Total</th>
           <th>Passed</th>
           <th>Failed</th>
-          <th>Skipped</th>
+          <th>Flaky</th>
           <th>Interrupted</th>
           <th>Actions</th>
         </tr>

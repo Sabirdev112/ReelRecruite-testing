@@ -1,0 +1,14 @@
+{
+  "recruiter": {
+    "email": "carlos@gmail.com",
+    "password": "Carlos@1234"
+  },
+  "candidate": {
+    "email": "muhammadsabir.dev@gmail.com",
+    "password": "Sabir@1234_1"
+  },
+  "admin": {
+    "email": "super-admin@recruitai.com",
+    "password": "Password@123"
+  }
+}

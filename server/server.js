@@ -5,14 +5,23 @@ import fs from 'fs';
 import open from 'open';
 import { spawn } from 'child_process';
 import treeKill from 'tree-kill';
+import { getTestRuns, getRunDetails, getLatestTests } from '../dashboard/supabaseService.js';
 
 let currentRunProcess = null; // Active process for the current test file
 let isRunStopped = false;    // Flag to abort the remaining files in a full run
+let isSessionRunning = false; // Flag for the overall test session (multiple files)
 
 const app = express();
 const PORT = 5000;
 
-const dashboardPath = path.join(process.cwd(), 'dashboard');
+const dashboardPath = resolve(process.cwd(), 'dashboard');
+
+// API: Get current session status
+app.get('/api/status', (req, res) => {
+  res.json({
+    running: isSessionRunning || !!currentRunProcess
+  });
+});
 
 // Direct path to Playwright Test CLI (bypasses npx and shell)
 const playwrightCliPath = resolve(
@@ -25,23 +34,49 @@ const playwrightCliPath = resolve(
 
 app.use(express.json());
 
-// API: Get runs
-app.get('/api/runs', (req, res) => {
-  const dataFile = path.join(process.cwd(), 'server', 'data', 'runs.json');
-
-  if (!fs.existsSync(dataFile)) return res.json([]);
-
+// API: Get runs (from Supabase, fallback to local JSON)
+app.get('/api/runs', async (req, res) => {
   try {
-    const rawData = fs.readFileSync(dataFile, 'utf-8');
-    const data = JSON.parse(rawData);
-    res.json(Array.isArray(data) ? data : []);
+    const runs = await getTestRuns();
+    res.json(runs);
   } catch (err) {
-    console.error('Error loading runs:', err.message);
-    res.status(500).json({ error: 'Failed to load runs' });
+    console.error('Error loading runs from Supabase:', err.message);
+    // Fallback to local JSON if Supabase fails
+    const dataFile = path.join(process.cwd(), 'server', 'data', 'runs.json');
+    if (fs.existsSync(dataFile)) {
+      try {
+        const data = JSON.parse(fs.readFileSync(dataFile, 'utf-8'));
+        return res.json(Array.isArray(data) ? data : []);
+      } catch (e) {
+        // ignore parse errors
+      }
+    }
+    // No data source available — return empty instead of crashing
+    res.json([]);
   }
 });
 
-// API: Re-run single test
+// API: Get run details (Now from Supabase)
+app.get('/api/run-details/:id', async (req, res) => {
+  try {
+    const details = await getRunDetails(req.params.id);
+    if (!details) return res.status(404).json({ error: 'Run not found' });
+    res.json(details);
+  } catch (err) {
+    console.error('Error loading run details:', err.message);
+    res.status(500).json({ error: 'Failed to load run details' });
+  }
+});
+// API: Get latest individual test cases
+app.get('/api/latest-tests', async (req, res) => {
+  try {
+    const tests = await getLatestTests();
+    res.json(tests);
+  } catch (err) {
+    console.error('Error loading latest tests:', err.message);
+    res.status(500).json({ error: 'Failed to load latest tests' });
+  }
+});
 app.post('/api/rerun-test', (req, res) => {
   const { file, title } = req.body;
 
@@ -108,51 +143,51 @@ app.post('/api/rerun-test', (req, res) => {
   });
 });
 
-// API: Run all tests in order
 app.post('/api/run-all-tests', (req, res) => {
   if (currentRunProcess) {
     return res.status(409).json({ error: 'A full test run is already in progress' });
   }
 
   isRunStopped = false; // Reset stop flag
+  isSessionRunning = true; // Mark session active
 
   const testFiles = [
-    'UI/Signup.spec.js',
-    'UI/Recruiter/ForgetPassword.spec.js',
-    'UI/candidate/PhoneLogin.spec.js',
-    'UI/candidate/ChangePassword.spec.js',
-    'UI/Login.spec.js',
-    'UI/Recruiter/UpdateInfo.spec.js',
-    'UI/Recruiter/UpdateAbout.spec.js',
-    'UI/Recruiter/UpdateCompany.spec.js',
-    'UI/candidate/UpdateInfo.spec.js',
-    'UI/candidate/UpdateAbout.spec.js',
-    'UI/candidate/UpdateSkill.spec.js',
-    'UI/candidate/UpdateWork.spec.js',
-    'UI/candidate/UpdateEducation.spec.js',
-    'UI/candidate/UpdateResume.spec.js',
-    'UI/candidate/UpdateCoverVideo.spec.js',
-    'UI/candidate/FIlter.spec.js',
-    'UI/candidate/workTypeFilter.spec.js',
-    'UI/candidate/regionFilter.spec.js',
-    'UI/candidate/jobtype.spec.js',
-    'UI/candidate/experienceLevelFilter.spec.js',
-    'UI/candidate/currencyFilter.spec.js',
-    'UI/candidate/SearchJob.spec.js',
-    'UI/Recruiter/SaveDraft.spec.js',
-    'UI/Recruiter/CreateJob.spec.js',
-    'UI/Recruiter/EditJob.spec.js',
-    'UI/candidate/jobApply.spec.js',
-    'UI/Recruiter/viewApplications.spec.js',
-    'UI/Recruiter/ShortlistCandidate.spec.js',
-    'UI/Recruiter/SeeResume.spec.js',
-    'UI/Recruiter/SeeCoverVideo.spec.js',
-    'UI/Recruiter/sendMessage.spec.js',
-    'UI/Recruiter/ArchiveChat.spec.js',
-    'UI/Recruiter/UnArchiveChat.spec.js',
-    'UI/Candidate/withdrawApplication.spec.js',
-    'UI/candidate/ViewAppliedJobs.spec.js',
-    'UI/Recruiter/DeleteJob.spec.js'
+    'tests/e2e/Signup.spec.js',
+    'tests/e2e/Recruiter/ForgetPassword.spec.js',
+    'tests/e2e/candidate/PhoneLogin.spec.js',
+    'tests/e2e/candidate/ChangePassword.spec.js',
+    'tests/e2e/Login.spec.js',
+    'tests/e2e/Recruiter/UpdateInfo.spec.js',
+    'tests/e2e/Recruiter/UpdateAbout.spec.js',
+    'tests/e2e/Recruiter/UpdateCompany.spec.js',
+    'tests/e2e/candidate/UpdateInfo.spec.js',
+    'tests/e2e/candidate/UpdateAbout.spec.js',
+    'tests/e2e/candidate/UpdateSkill.spec.js',
+    'tests/e2e/candidate/UpdateWork.spec.js',
+    'tests/e2e/candidate/UpdateEducation.spec.js',
+    'tests/e2e/candidate/UpdateResume.spec.js',
+    'tests/e2e/candidate/UpdateCoverVideo.spec.js',
+    'tests/e2e/candidate/FIlter.spec.js',
+    'tests/e2e/candidate/workTypeFilter.spec.js',
+    'tests/e2e/candidate/regionFilter.spec.js',
+    'tests/e2e/candidate/jobtype.spec.js',
+    'tests/e2e/candidate/experienceLevelFilter.spec.js',
+    'tests/e2e/candidate/currencyFilter.spec.js',
+    'tests/e2e/candidate/SearchJob.spec.js',
+    'tests/e2e/Recruiter/SaveDraft.spec.js',
+    'tests/e2e/Recruiter/CreateJob.spec.js',
+    'tests/e2e/Recruiter/EditJob.spec.js',
+    'tests/e2e/candidate/jobApply.spec.js',
+    'tests/e2e/Recruiter/viewApplications.spec.js',
+    'tests/e2e/Recruiter/ShortlistCandidate.spec.js',
+    'tests/e2e/Recruiter/SeeResume.spec.js',
+    'tests/e2e/Recruiter/SeeCoverVideo.spec.js',
+    'tests/e2e/Recruiter/sendMessage.spec.js',
+    'tests/e2e/Recruiter/ArchiveChat.spec.js',
+    'tests/e2e/Recruiter/UnArchiveChat.spec.js',
+    'tests/e2e/candidate/withdrawApplication.spec.js',
+    'tests/e2e/candidate/ViewAppliedJobs.spec.js',
+    'tests/e2e/Recruiter/DeleteJob.spec.js'
   ];
 
   console.log('\nStarting full test run in order...\n');
@@ -161,12 +196,14 @@ app.post('/api/run-all-tests', (req, res) => {
 
   const runNext = () => {
     if (isRunStopped) {
+      isSessionRunning = false;
       currentRunProcess = null;
       console.log('\nFull test run stopped. Remaining files skipped.\n');
       return res.json({ success: true, message: 'Test run stopped' });
     }
 
     if (index >= testFiles.length) {
+      isSessionRunning = false;
       currentRunProcess = null;
       console.log('\nAll tests completed.\n');
       return res.json({ success: true });
@@ -208,6 +245,80 @@ app.post('/api/run-all-tests', (req, res) => {
   runNext();
 });
 
+// API: Run all load tests in order
+app.post('/api/run-load-tests', (req, res) => {
+  if (currentRunProcess) {
+    return res.status(409).json({ error: 'A test run is already in progress' });
+  }
+
+  isRunStopped = false; // Reset stop flag
+  isSessionRunning = true; // Mark session active
+
+  const loadTestDir = path.join(process.cwd(), 'tests', 'Load-Test');
+  
+  if (!fs.existsSync(loadTestDir)) {
+    return res.status(404).json({ error: 'Load test directory not found' });
+  }
+
+  const testFiles = fs.readdirSync(loadTestDir)
+    .filter(file => file.endsWith('.js'))
+    .map(file => path.join('tests', 'Load-Test', file));
+
+  if (testFiles.length === 0) {
+    return res.status(404).json({ error: 'No load test files found' });
+  }
+
+  console.log(`\nStarting full load test run (${testFiles.length} files)...\n`);
+
+  let index = 0;
+
+  const runNext = () => {
+    if (isRunStopped) {
+      isSessionRunning = false;
+      currentRunProcess = null;
+      console.log('\nLoad test run stopped. Remaining files skipped.\n');
+      return res.json({ success: true, message: 'Load test run stopped' });
+    }
+
+    if (index >= testFiles.length) {
+      isSessionRunning = false;
+      currentRunProcess = null;
+      console.log('\nAll load tests completed.\n');
+      return res.json({ success: true });
+    }
+
+    const file = testFiles[index];
+    console.log(`Running Load Test (${index + 1}/${testFiles.length}): ${file}`);
+
+    // Run using k6
+    currentRunProcess = spawn('k6', ['run', file], {
+      cwd: process.cwd(),
+      stdio: 'inherit'
+    });
+
+    currentRunProcess.on('close', (code) => {
+      currentRunProcess = null;
+      if (code === 0) {
+        console.log(`✅ Load test ${file} passed\n`);
+      } else {
+        console.log(`❌ Load test ${file} failed (code ${code})\n`);
+      }
+      index++;
+      runNext();
+    });
+
+    currentRunProcess.on('error', (err) => {
+      currentRunProcess = null;
+      console.error(`Spawn error for load test ${file}:`, err.message);
+      // Even if it fails to start (e.g. k6 missing), we move to next or stop
+      index++;
+      runNext();
+    });
+  };
+
+  runNext();
+});
+
 // API: Stop current full run
 app.post('/api/stop-run', (req, res) => {
   if (!currentRunProcess) {
@@ -215,6 +326,7 @@ app.post('/api/stop-run', (req, res) => {
   }
 
   isRunStopped = true;
+  isSessionRunning = false;
 
   console.log('\nStopping full Playwright test run...');
 

@@ -1,7 +1,7 @@
 import { defineConfig } from '@playwright/test';
 
 export default defineConfig({
-  testDir: '.',
+  testDir: './tests/e2e',
 
   testMatch: [
     '**/*.spec.js',
@@ -14,13 +14,16 @@ export default defineConfig({
   retries: 1,
 
   use: {
-    trace: 'on-first-retry'
+    baseURL: process.env.BASE_URL || 'http://localhost:3000',
+    trace: 'on-first-retry',
+    screenshot: 'only-on-failure',
+    video: 'retain-on-failure',
   },
 
   reporter: [
     ['html', { open: 'never' }],
     ['list'],
-    ['./reporter/customReporter.js'] // ✅ FIX
+    ['./reporter/customReporter.js']
   ],
 
   outputDir: 'test-results'
