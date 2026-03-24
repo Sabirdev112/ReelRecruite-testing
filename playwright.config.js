@@ -1,30 +1,34 @@
 import { defineConfig } from '@playwright/test';
+import dotenv from 'dotenv';
+import path from 'path';
+
+// Load env vars for all contexts
+dotenv.config();
 
 export default defineConfig({
-  testDir: './tests/e2e',
+  testDir: './tests', // Root of all specimen categories
 
   testMatch: [
     '**/*.spec.js',
     '**/*.test.js',
-    '**/*.spec.ts',
-    '**/*.test.ts'
   ],
 
-  timeout: 60 * 1000,
-  retries: 1,
-
-  use: {
-    baseURL: process.env.BASE_URL || 'http://localhost:3000',
-    trace: 'on-first-retry',
-    screenshot: 'only-on-failure',
-    video: 'retain-on-failure',
-  },
-
+  // Grouping specimens by folder logic in reporter
   reporter: [
     ['html', { open: 'never' }],
     ['list'],
     ['./reporter/customReporter.js']
   ],
 
-  outputDir: 'test-results'
+  use: {
+    baseURL: process.env.BASE_URL || 'http://localhost:3000',
+    trace: 'on-first-retry',
+    viewport: { width: 1280, height: 720 },
+    screenshot: 'only-on-failure',
+    video: 'retain-on-failure',
+  },
+
+  timeout: 60 * 1000,
+  retries: 1,
+  outputDir: 'test-results',
 });

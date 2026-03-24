@@ -1,7 +1,10 @@
-import { exec } from 'child_process';
 import fs from 'fs';
 import path from 'path';
-import { insertTestCase, insertTestRun } from '../dashboard/supabaseService.js';
+import { 
+  insertTestCase, insertTestRun, 
+  insertApiTestCase, insertApiRun, 
+  insertLoadTestCase, insertLoadRun 
+} from '../dashboard/lib/supabase.js';
 
 export default class CustomReporter {
   constructor() {
@@ -10,108 +13,109 @@ export default class CustomReporter {
   }
 
   onTestEnd(test, result) {
-  // Get full relative path from project root
-  const fullPath = test.location.file; // This is usually absolute
-  const relativePath = path.relative(process.cwd(), fullPath).replace(/\\/g, '/'); // Normalize to forward slashes
+    const filePath = path.relative(process.cwd(), test.location.file);
+    const normalizedPath = filePath.replace(/\\/g, '/');
+    
+    // Look for screenshots on failure
+    let screenshotPath = null;
+    const screenshotAttachment = result.attachments.find(a => a.name === 'screenshot');
+    
+    if (screenshotAttachment && screenshotAttachment.path) {
+      const runId = this.runStartTime;
+      // Use test title as filename basis
+      const safeTitle = test.title.replace(/[^a-z0-0]/gi, '_').toLowerCase();
+      const fileName = `${runId}_${safeTitle}.png`;
+      const targetDir = path.join(process.cwd(), 'dashboard', 'public', 'screenshots');
+      
+      if (!fs.existsSync(targetDir)) fs.mkdirSync(targetDir, { recursive: true });
+      
+      const targetPath = path.join(targetDir, fileName);
+      try {
+        fs.copyFileSync(screenshotAttachment.path, targetPath);
+        screenshotPath = `/screenshots/${fileName}`;
+      } catch (err) {
+        console.warn('[REPORTER] Failed to archive screenshot:', err.message);
+      }
+    }
 
-  this.results.push({
-    title: test.title,
-    description:
-      test.annotations?.find(a => a.type === 'description')?.description || '',
-    file: path.relative(process.cwd(), test.location.file).replace(/\\/g, '/'),        // ← NOW CORRECT: e.g., "UI/Recruiter/UpdateInfo.spec.js"
-    line: test.location.line,
-    status: result.status,
-    duration: result.duration,
-    retries: result.retry,
-    wasFlaky: result.retry > 0 && result.status === 'passed',
-    error: result.error ? result.error.message : null,
-    stack: result.error ? result.error.stack : null,
-    attachments: result.attachments.map(a => ({
-      name: a.name,
-      path: a.path,
-      contentType: a.contentType
-    }))
-  });
-}
+    this.results.push({
+      title: test.title,
+      file: normalizedPath,
+      line: test.location.line,
+      status: result.status,
+      duration: result.duration,
+      error: result.error ? result.error.message : null,
+      stack: result.error ? result.error.stack : null,
+      screenshot: screenshotPath
+    });
+  }
 
   async onEnd() {
-  const runEndTime = Date.now();
-  const summary = {
-    total: this.results.length,
-    passed: this.results.filter(t => t.status === 'passed').length,
-    failed: this.results.filter(t => t.status === 'failed').length,
-    Flaky: this.results.filter(t => 
-      t.status === 'skipped' || t.status === 'timedOut'
-    ).length,
-    interrupted: this.results.filter(t => t.status === 'interrupted').length 
-  };
+    const runEndTime = Date.now();
+    const summary = {
+      total: this.results.length,
+      passed: this.results.filter(t => t.status === 'passed').length,
+      failed: this.results.filter(t => t.status === 'failed').length,
+      flaky: this.results.filter(t => t.status === 'skipped' || t.status === 'timedOut').length,
+      interrupted: this.results.filter(t => t.status === 'interrupted').length 
+    };
 
     const runData = {
       id: Date.now(),
+      name: process.env.PLAYWRIGHT_RUN_NAME || 'Automated Suite',
       startedAt: new Date(this.runStartTime).toISOString(),
       endedAt: new Date(runEndTime).toISOString(),
       duration: runEndTime - this.runStartTime,
       summary,
-      tests: this.results
     };
 
-    // Save to local JSON (backward compatibility)
-    const dataDir = path.join(process.cwd(), 'server', 'data');
-    const dataFile = path.join(dataDir, 'runs.json');
+    // Determine target tables based on evidence (file path or run name as fallback)
+    const firstTestFile = (this.results[0]?.file || '').toLowerCase();
+    const runName = runData.name.toLowerCase();
+    
+    let runInserter, caseInserter, dataKey;
 
-    if (!fs.existsSync(dataDir)) fs.mkdirSync(dataDir, { recursive: true });
+    if (firstTestFile.includes('api') || runName.includes('api')) {
+       runInserter = insertApiRun;
+       caseInserter = insertApiTestCase;
+       dataKey = 'api-runs';
+    } else if (firstTestFile.includes('load-test') || firstTestFile.includes('k6') || runName.includes('load')) {
+       runInserter = insertLoadRun;
+       caseInserter = insertLoadTestCase;
+       dataKey = 'load-runs';
+    } else {
+       runInserter = insertTestRun;
+       caseInserter = insertTestCase;
+       dataKey = 'runs';
+    }
 
-    const existingRuns = fs.existsSync(dataFile)
-      ? JSON.parse(fs.readFileSync(dataFile, 'utf-8'))
-      : [];
+    console.log(`[REPORTER] Handshaking: ${runName} -> ${dataKey}`);
 
-    existingRuns.unshift(runData);
-
-    fs.writeFileSync(dataFile, JSON.stringify(existingRuns, null, 2));
-    console.log('📊 Test results saved locally');
-
-    // ✅ Sync with Supabase (Full migration)
-    console.log('☁️  Syncing full run to Supabase...');
+    // Supabase Sync
     try {
-      // 1. Insert Run Summary
-      await insertTestRun({
-        id: runData.id,
-        startedAt: runData.startedAt,
-        endedAt: runData.endedAt,
-        duration: runData.duration,
-        summary: runData.summary
-      });
+      await runInserter(runData);
 
-      // 2. Insert individual Test Cases
       for (const test of this.results) {
         let dbStatus = test.status;
-        if (dbStatus === 'skipped' || dbStatus === 'timedOut') {
-          dbStatus = 'Flaky';
-        }
+        if (dbStatus === 'skipped' || dbStatus === 'timedOut') dbStatus = 'flaky';
 
-        await insertTestCase(
+        await caseInserter(
           test.title,
           dbStatus,
           {
             file: test.file,
             duration: test.duration,
             error: test.error,
-            stack: test.stack
+            stack: test.stack,
+            line: test.line,
+            screenshot: test.screenshot
           },
-          runData.id // Link to the run
+          runData.id
         );
       }
-      console.log('✅ Supabase full sync completed');
+      console.log(`✅ Telemetry Bridge Complete: ${runData.name}`);
     } catch (err) {
-      console.error('Failed to sync to Supabase:', err.message);
-    }
-
-    // ✅ Check if server file exists before starting
-    const serverFile = path.join(process.cwd(), 'server', 'server.js');
-    if (fs.existsSync(serverFile)) {
-      console.log('🚀 Ensuring dashboard server logic...');
-    } else {
-      console.error('❌ server/server.js file not found.');
+      console.error('[REPORTER] Supabase handshake failed:', err.message);
     }
   }
 }
