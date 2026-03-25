@@ -1,13 +1,17 @@
 {
   "name": "playwright",
   "version": "1.0.0",
+  "workspaces": [
+    "dashboard"
+  ],
   "type": "module",
   "main": "index.js",
   "scripts": {
     "test": "npx playwright test",
     "test:ui": "npx playwright test --ui",
     "test:headed": "npx playwright test --headed",
-    "test:debug": "npx playwright test --debug"
+    "test:debug": "npx playwright test --debug",
+    "dashboard:dev": "npm run dev -w dashboard"
   },
   "keywords": [],
   "author": "",

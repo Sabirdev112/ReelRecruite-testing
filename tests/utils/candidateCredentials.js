@@ -9,17 +9,16 @@ const FIXTURE_PATH = path.join(__dirname, '../fixtures/users.json');
 
 export function loadCredentials() {
   const data = JSON.parse(fs.readFileSync(FIXTURE_PATH, 'utf-8'));
-  return data.candidate;
+  // Wrap in array so callers can use [0] indexing
+  return Array.isArray(data.candidate) ? data.candidate : [data.candidate];
 }
 
 export function updatePassword(email, newPassword) {
   const data = JSON.parse(fs.readFileSync(FIXTURE_PATH, 'utf-8'));
-  
-  data.candidate = data.candidate.map(user =>
-    user.email === email
-      ? { ...user, password: newPassword }
-      : user
-  );
+
+  if (data.candidate.email === email) {
+    data.candidate = { ...data.candidate, password: newPassword };
+  }
 
   fs.writeFileSync(
     FIXTURE_PATH,

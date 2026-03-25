@@ -5,8 +5,7 @@ import { loadCredentials } from '../../utils/recruiterCredentials.js';
 import { changeRecruiterPassword, verifyPasswordUpdatedInDb } from '../../utils/password.helper.js';
 
 test('Recruiter forget password flow', async ({ page, loginPage, forgetPassword }) => {
-  const recruiters = loadCredentials();
-  const recruiter = recruiters[0];
+  const recruiter = loadCredentials()[0];
 
   const otp = '123456';
   const oldPassword = recruiter.password;
