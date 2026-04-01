@@ -16,7 +16,7 @@ export function getRandomUser() {
   return {
     fullName: `User ${uniqueId.slice(-4)}`,
     email: `user${uniqueId}@gmail.com`,
-    phone: `3${uniqueId.slice(-9)}`,
+    phone: `92${uniqueId.slice(-9)}`,
     password: PASSWORD
   };
 }
@@ -26,7 +26,7 @@ export function getRandomUser() {
  */
 export function storeNewUser(user) {
   if (!user?.email || !user?.phone) {
-    throw new Error('Invalid user object. Cannot store user.');
+    throw new Error('email and phone did not generated. Cannot store user.');
   }
 
   const users = fs.existsSync(NEW_USERS_FILE)

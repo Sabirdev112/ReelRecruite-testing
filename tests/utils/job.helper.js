@@ -4,12 +4,10 @@ import { fileURLToPath } from 'url';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+const jobIdPath = path.join(__dirname, '../test-data/Recruiter/jobid.json');
 
 export function getLatestJobId() {
-  const jobPath = path.join(
-    __dirname,
-    '../test-data/Recruiter/jobid.json'
-  );
+  const jobPath = jobIdPath;
 
   if (!fs.existsSync(jobPath)) {
     throw new Error('Job ID file not found. Create a job first.');
@@ -24,10 +22,7 @@ export function buildJobUrl(jobId) {
 }
 
 export function storeJobId(jobId) {
-   const JOB_PATH = path.join(
-    __dirname,
-    '../test-data/Recruiter/jobid.json'
-  );
+   const JOB_PATH = jobIdPath;
   if (!jobId) throw new Error('Cannot store empty jobId');
 
   const data = { jobId };

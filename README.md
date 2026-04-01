@@ -21,7 +21,7 @@ Launch the local dashboard to run tests individually or in batch:
 ```bash
 node server/server
 ```
-Then open `http://localhost:5000` in your browser.
+Then open `http://localhost:3001` in your browser.
 
 ### 2. Using Playwright CLI
 Run all tests:

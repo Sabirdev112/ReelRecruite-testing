@@ -34,7 +34,7 @@ export class Login extends BasePage {
         await this.phonePage.click();
         await this.phoneInput.waitFor({ state: 'visible' });
         await this.phoneInput.click();
-        await this.phoneInput.pressSequentially(phone, { delay: 40 });
+        await this.phoneInput.fill(phone, { delay: 40 });
         await this.passwordInput.waitFor({ state: 'visible' });
         await this.passwordInput.click();
         await this.passwordInput.pressSequentially(password, { delay: 40 });

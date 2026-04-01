@@ -76,15 +76,18 @@ export class UploadResume extends BasePage {
   const resumePath = getResumePath(filename);
   await this.uploadInput.waitFor({ state: 'attached' });
 
-  await Promise.all([
-    this.page.waitForResponse(
-      r =>
-        r.request().method() === 'POST' &&
-        r.status() === 200,
-      { timeout: 20_0000 }
-    ),
-    this.uploadInput.setInputFiles(resumePath)
-  ]);
+  const uploadPromise = this.page.waitForResponse(
+    res =>
+      res.url().includes('/upload') && // ✅ make this specific
+      res.request().method() === 'POST' &&
+      res.status() === 200,
+    { timeout: 60000 }
+  );
+
+  await this.uploadInput.setInputFiles(resumePath);
+  await uploadPromise;
+
+  await expect(this.uploadInput).toBeEnabled();
   console.log(`Resume upload completed: ${resumePath}`);
 }
 
