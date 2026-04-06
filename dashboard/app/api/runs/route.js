@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { getTestRuns, getApiRuns, getLoadRuns } from '@/lib/supabase';
+import { getTestRuns, getApiRuns, getLoadRuns } from '../../../lib/db';
 
 export async function GET(req) {
   const { searchParams } = new URL(req.url);
@@ -17,3 +17,6 @@ export async function GET(req) {
     return NextResponse.json([], { status: 500 });
   }
 }
+
+
+

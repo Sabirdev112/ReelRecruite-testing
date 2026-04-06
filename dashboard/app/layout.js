@@ -2,7 +2,7 @@
 import { Inter } from 'next/font/google';
 import './globals.css';
 import { useEffect, useState } from 'react';
-import { Moon, Sun } from 'lucide-react';
+import { Moon, Sun, LayoutDashboard } from 'lucide-react';
 import Link from 'next/link';
 
 const inter = Inter({ subsets: ['latin'] });
@@ -28,10 +28,13 @@ export default function RootLayout({ children }) {
       <body className={`${inter.className} min-h-screen flex flex-col`}>
         <header className="sticky top-0 z-50 glass border-b border-border/40 p-4 px-8 flex justify-between items-center transition-all duration-300">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-indigo-600 rounded-xl flex items-center justify-center text-white font-bold text-xl shadow-lg ring-2 ring-indigo-500/20">R</div>
-            <Link href="/">
-               <h1 className="text-xl font-black tracking-tight leading-none bg-gradient-to-r from-indigo-600 to-violet-600 bg-clip-text text-transparent">ReelRecruite</h1>
-               <span className="text-[10px] uppercase font-bold tracking-[0.2em] text-muted-foreground/60">Quality Dashboard</span>
+            <div className="w-10 h-10 bg-indigo-600 rounded-xl flex items-center justify-center text-white font-bold text-xl shadow-lg ring-2 ring-indigo-500/20">A</div>
+            <Link href="/" className="group">
+               <h1 className="text-xl font-black tracking-tight leading-none bg-gradient-to-r from-indigo-600 to-violet-600 bg-clip-text text-transparent flex items-center gap-2">
+                 <LayoutDashboard size={18} className="text-indigo-600" />
+                 Automation Center
+               </h1>
+               <span className="text-[10px] uppercase font-bold tracking-[0.2em] text-muted-foreground/60 group-hover:text-indigo-600 transition-colors">Quality Control Hub</span>
             </Link>
           </div>
           <button 
@@ -46,7 +49,7 @@ export default function RootLayout({ children }) {
         </main>
         <footer className="p-12 border-t border-border/40 text-center opacity-60">
            <div className="flex flex-col items-center gap-2">
-              <p className="text-xs font-medium uppercase tracking-widest">&copy; {new Date().getFullYear()} ReelRecruite Labs</p>
+              <p className="text-xs font-medium uppercase tracking-widest">&copy; {new Date().getFullYear()} Automation Dashboard</p>
               <div className="flex gap-4 text-[10px] font-bold text-indigo-600">
                  <span>INFRASTRUCTURE</span>
                  <span>MONITORING</span>
@@ -58,3 +61,6 @@ export default function RootLayout({ children }) {
     </html>
   );
 }
+
+
+

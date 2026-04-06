@@ -1,6 +1,7 @@
 'use client';
 import { useEffect, useState, use } from 'react';
 import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
 import { 
   ArrowLeft, 
   ArrowRight,
@@ -32,6 +33,9 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 
 export default function ReportPage({ params }) {
   const { id } = use(params);
+  const searchParams = useSearchParams();
+  const type = searchParams?.get('type') || 'ui';
+
   const [run, setRun] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -40,7 +44,7 @@ export default function ReportPage({ params }) {
 
   const fetchDetails = async () => {
     try {
-      const res = await fetch(`/api/run-details/${id}`);
+      const res = await fetch(`/api/run-details/${id}?type=${type}`);
       if (!res.ok) throw new Error('Technical report not found in metadata');
       const data = await res.json();
       setRun(data);
@@ -55,8 +59,8 @@ export default function ReportPage({ params }) {
     fetchDetails();
   }, [id]);
 
-  const toggleExpand = (title) => {
-    setExpandedTests(prev => ({ ...prev, [title]: !prev[title] }));
+  const toggleExpand = (index) => {
+    setExpandedTests(prev => ({ ...prev, [index]: !prev[index] }));
   };
 
   const rerunTest = async (test) => {
@@ -180,23 +184,22 @@ export default function ReportPage({ params }) {
                          <span className="text-[8px] font-black uppercase bg-rose-500 text-white px-2 py-0.5 rounded tracking-tighter">Spec: {i+1}</span>
                          <h5 className="text-xs font-black uppercase tracking-tighter text-foreground truncate">{test.title}</h5>
                       </div>
-                      <p className="text-[11px] font-medium text-muted-foreground/80 italic line-clamp-2 leading-relaxed text-foreground">
+                      <p className="text-[11px] font-medium text-muted-foreground/80 italic line-clamp-2 leading-relaxed text-foreground text-foreground flex-1">
                          {test.error || "Execution timeout or internal runner crash prevented diagnostic capture."}
                       </p>
                    </div>
                    <button 
-                     onClick={() => toggleExpand(test.title)}
-                     className="text-[9px] font-black uppercase tracking-widest text-indigo-600 hover:text-indigo-700 flex items-center gap-1 transition-all mt-2"
+                     onClick={() => {
+                        // Find this test in the main list to expand it there
+                        const fullIndex = run.tests.findIndex(t => t === test);
+                        if (fullIndex !== -1) toggleExpand(fullIndex);
+                     }}
+                     className="text-[9px] font-black uppercase tracking-widest text-indigo-600 hover:text-indigo-700 flex items-center gap-1 transition-all mt-4 w-fit"
                    >
                       View Deep Specs <ArrowRight size={10} />
                    </button>
                 </div>
               ))}
-              {failedTests.length > 4 && (
-                <div className="flex items-center justify-center p-6 border-2 border-dashed border-border/40 rounded-3xl text-muted-foreground italic text-xs font-bold">
-                   + {failedTests.length - 4} more technical failures detected below
-                </div>
-              )}
            </div>
         </div>
       )}
@@ -204,8 +207,8 @@ export default function ReportPage({ params }) {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
          <div className="lg:col-span-4 space-y-6">
             <div className="bg-card border border-border/40 rounded-3xl p-10 flex flex-col items-center justify-center shadow-sm relative overflow-hidden group text-foreground">
-               <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-emerald-500 via-rose-500 to-amber-500 text-foreground"></div>
-               <h4 className="text-[10px] items-center gap-2 font-black uppercase tracking-[0.3em] text-muted-foreground/60 mb-10 border-b w-full text-center pb-4 flex justify-center border-border/40 text-foreground">
+               <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-emerald-500 via-rose-500 to-amber-500 text-foreground text-foreground"></div>
+               <h4 className="text-[10px] items-center gap-2 font-black uppercase tracking-[0.3em] text-muted-foreground/60 mb-10 border-b w-full text-center pb-4 flex justify-center border-border/40 text-foreground text-foreground">
                   <ShieldCheck size={14} className="text-indigo-600" /> Integrity Map
                </h4>
                <div className="w-48 h-48 relative flex items-center justify-center">
@@ -215,14 +218,14 @@ export default function ReportPage({ params }) {
                      <span className="text-[8px] font-black uppercase tracking-widest text-muted-foreground/60">Quality Score</span>
                   </div>
                </div>
-               <div className="mt-10 grid grid-cols-2 gap-x-8 gap-y-6 w-full border-t border-dashed pt-8 border-border/40 text-foreground">
+               <div className="mt-10 grid grid-cols-2 gap-x-8 gap-y-6 w-full border-t border-dashed pt-8 border-border/40 text-foreground text-foreground">
                   {[
                     { label: 'Passed', val: s.passed, color: 'bg-emerald-500', tColor: 'text-emerald-600' },
                     { label: 'Failed', val: s.failed, color: 'bg-rose-500', tColor: 'text-rose-600' },
                     { label: 'Flaky', val: s.flaky, color: 'bg-amber-500', tColor: 'text-amber-600' },
                     { label: 'Killed', val: s.interrupted, color: 'bg-slate-400', tColor: 'text-slate-500' }
                   ].map((stat, i) => (
-                    <div key={i} className="flex flex-col gap-1">
+                    <div key={i} className="flex flex-col gap-1 text-foreground">
                        <div className="flex items-center gap-2">
                           <div className={`w-2.5 h-2.5 rounded-sm ${stat.color}`}></div>
                           <span className="text-[9px] font-black uppercase tracking-widest text-muted-foreground">{stat.label}</span>
@@ -232,38 +235,20 @@ export default function ReportPage({ params }) {
                   ))}
                </div>
             </div>
-
-            <div className="bg-secondary/30 border border-border/40 rounded-3xl p-8 shadow-sm text-foreground">
-               <h4 className="text-[10px] font-black uppercase tracking-widest mb-4 flex items-center gap-2 text-foreground text-foreground"><Cpu size={14}/> Engine Context</h4>
-               <div className="space-y-4">
-                  <div className="flex justify-between items-center py-2 border-b border-dashed border-border/40 text-foreground">
-                     <span className="text-[10px] font-bold text-muted-foreground uppercase">Framework</span>
-                     <span className="text-xs font-black text-foreground">Next.js/AppRouter</span>
-                  </div>
-                  <div className="flex justify-between items-center py-2 border-b border-dashed border-border/40 text-foreground">
-                     <span className="text-[10px] font-bold text-muted-foreground uppercase">Execution Agent</span>
-                     <span className="text-xs font-black text-foreground">Playwright CLI</span>
-                  </div>
-                  <div className="flex justify-between items-center py-2 text-foreground">
-                     <span className="text-[10px] font-bold text-muted-foreground uppercase">Region</span>
-                     <span className="text-xs font-black text-foreground">Cloud Node-X1</span>
-                  </div>
-               </div>
-            </div>
          </div>
 
-         <div className="lg:col-span-8 flex flex-col gap-6">
-            <div className="flex items-center justify-between mb-2">
-               <h3 className="text-2xl font-black tracking-tight flex items-center gap-3 italic text-foreground"><FileText size={24} className="text-indigo-600" /> Audit Spec Logs</h3>
-               <div className="text-[10px] font-black uppercase tracking-widest px-4 py-2 border border-rose-500/30 text-rose-600 bg-rose-500/5 rounded-full flex items-center gap-1.5 animate-pulse">
+         <div className="lg:col-span-8 flex flex-col gap-6 text-foreground">
+            <div className="flex items-center justify-between mb-2 text-foreground">
+               <h3 className="text-2xl font-black tracking-tight flex items-center gap-3 italic text-foreground text-foreground"><FileText size={24} className="text-indigo-600" /> Audit Spec Logs</h3>
+               <div className="text-[10px] font-black uppercase tracking-widest px-4 py-2 border border-rose-500/30 text-rose-600 bg-rose-500/5 rounded-full flex items-center gap-1.5 animate-pulse text-foreground">
                   <Activity size={12}/> Intelligence: Failed specs priority
                </div>
             </div>
 
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-4 text-foreground">
                {run.tests.map((test, i) => {
                  const isFail = test.status === 'failed';
-                 const isExp = expandedTests[test.title] !== undefined ? expandedTests[test.title] : isFail;
+                 const isExp = expandedTests[i] !== undefined ? expandedTests[i] : isFail;
                  const isRerunning = rerunning[test.title];
 
                  return (
@@ -272,7 +257,7 @@ export default function ReportPage({ params }) {
                      isFail ? 'border-l-rose-500' : 'border-l-muted'
                    }`}>
                       <div 
-                        onClick={() => toggleExpand(test.title)}
+                        onClick={() => toggleExpand(i)}
                         className={`p-6 flex flex-col md:flex-row justify-between items-start md:items-center gap-6 cursor-pointer hover:bg-secondary/20 transition-all ${isExp ? 'bg-secondary/10' : ''}`}
                       >
                          <div className="flex items-center gap-5">
@@ -301,6 +286,17 @@ export default function ReportPage({ params }) {
                                   <span className="text-[8px] font-black uppercase text-muted-foreground tracking-widest mb-1">Latency</span>
                                   <span className="text-sm font-black italic tracking-tighter text-foreground">{(test.duration / 1000).toFixed(2)}s</span>
                                </div>
+                               {test.browser && (
+                                 <div className="flex flex-col">
+                                    <span className="text-[8px] font-black uppercase text-muted-foreground tracking-widest mb-1">Platform</span>
+                                    <span className={`text-[10px] font-black uppercase px-2 py-0.5 rounded-md border ${
+                                      test.browser === 'chromium' ? 'text-yellow-600 border-yellow-500/20 bg-yellow-500/5' :
+                                      test.browser === 'firefox' ? 'text-orange-600 border-orange-500/20 bg-orange-500/5' :
+                                      test.browser === 'webkit' ? 'text-blue-600 border-blue-500/20 bg-blue-500/5' :
+                                      'text-muted-foreground border-border bg-secondary/20'
+                                    }`}>{test.browser}</span>
+                                 </div>
+                               )}
                                <div className="flex flex-col text-right">
                                   <span className="text-[8px] font-black uppercase tracking-widest mb-1 text-muted-foreground">Response</span>
                                   <span className={`text-sm font-black uppercase tracking-tighter ${
@@ -354,6 +350,28 @@ export default function ReportPage({ params }) {
                                       {test.error}
                                    </pre>
                                 </div>
+                             </div>
+                           )}
+
+                           {/* API / Load Response Body */}
+                           {(test.responseBody !== undefined || test.statusCode !== undefined) && (
+                             <div className="bg-slate-900 rounded-3xl p-8 mb-8 border border-emerald-500/10 shadow-2xl overflow-hidden">
+                                <div className="flex items-center gap-3 border-b border-white/10 pb-4 mb-4">
+                                   <Activity size={16} className="text-emerald-400" />
+                                   <span className="text-[10px] font-black uppercase tracking-[0.2em] text-emerald-400">API Response Received</span>
+                                   {test.statusCode && (
+                                     <span className={`ml-auto text-[10px] font-black px-3 py-1 rounded-full ${
+                                       test.statusCode >= 200 && test.statusCode < 300
+                                         ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/20'
+                                         : 'bg-rose-500/20 text-rose-400 border border-rose-500/20'
+                                     }`}>HTTP {test.statusCode}</span>
+                                   )}
+                                </div>
+                                <pre className="text-[11px] text-emerald-100/80 font-mono tracking-tight leading-loose whitespace-pre-wrap select-all bg-black/40 p-6 rounded-2xl border border-white/5 max-h-[400px] overflow-y-auto">
+                                   {typeof test.responseBody === 'object'
+                                     ? JSON.stringify(test.responseBody, null, 2)
+                                     : test.responseBody || '(empty response)'}
+                                </pre>
                              </div>
                            )}
 

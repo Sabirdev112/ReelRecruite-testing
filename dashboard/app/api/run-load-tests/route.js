@@ -1,10 +1,10 @@
 import { NextResponse } from 'next/server';
-import { runLoadTests } from '@/lib/processManager';
+import { runLoadTests } from '../../../lib/runner';
 import path from 'path';
 import fs from 'fs';
 
 export async function POST() {
-  const rootDir = path.resolve(process.cwd(), '../');
+  const rootDir = process.env.TEST_ROOT_DIR || path.resolve(process.cwd(), '..');
   const loadTestDir = path.join(rootDir, 'tests/Load-Test');
   
   if (!fs.existsSync(loadTestDir)) {
@@ -27,3 +27,6 @@ export async function POST() {
     return NextResponse.json({ success: false, error: err.message }, { status: 500 });
   }
 }
+
+
+

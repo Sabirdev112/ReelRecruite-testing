@@ -3,7 +3,7 @@ const { Pool } = pg;
 import dotenv from 'dotenv';
 import path from 'path';
 
-dotenv.config({ path: path.resolve(process.cwd(), '../.env') });
+dotenv.config({ path: path.resolve(process.cwd(), '.env') });
 
 const pool = new Pool({
   host: process.env.DB_HOST_SB?.trim(),
@@ -73,3 +73,4 @@ async function migrate() {
 }
 
 migrate();
+

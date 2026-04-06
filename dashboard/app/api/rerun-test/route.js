@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { rerunSingleTest } from '@/lib/processManager';
+import { rerunSingleTest } from '@/lib/runner';
 import path from 'path';
 
 export async function POST(req) {
@@ -9,7 +9,7 @@ export async function POST(req) {
     return NextResponse.json({ error: 'Missing file or title' }, { status: 400 });
   }
 
-  const rootDir = path.resolve(process.cwd(), '..');
+  const rootDir = process.env.TEST_ROOT_DIR || path.resolve(process.cwd(), '..');
   const playwrightCliPath = path.join(rootDir, 'node_modules/@playwright/test/cli.js');
 
   try {
@@ -24,3 +24,6 @@ export async function POST(req) {
     return NextResponse.json({ success: false, error: err.message }, { status: 500 });
   }
 }
+
+
+
