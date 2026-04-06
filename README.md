@@ -16,14 +16,19 @@ All automation code is located in the `tests/` directory:
 
 ## 🚀 Running Tests
 
-### 1. Using the Dashboard (Recommended)
-Launch the local dashboard to run tests individually or in batch:
+### 1. Automation Dashboard (UI runner)
+The Next.js dashboard lives in its own repository: **[Automation-dashboard](https://github.com/Sabirdev112/Automation-dashboard)**. Clone it next to this project (or anywhere), set `TEST_ROOT_DIR` in its `.env` to the **absolute path of this repo**, then run `npm install`, `node migrate-multi.js`, and `npm run dev`. See that repo’s README for full setup.
+
+This repo installs the reporter via `file:../Automation-dashboard/packages/automation-reporter`. Clone **[Automation-dashboard](https://github.com/Sabirdev112/Automation-dashboard)** as a **sibling folder** named `Automation-dashboard`, run **`npm install` inside that dashboard repo once** (so `pg` resolves for the reporter), then run **`npm install`** here.
+
+### 2. Legacy JSON API (optional)
+A small Express server exposes JSON APIs under port 5000 (no bundled UI):
 ```bash
 node server/server
 ```
-Then open `http://localhost:3001` in your browser.
+Use the Automation Dashboard for the full web UI.
 
-### 2. Using Playwright CLI
+### 3. Using Playwright CLI
 Run all tests:
 ```bash
 npx playwright test
@@ -95,4 +100,4 @@ If a test fails, Playwright is configured to:
 - Save a **Screenshot** on failure.
 - Record a **Video** on failure.
 
-These can be found in the `test-results/` folder or viewed directly via the local dashboard.
+These can be found in the `test-results/` folder or in the Automation Dashboard reports after syncing to Supabase.

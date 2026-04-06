@@ -2,10 +2,9 @@ import express from 'express';
 import path from 'path';
 import { resolve } from 'path';
 import fs from 'fs';
-import open from 'open';
 import { spawn } from 'child_process';
 import treeKill from 'tree-kill';
-import { getTestRuns, getRunDetails, getLatestTests } from '../dashboard/supabaseService.js';
+import { getTestRuns, getRunDetails, getLatestTests } from './lib/db.js';
 
 let currentRunProcess = null; // Active process for the current test file
 let isRunStopped = false;    // Flag to abort the remaining files in a full run
@@ -13,8 +12,6 @@ let isSessionRunning = false; // Flag for the overall test session (multiple fil
 
 const app = express();
 const PORT = 5000;
-
-const dashboardPath = resolve(process.cwd(), 'dashboard');
 
 // API: Get current session status
 app.get('/api/status', (req, res) => {
@@ -129,7 +126,7 @@ app.post('/api/rerun-test', (req, res) => {
         res.json({ success: true, passed: true, code: 0 });
       } else {
         console.log(`❌ Single test failed (exit code ${code})`);
-        console.log(`   Note: Rerun executed successfully. Test result saved to dashboard.\n`);
+        console.log(`   Note: Rerun executed successfully. Test result saved to Supabase.\n`);
         // Still return success: true because the rerun executed successfully
         // The test result (pass/fail) is separate from execution success
         res.json({ success: true, passed: false, code });
@@ -346,15 +343,15 @@ app.post('/api/stop-run', (req, res) => {
   });
 });
 
-// Static files
-app.use(express.static(dashboardPath));
-
-// SPA fallback (Express 5 compatible)
-app.get('/*splat', (req, res) => {
-  res.sendFile(path.join(dashboardPath, 'index.html'));
+// Legacy HTTP API only — UI lives in https://github.com/Sabirdev112/Automation-dashboard
+app.get('/', (req, res) => {
+  res.json({
+    message: 'Legacy test-runner API. For the web UI, run the Automation Dashboard (Next.js) from its own repo.',
+    dashboard: 'https://github.com/Sabirdev112/Automation-dashboard',
+  });
 });
 
 app.listen(PORT, () => {
-  console.log(`\nDashboard server running at http://localhost:${PORT}\n`);
-  open(`http://localhost:${PORT}`);
+  console.log(`\nLegacy API server at http://localhost:${PORT} (JSON APIs only)\n`);
+  console.log('Automation Dashboard UI: https://github.com/Sabirdev112/Automation-dashboard\n');
 });
