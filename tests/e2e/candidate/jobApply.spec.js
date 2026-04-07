@@ -1,8 +1,6 @@
 import { test, chromium } from '../../fixtures/base.fixtures.js';
 import { Login } from '../../pages/Login.js';
 import { ApplyJobPage } from '../../pages/ApplyJobPage.js';
-
-
 import { loadCredentials } from '../../utils/candidateCredentials.js';
 import { getLatestJobId, buildJobUrl } from '../../utils/job.helper.js';
 import { storeApplicationId } from '../../utils/application.helper.js';

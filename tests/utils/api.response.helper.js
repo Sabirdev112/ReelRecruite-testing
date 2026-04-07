@@ -1,0 +1,221 @@
+import { expect } from '@playwright/test';
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const RESPONSES_PATH = path.join(__dirname, 'responses.json');
+const USERS_PATH = path.join(__dirname, '../fixtures/users.json');
+const JOB_ID_PATH = path.join(__dirname, '../test-data/Recruiter/jobid.json');
+const APPLICATION_ID_PATH = path.join(__dirname, '../test-data/Candidate/applicationId.json');
+
+function readJson(filePath) {
+  return JSON.parse(fs.readFileSync(filePath, 'utf-8'));
+}
+
+function phoneApiFormat(raw) {
+  if (!raw || typeof raw !== 'string') return raw;
+  const digits = raw.replace(/\D/g, '');
+  if (digits.length === 11 && digits.startsWith('1')) {
+    return `(+1)${digits.slice(1)}`;
+  }
+  if (digits.length === 10) {
+    return `(+1)${digits}`;
+  }
+  return raw;
+}
+
+function buildPlaceholderMap() {
+  const users = readJson(USERS_PATH);
+  const r = users.recruiter || {};
+  const c = users.candidate || {};
+  let jobId;
+  let applicationId;
+  try {
+    jobId = readJson(JOB_ID_PATH).jobId;
+  } catch {
+    jobId = '';
+  }
+  try {
+    applicationId = readJson(APPLICATION_ID_PATH).applicationId;
+  } catch {
+    applicationId = '';
+  }
+  return {
+    '{{recruiter.email}}': r.email ?? '',
+    '{{recruiter.password}}': r.password ?? '',
+    '{{candidate.email}}': c.email ?? '',
+    '{{candidate.password}}': c.password ?? '',
+    '{{candidate.phoneApi}}': phoneApiFormat(c.phone) || c.phone || '',
+    '{{jobId}}': jobId,
+    '{{applicationId}}': applicationId,
+    '{{uniqueSignupEmail}}': `api_${Date.now()}_${Math.random().toString(36).slice(2, 10)}@testmail.dev`,
+    '{{chatId}}': '5ebf38d4-6aed-4b5e-b68b-4067040e03e7',
+  };
+}
+
+function applyPlaceholders(value, map) {
+  if (typeof value === 'string') {
+    let s = value;
+    for (const [k, v] of Object.entries(map)) {
+      s = s.split(k).join(String(v));
+    }
+    return s;
+  }
+  if (Array.isArray(value)) {
+    return value.map((x) => applyPlaceholders(x, map));
+  }
+  if (value && typeof value === 'object') {
+    const out = {};
+    for (const [k, v] of Object.entries(value)) {
+      out[k] = applyPlaceholders(v, map);
+    }
+    return out;
+  }
+  return value;
+}
+
+export async function apiResponse(response, testInfo) {
+  let responseBody;
+
+  try {
+    const text = await response.text();
+    try {
+      responseBody = JSON.parse(text);
+    } catch {
+      responseBody = text;
+    }
+  } catch {
+    responseBody = 'Unable to read response body';
+  }
+
+  await testInfo.attach('api-response', {
+    body: Buffer.from(
+      JSON.stringify({
+        status: response.status(),
+        body: responseBody,
+      }),
+    ),
+    contentType: 'application/json',
+  });
+}
+
+/**
+ * Runs one API case from tests/utils/responses.json (keys aligned with e2e / POM flows).
+ * @param {import('@playwright/test').APIRequestContext} request
+ * @param {import('@playwright/test').TestInfo} testInfo
+ * @param {string} caseKey
+ * @param {object} [options]
+ * @param {boolean} [options.refreshUniqueSignupEmail] — new email for {{uniqueSignupEmail}} on each call
+ * @param {Record<string, string>} [options.placeholderOverrides] — extra or replacement placeholder values (e.g. {{signup.phone}})
+ */
+export async function runApiCase(request, testInfo, caseKey, options = {}) {
+  const all = readJson(RESPONSES_PATH);
+  const baseUrl = all._meta?.baseUrl;
+  if (!baseUrl) {
+    throw new Error('responses.json missing _meta.baseUrl');
+  }
+
+  const def = all[caseKey];
+  if (!def || typeof def !== 'object') {
+    throw new Error(`Unknown API case "${caseKey}" in responses.json`);
+  }
+
+  const map = buildPlaceholderMap();
+  if (options.refreshUniqueSignupEmail) {
+    map['{{uniqueSignupEmail}}'] = `api_${Date.now()}_${Math.random().toString(36).slice(2, 10)}@testmail.dev`;
+  }
+  if (options.placeholderOverrides) {
+    Object.assign(map, options.placeholderOverrides);
+  }
+
+  const method = def.method;
+  const endpoint = def.endpoint;
+  if (!method || !endpoint) {
+    throw new Error(`Case "${caseKey}" needs method and endpoint`);
+  }
+
+  let headers = { ...(def.headers || {}) };
+  let payload =
+    def.payload !== undefined ? structuredClone(def.payload) : undefined;
+
+  payload = applyPlaceholders(payload, map);
+
+  async function signInForRole() {
+    if (def.authRole !== 'recruiter' && def.authRole !== 'candidate') {
+      return;
+    }
+    const users = readJson(USERS_PATH);
+    const creds = users[def.authRole];
+    const loginRes = await request.post(`${baseUrl}/v1/auth/signin`, {
+      data: {
+        email: creds.email,
+        password: creds.password,
+      },
+      headers: { 'Content-Type': 'application/json' },
+    });
+    const loginBody = await loginRes.json();
+    const token = loginBody.tokens?.access_token;
+    if (!token) {
+      throw new Error(
+        `Auth failed for ${def.authRole}: ${JSON.stringify(loginBody)}`,
+      );
+    }
+    headers.Authorization = `Bearer ${token}`;
+  }
+
+  await signInForRole();
+
+  const query = def.query ? applyPlaceholders(def.query, map) : null;
+  let url = `${baseUrl}${endpoint}`;
+  if (query && Object.keys(query).length) {
+    const qs = new URLSearchParams();
+    for (const [k, v] of Object.entries(query)) {
+      if (v !== undefined && v !== null) qs.set(k, String(v));
+    }
+    const qstr = qs.toString();
+    if (qstr) url += `?${qstr}`;
+  }
+
+  const hasBody =
+    payload !== undefined &&
+    payload !== null &&
+    ['POST', 'PUT', 'PATCH', 'DELETE'].includes(method);
+
+  async function sendOnce() {
+    const hdrs = { ...headers };
+    if (hasBody && !hdrs['Content-Type']) {
+      hdrs['Content-Type'] = 'application/json';
+    }
+    const opts = { headers: hdrs };
+    if (hasBody) opts.data = payload;
+    if (method === 'GET') return request.get(url, opts);
+    if (method === 'POST') return request.post(url, opts);
+    if (method === 'PUT') return request.put(url, opts);
+    if (method === 'PATCH') return request.patch(url, opts);
+    if (method === 'DELETE') return request.delete(url, opts);
+    throw new Error(`Unsupported method ${method}`);
+  }
+
+  const start = Date.now();
+  let response = await sendOnce();
+  if (response.status() === 419 && def.authRole) {
+    await signInForRole();
+    response = await sendOnce();
+  }
+
+  const duration = Date.now() - start;
+  console.log(`[API ${caseKey}] ${method} ${endpoint} — ${duration}ms — HTTP ${response.status()}`);
+
+  await apiResponse(response, testInfo);
+
+  const expected = Array.isArray(def.expectedStatus)
+    ? def.expectedStatus
+    : [def.expectedStatus];
+  expect(
+    expected,
+    `Unexpected status for ${caseKey}: got ${response.status()}`,
+  ).toContain(response.status());
+
+  return response;
+}

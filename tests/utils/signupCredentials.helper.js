@@ -22,6 +22,15 @@ export function getRandomUser() {
 }
 
 /**
+ * Format a getRandomUser().phone value for POST /v1/auth/signup (expects e.g. (+92)0123456789).
+ */
+export function toSignupApiPhone(phone) {
+  const digits = String(phone).replace(/\D/g, '');
+  const local = (digits.startsWith('92') ? digits.slice(2) : digits).slice(-10).padStart(10, '0');
+  return `(+92)${local}`;
+}
+
+/**
  * Persist successfully signed-up user
  */
 export function storeNewUser(user) {

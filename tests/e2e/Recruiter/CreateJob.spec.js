@@ -1,6 +1,4 @@
 import { test, expect } from '../../fixtures/base.fixtures.js';
-
-
 import { verifyJobInDb } from '../../utils/jobDb.helper.js';
 import { storeJobId } from '../../utils/job.helper.js';
 import { loadCredentials } from '../../utils/recruiterCredentials.js';
@@ -17,9 +15,9 @@ test('Recruiter login and create a new job', async ({ page, loginPage, createJob
   await page.waitForURL('**/my-jobs');
 
   await createJobPage.openJobForm();
-  await createJobPage.fillTitle('React Developer');
+  await createJobPage.fillTitle('Senior SQA Engineer');
   await createJobPage.generateHighlight();
-  await createJobPage.addRegionAndLocation('asia','pakistan');
+  await createJobPage.addRegionAndLocation('Pakistan','Lahore');
   await createJobPage.fillJobTypeAndCompensation();
   await createJobPage.fillJobDescription();
   await createJobPage.clickNext();

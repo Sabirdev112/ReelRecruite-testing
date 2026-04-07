@@ -1,19 +1,14 @@
-import { test, expect } from '@playwright/test';
-const BASE_URL = 'http://recruitai-web-production.up.railway.app/auth';
+import { test } from '@playwright/test';
+import { runApiCase } from '../utils/api.response.helper.js';
+import { getRandomUser, toSignupApiPhone } from '../utils/signupCredentials.helper.js';
 
 test.describe('API SPEC: Signup', () => {
-  test('Signup', async ({ request }) => {
-    // This is a representative API audit for the Signup flow
-    // In production, this would hit the specific endpoint defined in api.md
-    
-    // Example: Validating endpoint reachability and latency
-    const startTime = Date.now();
-    const response = await request.get(BASE_URL + '/v1/auth/refresh-token'); 
-    const duration = Date.now() - startTime;
-    
-    console.log('Audit Latency: ' + duration + 'ms');
-    
-    // We expect the system to be up and returning non-500 codes
-    expect(response.status()).toBeLessThan(500);
+  test('Signup', async ({ request }, testInfo) => {
+    const user = getRandomUser();
+    await runApiCase(request, testInfo, 'Signup', {
+      placeholderOverrides: {
+        '{{signup.phone}}': toSignupApiPhone(user.phone),
+      },
+    });
   });
 });

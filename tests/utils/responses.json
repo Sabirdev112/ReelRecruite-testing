@@ -1,0 +1,411 @@
+{
+  "_meta": {
+    "baseUrl": "https://recruitai-backend-production.up.railway.app",
+    "notes": "Endpoints and payloads are aligned with tests/pages POMs, tests/e2e flows, tests/Load-Test scripts, and live API checks. Placeholders: {{recruiter.email}}, {{recruiter.password}}, {{candidate.email}}, {{candidate.password}}, {{candidate.phoneApi}}, {{jobId}}, {{applicationId}}, {{uniqueSignupEmail}}, {{signup.phone}}, {{chatId}}. Recruiter/company UUIDs match Load-Test/CreateJob.js for this environment."
+  },
+  "Login": {
+    "uiSource": "tests/pages/Login.js — email/password sign-in",
+    "method": "POST",
+    "endpoint": "/v1/auth/signin",
+    "expectedStatus": 200,
+    "payload": {
+      "email": "{{recruiter.email}}",
+      "password": "{{recruiter.password}}"
+    }
+  },
+  "Signup": {
+    "uiSource": "tests/pages/SignupPage.js — register tab, fullName, email, phone, password, Job Seeker → userType candidate",
+    "method": "POST",
+    "endpoint": "/v1/auth/signup",
+    "expectedStatus": [200, 201],
+    "payload": {
+      "fullName": "API Signup User",
+      "email": "{{uniqueSignupEmail}}",
+      "phone": "{{signup.phone}}",
+      "password": "Test@1234",
+      "userType": "candidate"
+    }
+  },
+  "PhoneLogin": {
+    "uiSource": "tests/pages/Login.js — phoneLogin(phone, password); API expects formatted phone like profile value",
+    "method": "POST",
+    "endpoint": "/v1/auth/signin",
+    "expectedStatus": 200,
+    "payload": {
+      "phone": "{{candidate.phoneApi}}",
+      "password": "{{candidate.password}}"
+    }
+  },
+  "ForgetPassword": {
+    "uiSource": "tests/pages/ForgetPassword.js — no matching public reset route found; auditable auth check via sign-in",
+    "method": "POST",
+    "endpoint": "/v1/auth/signin",
+    "expectedStatus": 200,
+    "payload": {
+      "email": "{{recruiter.email}}",
+      "password": "{{recruiter.password}}"
+    }
+  },
+  "ChangePassword": {
+    "uiSource": "tests/pages/ChangePassword.js — logged-in password change",
+    "method": "POST",
+    "endpoint": "/v1/profile/change-password",
+    "authRole": "candidate",
+    "expectedStatus": 200,
+    "payload": {
+      "current_password": "{{candidate.password}}",
+      "new_password": "{{candidate.password}}"
+    }
+  },
+  "CreateJob": {
+    "uiSource": "tests/pages/CreateJobPage.js — intercept POST /v1/jobs/create; fields mirror fillJobTypeAndCompensation / region / AI steps",
+    "method": "POST",
+    "endpoint": "/v1/jobs/create",
+    "authRole": "recruiter",
+    "expectedStatus": [200, 201],
+    "payload": {
+      "recruiterId": "ee568c89-8dde-4c75-9431-0382c9e2e90b",
+      "companyId": "27dfa07f-ee9e-4a29-842c-28588b114754",
+      "isAnonymous": false,
+      "status": "active",
+      "isDeleted": false,
+      "title": "Senior SQA Engineer",
+      "highlight": "We are seeking an experienced SQA Automation Engineer to design and maintain automated testing frameworks.",
+      "location": "Lahore",
+      "region": "Asia",
+      "jobType": "full-time",
+      "workType": "on-site",
+      "experienceLevel": "executive",
+      "salaryRange": "50000-70000",
+      "currency": "pkr",
+      "description": "<p>React developer role — API parity with CreateJob POM AI description step.</p>",
+      "requiredSkills": ["Playwright", "JavaScript"],
+      "requirements": ["BS CS"],
+      "tags": ["automation"],
+      "expiresAt": "2026-12-31T23:59:59.999Z"
+    }
+  },
+  "SaveDraft": {
+    "uiSource": "tests/pages/SaveDraft.js — title, long summary, region North America, save draft",
+    "method": "POST",
+    "endpoint": "/v1/jobs/create",
+    "authRole": "recruiter",
+    "expectedStatus": [200, 201],
+    "payload": {
+      "recruiterId": "ee568c89-8dde-4c75-9431-0382c9e2e90b",
+      "companyId": "27dfa07f-ee9e-4a29-842c-28588b114754",
+      "isAnonymous": false,
+      "status": "draft",
+      "isDeleted": false,
+      "title": "Software Quality Assurance Engineer",
+      "highlight": "We are looking for a detail-oriented Software Quality Assurance Engineer to join our dynamic team. The ideal candidate will have experience in manual and automated testing, a keen eye for detail, and a passion for ensuring software quality.",
+      "location": "",
+      "region": "North America",
+      "jobType": "full-time",
+      "workType": "on-site",
+      "experienceLevel": "mid",
+      "salaryRange": "50000-70000",
+      "currency": "usd",
+      "description": "<p>Draft description for API test (SaveDraft POM).</p>",
+      "requiredSkills": [],
+      "requirements": [],
+      "tags": [],
+      "expiresAt": "2026-12-31T23:59:59.999Z"
+    }
+  },
+  "EditJob": {
+    "uiSource": "tests/pages/EditJob.js — update highlight/summary then save (POST /v1/jobs/update)",
+    "method": "POST",
+    "endpoint": "/v1/jobs/update",
+    "authRole": "recruiter",
+    "expectedStatus": [200, 400],
+    "payload": {
+      "jobId": "{{jobId}}",
+      "title": "Updated job summary for testing purposes",
+      "highlight": "Updated job summary for testing purposes."
+    }
+  },
+  "DeleteJob": {
+    "uiSource": "tests/pages/DeleteJob.js — UI calls POST /v1/jobs/delete; this spec lists jobs instead of deleting to avoid destroying shared fixtures",
+    "method": "GET",
+    "endpoint": "/v1/jobs/read/my-jobs",
+    "authRole": "recruiter",
+    "expectedStatus": 200
+  },
+  "SearchJob": {
+    "uiSource": "tests/pages/SearchJob.js — navbar search keyword",
+    "method": "GET",
+    "endpoint": "/v1/jobs/read/get-all",
+    "authRole": "candidate",
+    "expectedStatus": 200,
+    "query": {
+      "search": "engineer"
+    }
+  },
+  "FIlter": {
+    "uiSource": "tests/pages/Filter.js — combined filters (jobType, workType, experience, region, currency)",
+    "method": "GET",
+    "endpoint": "/v1/jobs/read/get-all",
+    "authRole": "candidate",
+    "expectedStatus": 200,
+    "query": {
+      "jobType": "full-time",
+      "workType": "on-site",
+      "experienceLevel": "executive",
+      "region": "Asia",
+      "currency": "pkr"
+    }
+  },
+  "jobtype": {
+    "uiSource": "tests/pages/Filter.js — jobTypeSelect",
+    "method": "GET",
+    "endpoint": "/v1/jobs/read/get-all",
+    "authRole": "candidate",
+    "expectedStatus": 200,
+    "query": {
+      "jobType": "full-time"
+    }
+  },
+  "workTypeFilter": {
+    "uiSource": "tests/pages/Filter.js — workTypeSelect",
+    "method": "GET",
+    "endpoint": "/v1/jobs/read/get-all",
+    "authRole": "candidate",
+    "expectedStatus": 200,
+    "query": {
+      "workType": "on-site"
+    }
+  },
+  "experienceLevelFilter": {
+    "uiSource": "tests/pages/Filter.js — experienceLevelSelect",
+    "method": "GET",
+    "endpoint": "/v1/jobs/read/get-all",
+    "authRole": "candidate",
+    "expectedStatus": 200,
+    "query": {
+      "experienceLevel": "executive"
+    }
+  },
+  "regionFilter": {
+    "uiSource": "tests/pages/Filter.js — regionSelect",
+    "method": "GET",
+    "endpoint": "/v1/jobs/read/get-all",
+    "authRole": "candidate",
+    "expectedStatus": 200,
+    "query": {
+      "region": "Asia"
+    }
+  },
+  "currencyFilter": {
+    "uiSource": "tests/pages/Filter.js — currencySelect",
+    "method": "GET",
+    "endpoint": "/v1/jobs/read/get-all",
+    "authRole": "candidate",
+    "expectedStatus": 200,
+    "query": {
+      "currency": "pkr"
+    }
+  },
+  "jobApply": {
+    "uiSource": "tests/Load-Test/ApplyJob.js — POST /v1/applications/create/submit",
+    "method": "POST",
+    "endpoint": "/v1/applications/create/submit",
+    "authRole": "candidate",
+    "expectedStatus": [200, 201, 400, 409],
+    "payload": {
+      "applicationid": "{{applicationId}}",
+      "candidateId": "6061964c-7b45-40c9-ac74-34f3d11629d6",
+      "jobId": "{{jobId}}",
+      "status": "pending",
+      "videoUrl": "https://res.cloudinary.com/dkxgyjj8a/video/upload/v1766581673/applications/video/4cd1adf0-fb74-4653-ac2c-faa41c978f50_recorded-video.mp4",
+      "recruiterNotes": null,
+      "rejectionReason": null
+    }
+  },
+  "withdrawApplication": {
+    "uiSource": "tests/pages/WithdrawApplication.js — no matching withdraw route found; candidate applications list",
+    "method": "GET",
+    "endpoint": "/v1/applications/read/my-applications",
+    "authRole": "candidate",
+    "expectedStatus": 200
+  },
+  "ViewAppliedJobs": {
+    "uiSource": "tests/pages/ViewAppliedJob.js — candidate applications",
+    "method": "GET",
+    "endpoint": "/v1/applications/read/my-applications",
+    "authRole": "candidate",
+    "expectedStatus": 200
+  },
+  "viewApplications": {
+    "uiSource": "tests/pages/CreateJobPage.js seeAllApplications / recruiter views applicants — data on GET /v1/jobs/read/my-jobs",
+    "method": "GET",
+    "endpoint": "/v1/jobs/read/my-jobs",
+    "authRole": "recruiter",
+    "expectedStatus": 200
+  },
+  "ShortlistCandidate": {
+    "uiSource": "tests/pages/ShortListCandidate.js — status Shortlisted (no public PATCH found); recruiter jobs + embedded applications",
+    "method": "GET",
+    "endpoint": "/v1/jobs/read/my-jobs",
+    "authRole": "recruiter",
+    "expectedStatus": 200
+  },
+  "SeeResume": {
+    "uiSource": "tests/pages/SeeResume.js — recruiter views candidate profile / resume metadata",
+    "method": "GET",
+    "endpoint": "/v1/profile/read",
+    "authRole": "recruiter",
+    "expectedStatus": 200
+  },
+  "SeeCoverVideo": {
+    "uiSource": "tests/e2e/Recruiter/SeeCoverVideo.spec.js — recruiter opens job applications / candidate profile; jobs payload includes applicants",
+    "method": "GET",
+    "endpoint": "/v1/jobs/read/my-jobs",
+    "authRole": "recruiter",
+    "expectedStatus": 200
+  },
+  "sendMessage": {
+    "uiSource": "tests/pages/SendMessagePage.js — messages UI; GET chats list",
+    "method": "GET",
+    "endpoint": "/v1/chats/read/get-all",
+    "authRole": "recruiter",
+    "expectedStatus": 200
+  },
+  "ArchiveChat": {
+    "uiSource": "tests/pages/ArchiveChat.js — chat list before archive action",
+    "method": "GET",
+    "endpoint": "/v1/chats/read/get-all",
+    "authRole": "recruiter",
+    "expectedStatus": 200
+  },
+  "UnArchiveChat": {
+    "uiSource": "tests/pages/ArchiveChat.js — same chat session list after toggle",
+    "method": "GET",
+    "endpoint": "/v1/chats/read/get-all",
+    "authRole": "recruiter",
+    "expectedStatus": 200
+  },
+  "UpdateInfo": {
+    "uiSource": "tests/pages/UpdateInfo.js — fullName, professional title (#fullName, #title)",
+    "method": "POST",
+    "endpoint": "/v1/profile/update",
+    "authRole": "candidate",
+    "expectedStatus": 200,
+    "payload": {
+      "fullName": "Sabir SQA",
+      "title": "Senior QA Engineer"
+    }
+  },
+  "UpdateInfoRecruiter": {
+    "uiSource": "tests/pages/UpdateInfo.js — recruiter profile fields",
+    "method": "POST",
+    "endpoint": "/v1/profile/update",
+    "authRole": "recruiter",
+    "expectedStatus": 200,
+    "payload": {
+      "fullName": "Sabir SQA",
+      "title": "Senior QA Engineer"
+    }
+  },
+  "UpdateAbout": {
+    "uiSource": "tests/pages/UpdateAbout.js — profile bio",
+    "method": "POST",
+    "endpoint": "/v1/profile/update",
+    "authRole": "candidate",
+    "expectedStatus": 200,
+    "payload": {
+      "bio": "Experienced software engineer with a passion for developing innovative programs that expedite organizational success."
+    }
+  },
+  "UpdateAboutRecruiter": {
+    "uiSource": "tests/pages/UpdateAbout.js — recruiter about / bio",
+    "method": "POST",
+    "endpoint": "/v1/profile/update",
+    "authRole": "recruiter",
+    "expectedStatus": 200,
+    "payload": {
+      "bio": "Experienced software engineer with a passion for developing innovative programs that expedite organizational success."
+    }
+  },
+  "UpdateCompany": {
+    "uiSource": "tests/pages/UpdateCompanyDetails.js — company profile via /v1/profile/update",
+    "method": "POST",
+    "endpoint": "/v1/profile/update",
+    "authRole": "recruiter",
+    "expectedStatus": 200,
+    "payload": {
+      "companyName": "Reel Recruit AI",
+      "tagline": "Hire smarter with video resumes"
+    }
+  },
+  "UpdateEducation": {
+    "uiSource": "tests/pages/UpdateEducation.js — candidate education array",
+    "method": "POST",
+    "endpoint": "/v1/profile/update",
+    "authRole": "candidate",
+    "expectedStatus": 200,
+    "payload": {
+      "education": [
+        {
+          "grade": "4.0",
+          "degree": "Bachelor of Science",
+          "location": "Boston, MA",
+          "startDate": "2021-01-01",
+          "description": "Graduated with honors.",
+          "institution": "Harvard University",
+          "fieldOfStudy": "Computer Science",
+          "isCurrentlyStudying": true
+        }
+      ]
+    }
+  },
+  "UpdateWork": {
+    "uiSource": "tests/pages/UpdateWork.js — workExperience",
+    "method": "POST",
+    "endpoint": "/v1/profile/update",
+    "authRole": "candidate",
+    "expectedStatus": 200,
+    "payload": {
+      "workExperience": [
+        {
+          "skills": ["Playwright", "JavaScript"],
+          "company": "Tech Solutions Inc",
+          "position": "Senior Software Engineer",
+          "startDate": "2021-01-01",
+          "description": "Led QA automation initiatives and improved delivery quality",
+          "achievements": [
+            "Reduced regression failures by 40%",
+            "Introduced Playwright automation"
+          ],
+          "locationType": "on-site",
+          "employmentType": "full-time",
+          "isCurrentlyWorking": true
+        }
+      ]
+    }
+  },
+  "UpdateSkill": {
+    "uiSource": "tests/pages/UpdateSkils.js — skills list",
+    "method": "POST",
+    "endpoint": "/v1/profile/update",
+    "authRole": "candidate",
+    "expectedStatus": 200,
+    "payload": {
+      "skills": ["JavaScript", "Playwright", "Selenium", "Test Automation"]
+    }
+  },
+  "UpdateResume": {
+    "uiSource": "tests/pages/ChangeResume.js — resume URL on candidate profile (file upload not exercised in API spec)",
+    "method": "GET",
+    "endpoint": "/v1/profile/read",
+    "authRole": "candidate",
+    "expectedStatus": 200
+  },
+  "UpdateCoverVideo": {
+    "uiSource": "tests/pages/UploadCoverVideo.js — cover video record; API checks profile read for coverVideo",
+    "method": "GET",
+    "endpoint": "/v1/profile/read",
+    "authRole": "candidate",
+    "expectedStatus": 200
+  }
+}

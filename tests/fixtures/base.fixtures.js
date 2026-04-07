@@ -1,4 +1,6 @@
 import { test as base } from '@playwright/test';
+import fs from 'fs';
+import path from 'path';
 import { Login } from '../pages/Login.js';
 import { UpdateAboutPage } from '../pages/UpdateAbout.js';
 import { SignupPage } from '../pages/SignupPage.js';
@@ -27,7 +29,31 @@ import { viewAppliedJobPage } from '../pages/ViewAppliedJob.js';
 import { ViewReelsPage } from '../pages/ViewReels.js';
 import { withdrawPage } from '../pages/WithdrawApplication.js';
 
+// Create a helper to track browser info
+const browserTrackerFile = path.join(process.cwd(), '.browser-trace.json');
+
+function recordTestBrowser(testId, browserName) {
+  try {
+    let tracker = {};
+    if (fs.existsSync(browserTrackerFile)) {
+      tracker = JSON.parse(fs.readFileSync(browserTrackerFile, 'utf-8'));
+    }
+    tracker[testId] = browserName;
+    fs.writeFileSync(browserTrackerFile, JSON.stringify(tracker, null, 2));
+  } catch (err) {
+    console.error('[FIXTURE] Failed to record browser:', err.message);
+  }
+}
+
 export const test = base.extend({
+    // Capture browser name from testInfo automatically
+    recordBrowserName: [async ({ }, use, testInfo) => {
+        const browserName = testInfo.project.name || 'unknown';
+        recordTestBrowser(testInfo.testId, browserName);
+        console.log(`[FIXTURE] Test: ${testInfo.title} | Browser: ${browserName}`);
+        await use(browserName);
+    }, { auto: true }],
+    
     loginPage: async ({ page }, use) => {
         await use(new Login(page));
     },

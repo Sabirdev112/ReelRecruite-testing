@@ -34,14 +34,6 @@ export class CreateJobPage extends BasePage {
     this.confirmPostButton = page.getByTestId('publish-job-button');
   }
 
-  // async handleCancelIfPresent() {
-  //   if (await this.cancelButton.isVisible()) {
-  //     await expect(this.cancelButton).toBeVisible();
-  //     await this.cancelButton.click();
-  //     await expect(this.cancelButton).toBeHidden();
-  //   }
-  //   console.log('Handled Cancel if present');
-  // }
 
     async openJobForm() {
     await this.postNewJobButton.waitFor({ state: 'visible' });
@@ -60,7 +52,7 @@ export class CreateJobPage extends BasePage {
   await this.generateHighlightButton.waitFor({ state: 'visible' });
   await this.generateHighlightButton.click();
   await this.generateInput.waitFor({ state: 'visible' });
-  await this.generateInput.fill('React developer');
+  await this.generateInput.fill('Senior SQA Engineer');
   await this.confirmGenerateButton.waitFor({ state: 'visible' });
   await this.confirmGenerateButton.click();
   await this.applyAiButton.waitFor({ state: 'visible' });
@@ -79,7 +71,7 @@ export class CreateJobPage extends BasePage {
   async fillJobTypeAndCompensation(){
     await this.jobTypeDropdown.waitFor({ state: 'visible' });
     await this.jobTypeDropdown.click();
-    await this.page.getByRole('option', { name: 'Internship' }).click();
+    await this.page.getByRole('option', { name: 'Full-time' }).click();
     await this.workTypeDropdown.waitFor({ state: 'visible' });
     await this.workTypeDropdown.click();
     await this.page.getByRole('option', { name: 'On-site' }).click();
