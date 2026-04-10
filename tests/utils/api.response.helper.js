@@ -8,23 +8,26 @@ const RESPONSES_PATH = path.join(__dirname, 'responses.json');
 const USERS_PATH = path.join(__dirname, '../fixtures/users.json');
 const JOB_ID_PATH = path.join(__dirname, '../test-data/Recruiter/jobid.json');
 const APPLICATION_ID_PATH = path.join(__dirname, '../test-data/Candidate/applicationId.json');
+const NEW_USERS_FILE = path.join(__dirname, '../test-Data/users/NewUsers.json');
 
 function readJson(filePath) {
   return JSON.parse(fs.readFileSync(filePath, 'utf-8'));
 }
 
+// Setup phone format
 function phoneApiFormat(raw) {
   if (!raw || typeof raw !== 'string') return raw;
   const digits = raw.replace(/\D/g, '');
-  if (digits.length === 11 && digits.startsWith('1')) {
-    return `(+1)${digits.slice(1)}`;
+  if (digits.length === 12 && digits.startsWith('92')) {
+    return `(+92)${digits.slice(2)}`;
   }
-  if (digits.length === 10) {
-    return `(+1)${digits}`;
+  if (digits.length === 11) {
+    return `(+92)${digits}`;
   }
   return raw;
 }
 
+// Build Placeholder
 function buildPlaceholderMap() {
   const users = readJson(USERS_PATH);
   const r = users.recruiter || {};
@@ -49,11 +52,12 @@ function buildPlaceholderMap() {
     '{{candidate.phoneApi}}': phoneApiFormat(c.phone) || c.phone || '',
     '{{jobId}}': jobId,
     '{{applicationId}}': applicationId,
-    '{{uniqueSignupEmail}}': `api_${Date.now()}_${Math.random().toString(36).slice(2, 10)}@testmail.dev`,
+    '{{uniqueSignupEmail}}': `${Date.now()}_${Math.random().toString(36).slice(2, 10)}@testmail.dev`,
     '{{chatId}}': '5ebf38d4-6aed-4b5e-b68b-4067040e03e7',
   };
 }
 
+// Apply placeholder
 function applyPlaceholders(value, map) {
   if (typeof value === 'string') {
     let s = value;
@@ -75,6 +79,47 @@ function applyPlaceholders(value, map) {
   return value;
 }
 
+// create a random user
+export function createSignupUser() {
+
+  const allResponses = JSON.parse(fs.readFileSync(RESPONSES_PATH, 'utf-8'));
+  const signupPayload = allResponses.Signup?.payload;
+
+  if (!signupPayload) throw new Error('Signup payload not found in responses.json');
+
+  const email = `${Date.now()}_${Math.random().toString(36).slice(2, 10)}@testmail.dev`;
+  const phone = '92' + Math.floor(Math.random() * 1e9).toString().padStart(9, '0');
+
+  return {
+    fullName: signupPayload.fullName,
+    email,
+    phone,
+    password: signupPayload.password,
+    userType: signupPayload.userType,
+  };
+}
+
+// Get Job data
+export function getJobPayload() {
+  const allResponses = JSON.parse(fs.readFileSync(RESPONSES_PATH, 'utf-8'));
+  const jobPayload = allResponses.CreateJob?.payload;
+
+  if (!jobPayload) throw new Error('CreateJob payload not found in responses.json');
+
+  return JSON.parse(JSON.stringify(jobPayload));
+}
+
+// Get users from newusers.json
+export function getAllUsers() {
+  if (!fs.existsSync(NEW_USERS_FILE)) {
+    throw new Error('newusers.json not found. No users to run tests.');
+  }
+
+  const users = JSON.parse(fs.readFileSync(NEW_USERS_FILE, 'utf-8'));
+  return users;
+}
+
+// API Response Helper
 export async function apiResponse(response, testInfo) {
   let responseBody;
 
@@ -109,6 +154,7 @@ export async function apiResponse(response, testInfo) {
  * @param {boolean} [options.refreshUniqueSignupEmail] — new email for {{uniqueSignupEmail}} on each call
  * @param {Record<string, string>} [options.placeholderOverrides] — extra or replacement placeholder values (e.g. {{signup.phone}})
  */
+
 export async function runApiCase(request, testInfo, caseKey, options = {}) {
   const all = readJson(RESPONSES_PATH);
   const baseUrl = all._meta?.baseUrl;

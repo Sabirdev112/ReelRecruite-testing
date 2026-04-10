@@ -12,7 +12,7 @@ const jobUrl = buildJobUrl(jobId);
 
 // bump test timeout locally to avoid hitting playwright.config.js limit
 // especially since we loop through multiple users and record videos
-test.setTimeout(600_000);
+test.setTimeout(300_000);
 
 test('Apply for latest job (users from JSON)', async () => {
   const browser = await chromium.launch({ headless: false });
@@ -37,9 +37,15 @@ test('Apply for latest job (users from JSON)', async () => {
       await page.waitForURL('**/jobs');
 
       await page.goto(jobUrl);
+      
+      // Check if button is disabled (already applied or ineligible)
+      await applyJobPage.applyNowButton.waitFor({ state: 'visible' });
+      if (await applyJobPage.applyNowButton.isDisabled()) {
+        continue;
+      }
+
       await applyJobPage.applyNow();
       await applyJobPage.recordVideo();
-      await page.waitForTimeout(10000);
       await applyJobPage.stopRecording();
       await applyJobPage.answerOne();
       await applyJobPage.answerTwo();
