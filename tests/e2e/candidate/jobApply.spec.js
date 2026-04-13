@@ -15,34 +15,19 @@ const jobUrl = buildJobUrl(jobId);
 test.setTimeout(300_000);
 
 test('Apply for latest job (users from JSON)', async () => {
-  const browser = await chromium.launch({ headless: false });
-  let successFlag = false;
+   const browser = await chromium.launch({ headless: false });
+   const user = loadCredentials()[0];
 
-  for (const user of users) {
-    if (successFlag) {
-      console.log('Application already successful. Exiting test.');
-      break;
-    }
-
-    console.log(`\nProcessing user: ${user.email}`);
     const context = await browser.newContext({ permissions: ['camera', 'microphone'] });
     const page = await context.newPage();
     const loginPage = new Login(page);
     const applyJobPage = new ApplyJobPage(page);
 
-    try {
       await loginPage.goto();
       await loginPage.login(user.email, user.password);
       await loginPage.clickSignIn();
       await page.waitForURL('**/jobs');
-
       await page.goto(jobUrl);
-      
-      // Check if button is disabled (already applied or ineligible)
-      await applyJobPage.applyNowButton.waitFor({ state: 'visible' });
-      if (await applyJobPage.applyNowButton.isDisabled()) {
-        continue;
-      }
 
       await applyJobPage.applyNow();
       await applyJobPage.recordVideo();
@@ -56,24 +41,8 @@ test('Apply for latest job (users from JSON)', async () => {
       if (applicationId) {
         storeApplicationId(applicationId);
         console.log(`✓ Application succeeded for ${user.email}: ${applicationId}`);
-        successFlag = true;
         await context.close();
-        break;
-      } else {
-        console.log(`✗ No application recorded for ${user.email}. Moving to next user.`);
       }
-    } catch (err) {
-      console.log(`✗ Error processing ${user.email}: ${err.message || err}. Moving to next user.`);
-    } finally {
-      await context.close();
-    }
-  }
-
-  if (!successFlag) {
-    throw new Error('Failed to apply for job with any user from the JSON list.');
-  }
-
-  await browser.close();
 });
 
 

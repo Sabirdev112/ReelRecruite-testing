@@ -49,6 +49,7 @@ function buildPlaceholderMap() {
     '{{recruiter.password}}': r.password ?? '',
     '{{candidate.email}}': c.email ?? '',
     '{{candidate.password}}': c.password ?? '',
+    '{{candidate.phone}}': c.phone ?? '',
     '{{candidate.phoneApi}}': phoneApiFormat(c.phone) || c.phone || '',
     '{{jobId}}': jobId,
     '{{applicationId}}': applicationId,

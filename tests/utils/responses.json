@@ -32,7 +32,7 @@
     "endpoint": "/v1/auth/signin",
     "expectedStatus": 200,
     "payload": {
-      "phone": "{{candidate.phoneApi}}",
+      "phone": "{{candidate.phone}}",
       "password": "{{candidate.password}}"
     }
   },
