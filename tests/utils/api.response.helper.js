@@ -111,14 +111,14 @@ export function getJobPayload() {
 }
 
 // Get users from newusers.json
-export function getAllUsers() {
-  if (!fs.existsSync(NEW_USERS_FILE)) {
-    throw new Error('newusers.json not found. No users to run tests.');
-  }
+// export function getAllUsers() {
+//   if (!fs.existsSync(NEW_USERS_FILE)) {
+//     throw new Error('newusers.json not found. No users to run tests.');
+//   }
 
-  const users = JSON.parse(fs.readFileSync(NEW_USERS_FILE, 'utf-8'));
-  return users;
-}
+//   const users = JSON.parse(fs.readFileSync(NEW_USERS_FILE, 'utf-8'));
+//   return users;
+// }
 
 // API Response Helper
 export async function apiResponse(response, testInfo) {

@@ -4,7 +4,6 @@
     "notes": "Endpoints and payloads are aligned with tests/pages POMs, tests/e2e flows, tests/Load-Test scripts, and live API checks. Placeholders: {{recruiter.email}}, {{recruiter.password}}, {{candidate.email}}, {{candidate.password}}, {{candidate.phoneApi}}, {{jobId}}, {{applicationId}}, {{uniqueSignupEmail}}, {{signup.phone}}, {{chatId}}. Recruiter/company UUIDs match Load-Test/CreateJob.js for this environment."
   },
   "Login": {
-    "uiSource": "tests/pages/Login.js — email/password sign-in",
     "method": "POST",
     "endpoint": "/v1/auth/signin",
     "expectedStatus": 200,
@@ -14,10 +13,12 @@
     }
   },
   "Signup": {
-    "uiSource": "tests/pages/SignupPage.js — register tab, fullName, email, phone, password, Job Seeker → userType candidate",
     "method": "POST",
     "endpoint": "/v1/auth/signup",
-    "expectedStatus": [200, 201],
+    "expectedStatus": [
+      200,
+      201
+    ],
     "payload": {
       "fullName": "API Signup User",
       "email": "{{uniqueSignupEmail}}",
@@ -27,7 +28,6 @@
     }
   },
   "PhoneLogin": {
-    "uiSource": "tests/pages/Login.js — phoneLogin(phone, password); API expects formatted phone like profile value",
     "method": "POST",
     "endpoint": "/v1/auth/signin",
     "expectedStatus": 200,
@@ -37,7 +37,6 @@
     }
   },
   "ForgetPassword": {
-    "uiSource": "tests/pages/ForgetPassword.js — no matching public reset route found; auditable auth check via sign-in",
     "method": "POST",
     "endpoint": "/v1/auth/signin",
     "expectedStatus": 200,
@@ -47,7 +46,6 @@
     }
   },
   "ChangePassword": {
-    "uiSource": "tests/pages/ChangePassword.js — logged-in password change",
     "method": "POST",
     "endpoint": "/v1/profile/change-password",
     "authRole": "candidate",
@@ -58,11 +56,13 @@
     }
   },
   "CreateJob": {
-    "uiSource": "tests/pages/CreateJobPage.js — intercept POST /v1/jobs/create; fields mirror fillJobTypeAndCompensation / region / AI steps",
     "method": "POST",
     "endpoint": "/v1/jobs/create",
     "authRole": "recruiter",
-    "expectedStatus": [200, 201],
+    "expectedStatus": [
+      200,
+      201
+    ],
     "payload": {
       "recruiterId": "ee568c89-8dde-4c75-9431-0382c9e2e90b",
       "companyId": "27dfa07f-ee9e-4a29-842c-28588b114754",
@@ -79,18 +79,27 @@
       "salaryRange": "50000-70000",
       "currency": "pkr",
       "description": "<p>React developer role — API parity with CreateJob POM AI description step.</p>",
-      "requiredSkills": ["Playwright", "JavaScript"],
-      "requirements": ["BS CS"],
-      "tags": ["automation"],
+      "requiredSkills": [
+        "Playwright",
+        "JavaScript"
+      ],
+      "requirements": [
+        "BS CS"
+      ],
+      "tags": [
+        "automation"
+      ],
       "expiresAt": "2026-12-31T23:59:59.999Z"
     }
   },
   "SaveDraft": {
-    "uiSource": "tests/pages/SaveDraft.js — title, long summary, region North America, save draft",
     "method": "POST",
     "endpoint": "/v1/jobs/create",
     "authRole": "recruiter",
-    "expectedStatus": [200, 201],
+    "expectedStatus": [
+      200,
+      201
+    ],
     "payload": {
       "recruiterId": "ee568c89-8dde-4c75-9431-0382c9e2e90b",
       "companyId": "27dfa07f-ee9e-4a29-842c-28588b114754",
@@ -114,11 +123,13 @@
     }
   },
   "EditJob": {
-    "uiSource": "tests/pages/EditJob.js — update highlight/summary then save (POST /v1/jobs/update)",
     "method": "POST",
     "endpoint": "/v1/jobs/update",
     "authRole": "recruiter",
-    "expectedStatus": [200, 400],
+    "expectedStatus": [
+      200,
+      400
+    ],
     "payload": {
       "jobId": "{{jobId}}",
       "title": "Updated job summary for testing purposes",
@@ -126,14 +137,12 @@
     }
   },
   "DeleteJob": {
-    "uiSource": "tests/pages/DeleteJob.js — UI calls POST /v1/jobs/delete; this spec lists jobs instead of deleting to avoid destroying shared fixtures",
     "method": "GET",
     "endpoint": "/v1/jobs/read/my-jobs",
     "authRole": "recruiter",
     "expectedStatus": 200
   },
   "SearchJob": {
-    "uiSource": "tests/pages/SearchJob.js — navbar search keyword",
     "method": "GET",
     "endpoint": "/v1/jobs/read/get-all",
     "authRole": "candidate",
@@ -143,7 +152,6 @@
     }
   },
   "FIlter": {
-    "uiSource": "tests/pages/Filter.js — combined filters (jobType, workType, experience, region, currency)",
     "method": "GET",
     "endpoint": "/v1/jobs/read/get-all",
     "authRole": "candidate",
@@ -157,7 +165,6 @@
     }
   },
   "jobtype": {
-    "uiSource": "tests/pages/Filter.js — jobTypeSelect",
     "method": "GET",
     "endpoint": "/v1/jobs/read/get-all",
     "authRole": "candidate",
@@ -167,7 +174,6 @@
     }
   },
   "workTypeFilter": {
-    "uiSource": "tests/pages/Filter.js — workTypeSelect",
     "method": "GET",
     "endpoint": "/v1/jobs/read/get-all",
     "authRole": "candidate",
@@ -177,7 +183,6 @@
     }
   },
   "experienceLevelFilter": {
-    "uiSource": "tests/pages/Filter.js — experienceLevelSelect",
     "method": "GET",
     "endpoint": "/v1/jobs/read/get-all",
     "authRole": "candidate",
@@ -187,7 +192,6 @@
     }
   },
   "regionFilter": {
-    "uiSource": "tests/pages/Filter.js — regionSelect",
     "method": "GET",
     "endpoint": "/v1/jobs/read/get-all",
     "authRole": "candidate",
@@ -197,7 +201,6 @@
     }
   },
   "currencyFilter": {
-    "uiSource": "tests/pages/Filter.js — currencySelect",
     "method": "GET",
     "endpoint": "/v1/jobs/read/get-all",
     "authRole": "candidate",
@@ -207,11 +210,15 @@
     }
   },
   "jobApply": {
-    "uiSource": "tests/Load-Test/ApplyJob.js — POST /v1/applications/create/submit",
     "method": "POST",
     "endpoint": "/v1/applications/create/submit",
     "authRole": "candidate",
-    "expectedStatus": [200, 201, 400, 409],
+    "expectedStatus": [
+      200,
+      201,
+      400,
+      409
+    ],
     "payload": {
       "applicationid": "{{applicationId}}",
       "candidateId": "6061964c-7b45-40c9-ac74-34f3d11629d6",
@@ -223,70 +230,60 @@
     }
   },
   "withdrawApplication": {
-    "uiSource": "tests/pages/WithdrawApplication.js — no matching withdraw route found; candidate applications list",
     "method": "GET",
     "endpoint": "/v1/applications/read/my-applications",
     "authRole": "candidate",
     "expectedStatus": 200
   },
   "ViewAppliedJobs": {
-    "uiSource": "tests/pages/ViewAppliedJob.js — candidate applications",
     "method": "GET",
     "endpoint": "/v1/applications/read/my-applications",
     "authRole": "candidate",
     "expectedStatus": 200
   },
   "viewApplications": {
-    "uiSource": "tests/pages/CreateJobPage.js seeAllApplications / recruiter views applicants — data on GET /v1/jobs/read/my-jobs",
     "method": "GET",
     "endpoint": "/v1/jobs/read/my-jobs",
     "authRole": "recruiter",
     "expectedStatus": 200
   },
   "ShortlistCandidate": {
-    "uiSource": "tests/pages/ShortListCandidate.js — status Shortlisted (no public PATCH found); recruiter jobs + embedded applications",
     "method": "GET",
     "endpoint": "/v1/jobs/read/my-jobs",
     "authRole": "recruiter",
     "expectedStatus": 200
   },
   "SeeResume": {
-    "uiSource": "tests/pages/SeeResume.js — recruiter views candidate profile / resume metadata",
     "method": "GET",
     "endpoint": "/v1/profile/read",
     "authRole": "recruiter",
     "expectedStatus": 200
   },
   "SeeCoverVideo": {
-    "uiSource": "tests/e2e/Recruiter/SeeCoverVideo.spec.js — recruiter opens job applications / candidate profile; jobs payload includes applicants",
     "method": "GET",
     "endpoint": "/v1/jobs/read/my-jobs",
     "authRole": "recruiter",
     "expectedStatus": 200
   },
   "sendMessage": {
-    "uiSource": "tests/pages/SendMessagePage.js — messages UI; GET chats list",
     "method": "GET",
     "endpoint": "/v1/chats/read/get-all",
     "authRole": "recruiter",
     "expectedStatus": 200
   },
   "ArchiveChat": {
-    "uiSource": "tests/pages/ArchiveChat.js — chat list before archive action",
     "method": "GET",
     "endpoint": "/v1/chats/read/get-all",
     "authRole": "recruiter",
     "expectedStatus": 200
   },
   "UnArchiveChat": {
-    "uiSource": "tests/pages/ArchiveChat.js — same chat session list after toggle",
     "method": "GET",
     "endpoint": "/v1/chats/read/get-all",
     "authRole": "recruiter",
     "expectedStatus": 200
   },
   "UpdateInfo": {
-    "uiSource": "tests/pages/UpdateInfo.js — fullName, professional title (#fullName, #title)",
     "method": "POST",
     "endpoint": "/v1/profile/update",
     "authRole": "candidate",
@@ -297,7 +294,6 @@
     }
   },
   "UpdateInfoRecruiter": {
-    "uiSource": "tests/pages/UpdateInfo.js — recruiter profile fields",
     "method": "POST",
     "endpoint": "/v1/profile/update",
     "authRole": "recruiter",
@@ -308,7 +304,6 @@
     }
   },
   "UpdateAbout": {
-    "uiSource": "tests/pages/UpdateAbout.js — profile bio",
     "method": "POST",
     "endpoint": "/v1/profile/update",
     "authRole": "candidate",
@@ -318,7 +313,6 @@
     }
   },
   "UpdateAboutRecruiter": {
-    "uiSource": "tests/pages/UpdateAbout.js — recruiter about / bio",
     "method": "POST",
     "endpoint": "/v1/profile/update",
     "authRole": "recruiter",
@@ -328,7 +322,6 @@
     }
   },
   "UpdateCompany": {
-    "uiSource": "tests/pages/UpdateCompanyDetails.js — company profile via /v1/profile/update",
     "method": "POST",
     "endpoint": "/v1/profile/update",
     "authRole": "recruiter",
@@ -339,7 +332,6 @@
     }
   },
   "UpdateEducation": {
-    "uiSource": "tests/pages/UpdateEducation.js — candidate education array",
     "method": "POST",
     "endpoint": "/v1/profile/update",
     "authRole": "candidate",
@@ -360,7 +352,6 @@
     }
   },
   "UpdateWork": {
-    "uiSource": "tests/pages/UpdateWork.js — workExperience",
     "method": "POST",
     "endpoint": "/v1/profile/update",
     "authRole": "candidate",
@@ -368,7 +359,10 @@
     "payload": {
       "workExperience": [
         {
-          "skills": ["Playwright", "JavaScript"],
+          "skills": [
+            "Playwright",
+            "JavaScript"
+          ],
           "company": "Tech Solutions Inc",
           "position": "Senior Software Engineer",
           "startDate": "2021-01-01",
@@ -385,24 +379,26 @@
     }
   },
   "UpdateSkill": {
-    "uiSource": "tests/pages/UpdateSkils.js — skills list",
     "method": "POST",
     "endpoint": "/v1/profile/update",
     "authRole": "candidate",
     "expectedStatus": 200,
     "payload": {
-      "skills": ["JavaScript", "Playwright", "Selenium", "Test Automation"]
+      "skills": [
+        "JavaScript",
+        "Playwright",
+        "Selenium",
+        "Test Automation"
+      ]
     }
   },
   "UpdateResume": {
-    "uiSource": "tests/pages/ChangeResume.js — resume URL on candidate profile (file upload not exercised in API spec)",
     "method": "GET",
     "endpoint": "/v1/profile/read",
     "authRole": "candidate",
     "expectedStatus": 200
   },
   "UpdateCoverVideo": {
-    "uiSource": "tests/pages/UploadCoverVideo.js — cover video record; API checks profile read for coverVideo",
     "method": "GET",
     "endpoint": "/v1/profile/read",
     "authRole": "candidate",
