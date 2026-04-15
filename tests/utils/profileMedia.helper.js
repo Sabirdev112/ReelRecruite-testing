@@ -5,9 +5,7 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-/**
- * Get absolute path to banner image
- */
+// Get absolute path
 export function getBannerImagePath(filename = 'logo.jpg') {
   const bannerPath = path.join(__dirname, '../test-data', filename);
 

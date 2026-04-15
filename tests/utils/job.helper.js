@@ -14,12 +14,10 @@ export function getLatestJobId() {
   }
 
   const { jobId } = JSON.parse(fs.readFileSync(jobPath, 'utf-8'));
-  return jobId;
+  const jobUrl = "https://recruitai-web-production.up.railway.app/jobs/"+jobId;
+  return jobUrl;
 }
 
-export function buildJobUrl(jobId) {
-  return `https://recruitai-web-production.up.railway.app/jobs/${jobId}`;
-}
 
 export function storeJobId(jobId) {
    const JOB_PATH = jobIdPath;

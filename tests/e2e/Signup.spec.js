@@ -3,7 +3,7 @@ import { test } from '../fixtures/base.fixtures.js';
 import {getRandomUser,storeNewUser} from '../utils/signupCredentials.helper.js';
 import { verifyUserCreated } from '../utils/signupDb.helper.js';
 
-test('Candidate signs up and moves user from RandomUsers to NewUsers', async ({ page, signupPage }) => {
+test('Candidate signs up', async ({ signupPage }) => {
   
 
   const user = getRandomUser();

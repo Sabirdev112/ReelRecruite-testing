@@ -16,7 +16,7 @@ export function getRandomUser() {
   return {
     fullName: `User ${uniqueId.slice(-4)}`,
     email: `user${uniqueId}@gmail.com`,
-    phone: `92${uniqueId.slice(-9)}`,
+    phone: `92${uniqueId.slice(-10)}`,
     password: PASSWORD
   };
 }
