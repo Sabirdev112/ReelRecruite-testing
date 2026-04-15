@@ -160,5 +160,17 @@
     "email": "user177626980972978@gmail.com",
     "phone": "926980972978",
     "password": "Test@12345"
+  },
+  {
+    "fullName": "User 1915",
+    "email": "user1776270800811915@gmail.com",
+    "phone": "920800811915",
+    "password": "Test@12345"
+  },
+  {
+    "fullName": "User 6193",
+    "email": "user1776274000066193@gmail.com",
+    "phone": "924000066193",
+    "password": "Test@12345"
   }
 ]

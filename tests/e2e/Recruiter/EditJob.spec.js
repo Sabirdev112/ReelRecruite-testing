@@ -1,12 +1,9 @@
 import {test} from '../../fixtures/base.fixtures.js';
 import { loadCredentials } from '../../utils/recruiterCredentials.js';
-import { getLatestJobId, buildJobUrl } from '../../utils/job.helper.js';
-
-
+import { getLatestJobId } from '../../utils/job.helper.js';
 
 const recruiter = loadCredentials()[0];
-const jobId = getLatestJobId();
-const jobUrl = buildJobUrl(jobId);
+const jobUrl = getLatestJobId();
 
 
 test('Recruiter Edits Job', async ({ page, loginPage, editJob }) => {

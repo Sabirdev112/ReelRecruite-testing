@@ -1,5 +1,4 @@
 import { BasePage } from './base.page.js';
-import {expect} from '@playwright/test';
 export class EditJobPage extends BasePage {
     constructor(page) {
         super(page);
