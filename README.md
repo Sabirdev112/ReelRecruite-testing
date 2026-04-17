@@ -1,103 +1,93 @@
-# Reel Recruit AI - Playwright E2E Testing Suite
+# Reel Recruit AI - Automation Monorepo 🚀
 
-This project contains the End-to-End (E2E) testing suite for the Reel Recruit AI platform, built using Playwright and following the Page Object Model (POM) and Dependency Injection (Fixtures) patterns.
+Welcome to the centralized automation hub for Reel Recruit AI. This repository is organized as a **Monorepo** using NPM Workspaces, containing both the Testing Suite and the Automation Dashboard.
 
-## 📁 Project Structure
+## 📁 Repository Structure
 
-All automation code is located in the `tests/` directory:
-
-- `tests/e2e/`: Contains all `.spec.js` test files organized by user role (Candidate/Recruiter).
-- `tests/pages/`: Contains Page Object classes. All classes extend `BasePage`.
-- `tests/fixtures/`: Contains `base.fixtures.js` which registers all Page Objects as Playwright fixtures.
-- `tests/utils/`: Contains helper functions (database queries, credential loaders, etc.).
-- `tests/test-data/`: Contains static assets (images, videos, PDFs) and JSON data files used by tests.
+- **`packages/dashboard`**: A Next.js application that provides a visual UI to monitor, rerun, and analyze test results.
+- **`packages/testing`**: A Playwright-based E2E testing suite with a custom Express API runner.
 
 ---
 
-## 🚀 Running Tests
+## 🛠️ Getting Started
 
-### 1. Automation Dashboard (UI runner)
-The Next.js dashboard lives in its own repository: **[Automation-dashboard](https://github.com/Sabirdev112/Automation-dashboard)**. Clone it next to this project (or anywhere), set `TEST_ROOT_DIR` in its `.env` to the **absolute path of this repo**, then run `npm install`, `node migrate-multi.js`, and `npm run dev`. See that repo’s README for full setup.
+### 1. Prerequisites
+- **Node.js**: v18 or higher.
+- **Playwright Browsers**: Run `npx playwright install` after the first setup.
+- **Environment Variables**: Ensure you have correct `.env` files in:
+  - `packages/testing/.env`
+  - `packages/dashboard/.env`
 
-This repo installs the reporter via `file:../Automation-dashboard/packages/automation-reporter`. Clone **[Automation-dashboard](https://github.com/Sabirdev112/Automation-dashboard)** as a **sibling folder** named `Automation-dashboard`, run **`npm install` inside that dashboard repo once** (so `pg` resolves for the reporter), then run **`npm install`** here.
-
-### 2. Legacy JSON API (optional)
-A small Express server exposes JSON APIs under port 5000 (no bundled UI):
+### 2. Initial Setup
+From the **root directory**, run:
 ```bash
-node server/server
+npm install
 ```
-Use the Automation Dashboard for the full web UI.
-
-### 3. Using Playwright CLI
-Run all tests:
-```bash
-npx playwright test
-```
-
-Run a specific test:
-```bash
-npx playwright test tests/e2e/Login.spec.js
-```
+This will automatically install dependencies for all packages in the monorepo.
 
 ---
 
-## ➕ How to Create a New Test Flow
+## 🚀 Running the Project
 
-Follow these steps to add a new functional test to the suite:
+You can run everything from the root directory using these shortcut commands:
 
-### Step 1: Create/Update the Page Object
-If the feature requires a new page, create a file in `tests/pages/NewFeaturePage.js`:
-```javascript
-import { BasePage } from './base.page.js';
-
-export class NewFeaturePage extends BasePage {
-  constructor(page) {
-    super(page);
-    this.someButton = page.getByTestId('some-button');
-  }
-
-  async performAction() {
-    await this.someButton.click();
-  }
-}
+### **A. Start the Automation Dashboard (UI)**
+Runs the Next.js UI where you can see the reports.
+```bash
+npm run dashboard:dev
 ```
+Local URL: `http://localhost:3000`
 
-### Step 2: Register the Fixture
-Open `tests/fixtures/base.fixtures.js` and register your new page so it can be injected into tests:
-```javascript
-// 1. Import the class
-import { NewFeaturePage } from '../pages/NewFeaturePage.js';
-
-// 2. Add to the base.extend call
-export const test = base.extend({
-    // ... other fixtures
-    newFeaturePage: async ({ page }, use) => {
-        await use(new NewFeaturePage(page));
-    },
-});
+### **B. Start the Test Runner Server (API)**
+Runs the Express server that the dashboard communicates with to trigger tests.
+```bash
+npm run testing:run
 ```
+Local URL: `http://localhost:5000`
 
-### Step 3: Create the Spec File
-Create your test file in `tests/e2e/` (e.g., `tests/e2e/candidate/NewFeature.spec.js`):
-```javascript
-import { test, expect } from '../../fixtures/base.fixtures.js';
+### **C. Run Tests via CLI**
+You can run all tests or choose a specific category:
+```bash
+# Run everything
+npm run testing:test
 
-test('Verify new feature functionality', async ({ page, loginPage, newFeaturePage }) => {
-  await loginPage.goto();
-  await newFeaturePage.performAction();
-  // ... assertions
-});
+# Run only UI/E2E Functional tests (Sequence ordered)
+npm run testing:e2e
+
+# Run only API tests
+npm run testing:api
+
+# Run only Load tests (k6)
+npm run testing:load
 ```
+# to run and test category in specific browser
+```bash
+npm run testing:e2e -- --project=chromium
+npm run testing:e2e -- --project=firefox
+npm run testing:e2e -- --project=webkit
+```
+---
 
-### Step 4: Update the Run All Flow (Optional)
-If you want your new test to be included in the "Run All Tests" button on the dashboard, add the file path to the `testFiles` array in `server/server.js`.
+## 🔢 Test Execution Order
+
+Tests are executed in a **specific numeric order** to handle state-dependent flows (e.g., Job Creation must happen before Job Application).
+
+- To maintain this order, tests in both `packages/testing/tests/e2e` and `packages/testing/tests/api` are named with numeric prefixes (`01-`, `02-`, etc.).
+- The system automatically discovers these files and sorts them before running.
+- **To add a new test in the sequence**: Simply name it `XX-MyTest.spec.js` and it will be picked up automatically.
 
 ---
 
-## 🛠️ Debugging
-If a test fails, Playwright is configured to:
-- Generate a **Trace** file (on first retry).
-- Save a **Screenshot** on failure.
-- Record a **Video** on failure.
+## 🌐 Deployment (Vercel)
 
-These can be found in the `test-results/` folder or in the Automation Dashboard reports after syncing to Supabase.
+### Deploying the Dashboard
+1. Connect this repo to Vercel.
+2. Set **Root Directory** to `packages/dashboard`.
+3. Add your Supabase/Database Environment Variables.
+4. **Note**: The Test Runner API (in `packages/testing`) should be hosted on a persistent server (like Railway or a VPS) because Playwright cannot run inside Vercel's serverless functions.
+
+---
+
+## 🧪 Debugging
+- All failure snapshots, videos, and traces are stored in `packages/testing/test-results`.
+- You can inspect these directly or via the local Dashboard.

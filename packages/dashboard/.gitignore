@@ -1,0 +1,35 @@
+# Dependencies
+node_modules/
+.next/
+out/
+build/
+
+# IDE / OS
+.vscode/
+.idea/
+.DS_Store
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Testing
+playwright-report/
+test-results/
+
+# Temp files
+*.tmp
+*.bak
+agent_skills/
+# Entire public dir is runtime-only (screenshots, etc.) — not committed
+public/
+
+# Test order configuration (customize locally per environment)
+lib/test-order.js

@@ -3,7 +3,6 @@ import path from 'path';
 import { resolve } from 'path';
 import fs from 'fs';
 import { spawn } from 'child_process';
-import treeKill from 'tree-kill';
 import { getTestRuns, getRunDetails, getLatestTests } from './lib/db.js';
 
 let currentRunProcess = null; // Active process for the current test file
@@ -148,44 +147,31 @@ app.post('/api/run-all-tests', (req, res) => {
   isRunStopped = false; // Reset stop flag
   isSessionRunning = true; // Mark session active
 
-  const testFiles = [
-    'tests/e2e/Signup.spec.js',
-    'tests/e2e/Recruiter/ForgetPassword.spec.js',
-    'tests/e2e/candidate/PhoneLogin.spec.js',
-    'tests/e2e/candidate/ChangePassword.spec.js',
-    'tests/e2e/Login.spec.js',
-    'tests/e2e/Recruiter/UpdateInfo.spec.js',
-    'tests/e2e/Recruiter/UpdateAbout.spec.js',
-    'tests/e2e/Recruiter/UpdateCompany.spec.js',
-    'tests/e2e/candidate/UpdateInfo.spec.js',
-    'tests/e2e/candidate/UpdateAbout.spec.js',
-    'tests/e2e/candidate/UpdateSkill.spec.js',
-    'tests/e2e/candidate/UpdateWork.spec.js',
-    'tests/e2e/candidate/UpdateEducation.spec.js',
-    'tests/e2e/candidate/UpdateResume.spec.js',
-    'tests/e2e/candidate/UpdateCoverVideo.spec.js',
-    'tests/e2e/candidate/FIlter.spec.js',
-    'tests/e2e/candidate/workTypeFilter.spec.js',
-    'tests/e2e/candidate/regionFilter.spec.js',
-    'tests/e2e/candidate/jobtype.spec.js',
-    'tests/e2e/candidate/experienceLevelFilter.spec.js',
-    'tests/e2e/candidate/currencyFilter.spec.js',
-    'tests/e2e/candidate/SearchJob.spec.js',
-    'tests/e2e/Recruiter/SaveDraft.spec.js',
-    'tests/e2e/Recruiter/CreateJob.spec.js',
-    'tests/e2e/Recruiter/EditJob.spec.js',
-    'tests/e2e/candidate/jobApply.spec.js',
-    'tests/e2e/Recruiter/viewApplications.spec.js',
-    'tests/e2e/Recruiter/ShortlistCandidate.spec.js',
-    'tests/e2e/Recruiter/SeeResume.spec.js',
-    'tests/e2e/Recruiter/SeeCoverVideo.spec.js',
-    'tests/e2e/Recruiter/sendMessage.spec.js',
-    'tests/e2e/Recruiter/ArchiveChat.spec.js',
-    'tests/e2e/Recruiter/UnArchiveChat.spec.js',
-    'tests/e2e/candidate/withdrawApplication.spec.js',
-    'tests/e2e/candidate/ViewAppliedJobs.spec.js',
-    'tests/e2e/Recruiter/DeleteJob.spec.js'
-  ];
+  const getAllTestFiles = (dir, fileList = []) => {
+
+    const files = fs.readdirSync(dir);
+    files.forEach(file => {
+      const filePath = path.join(dir, file);
+      if (fs.statSync(filePath).isDirectory()) {
+        getAllTestFiles(filePath, fileList);
+      } else if (file.endsWith('.spec.js')) {
+        // Store relative path from process.cwd() formatted for Playwright
+        const relativePath = path.relative(process.cwd(), filePath).replace(/\\/g, '/');
+        fileList.push(relativePath);
+      }
+    });
+    return fileList;
+  };
+
+  const testFiles = getAllTestFiles(path.join(process.cwd(), 'tests', 'e2e')).sort((a, b) => {
+    const aName = path.basename(a);
+    const bName = path.basename(b);
+    return aName.localeCompare(bName, undefined, { numeric: true, sensitivity: 'base' });
+  });
+
+  if (testFiles.length === 0) {
+    return res.status(404).json({ error: 'No test files found in tests/e2e' });
+  }
 
   console.log('\nStarting full test run in order...\n');
 
