@@ -8,21 +8,7 @@ export class SendMessagePage extends BasePage {
     this.messageLocator = page.getByTestId('chat-item-5ebf38d4-6aed-4b5e-b68b-4067040e03e7');
     this.messageInput = page.getByTestId('chat-message-input').first();
     this.sendButton = page.getByTestId('chat-send-button');
-    this.maybeLaterButton = page.getByRole('button', { name: 'Maybe Later' });
-  }
-
-  async handleMaybeLaterIfPresent() {
-        try {
-            await this.maybeLaterButton.waitFor({
-                state: 'visible',
-                timeout: 2500
-            });
-            await this.maybeLaterButton.click();
-            await this.maybeLaterButton.waitFor({ state: 'hidden' });
-        } catch {
-            
-        }
-    } 
+}
 
   async openMessages() {
     await this.messagesButton.waitFor({ state: 'visible'});

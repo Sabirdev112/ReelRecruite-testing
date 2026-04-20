@@ -24,21 +24,7 @@ export class CompanyDetailsPage extends BasePage {
        this.contactEmailInput = page.locator('#contactEmail');
        this.contactNumberInput = page.locator('#contactPhone');
        this.saveButton = page.getByTestId('company-save-changes-button');
-       this.maybeLaterButton = page.getByRole('button', { name: 'Maybe Later' });
-     }
-
-     async handleMaybeLaterIfPresent() {
-        try {
-            await this.maybeLaterButton.waitFor({
-                state: 'visible',
-                timeout: 2500
-            });
-            await this.maybeLaterButton.click();
-            await this.maybeLaterButton.waitFor({ state: 'hidden' });
-        } catch {
-            // Modal did not appear — safe to continue
-        }
-    } 
+}
 
      async openProfileMenu() {
         await this.profileMenu.waitFor({ state: 'visible' });

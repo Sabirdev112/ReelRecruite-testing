@@ -11,21 +11,8 @@ export class UpdateAboutPage extends BasePage {
       this.countryTextbox = page.locator('#country');
       this.locationTextbox = page.locator('#location');
       this.saveChangesButton = page.getByTestId('about-save-button');
-      this.maybeLaterButton = page.getByRole('button', { name: 'Maybe Later' });
-    }
+}
  
-  async handleMaybeLaterIfPresent() {
-        try {
-            await this.maybeLaterButton.waitFor({
-                state: 'visible',
-                timeout: 2500
-            });
-            await this.maybeLaterButton.click();
-            await this.maybeLaterButton.waitFor({ state: 'hidden' });
-        } catch {
-            // Modal did not appear — safe to continue
-        }
-    }
   async clickProfile() {
     await this.profileMenu.waitFor({ state: 'visible', timeout: 10000 });
     await this.profileMenu.click();

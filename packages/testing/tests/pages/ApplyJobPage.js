@@ -11,20 +11,6 @@ export class ApplyJobPage extends BasePage {
     this.firstQuestion = page.getByTestId('dynamic-input-2f9fd407-83fb-4998-bb46-ad8226de76ff');
     this.secondQuestion = page.getByLabel('boolean-yes-radio-7113bc77-6cbd-4b9a-8863-76d8a885a5c5');
     this.submitButton = page.getByTestId('submit-application-button');
-    this.maybeLaterButton = page.getByRole('button', { name: 'Maybe Later' });
-
-  }
-  async handleMaybeLaterIfPresent() {
-    try {
-      await this.maybeLaterButton.waitFor({
-        state: 'visible',
-        timeout: 2500
-      });
-      await this.maybeLaterButton.click();
-      await this.maybeLaterButton.waitFor({ state: 'hidden' });
-    } catch {
-      // Modal did not appear — safe to continue
-    }
   }
 
   async applyNow() {

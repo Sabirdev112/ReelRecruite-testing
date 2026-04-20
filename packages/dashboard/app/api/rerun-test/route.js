@@ -9,15 +9,16 @@ export async function POST(req) {
     return NextResponse.json({ error: 'Missing file or title' }, { status: 400 });
   }
 
-  const rootDir = process.env.TEST_ROOT_DIR || path.resolve(process.cwd(), '..');
-  const playwrightCliPath = path.join(rootDir, 'node_modules/@playwright/test/cli.js');
+  const rootDir = path.resolve(process.cwd(), 'packages/testing');
+  const monorepoRoot = path.resolve(process.cwd());
+  const playwrightCliPath = path.join(monorepoRoot, 'node_modules/@playwright/test/cli.js');
 
   try {
     const result = await rerunSingleTest(file, title, playwrightCliPath, rootDir, browser);
-    return NextResponse.json({ 
-      success: true, 
-      passed: result, 
-      code: result ? 0 : 1 
+    return NextResponse.json({
+      success: true,
+      passed: result,
+      code: result ? 0 : 1
     });
   } catch (err) {
     console.error('Rerun Error:', err.message);

@@ -11,17 +11,7 @@ export class UploadResume extends BasePage {
     this.resumeSection = page.getByTestId('resume-header').first();
     this.deleteResumeButton = page.getByTestId('remove-resume-button');
     this.confirmDeleteButton = page.getByTestId('remove-resume-confirm-button');
-    this.maybeLaterButton = page.getByRole('button', { name: 'Maybe Later' });
-    this.uploadInput = page.getByTestId('upload-resume-label');
-  }
-
-  async handleMaybeLaterIfPresent() {
-    if (await this.maybeLaterButton.isVisible()) {
-      await this.maybeLaterButton.waitFor({ state: 'visible' });
-      await this.maybeLaterButton.click();
-      await expect(this.maybeLaterButton).toBeHidden();
-      console.log('Handled Maybe Later modal');
-    }
+this.uploadInput = page.getByTestId('upload-resume-label');
   }
 
   async clickProfileMenu() {
@@ -35,8 +25,7 @@ export class UploadResume extends BasePage {
     await this.ProfileButton.waitFor({ state: 'visible' });
     await expect(this.ProfileButton).toBeVisible();
     await this.ProfileButton.click();
-    await this.handleMaybeLaterIfPresent();
-    console.log('Navigated to Profile page');
+console.log('Navigated to Profile page');
   }
 
   async navigateToResumeSection() {
@@ -56,8 +45,7 @@ export class UploadResume extends BasePage {
       await this.deleteResumeButton.waitFor({ state: 'visible' });
       await expect(this.deleteResumeButton).toBeVisible();
       await this.deleteResumeButton.click();
-      await this.handleMaybeLaterIfPresent();
-      console.log('Existing resume deleted');
+console.log('Existing resume deleted');
     }
   }
 
@@ -65,15 +53,12 @@ export class UploadResume extends BasePage {
     if (await this.confirmDeleteButton.isVisible()) {
       await this.confirmDeleteButton.waitFor({ state: 'visible' });
       await this.confirmDeleteButton.click();
-      await this.handleMaybeLaterIfPresent();
-      console.log('Confirmed resume deletion');
+console.log('Confirmed resume deletion');
     }
   }
 
   async uploadNewResume(filename = 'Bold-Poster.pdf') {
-  
-  await this.handleMaybeLaterIfPresent();
-  const resumePath = getResumePath(filename);
+const resumePath = getResumePath(filename);
   await this.uploadInput.waitFor({ state: 'attached' });
 
   const uploadPromise = this.page.waitForResponse(

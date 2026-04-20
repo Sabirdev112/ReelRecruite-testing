@@ -12,21 +12,7 @@ export class FilterPage extends BasePage {
     this.currencySelect = page.getByTestId('job-filter-currency-select');
     this.applyFiltersButton = page.getByTestId('job-filter-apply-button');
     this.removeFiltersButton = page.getByTestId('job-filter-remove-all-button');
-    this.maybeLaterButton = page.getByRole('button', { name: 'Maybe Later' });
-  }
-
-  async handleMaybeLaterIfPresent() {
-        try {
-            await this.maybeLaterButton.waitFor({
-                state: 'visible',
-                timeout: 2500
-            });
-            await this.maybeLaterButton.click();
-            await this.maybeLaterButton.waitFor({ state: 'hidden' });
-        } catch {
-            // Modal did not appear — safe to continue
-        }
-    } 
+}
 
   
   async openFilters() {

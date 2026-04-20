@@ -40,7 +40,7 @@ async function runFilesSequential(testFiles, playwrightCliPath, rootDir, runName
 
   // UI runs in 3 browsers by default, API runs in 1 (Chromium)
   let browsers = isApi ? ['chromium'] : ['chromium', 'firefox', 'webkit'];
-  
+
   // If a specific browser is targeted for a UI run, override the list
   if (!isApi && targetBrowser && targetBrowser !== 'all') {
     browsers = [targetBrowser];
@@ -60,7 +60,7 @@ async function runFilesSequential(testFiles, playwrightCliPath, rootDir, runName
   manager.isRunStopped = false;
   manager.isSessionRunning = true;
   manager.progress = { total: totalSteps, completed: 0, currentTest: '', currentBrowser: '' };
-  
+
   let browserIndex = 0;
   let fileIndex = 0;
 
@@ -90,9 +90,9 @@ async function runFilesSequential(testFiles, playwrightCliPath, rootDir, runName
 
     const browserLabel = browser ? `[${browser.toUpperCase()}] ` : '';
     manager.progress.currentTest = `${browserLabel}${file.split(/[\\/]/).pop()}`;
-    
+
     const args = [playwrightCliPath, 'test', file];
-    
+
     // For UI tests (not API-exclusive sessions), specify the project and headed mode
     if (!isApi && !isFileApi) {
       args.push('--headed', '--workers=1');
@@ -107,8 +107,8 @@ async function runFilesSequential(testFiles, playwrightCliPath, rootDir, runName
     const child = spawn(process.execPath, args, {
       cwd: rootDir,
       stdio: 'inherit',
-      env: { 
-        ...process.env, 
+      env: {
+        ...process.env,
         PLAYWRIGHT_RUN_NAME: runName,
         DASHBOARD_PATH: process.cwd()
       }
@@ -118,7 +118,7 @@ async function runFilesSequential(testFiles, playwrightCliPath, rootDir, runName
 
     child.on('close', (code) => {
       manager.currentRunProcess = null;
-      
+
       // STOP if failure occurs (Exit Code !== 0)
       if (code !== 0) {
         console.warn(`[PROCESS MANAGER] Audit failed at spec: ${file} on ${browser || 'api'}. Aborting sequence.`);
@@ -126,7 +126,7 @@ async function runFilesSequential(testFiles, playwrightCliPath, rootDir, runName
         manager.isSessionRunning = false;
         return;
       }
-      
+
       fileIndex++;
       if (fileIndex >= testFiles.length) {
         fileIndex = 0;
@@ -163,7 +163,7 @@ export async function runLoadTests(testFiles, rootDir, runName = 'Load Stress Au
   manager.isRunStopped = false;
   manager.isSessionRunning = true;
   manager.progress = { total: testFiles.length, completed: 0, currentTest: '' };
-  
+
   let index = 0;
 
   const runNext = async () => {
@@ -177,7 +177,7 @@ export async function runLoadTests(testFiles, rootDir, runName = 'Load Stress Au
         duration: Date.now() - runId,
         summary: { total: testFiles.length, passed: manager.progress.completed, failed: 0 }
       });
-      
+
       manager.isSessionRunning = false;
       manager.currentRunProcess = null;
       return;
@@ -196,7 +196,7 @@ export async function runLoadTests(testFiles, rootDir, runName = 'Load Stress Au
 
     child.on('close', async (code) => {
       manager.currentRunProcess = null;
-      
+
       try {
         await insertLoadTestCase(
           testName,
@@ -212,7 +212,7 @@ export async function runLoadTests(testFiles, rootDir, runName = 'Load Stress Au
       if (code !== 0) {
         console.warn(`[PROCESS MANAGER] Load threshold failed at ${testName}. Aborting stress sequence.`);
         manager.isRunStopped = true;
-        
+
         // Finalize run record prematurely
         const endedAt = new Date().toISOString();
         await insertLoadRun({
@@ -255,7 +255,7 @@ export async function rerunSingleTest(file, grep, playwrightCliPath, rootDir, br
   const escapedGrep = grep.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
   const args = [playwrightCliPath, 'test', safeFile, '--grep', escapedGrep, '--retries=1'];
-  
+
   if (isApi) {
     // API tests ALWAYS run in chromium project
     args.push('--project=chromium');

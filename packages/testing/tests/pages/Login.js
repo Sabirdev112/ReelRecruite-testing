@@ -12,19 +12,8 @@ export class Login extends BasePage {
         this.signInButtonLocator = page.getByTestId('signin-submit-button');
         this.avatar = page.getByTestId('navbar-user-avatar');
         this.signoutButton = page.getByTestId('navbar-user-menu-item-logout');
-        this.maybeLaterButton = page.getByRole('button', { name: 'Maybe Later' });
-    }
-    async handleMaybeLaterIfPresent() {
-        try {
-            await this.maybeLaterButton.waitFor({
-                state: 'visible',
-                timeout: 2500
-            });
-            await this.maybeLaterButton.click();
-            await this.maybeLaterButton.waitFor({ state: 'hidden' });
-        } catch {
-        }
-    }
+}
+
     async goto() {
         await this.page.goto('https://recruitai-web-production.up.railway.app/auth');
     }
@@ -53,8 +42,7 @@ export class Login extends BasePage {
     async clickSignIn() {
         await this.signInButtonLocator.waitFor({ state: 'visible' });
         await this.signInButtonLocator.click();
-        await this.handleMaybeLaterIfPresent();
-        console.log('Login successful.');
+console.log('Login successful.');
     }
     async logout() {
         await this.avatar.click();

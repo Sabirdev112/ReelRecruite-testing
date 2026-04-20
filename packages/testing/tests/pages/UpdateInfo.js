@@ -5,8 +5,7 @@ import { getBannerImagePath, getProfileImagePath } from '../utils/profileMedia.h
 export class UpdateInfoPage extends BasePage {
   constructor(page) {
     super(page);
-    this.maybeLaterButton = page.getByRole('button', { name: 'Maybe Later' });
-    this.profileMenu = page.getByTestId('navbar-user-menu-trigger').first();
+this.profileMenu = page.getByTestId('navbar-user-menu-trigger').first();
     this.profileButton = page.getByTestId('navbar-user-menu-item-profile').first();
     this.editProfileButton = page.getByTestId('edit-profile-info-button');
     this.coverImageButton = page.getByTestId('edit-profile-cover-upload-button');
@@ -16,15 +15,6 @@ export class UpdateInfoPage extends BasePage {
 
     this.saveChangesButton = page.getByTestId('profile-save-changes-button');
     this.cancelButton = page.getByRole('button', { name: 'Cancel' });
-  }
-
-  async handleMaybeLaterIfPresent() {
-    try {
-      await this.maybeLaterButton.waitFor({ state: 'visible', timeout: 2500 });
-      await expect(this.maybeLaterButton).toBeVisible();
-      await this.maybeLaterButton.click();
-      await expect(this.maybeLaterButton).toBeHidden();
-    } catch {}
   }
 
   async openProfileMenu() {
@@ -49,8 +39,7 @@ export class UpdateInfoPage extends BasePage {
   }
 
   async uploadCoverImage() {
-    await this.handleMaybeLaterIfPresent();
-    const bannerPath = getBannerImagePath();
+const bannerPath = getBannerImagePath();
 
     await this.coverImageButton.waitFor({ state: 'visible' });
     await this.page.locator('input[type="file"]').first().waitFor({ state: 'attached' });
@@ -62,8 +51,7 @@ export class UpdateInfoPage extends BasePage {
   }
 
   async uploadProfilePicture() {
-    await this.handleMaybeLaterIfPresent();
-    const profilePath = getProfileImagePath();
+const profilePath = getProfileImagePath();
     await this.profilePictureEditButton.waitFor({ state: 'visible' });
     await this.page.locator('input[type="file"]').last().waitFor({ state: 'attached' });
     await this.page.locator('input[type="file"]').last().setInputFiles(profilePath);

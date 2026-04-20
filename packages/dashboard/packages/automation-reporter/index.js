@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import { insertTestCase, insertTestRun, insertApiTestCase, insertApiRun, insertLoadTestCase, insertLoadRun, uploadScreenshot } from './supabase.js';
+import { insertTestCase, insertTestRun, insertApiTestCase, insertApiRun, insertLoadTestCase, insertLoadRun, uploadScreenshot } from './mongo.js';
 
 
 // Get browser name for test
@@ -229,7 +229,7 @@ onTestEnd(test, result) {
       }
       } catch (err) 
       {
-        console.error('[REPORTER] Supabase handshake failed:', err.message);
+        console.error('[REPORTER] MongoDB handshake failed:', err.message);
       } finally 
       {
         if (fs.existsSync(browserTrackerFile)) fs.unlinkSync(browserTrackerFile);

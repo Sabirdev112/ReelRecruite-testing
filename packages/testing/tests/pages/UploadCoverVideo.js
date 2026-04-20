@@ -10,16 +10,7 @@ export class UpdateCoverVideoResumePage extends BasePage {
     this.coverVideoSection = page.getByTestId('video-resume-header');
     this.removeVideoButton = page.getByRole('button', { name: 'Remove Video Resume' }).last();
     this.okButton = page.getByRole('button', { name: 'Ok' });
-    this.maybeLaterButton = page.getByRole('button', { name: 'Maybe Later' });
-    this.uploadVideoInput = page.getByTestId('upload-video-label');
-  }
-
-  async handleMaybeLaterIfPresent() {
-    try {
-      await this.maybeLaterButton.waitFor({ state: 'visible', timeout: 2000 });
-      await this.maybeLaterButton.click();
-      await this.maybeLaterButton.waitFor({ state: 'hidden', timeout: 2000 });
-    } catch { }
+this.uploadVideoInput = page.getByTestId('upload-video-label');
   }
 
   async clickProfile() {
@@ -41,9 +32,7 @@ export class UpdateCoverVideoResumePage extends BasePage {
   }
 
   async removeVideoIfExists() {
-    await this.handleMaybeLaterIfPresent();
-
-    if (await this.uploadVideoInput.isVisible()) {
+if (await this.uploadVideoInput.isVisible()) {
       console.log('No existing video to delete - upload button is visible');
       return;
     }
@@ -57,16 +46,12 @@ export class UpdateCoverVideoResumePage extends BasePage {
       console.log('Clicked Ok on confirmation dialog');
       await this.uploadVideoInput.waitFor({ state: 'visible', timeout: 10000 });
       console.log('Video removed successfully - upload button is now visible');
-
-      await this.handleMaybeLaterIfPresent();
-    }
+}
   }
 
 
   async uploadVideo(filename = 'small-video.mp4') {
-    await this.handleMaybeLaterIfPresent();
-
-    const videoPath = getVideoPath(filename);
+const videoPath = getVideoPath(filename);
 
     console.log(`Starting video upload: ${filename}`);
     const videoInput = this.page.getByTestId('video-resume-file-input');

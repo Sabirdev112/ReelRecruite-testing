@@ -9,22 +9,8 @@ export class ShortlistCandidatePage extends BasePage {
     this.shortListedButton = page.getByRole('button', { name: "Shortlisted" });
     this.rejectButton = page.getByRole('button', { name: "Rejected" });
     this.saveButton = page.getByTestId('application-update-status-submit');
-    this.maybeLaterButton = page.getByRole('button', { name: 'Maybe Later' });
-  }
+}
 
-  async handleMaybeLaterIfPresent() {
-        try {
-            await this.maybeLaterButton.waitFor({
-                state: 'visible',
-                timeout: 2500
-            });
-            await this.maybeLaterButton.click();
-            await this.maybeLaterButton.waitFor({ state: 'hidden' });
-        } catch {
-            // Modal did not appear — safe to continue
-        }
-    } 
-    
   async clickViewApplications() {
     await this.viewApplicationButton.waitFor({ state: 'visible' });
     await this.viewApplicationButton.click();

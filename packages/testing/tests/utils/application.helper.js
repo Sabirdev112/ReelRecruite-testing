@@ -6,9 +6,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const applicationIdPath = path.join(__dirname, '../test-data/Candidate/applicationId.json');
 
-/**
- * Save application ID to tests/test-data/Candidate/applicationId.json
- */
+// Save application ID to tests/test-data/Candidate/applicationId.json
 export function storeApplicationId(applicationId) {
   const filePath = applicationIdPath;
   const data = { applicationId };

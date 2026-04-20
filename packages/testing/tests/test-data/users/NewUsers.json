@@ -212,5 +212,25 @@
     "phone": "92321991748",
     "password": "Test@1234",
     "userType": "candidate"
+  },
+  {
+    "fullName": "User 3989",
+    "email": "user1776434963923989@gmail.com",
+    "phone": "924963923989",
+    "password": "Test@12345"
+  },
+  {
+    "fullName": "API Signup User",
+    "email": "1776686016564_jdytz8xp@testmail.dev",
+    "phone": "92117567442",
+    "password": "Test@1234",
+    "userType": "candidate"
+  },
+  {
+    "fullName": "API Signup User",
+    "email": "1776687253855_owo48kiq@testmail.dev",
+    "phone": "92732246122",
+    "password": "Test@1234",
+    "userType": "candidate"
   }
 ]

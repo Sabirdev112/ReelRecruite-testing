@@ -3,19 +3,8 @@ export class withdrawPage extends BasePage {
     constructor(page) {
         super(page);
         this.withdrawButton = page.getByRole('button', { name: 'Withdraw Application' })
-         this.maybeLaterButton = page.getByRole('button', { name: 'Maybe Later' });
-         this.confirmWithdrawButton = page.getByRole('button', { name: 'Ok' });
+        this.confirmWithdrawButton = page.getByRole('button', { name: 'Ok' });
     }
-    async handleMaybeLaterIfPresent() {
-        try {
-            await this.maybeLaterButton.waitFor({
-                state: 'visible'
-            });
-            await this.maybeLaterButton.click();
-            await this.maybeLaterButton.waitFor({ state: 'hidden' });
-        } catch {
-        }
-    } 
 
     async withdraw () {
         await this.withdrawButton.waitFor({ state: 'visible' });

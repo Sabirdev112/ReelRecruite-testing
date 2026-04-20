@@ -8,17 +8,8 @@ export class ArchiveChatPage extends BasePage {
     this.ChatBox = page.getByTestId('chat-item-5ebf38d4-6aed-4b5e-b68b-4067040e03e7');
     this.archiveButton = page.getByTestId('chat-archive-button').first();
     this.unArchiveButton = page.getByTestId('chat-realunarchive-button').first();
-    this.maybeLaterButton = page.getByRole('button', { name: 'Maybe Later' });
-  }
+}
 
-  // Handles optional "Maybe Later" modal
-  async handleMaybeLaterIfPresent() {
-    if (await this.maybeLaterButton.isVisible()) {
-      await expect(this.maybeLaterButton).toBeVisible();
-      await this.maybeLaterButton.click();
-      await expect(this.maybeLaterButton).toBeHidden();
-    }
-  }
 
   // Open messages sidebar
   async openMessages() {

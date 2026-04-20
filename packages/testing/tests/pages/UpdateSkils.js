@@ -10,21 +10,7 @@ export class UpdateSkillsPage extends BasePage {
       this.editSkillsButton = page.getByTestId('edit-skills-button');
       this.skillsTextbox = page.getByTestId('skills-input-field');
       this.saveChangesButton = page.getByTestId('skills-save-button');
-      this.maybeLaterButton = page.getByRole('button', { name: 'Maybe Later' });
-    }
-
-    async handleMaybeLaterIfPresent() {
-        try {
-            await this.maybeLaterButton.waitFor({
-                state: 'visible',
-                timeout: 2500
-            });
-            await this.maybeLaterButton.click();
-            await this.maybeLaterButton.waitFor({ state: 'hidden' });
-        } catch {
-            
-        }
-    }
+}
   
     async clickProfile() {
       await this.profileMenu.waitFor({ state: 'visible', timeout: 10000 });

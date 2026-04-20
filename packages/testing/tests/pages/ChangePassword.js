@@ -11,17 +11,9 @@ export class ChangePassword extends BasePage {
     this.oldPasswordInput = page.getByTestId('current-password-input');
     this.newPasswordInput = page.getByTestId('new-password-input');
     this.saveChangesButton = page.getByTestId('update-password-submit');
-    this.maybeLaterButton = page.getByRole('button', { name: 'Maybe Later' });
-  }
+}
 
-  async handleMaybeLaterIfPresent() {
-    if (await this.maybeLaterButton.isVisible()) {
-      await expect(this.maybeLaterButton).toBeVisible();
-      await this.maybeLaterButton.click();
-      await expect(this.maybeLaterButton).toBeHidden();
-      
-    }
-  }
+
 
   async openProfileMenu() {
     await this.profileMenu.waitFor({ state: 'visible' });

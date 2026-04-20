@@ -9,20 +9,7 @@ export class SeeResumePage extends BasePage {
     this.viewProfileButton = page.getByTestId('application-view-profile-button');
     this.ResumeSection = page.getByTestId('resume-section');
     this.clickViewResumeButton = page.getByTestId('view-resume-card');
-    this.maybeLaterButton = page.getByRole('button', { name: 'Maybe Later' }); 
-  }
-  async handleMaybeLaterIfPresent() {
-        try {
-            await this.maybeLaterButton.waitFor({
-                state: 'visible',
-                timeout: 2500
-            });
-            await this.maybeLaterButton.click();
-            await this.maybeLaterButton.waitFor({ state: 'hidden' });
-        } catch {
-            
-        }
-    } 
+}
     
   async navigateToApplications() {
     await this.viewApplicationButton.waitFor({ state: 'visible' });

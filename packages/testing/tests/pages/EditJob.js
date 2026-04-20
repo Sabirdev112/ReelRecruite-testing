@@ -6,22 +6,7 @@ export class EditJobPage extends BasePage {
         this.editButton = page.getByTestId('job-edit-button');
         this.customFields = page.getByTestId('edit-job-tab-label-custom');
         this.saveChangesButton = page.getByTestId('update-job-button');
-        this.maybeLaterButton = page.getByRole('button', { name: 'Maybe Later' });
-
-    }
-
-    async handleMaybeLaterIfPresent() {
-        try {
-            await this.maybeLaterButton.waitFor({
-                state: 'visible',
-                timeout: 2500
-            });
-            await this.maybeLaterButton.click();
-            await this.maybeLaterButton.waitFor({ state: 'hidden' });
-        } catch {
-            // Modal did not appear — safe to continue
-        }
-    } 
+}
 
     async editJob(){
         await this.editButton.waitFor({ state: 'visible' });

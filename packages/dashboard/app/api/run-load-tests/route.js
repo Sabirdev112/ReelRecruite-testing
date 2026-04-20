@@ -6,7 +6,7 @@ import fs from 'fs';
 export async function POST() {
   
   // Match UI/API routes: resolve relative paths from the dashboard cwd; absolute TEST_ROOT_DIR is unchanged
-      const rootDir = path.resolve(process.cwd(), process.env.TEST_ROOT_DIR || '..');
+      const rootDir = path.resolve(process.cwd(), 'packages/testing');
       const loadTestDir = path.join(rootDir, 'tests', 'Load-Test');
 
   if (!fs.existsSync(loadTestDir)) {

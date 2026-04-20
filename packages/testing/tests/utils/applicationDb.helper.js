@@ -1,9 +1,7 @@
 import { expect } from '@playwright/test';
 import { runQuery } from './db/dbClient.js';
 
-/**
- * Returns the application ID after verifying it exists in DB
- */
+// Returns the application ID after verifying it exists in DB
 export async function getApplicationIdForCandidate(email, jobId) {
   const users = await runQuery(
     `SELECT id FROM users WHERE email = $1`,

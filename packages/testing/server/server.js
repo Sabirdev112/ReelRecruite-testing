@@ -3,7 +3,10 @@ import path from 'path';
 import { resolve } from 'path';
 import fs from 'fs';
 import { spawn } from 'child_process';
-import treeKill from 'tree-kill';
+import { fileURLToPath } from 'url';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const TESTING_ROOT = path.resolve(__dirname, '..');
 import { getTestRuns, getRunDetails, getLatestTests } from './lib/db.js';
 
 let currentRunProcess = null; // Active process for the current test file
@@ -20,9 +23,11 @@ app.get('/api/status', (req, res) => {
   });
 });
 
-// Direct path to Playwright Test CLI (bypasses npx and shell)
+// Direct path to Playwright Test CLI (resolves relative to the Monorepo Root)
 const playwrightCliPath = resolve(
-  process.cwd(),
+  TESTING_ROOT,
+  '..',
+  '..',
   'node_modules',
   '@playwright',
   'test',
@@ -109,7 +114,7 @@ app.post('/api/rerun-test', (req, res) => {
   console.log('Spawning:', 'node', spawnArgs.join(' '));
 
   const child = spawn('node', spawnArgs, {
-    cwd: process.cwd(),
+    cwd: TESTING_ROOT,
     stdio: 'inherit'
   });
 
@@ -163,7 +168,7 @@ app.post('/api/run-all-tests', (req, res) => {
     return fileList;
   };
 
-  const testFiles = getAllTestFiles(path.join(process.cwd(), 'tests', 'e2e')).sort((a, b) => {
+  const testFiles = getAllTestFiles(path.join(TESTING_ROOT, 'tests', 'e2e')).sort((a, b) => {
     const aName = path.basename(a);
     const bName = path.basename(b);
     return aName.localeCompare(bName, undefined, { numeric: true, sensitivity: 'base' });
@@ -202,7 +207,7 @@ app.post('/api/run-all-tests', (req, res) => {
       '--headed',
       '--workers=1'
     ], {
-      cwd: process.cwd(),
+      cwd: TESTING_ROOT,
       stdio: 'inherit'
     });
 
@@ -237,7 +242,7 @@ app.post('/api/run-load-tests', (req, res) => {
   isRunStopped = false; // Reset stop flag
   isSessionRunning = true; // Mark session active
 
-  const loadTestDir = path.join(process.cwd(), 'tests', 'Load-Test');
+  const loadTestDir = path.join(TESTING_ROOT, 'tests', 'Load-Test');
   
   if (!fs.existsSync(loadTestDir)) {
     return res.status(404).json({ error: 'Load test directory not found' });
@@ -275,7 +280,7 @@ app.post('/api/run-load-tests', (req, res) => {
 
     // Run using k6
     currentRunProcess = spawn('k6', ['run', file], {
-      cwd: process.cwd(),
+      cwd: TESTING_ROOT,
       stdio: 'inherit'
     });
 

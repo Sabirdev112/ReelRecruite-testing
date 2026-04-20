@@ -10,8 +10,8 @@
     "dashboard:build": "npm run build --workspace=@reel-recruite/dashboard",
     "testing:run": "npm run server --workspace=@reel-recruite/testing",
     "testing:test": "npm run test --workspace=@reel-recruite/testing",
-    "testing:e2e": "npm run test:e2e --workspace=@reel-recruite/testing",
-    "testing:api": "npm run test:api --workspace=@reel-recruite/testing",
+    "testing:e2e": "npm run test:e2e --workspace=@reel-recruite/testing -- --project=chromium --workers=1",
+    "testing:api": "npm run test:api --workspace=@reel-recruite/testing -- --project=chromium --workers=1",
     "testing:load": "npm run test:load --workspace=@reel-recruite/testing"
   }
 }

@@ -22,20 +22,8 @@ export class UpdateWorkPage extends BasePage {
     this.achievementInput = page.getByTestId('experience-achievement-input-0');
     this.skillInput = page.getByTestId('experience-skill-input-0');
     this.saveButton = page.getByRole('button', { name: 'Add Experience' }).last();
-    this.maybeLaterButton = page.getByRole('button', { name: 'Maybe Later' });
-  }
-  async handleMaybeLaterIfPresent() {
-        try {
-            await this.maybeLaterButton.waitFor({
-                state: 'visible',
-                timeout: 2500
-            });
-            await this.maybeLaterButton.click();
-            await this.maybeLaterButton.waitFor({ state: 'hidden' });
-        } catch {
-            // Modal did not appear — safe to continue
-        }
-    }
+}
+ 
   async selectDropdownByLabel(dropdown, label) {
     await dropdown.waitFor({ state: 'visible' });
     await dropdown.selectOption({ label });

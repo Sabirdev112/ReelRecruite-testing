@@ -9,21 +9,8 @@ export class SeeCoverVideoPage extends BasePage {
     this.viewProfileButton = page.getByTestId('application-view-profile-button');
     this.coverVideoSection = page.getByTestId('video-resume-header');
     this.video = page.getByTestId('video-resume-player');
-    this.maybeLaterButton = page.getByRole('button', { name: 'Maybe Later' });
-  }
-  async handleMaybeLaterIfPresent() {
-        try {
-            await this.maybeLaterButton.waitFor({
-                state: 'visible',
-                timeout: 2500
-            });
-            await this.maybeLaterButton.click();
-            await this.maybeLaterButton.waitFor({ state: 'hidden' });
-        } catch {
-            // Modal did not appear — safe to continue
-        }
-    } 
-    
+}
+ 
   async navigateToApplications() {
     await this.viewApplicationButton.waitFor({ state: 'visible' });
     await this.viewApplicationButton.click();

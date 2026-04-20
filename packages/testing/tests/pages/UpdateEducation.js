@@ -22,18 +22,7 @@ export class UpdateEducationPage extends BasePage {
     this.endDateTextbox = page.getByTestId('education-current-checkbox-0');
     this.descriptionTextbox = page.getByTestId('education-description-input-0');
     this.saveChangesButton = page.getByRole('button', { name: 'Add Education' }).last();
-    this.maybeLaterButton = page.getByRole('button', { name: 'Maybe Later' });
-  }
-
-  async handleMaybeLaterIfPresent() {
-    try {
-      await this.maybeLaterButton.waitFor({ state: 'visible', timeout: 2000 });
-      await expect(this.maybeLaterButton).toBeVisible();
-      await this.maybeLaterButton.click();
-      await expect(this.maybeLaterButton).toBeHidden();
-      console.log('Handled "Maybe Later" modal');
-    } catch {}
-  }
+}
 
   async clearAndTypeUsingKeyboard(locator, value) {
     await locator.waitFor({ state: 'visible' });
@@ -85,8 +74,7 @@ export class UpdateEducationPage extends BasePage {
       await this.deleteEduButton.click({ force: true });
       await this.confirmDeleteButton.waitFor({ state: 'visible' });
       await this.confirmDeleteButton.click();
-      await this.handleMaybeLaterIfPresent();
-      console.log('Deleted existing education entry');
+console.log('Deleted existing education entry');
     } else {
       console.log('No education entry to delete');
     }
