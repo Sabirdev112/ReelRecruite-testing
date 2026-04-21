@@ -37,7 +37,7 @@ export async function getCompanyProfileByEmail(email) {
   const rows = await runQuery(
     `SELECT cp.id, cp.user_id, cp.company_name, cp.company_slug, cp.description, cp.website, cp.logo_url, cp.banner_url, cp.tagline, cp.locations, cp.updated_at FROM company_profiles cp JOIN users u ON cp.user_id = u.id WHERE u.email = $1`,
     [email]
-    
+
   );
   const result = rows[0];
   console.log('[recruiterDb] getCompanyProfileByEmail:', { email, company_name: result && result.company_name, updated_at: result && result.updated_at });

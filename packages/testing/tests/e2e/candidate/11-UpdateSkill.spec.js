@@ -1,21 +1,15 @@
 import { test, expect } from '../../fixtures/base.fixtures.js';
 import { loadCredentials } from '../../utils/candidateCredentials.js';
-
 import { getCandidateSkills, getCandidateProfileByEmail } from '../../utils/candidateDb.helper.js';
-
 
 const candidate = loadCredentials()[0];
 
-
 test('candidate can update skills section', async ({ page, loginPage, updateSkils }) => {
-  
-  
 
   await loginPage.goto();
   await loginPage.login(candidate.email, candidate.password);
   await loginPage.clickSignIn();
   await page.waitForURL('**/jobs');
-  
   await updateSkils.clickProfile();
   await updateSkils.openProfile();
   await updateSkils.clickEditSkills();

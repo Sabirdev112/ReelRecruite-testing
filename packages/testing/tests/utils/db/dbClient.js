@@ -1,42 +1,37 @@
-import 'dotenv/config';
-import { MongoClient, ServerApiVersion } from 'mongodb';
-import dns from 'dns';
+import pg from 'pg';
+import dotenv from 'dotenv';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
-dns.setServers(['8.8.8.8', '8.8.4.4']);
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
-const uri = process.env.MONGODB_URI;
-const client = new MongoClient(uri, {
-  serverApi: {
-    version: ServerApiVersion.v1,
-    strict: true,
-    deprecationErrors: true,
-  }
+// Load env from testing package root
+dotenv.config({ path: path.resolve(__dirname, '../../../.env') });
+
+const { Pool } = pg;
+
+const pool = new Pool({
+  host: process.env.DB_HOST,
+  port: parseInt(process.env.DB_PORT, 10) || 5432,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
+  ssl: { rejectUnauthorized: false }
 });
 
-let db;
-
-async function getDb() {
-  if (db) return db;
-  await client.connect();
-  // Name of your core application database
-  db = client.db('reelrecruite_db'); 
-  return db;
-}
-
 /**
- * findDocs mirrors runQuery behavior for NoSQL
+ * Executes a PostgreSQL query (Legacy verification logic)
  */
-export async function findDocs(collectionName, filter = {}) {
-  const database = await getDb();
-  const collection = database.collection(collectionName);
-  const results = await collection.find(filter).toArray();
-  return results;
+export async function runQuery(query, params = []) {
+  try {
+    const res = await pool.query(query, params);
+    return res.rows;
+  } catch (err) {
+    console.error('[DB-VERIFICATION] PG Error:', err.message);
+    throw err;
+  }
 }
 
-/**
- * Generic query function for flexibility
- */
-export async function runMongo(callback) {
-  const database = await getDb();
-  return await callback(database);
-}
+// Keep a placeholder for mongo if needed, but the main E2E uses PostgreSQL for app data
+export const getPool = () => pool;

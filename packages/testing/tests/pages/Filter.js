@@ -82,10 +82,15 @@ export class FilterPage extends BasePage {
 
   async applyAllFilters() {
     await this.openFilters();
+    await this.jobTypeSelect.waitFor({ state: 'visible' });
     await this.selectRandomOption(this.jobTypeSelect);
+    await this.workTypeSelect.waitFor({ state: 'visible' });
     await this.selectRandomOption(this.workTypeSelect);
+    await this.experienceLevelSelect.waitFor({ state: 'visible' });
     await this.selectRandomOption(this.experienceLevelSelect);
+    await this.regionSelect.waitFor({ state: 'visible' });
     await this.selectRandomOption(this.regionSelect);
+    await this.currencySelect.waitFor({ state: 'visible' });
     await this.selectRandomOption(this.currencySelect);
     await this.applyFilters();
     console.log('All filters applied');

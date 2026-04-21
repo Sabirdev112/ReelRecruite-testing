@@ -121,14 +121,17 @@ export default function ReportPage({ params }) {
         const res = await fetch('/api/rerun-test', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ file: test.file, title: test.title, browser: test.browser })
+        body: JSON.stringify({ 
+          file: test.file, 
+          title: test.title, 
+          browser: test.browser,
+          type: type // 'ui' or 'api'
+        })
         });
         const result = await res.json();
         if (result.success) {
-         setTimeout(() => {
-           window.location.href = '/'; 
-         }, 1500);
-      }
+          fetchDetails(); // Refresh the current page data
+        }
       } catch (err) {
         console.error('Rerun failed:', err);
         alert('Rerun failed to initiate.');
@@ -284,6 +287,7 @@ return (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {failedTests.slice(0, 4).map((test, i) => {
                 const isFlaky = test.status === 'flaky';
+                const isFail = test.status === 'failed';
                 const borderAccent = isFlaky ? 'border-l-amber-500' : 'border-l-rose-500';
                 const specBadgeBg = isFlaky ? 'bg-amber-500' : 'bg-rose-500';
                 return (
@@ -378,14 +382,16 @@ return (
 
             <div className="flex flex-col gap-4 text-foreground">
                {displayTests.map((test, i) => {
-                 const isFail = test.status === 'failed' || test.status === 'flaky';
+                 const isFlaky = test.status === 'flaky';
+                 const isFail = test.status === 'failed' || isFlaky;
                  const isExp = expandedTests[i] !== undefined ? expandedTests[i] : isFail;
                  const isRerunning = rerunning[test.title];
 
                   return (
                   <div key={i} className={`bg-card rounded-2xl overflow-hidden border border-border/40 shadow-sm transition-all duration-300 relative group border-l-8 ${
                      test.status === 'passed' ? 'border-l-emerald-500' : 
-                     isFail ? 'border-l-rose-500' : 'border-l-muted'
+                     isFlaky ? 'border-l-amber-500' : 
+                     test.status === 'failed' ? 'border-l-rose-500' : 'border-l-muted'
                      }`}>
                      <div 
                         onClick={() => toggleExpand(i)}
@@ -393,10 +399,11 @@ return (
                         >
                            <div className="flex items-center gap-5">
                               <div className={`p-4 rounded-2xl flex items-center justify-center transition-all group-hover:rotate-12 ${
-                                test.status === 'passed' ? 'bg-emerald-500 text-white shadow-lg shadow-emerald-500/20' : 
-                                isFail ? 'bg-rose-500 text-white shadow-lg shadow-rose-500/20' : 'bg-slate-400 text-white shadow-lg'
-                                }`}>
-                                {test.status === 'passed' ? <CheckCircle2 size={15}/> : isFail ? <XCircle size={15}/> : <Zap size={15}/>}
+                                 test.status === 'passed' ? 'bg-emerald-500 text-white shadow-lg shadow-emerald-500/20' : 
+                                 isFlaky ? 'bg-amber-500 text-white shadow-lg shadow-amber-500/20' : 
+                                 test.status === 'failed' ? 'bg-rose-500 text-white shadow-lg shadow-rose-500/20' : 'bg-slate-400 text-white shadow-lg'
+                                 }`}>
+                                {test.status === 'passed' ? <CheckCircle2 size={15}/> : isFlaky ? <AlertTriangle size={15}/> : test.status === 'failed' ? <XCircle size={15}/> : <Zap size={15}/>}
                               </div>
 
                               <div>
@@ -457,7 +464,9 @@ return (
                                        </span>
                                      )}
                                      <span className={`text-sm font-black uppercase tracking-tighter ${
-                                       test.status === 'passed' ? 'text-emerald-500' : isFail ? 'text-rose-500' : 'text-slate-400'
+                                       test.status === 'passed' ? 'text-emerald-500' : 
+                                       isFlaky ? 'text-amber-500' :
+                                       test.status === 'failed' ? 'text-rose-500' : 'text-slate-400'
                                      }`}>{test.status}</span>
                                   </div>
                                </div>

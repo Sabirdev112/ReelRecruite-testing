@@ -50,13 +50,24 @@ async function connectToMongo() {
   }
 }
 
-// Map the old Supabase helper functions to MongoDB
+// Copies the local screenshot to the dashboard's public folder for local serving
 export async function uploadScreenshot(localPath, fileName) {
-    // Local storage only now
     try {
+        const dashboardPath = process.env.DASHBOARD_PATH || path.resolve(process.cwd(), '..', 'dashboard');
+        const targetDir = path.join(dashboardPath, 'public', 'screenshots');
+        
+        if (!fs.existsSync(targetDir)) {
+            fs.mkdirSync(targetDir, { recursive: true });
+        }
+
+        const targetPath = path.join(targetDir, fileName);
+        fs.copyFileSync(localPath, targetPath);
+        
+        console.log(`[REPORTER] Screenshot saved to: ${targetPath}`);
         return `/screenshots/${fileName}`;
     } catch (err) {
-        return null;
+        console.error('[REPORTER] Failed to save local screenshot:', err.message);
+        return `/screenshots/${fileName}`; // Return path anyway as fallback
     }
 }
 

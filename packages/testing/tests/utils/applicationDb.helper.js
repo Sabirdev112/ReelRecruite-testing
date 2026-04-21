@@ -63,4 +63,3 @@ export async function verifyApplicationWithdrawn(email, applicationId) {
   console.log('DB verification passed: Application is withdrawn');
   return applications[0].id;
 }
-

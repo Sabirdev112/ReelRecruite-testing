@@ -232,5 +232,35 @@
     "phone": "92732246122",
     "password": "Test@1234",
     "userType": "candidate"
+  },
+  {
+    "fullName": "User 2881",
+    "email": "user1776688081072881@gmail.com",
+    "phone": "928081072881",
+    "password": "Test@12345"
+  },
+  {
+    "fullName": "User 3962",
+    "email": "user1776689088023962@gmail.com",
+    "phone": "929088023962",
+    "password": "Test@12345"
+  },
+  {
+    "fullName": "User 8327",
+    "email": "user1776690712728327@gmail.com",
+    "phone": "920712728327",
+    "password": "Test@12345"
+  },
+  {
+    "fullName": "User 3532",
+    "email": "user1776700836063532@gmail.com",
+    "phone": "920836063532",
+    "password": "Test@12345"
+  },
+  {
+    "fullName": "User 8951",
+    "email": "user1776702015488951@gmail.com",
+    "phone": "922015488951",
+    "password": "Test@12345"
   }
 ]

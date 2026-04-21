@@ -29,8 +29,8 @@ export class Login extends BasePage {
         await this.passwordInput.pressSequentially(password, { delay: 40 });
         await this.passwordInput.blur();
     }
-    async login(email, password) {
 
+    async login(email, password) {
         await this.usernameInput.waitFor({ state: 'visible' });
         await this.usernameInput.click();
         await this.usernameInput.pressSequentially(email, { delay: 40 });
@@ -39,11 +39,13 @@ export class Login extends BasePage {
         await this.passwordInput.pressSequentially(password, { delay: 40 });
         await this.passwordInput.blur();
     }
+
     async clickSignIn() {
         await this.signInButtonLocator.waitFor({ state: 'visible' });
         await this.signInButtonLocator.click();
-console.log('Login successful.');
+        console.log('Login successful.');
     }
+
     async logout() {
         await this.avatar.click();
         await this.signoutButton.waitFor({ state: 'visible' });

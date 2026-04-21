@@ -2,8 +2,8 @@ import http from 'k6/http';
 import { check, sleep } from 'k6';
 
 export const options = {
-  vus: 5,          // adjust VUs as needed
-  duration: '20s', // adjust duration as needed
+  vus: 5,
+  duration: '20s',
   thresholds: {
     http_req_failed: ['rate<0.05'],
     http_req_duration: ['p(95)<2500'],
@@ -12,7 +12,7 @@ export const options = {
 
 const users = JSON.parse(open('../fixtures/users.json'));
 
-// 🔹 Helper to login and get tokens
+// Helper to login and get tokens
 function login() {
   const loginRes = http.post(
     'https://recruitai-backend-production.up.railway.app/v1/auth/signin',
@@ -33,7 +33,7 @@ function login() {
   return tokens;
 }
 
-// 🔹 Helper to refresh token
+// Helper to refresh token
 function refreshToken(refresh_token) {
   const refreshRes = http.post(
     'https://recruitai-backend-production.up.railway.app/v1/auth/refresh-token',
@@ -59,28 +59,29 @@ export default function () {
 
   sleep(0.2); // small wait to ensure token is active
 
-  // 🔹 POST /applications/create/submit body
+  const applicationIdPath = "test-data/candidate/applicationId.json";
+  // POST /applications/create/submit body
   const applicationBody = {
-    applicationid: "ac193f9e-4533-4c92-bd5d-67621056eb0b",
+    applicationid: applicationIdPath,
     candidateId: "6061964c-7b45-40c9-ac74-34f3d11629d6",
     jobId: "ad3d3071-edbb-44fb-befe-1e99e437e9f3",
     status: "pending",
     videoUrl: "https://res.cloudinary.com/dkxgyjj8a/video/upload/v1766581673/applications/video/4cd1adf0-fb74-4653-ac2c-faa41c978f50_recorded-video.mp4",
     recruiterNotes: null,
     rejectionReason: null,
-    submittedAt: "2025-12-24T13:08:09.259Z",
+    submittedAt: "2026-04-20T13:08:09.259Z",
     reviewedAt: null,
-    createdAt: "2025-12-24T13:08:09.259Z"
+    createdAt: "2026-04-20T13:08:09.259Z"
   };
 
-  // 🔹 Make request with access token
+  // Make request with access token
   let res = http.post(
     'https://recruitai-backend-production.up.railway.app/v1/applications/create/submit',
     JSON.stringify(applicationBody),
     { headers: { Authorization: `Bearer ${access_token}`, 'Content-Type': 'application/json' } }
   );
 
-  // 🔹 Retry with refresh token if session expired
+  // Retry with refresh token if session expired
   if (res.status === 419) {
     console.log('Session expired, refreshing token...');
     tokens = refreshToken(refresh_token);

@@ -14,8 +14,8 @@ export async function GET(req) {
 
         console.log(`[API] Successfully fetched ${tests.length} ${type} tests`);
         return NextResponse.json(tests);
-    } catch (err)
-    {
+        } catch (err)
+        {
         console.error(`API Error /api/latest-tests?type=${type}:`, err.message);
         return NextResponse.json({ error: err.message }, { status: 500 });
     }

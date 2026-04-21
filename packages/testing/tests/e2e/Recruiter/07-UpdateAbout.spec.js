@@ -1,15 +1,10 @@
 import { test, expect } from '../../fixtures/base.fixtures.js';
 import { loadCredentials } from '../../utils/recruiterCredentials.js';
-
-
 import { getUserByEmail } from '../../utils/recruiterDb.helper.js';
-
 
 const recruiter = loadCredentials()[0];
 
 test('recruiter can update about section', async ({ page, loginPage, updateAboutPage }) => {
-  
-  
 
   await loginPage.goto();
   await loginPage.login(recruiter.email, recruiter.password);

@@ -1,11 +1,8 @@
 import { test, expect } from '../../fixtures/base.fixtures.js';
 import { loadCredentials } from '../../utils/recruiterCredentials.js';
-
-
 import { getCompanyProfileByEmail } from '../../utils/recruiterDb.helper.js';
 
 const recruiter = loadCredentials()[0];
-
 
 test('Recruiter updates company details and logo', async ({ page, loginPage, updateCompanyDetails }) => {
   
@@ -13,7 +10,6 @@ test('Recruiter updates company details and logo', async ({ page, loginPage, upd
   await loginPage.login(recruiter.email, recruiter.password);
   await loginPage.clickSignIn();
   await page.waitForURL('**/my-jobs');
-  
   
   await updateCompanyDetails.openProfileMenu();
   await updateCompanyDetails.navigateToProfile();

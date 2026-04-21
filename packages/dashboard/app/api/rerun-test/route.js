@@ -3,24 +3,25 @@ import { rerunSingleTest } from '@/lib/runner';
 import path from 'path';
 
 export async function POST(req) {
-  const { file, title, browser } = await req.json();
+  const { file, title, browser, type } = await req.json();
 
   if (!file || !title) {
     return NextResponse.json({ error: 'Missing file or title' }, { status: 400 });
   }
 
-  const rootDir = path.resolve(process.cwd(), 'packages/testing');
-  const monorepoRoot = path.resolve(process.cwd());
-  const playwrightCliPath = path.join(monorepoRoot, 'node_modules/@playwright/test/cli.js');
+  const monorepoRoot = process.env.TEST_ROOT_DIR || path.resolve(process.cwd(), '..', '..');
+  const rootDir = path.resolve(monorepoRoot, 'packages', 'testing');
+  const playwrightCliPath = path.join(monorepoRoot, 'node_modules', '@playwright', 'test', 'cli.js');
 
   try {
-    const result = await rerunSingleTest(file, title, playwrightCliPath, rootDir, browser);
+    const result = await rerunSingleTest(file, title, playwrightCliPath, rootDir, browser, type);
     return NextResponse.json({
       success: true,
       passed: result,
       code: result ? 0 : 1
     });
-  } catch (err) {
+    } catch (err) 
+    {
     console.error('Rerun Error:', err.message);
     return NextResponse.json({ success: false, error: err.message }, { status: 500 });
   }

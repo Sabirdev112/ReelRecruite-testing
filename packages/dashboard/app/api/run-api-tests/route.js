@@ -5,9 +5,8 @@ import path from 'path';
 import fs from 'fs';
 
 export async function POST() {
-    const dashboardDir = process.cwd();
-    const monorepoRoot = path.resolve(dashboardDir, '..', '..');
-    const testingPackageDir = path.resolve(monorepoRoot, 'packages/testing');
+    const monorepoRoot = process.env.TEST_ROOT_DIR || path.resolve(process.cwd(), '..', '..');
+    const testingPackageDir = path.resolve(monorepoRoot, 'packages', 'testing');
     
     const rootDir = testingPackageDir;
     const playwrightCliPath = path.join(monorepoRoot, 'node_modules', '@playwright', 'test', 'cli.js');
@@ -33,7 +32,7 @@ export async function POST() {
         } else {
             return NextResponse.json({ success: false, message: 'A run is already in progress' }, { status: 409 });
         }
-    } catch (err) {
+        } catch (err) {
         return NextResponse.json({ success: false, error: err.message }, { status: 500 });
     }
 }

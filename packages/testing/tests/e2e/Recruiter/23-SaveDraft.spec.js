@@ -1,12 +1,7 @@
 import {test} from '../../fixtures/base.fixtures.js';
 import {loadCredentials} from '../../utils/recruiterCredentials.js';
 
-
-
-
 const recruiter = loadCredentials()[0];
-
-
 
 test ('Recruiter saves a job draft', async ({page, loginPage, saveDraft}) => {
 

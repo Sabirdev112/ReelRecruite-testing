@@ -6,8 +6,6 @@ import { loadCredentials } from '../../utils/recruiterCredentials.js';
 const recruiter = loadCredentials()[0];
 
 test('Recruiter login and create a new job', async ({ page, loginPage, createJobPage }) => {
-  
-  
 
   await loginPage.goto();
   await loginPage.login(recruiter.email, recruiter.password);

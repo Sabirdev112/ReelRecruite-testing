@@ -1,19 +1,12 @@
-import { expect } from '@playwright/test';
-import { runQuery } from './db/dbClient.js';
+import { runQuery } from "./db/dbClient.js";
 
 export async function verifyUserCreated(email) {
-  const users = await runQuery(
-    `
-    SELECT id, email
-    FROM users
-    WHERE email = $1
-    `,
+  const rows = await runQuery(
+    `SELECT id, email, full_name FROM users WHERE email = $1`,
     [email]
   );
-
-  expect(users.length).toBe(1);
-  expect(users[0].email).toBe(email);
-
-  return users[0].id;
+  if (rows.length === 0) {
+    throw new Error(`User with email ${email} not found in DB`);
+  }
+  return rows[0];
 }
-

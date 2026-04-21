@@ -1,28 +1,25 @@
 import { test } from '../fixtures/base.fixtures.js';
-
 import {getRandomUser,storeNewUser} from '../utils/signupCredentials.helper.js';
 import { verifyUserCreated } from '../utils/signupDb.helper.js';
 
 test('Candidate signs up', async ({ signupPage }) => {
   
-
   const user = getRandomUser();
 
-    await signupPage.goto();
-    await signupPage.register();
+  await signupPage.goto();
+  await signupPage.register();
+  await signupPage.enterFullName(user.fullName);
+  await signupPage.enterEmail(user.email);
+  await signupPage.enterPhone(user.phone);
+  await signupPage.enterPassword(user.password);
+  await signupPage.enterConfirmPassword(user.password);
+  await signupPage.selectRole('Job Seeker');
+  await signupPage.createAccount();
+  await signupPage.fillOTP('123456');
 
-    await signupPage.enterFullName(user.fullName);
-    await signupPage.enterEmail(user.email);
-    await signupPage.enterPhone(user.phone);
-    await signupPage.enterPassword(user.password);
-    await signupPage.enterConfirmPassword(user.password);
-    await signupPage.selectRole('Job Seeker');
-    await signupPage.createAccount();
-    await signupPage.fillOTP('123456');
-
-    // DB verification
-    await verifyUserCreated(user.email);
-    storeNewUser(user);
+  // DB verification
+  await verifyUserCreated(user.email);
+  storeNewUser(user);
 
 });
 

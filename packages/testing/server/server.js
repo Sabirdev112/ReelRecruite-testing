@@ -4,15 +4,15 @@ import { resolve } from 'path';
 import fs from 'fs';
 import { spawn } from 'child_process';
 import { fileURLToPath } from 'url';
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-const TESTING_ROOT = path.resolve(__dirname, '..');
 import { getTestRuns, getRunDetails, getLatestTests } from './lib/db.js';
 
 let currentRunProcess = null; // Active process for the current test file
 let isRunStopped = false;    // Flag to abort the remaining files in a full run
 let isSessionRunning = false; // Flag for the overall test session (multiple files)
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const TESTING_ROOT = path.resolve(__dirname, '..');
 const app = express();
 const PORT = 5000;
 
@@ -36,14 +36,15 @@ const playwrightCliPath = resolve(
 
 app.use(express.json());
 
-// API: Get runs (from Supabase, fallback to local JSON)
+// API: Get runs (from db, fallback to local JSON)
 app.get('/api/runs', async (req, res) => {
   try {
     const runs = await getTestRuns();
     res.json(runs);
   } catch (err) {
-    console.error('Error loading runs from Supabase:', err.message);
-    // Fallback to local JSON if Supabase fails
+    console.error('Error loading runs from db:', err.message);
+
+    // Fallback to local JSON if db fails
     const dataFile = path.join(process.cwd(), 'server', 'data', 'runs.json');
     if (fs.existsSync(dataFile)) {
       try {
@@ -69,6 +70,7 @@ app.get('/api/run-details/:id', async (req, res) => {
     res.status(500).json({ error: 'Failed to load run details' });
   }
 });
+
 // API: Get latest individual test cases
 app.get('/api/latest-tests', async (req, res) => {
   try {
@@ -79,6 +81,8 @@ app.get('/api/latest-tests', async (req, res) => {
     res.status(500).json({ error: 'Failed to load latest tests' });
   }
 });
+
+// API: Rerun single test
 app.post('/api/rerun-test', (req, res) => {
   const { file, title } = req.body;
 
@@ -97,7 +101,6 @@ app.post('/api/rerun-test', (req, res) => {
 
   // Escape regex metacharacters so Playwright's --grep receives a literal match
   const escapedGrep = safeTitle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-  // For debugging, print the final grep string
   console.log('   Grep :', escapedGrep);
 
   const spawnArgs = [
@@ -122,8 +125,7 @@ app.post('/api/rerun-test', (req, res) => {
     currentRunProcess = child;
 
   child.on('close', (code) => {
-    // The rerun was executed successfully, regardless of test result
-    // Wait for the reporter to write the results to runs.json
+   
     // The reporter's onEnd() is called when the process closes, but file write is async
     setTimeout(() => {
       if (code === 0) {
@@ -131,12 +133,11 @@ app.post('/api/rerun-test', (req, res) => {
         res.json({ success: true, passed: true, code: 0 });
       } else {
         console.log(`❌ Single test failed (exit code ${code})`);
-        console.log(`   Note: Rerun executed successfully. Test result saved to Supabase.\n`);
-        // Still return success: true because the rerun executed successfully
+
         // The test result (pass/fail) is separate from execution success
         res.json({ success: true, passed: false, code });
       }
-    }, 1000); // Increased delay to ensure reporter finishes writing
+    }, 1000);
   });
 
   child.on('error', (err) => {
@@ -145,6 +146,7 @@ app.post('/api/rerun-test', (req, res) => {
   });
 });
 
+// API: Run all tests
 app.post('/api/run-all-tests', (req, res) => {
   if (currentRunProcess) {
     return res.status(409).json({ error: 'A full test run is already in progress' });
@@ -155,11 +157,13 @@ app.post('/api/run-all-tests', (req, res) => {
 
   const getAllTestFiles = (dir, fileList = []) => {
     const files = fs.readdirSync(dir);
-    files.forEach(file => {
+      files.forEach(file => {
       const filePath = path.join(dir, file);
+
       if (fs.statSync(filePath).isDirectory()) {
         getAllTestFiles(filePath, fileList);
-      } else if (file.endsWith('.spec.js')) {
+      } 
+      else if (file.endsWith('.spec.js')) {
         // Store relative path from process.cwd() formatted for Playwright
         const relativePath = path.relative(process.cwd(), filePath).replace(/\\/g, '/');
         fileList.push(relativePath);
@@ -298,7 +302,6 @@ app.post('/api/run-load-tests', (req, res) => {
     currentRunProcess.on('error', (err) => {
       currentRunProcess = null;
       console.error(`Spawn error for load test ${file}:`, err.message);
-      // Even if it fails to start (e.g. k6 missing), we move to next or stop
       index++;
       runNext();
     });
@@ -334,8 +337,7 @@ app.post('/api/stop-run', (req, res) => {
   });
 });
 
-// Legacy HTTP API only — UI lives in https://github.com/Sabirdev112/Automation-dashboard
-app.get('/', (req, res) => {
+app.get('/', (res) => {
   res.json({
     message: 'Legacy test-runner API. For the web UI, run the Automation Dashboard (Next.js) from its own repo.',
     dashboard: 'https://github.com/Sabirdev112/Automation-dashboard',

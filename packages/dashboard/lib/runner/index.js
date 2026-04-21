@@ -22,16 +22,23 @@ export function getStatus() {
 }
 
 export function stopRun() {
-  if (!manager.currentRunProcess) return false;
   manager.isRunStopped = true;
   manager.isSessionRunning = false;
+  
+  const pid = manager.currentRunProcess?.pid;
+  if (!pid || typeof pid !== 'number') {
+    manager.currentRunProcess = null;
+    return true;
+  }
+
   try {
-    treeKill(manager.currentRunProcess.pid, 'SIGINT');
+    treeKill(pid, 'SIGINT');
     manager.currentRunProcess = null;
     return true;
   } catch (e) {
-    console.error('Failed to stop run process:', e.message);
-    return false;
+    console.warn('[RUNNER] Stop attempt partially failed:', e.message);
+    manager.currentRunProcess = null;
+    return true; // Still return true to clear UI
   }
 }
 
@@ -64,7 +71,7 @@ async function runFilesSequential(testFiles, playwrightCliPath, rootDir, runName
   let browserIndex = 0;
   let fileIndex = 0;
 
-  const runNext = () => {
+    const runNext = () => {
     if (manager.isRunStopped || browserIndex >= browsers.length) {
       manager.isSessionRunning = false;
       manager.currentRunProcess = null;
@@ -91,7 +98,7 @@ async function runFilesSequential(testFiles, playwrightCliPath, rootDir, runName
     const browserLabel = browser ? `[${browser.toUpperCase()}] ` : '';
     manager.progress.currentTest = `${browserLabel}${file.split(/[\\/]/).pop()}`;
 
-    const args = [playwrightCliPath, 'test', file];
+    const args = [playwrightCliPath, 'test', file, '--retries=1'];
 
     // For UI tests (not API-exclusive sessions), specify the project and headed mode
     if (!isApi && !isFileApi) {
@@ -104,9 +111,10 @@ async function runFilesSequential(testFiles, playwrightCliPath, rootDir, runName
       args.push(`--project=chromium`);
     }
 
-    const child = spawn(process.execPath, args, {
+    const child = spawn('node', args, {
       cwd: rootDir,
       stdio: 'inherit',
+      shell: true,
       env: {
         ...process.env,
         PLAYWRIGHT_RUN_NAME: runName,
@@ -245,33 +253,29 @@ export async function runLoadTests(testFiles, rootDir, runName = 'Load Stress Au
   return true;
 }
 
-export async function rerunSingleTest(file, grep, playwrightCliPath, rootDir, browser = null) {
+export async function rerunSingleTest(file, grep, playwrightCliPath, rootDir, browser = null, type = 'ui') {
   if (manager.currentRunProcess || manager.isSessionRunning) return false;
   manager.isSessionRunning = true;
   manager.progress = { total: 1, completed: 0, currentTest: grep, currentBrowser: browser || 'chromium' };
 
-  const safeFile = file.replace(/^D:[\\/]/i, '').replace(/\\/g, '/');
-  const isApi = safeFile.includes('api');
+  // Normalize path to be relative to the rootDir (packages/testing)
+  let testPath = file.replace(/\\/g, '/');
+  if (testPath.includes('packages/testing/')) {
+    testPath = testPath.split('packages/testing/').pop();
+  } else if (testPath.startsWith('testing/')) {
+    testPath = testPath.split('testing/').pop();
+  }
+  
+  const isApi = type === 'api';
   const escapedGrep = grep.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
-  const args = [playwrightCliPath, 'test', safeFile, '--grep', escapedGrep, '--retries=1'];
-
-  if (isApi) {
-    // API tests ALWAYS run in chromium project
-    args.push('--project=chromium');
-  } else {
-    // UI tests run in specified browser or default to chromium (headed)
-    args.push('--headed', '--workers=1');
-    if (browser) {
-      args.push(`--project=${browser}`);
-    } else {
-      args.push('--project=chromium');
-    }
-  }
-
-  const child = spawn(process.execPath, args, {
+  // Use a simplified command string for better reliability with shell: true on Windows
+  const command = `node "${playwrightCliPath}" test "${testPath}" --grep "${escapedGrep}" --retries=1 ${isApi ? '--project=chromium' : `--project=${browser || 'chromium'} --headed --workers=1`}`;
+  
+  const child = spawn(command, [], {
     cwd: rootDir,
     stdio: 'inherit',
+    shell: true,
     env: { ...process.env, PLAYWRIGHT_RUN_NAME: `Rerun: ${grep}` }
   });
 
@@ -283,6 +287,12 @@ export async function rerunSingleTest(file, grep, playwrightCliPath, rootDir, br
       manager.isSessionRunning = false;
       manager.progress.completed = 1;
       resolve(code === 0);
+    });
+    child.on('error', (err) => {
+      console.error('[RUNNER] Single test spawn error:', err.message);
+      manager.currentRunProcess = null;
+      manager.isSessionRunning = false;
+      resolve(false);
     });
   });
 }

@@ -5,9 +5,9 @@ import path from 'path';
 
 export async function POST(req) {
   const { browser } = await req.json().catch(() => ({}));
-  const dashboardDir = process.cwd(); // packages/dashboard
-  const monorepoRoot = path.resolve(dashboardDir, '..', '..');
-  const testingPackageDir = path.resolve(monorepoRoot, 'packages/testing');
+
+  const monorepoRoot = process.env.TEST_ROOT_DIR || path.resolve(process.cwd(), '..', '..');
+  const testingPackageDir = path.resolve(monorepoRoot, 'packages', 'testing');
   const playwrightCliPath = path.join(monorepoRoot, 'node_modules', '@playwright', 'test', 'cli.js');
   
   const rootDir = testingPackageDir;
