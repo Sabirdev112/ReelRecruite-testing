@@ -38,7 +38,6 @@ export class CreateJobPage extends BasePage {
     async openJobForm() {
     await this.postNewJobButton.waitFor({ state: 'visible' });
     await this.postNewJobButton.click();
-    await this.titleInput.waitFor({ state: 'visible' });
     console.log('Job form opened');
 }
 

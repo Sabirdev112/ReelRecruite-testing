@@ -4,7 +4,7 @@ import { getRecruiterPublicFieldsByEmail } from '../../utils/recruiterDb.helper.
 
 const recruiter = loadCredentials()[0];
 
-test('recruuiter info, profile picture, and banner update', async ({ page, loginPage, updateInfo }) => {
+test('recruiter info, profile picture, and banner update', async ({ page, loginPage, updateInfo }) => {
 
   await loginPage.goto();
   await loginPage.login(recruiter.email, recruiter.password);

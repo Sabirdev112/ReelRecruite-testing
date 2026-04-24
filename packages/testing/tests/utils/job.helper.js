@@ -6,7 +6,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const jobIdPath = path.join(__dirname, '../test-data/Recruiter/jobid.json');
 
-export function getLatestJobId() {
+export function getLatestJobUrl() {
   const jobPath = jobIdPath;
 
   if (!fs.existsSync(jobPath)) {
@@ -28,3 +28,13 @@ export function storeJobId(jobId) {
   console.log('Job ID stored successfully.', jobId );
 }
 
+export function getJobId(){
+  const jobPath = jobIdPath;
+
+  if (!fs.existsSync(jobPath)) {
+    throw new Error('Job ID file not found. Create a job first.');
+  }
+
+  const { jobId } = JSON.parse(fs.readFileSync(jobPath, 'utf-8'));
+  return jobId;
+}

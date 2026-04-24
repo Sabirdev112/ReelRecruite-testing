@@ -1,6 +1,6 @@
 import { test } from '../../fixtures/base.fixtures.js';
 import { loadCredentials } from '../../utils/candidateCredentials.js';
-import { getLatestJobId } from '../../utils/job.helper.js';
+import { getLatestJobUrl, getJobId} from '../../utils/job.helper.js';
 import { storeApplicationId } from '../../utils/application.helper.js';
 import { getApplicationIdForCandidate } from '../../utils/applicationDb.helper.js';
 
@@ -9,8 +9,8 @@ test.use({ permissions: ['camera', 'microphone'] });
 
 test('Apply for latest job', async ({ page, loginPage, applyJobPage }) => {
     const user = loadCredentials()[0];
-    const jobUrl = getLatestJobId();
-    const jobId = jobUrl.split('/').pop();
+    const jobUrl = getLatestJobUrl();
+    const jobId = getJobId();
 
     await loginPage.goto();
     await loginPage.login(user.email, user.password);
