@@ -29,7 +29,7 @@ export class CompanyDetailsPage extends BasePage {
      async openProfileMenu() {
         await this.profileMenu.waitFor({ state: 'visible' });
         await this.profileMenu.click();
-        console.log('Navigated to Profile page');
+        console.log('Profile menu opened');
      }
 
         async navigateToProfile() {

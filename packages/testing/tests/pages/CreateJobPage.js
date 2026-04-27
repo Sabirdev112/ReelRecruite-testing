@@ -35,7 +35,7 @@ export class CreateJobPage extends BasePage {
   }
 
 
-    async openJobForm() {
+  async openJobForm() {
     await this.postNewJobButton.waitFor({ state: 'visible' });
     await this.postNewJobButton.click();
     console.log('Job form opened');
@@ -43,7 +43,7 @@ export class CreateJobPage extends BasePage {
 
  async fillTitle(title){
   await this.titleInput.waitFor({ state: 'visible' });
-  await this.titleInput.fill(title);
+  await this.titleInput.pressSequentially(title);
   console.log('Title filled');
  }
 

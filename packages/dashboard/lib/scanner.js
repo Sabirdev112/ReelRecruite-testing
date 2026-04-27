@@ -25,9 +25,19 @@ export function getDynamicTestOrder(dir, rootDir) {
   const tests = getAllFiles(dir);
 
   // Sort numerically based on filename prefixes (01-, 02-)
+  // This ensures that 01-Signup.spec.js runs before Recruiter/02-ForgetPassword.spec.js
   return tests.sort((a, b) => {
     const aName = path.basename(a);
     const bName = path.basename(b);
+    
+    // Extract numbers from the start of the filenames
+    const aNum = parseInt(aName.match(/^\d+/)?.[0] || '999', 10);
+    const bNum = parseInt(bName.match(/^\d+/)?.[0] || '999', 10);
+    
+    if (aNum !== bNum) {
+      return aNum - bNum;
+    }
+    
     return aName.localeCompare(bName, undefined, { numeric: true, sensitivity: 'base' });
   });
 }

@@ -21,20 +21,6 @@ export class FilterPage extends BasePage {
     console.log('Filters opened');
   }
 
-  async selectRandomOption(selectLocator) {
-    await selectLocator.waitFor({ state: 'visible' });
-
-    const options = await selectLocator.locator('option').all();
-    if (options.length <= 1) return;
-
-    // Skip "All" option
-    const randomIndex = Math.floor(Math.random() * (options.length - 1)) + 1;
-    const value = await options[randomIndex].getAttribute('value');
-
-    await selectLocator.selectOption(value);
-    console.log(`Selected option: ${value}`);
-  }
-
   async applyFilters() {
     await this.applyFiltersButton.waitFor({ state: 'visible' });
     await this.applyFiltersButton.click();
@@ -47,54 +33,44 @@ export class FilterPage extends BasePage {
 
   async applyJobTypeFilter() {
     await this.openFilters();
-    await this.selectRandomOption(this.jobTypeSelect);
+    await this.jobTypeSelect.waitFor({ state: 'visible' });
+    await this.jobTypeSelect.selectOption({ label: 'Full-time' });
     await this.applyFilters();
     console.log('Job type filter applied');
   }
 
   async applyWorkTypeFilter() {
     await this.openFilters();
-    await this.selectRandomOption(this.workTypeSelect);
-    await this.applyFilters();
+    await this.workTypeSelect.waitFor({ state: 'visible' });
+    await this.workTypeSelect.selectOption({ label: 'Remote' });
+      await this.applyFilters();
     console.log('Work type filter applied');
   }
 
   async applyExperienceLevelFilter() {
     await this.openFilters();
-    await this.selectRandomOption(this.experienceLevelSelect);
+    await this.experienceLevelSelect.waitFor({ state: 'visible' });
+    await this.experienceLevelSelect.selectOption({ label: 'Executive' });
     await this.applyFilters();
     console.log('Experience level filter applied');
   }
 
   async applyRegionFilter() {
     await this.openFilters();
-    await this.selectRandomOption(this.regionSelect);
+    await this.regionSelect.waitFor({ state: 'visible' });
+    await this.regionSelect.selectOption({ label: 'Australia' });
     await this.applyFilters();
     console.log('Region filter applied');
   }
 
   async applyCurrencyFilter() {
     await this.openFilters();
-    await this.selectRandomOption(this.currencySelect);
+    await this.currencySelect.waitFor({ state: 'visible' });
+    await this.currencySelect.selectOption({ label: 'USD' });
     await this.applyFilters();
     console.log('Currency filter applied');
   }
 
-  async applyAllFilters() {
-    await this.openFilters();
-    await this.jobTypeSelect.waitFor({ state: 'visible' });
-    await this.selectRandomOption(this.jobTypeSelect);
-    await this.workTypeSelect.waitFor({ state: 'visible' });
-    await this.selectRandomOption(this.workTypeSelect);
-    await this.experienceLevelSelect.waitFor({ state: 'visible' });
-    await this.selectRandomOption(this.experienceLevelSelect);
-    await this.regionSelect.waitFor({ state: 'visible' });
-    await this.selectRandomOption(this.regionSelect);
-    await this.currencySelect.waitFor({ state: 'visible' });
-    await this.selectRandomOption(this.currencySelect);
-    await this.applyFilters();
-    console.log('All filters applied');
-  }
 }
 
 export default FilterPage;

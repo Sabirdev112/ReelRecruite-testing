@@ -72,7 +72,7 @@ app.get('/api/run-details/:id', async (req, res) => {
 });
 
 // API: Get latest individual test cases
-app.get('/api/latest-tests', async (req, res) => {
+app.get('/api/latest-tests', async (res) => {
   try {
     const tests = await getLatestTests();
     res.json(tests);
@@ -175,6 +175,14 @@ app.post('/api/run-all-tests', (req, res) => {
   const testFiles = getAllTestFiles(path.join(TESTING_ROOT, 'tests', 'e2e')).sort((a, b) => {
     const aName = path.basename(a);
     const bName = path.basename(b);
+    
+    const aNum = parseInt(aName.match(/^\d+/)?.[0] || '999', 10);
+    const bNum = parseInt(bName.match(/^\d+/)?.[0] || '999', 10);
+    
+    if (aNum !== bNum) {
+      return aNum - bNum;
+    }
+    
     return aName.localeCompare(bName, undefined, { numeric: true, sensitivity: 'base' });
   });
 
@@ -221,6 +229,13 @@ app.post('/api/run-all-tests', (req, res) => {
         console.log(`✅ ${file} passed\n`);
       } else {
         console.log(`❌ ${file} failed (code ${code})\n`);
+        console.log('Stopping full run due to failure...');
+        isRunStopped = true;
+        isSessionRunning = false;
+        // Wait briefly for logs/reporter then respond
+        return setTimeout(() => {
+          if (!res.headersSent) res.json({ success: false, message: `Failed at ${file}` });
+        }, 1000);
       }
       index++;
       runNext();

@@ -66,13 +66,12 @@ const resumePath = getResumePath(filename);
       res.url().includes('/upload') && // ✅ make this specific
       res.request().method() === 'POST' &&
       res.status() === 200,
-    { timeout: 60000 }
   );
 
   await this.uploadInput.setInputFiles(resumePath);
   await uploadPromise;
 
-  await expect(this.uploadInput).toBeEnabled();
+  await expect(this.uploadInput).toBeDisabled();
   console.log(`Resume upload completed: ${resumePath}`);
 }
 

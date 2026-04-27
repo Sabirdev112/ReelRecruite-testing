@@ -8,6 +8,7 @@ test('Recruiter logs in and Unarchives a chat', async ({ page, loginPage, archiv
   await loginPage.goto();
   await loginPage.login(recruiter.email, recruiter.password);
   await loginPage.clickSignIn();
+  await page.waitForURL('**/my-jobs');
   await archiveChat.openMessages();
   await archiveChat.openChat();
   await archiveChat.unArchiveChat();

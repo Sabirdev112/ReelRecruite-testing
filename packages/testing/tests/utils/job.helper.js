@@ -28,7 +28,7 @@ export function storeJobId(jobId) {
   console.log('Job ID stored successfully.', jobId );
 }
 
-export function getJobId(){
+export function getLatestJobId(){
   const jobPath = jobIdPath;
 
   if (!fs.existsSync(jobPath)) {

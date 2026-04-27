@@ -7,6 +7,8 @@ dotenv.config();
 
 export default defineConfig({
   testDir: './tests', // Root of all specimen categories
+  testSequencer: './sequencer.js',
+  workers: 1, // Run tests sequentially to maintain shared browser state and test order
 
   testMatch: [
     '**/*.spec.js',
@@ -24,10 +26,10 @@ export default defineConfig({
     baseURL: process.env.BASE_URL || 'http://localhost:3000',
     trace: 'retain-on-failure',
     viewport: { width: 1280, height: 720 },
-    screenshot: {
-      mode: 'on',
-      fullPage: true,
-    },
+    // screenshot: {
+    //   mode: 'on',
+    //   fullPage: true,
+    // },
     video: 'retain-on-failure',
   },
 
