@@ -1,5 +1,4 @@
 import { BasePage } from './base.page.js';
-import {expect} from '@playwright/test';
 export class FilterPage extends BasePage {
   constructor(page) {
     super(page);
@@ -11,10 +10,8 @@ export class FilterPage extends BasePage {
     this.regionSelect = page.getByTestId('job-filter-region-select');
     this.currencySelect = page.getByTestId('job-filter-currency-select');
     this.applyFiltersButton = page.getByTestId('job-filter-apply-button');
-    this.removeFiltersButton = page.getByTestId('job-filter-remove-all-button');
 }
 
-  
   async openFilters() {
     await this.filtersButton.waitFor({ state: 'visible' });
     await this.filtersButton.click();
@@ -26,16 +23,14 @@ export class FilterPage extends BasePage {
     await this.applyFiltersButton.click();
     console.log('Filters applied');
   }
-
-  // ======================
   // Individual filters
-  // ======================
 
   async applyJobTypeFilter() {
     await this.openFilters();
     await this.jobTypeSelect.waitFor({ state: 'visible' });
     await this.jobTypeSelect.selectOption({ label: 'Full-time' });
     await this.applyFilters();
+    await this.page.waitForTimeout(2000);
     console.log('Job type filter applied');
   }
 
@@ -43,7 +38,8 @@ export class FilterPage extends BasePage {
     await this.openFilters();
     await this.workTypeSelect.waitFor({ state: 'visible' });
     await this.workTypeSelect.selectOption({ label: 'Remote' });
-      await this.applyFilters();
+    await this.applyFilters();
+    await this.page.waitForTimeout(2000);
     console.log('Work type filter applied');
   }
 
@@ -52,6 +48,7 @@ export class FilterPage extends BasePage {
     await this.experienceLevelSelect.waitFor({ state: 'visible' });
     await this.experienceLevelSelect.selectOption({ label: 'Executive' });
     await this.applyFilters();
+    await this.page.waitForTimeout(2000);
     console.log('Experience level filter applied');
   }
 
@@ -60,6 +57,7 @@ export class FilterPage extends BasePage {
     await this.regionSelect.waitFor({ state: 'visible' });
     await this.regionSelect.selectOption({ label: 'Australia' });
     await this.applyFilters();
+    await this.page.waitForTimeout(2000);
     console.log('Region filter applied');
   }
 
@@ -68,6 +66,7 @@ export class FilterPage extends BasePage {
     await this.currencySelect.waitFor({ state: 'visible' });
     await this.currencySelect.selectOption({ label: 'USD' });
     await this.applyFilters();
+    await this.page.waitForTimeout(2000);
     console.log('Currency filter applied');
   }
 

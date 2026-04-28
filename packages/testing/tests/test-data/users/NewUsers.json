@@ -395,5 +395,30 @@
     "email": "user1777305925870224@gmail.com",
     "phone": "925925870224",
     "password": "Test@12345"
+  },
+  {
+    "fullName": "User 5767",
+    "email": "user1777377714625767@gmail.com",
+    "phone": "927714625767",
+    "password": "Test@12345"
+  },
+  {
+    "fullName": "API Signup User",
+    "email": "1777378354095_v9rzt64m@testmail.dev",
+    "phone": "92155683404",
+    "password": "Test@1234",
+    "userType": "candidate"
+  },
+  {
+    "fullName": "User 0445",
+    "email": "user1777391028750445@gmail.com",
+    "phone": "921028750445",
+    "password": "Test@12345"
+  },
+  {
+    "fullName": "User 0876",
+    "email": "user1777391393530876@gmail.com",
+    "phone": "921393530876",
+    "password": "Test@12345"
   }
 ]

@@ -34,7 +34,6 @@ export class SeeResumePage extends BasePage {
   async clickViewResume() {
     await this.clickViewResumeButton.waitFor({ state: 'visible' });
     await this.clickViewResumeButton.click();
-    await this.page.waitForTimeout(5000);
     console.log('Resume opened');
   }
 

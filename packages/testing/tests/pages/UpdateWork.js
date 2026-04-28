@@ -1,5 +1,4 @@
 import { BasePage } from './base.page.js';
-import {expect} from '@playwright/test';
 
 export class UpdateWorkPage extends BasePage {
   constructor(page) {
@@ -78,15 +77,6 @@ async deleteIfVisibleAndProceed() {
   }
 }
 
-  
-  async clearAndTypeUsingKeyboard(locator, value) {
-    await locator.waitFor({ state: 'visible' });
-    await locator.click();
-    await locator.press('Control+A');
-    await locator.press('Backspace');
-    await locator.type(value);
-  }
-
   async clickAddWork() {
     await this.addWorkButton.waitFor({ state: 'visible' });
     await this.addWorkButton.click();
@@ -94,13 +84,15 @@ async deleteIfVisibleAndProceed() {
   }
 
   async addCompany(company){
-    await this.clearAndTypeUsingKeyboard(this.companyInput, company);
+    await this.companyInput.waitFor({ state: 'visible' });
+    await this.companyInput.fill(company);
     console.log('added company');
   }
 
 
   async addPosition(position){
-    await this.clearAndTypeUsingKeyboard(this.positionInput, position);
+    await this.positionInput.waitFor({ state: 'visible' });
+    await this.positionInput.fill(position);
     console.log('added position');
   }
 
@@ -117,7 +109,8 @@ async deleteIfVisibleAndProceed() {
   }
 
   async addLocation(location){
-    await this.clearAndTypeUsingKeyboard(this.locationInput, location);
+    await this.locationInput.waitFor({ state: 'visible' });
+    await this.locationInput.fill(location);
     console.log('added location');
   }
 
@@ -137,7 +130,7 @@ async deleteIfVisibleAndProceed() {
 
 
   async addDescription(description){
-    await this.clearAndTypeUsingKeyboard(this.descriptionInput, description);
+    await this.descriptionInput.fill(description);
     console.log('added description');
   }
 

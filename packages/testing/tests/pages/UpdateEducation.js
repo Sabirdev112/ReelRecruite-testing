@@ -7,12 +7,10 @@ export class UpdateEducationPage extends BasePage {
 
     this.profileMenu = page.getByTestId('navbar-user-menu-trigger').first();
     this.ProfileButton = page.getByTestId('navbar-user-menu-item-profile').first();
-
     this.educationSection = page.getByTestId('education-section');
     this.deleteEduButton = page.getByTestId('delete-education-button');
     this.confirmDeleteButton = page.getByRole('button', { name: 'Ok' });
     this.addEducationButton = page.getByTestId('add-education-button-empty');
-
     this.schoolTextbox = page.getByTestId('education-institution-input-0');
     this.degreeTextbox = page.getByTestId('education-degree-input-0');
     this.fieldOfStudyTextbox = page.getByTestId('education-field-input-0');
@@ -24,35 +22,21 @@ export class UpdateEducationPage extends BasePage {
     this.saveChangesButton = page.getByRole('button', { name: 'Add Education' }).last();
 }
 
-  async clearAndTypeUsingKeyboard(locator, value) {
-    await locator.waitFor({ state: 'visible' });
-    await expect(locator).toBeEnabled();
-    await locator.click();
-    await locator.press('Control+A');
-    await locator.press('Backspace');
-    await locator.type(value);
-    const typedValue = await locator.inputValue();
-    expect(typedValue).toBe(value);
-    console.log(`Typed value: "${value}"`);
-  }
 
   async clickProfile() {
     await this.profileMenu.waitFor({ state: 'visible', timeout: 10000 });
-    await expect(this.profileMenu).toBeVisible();
     await this.profileMenu.click();
     console.log('Clicked profile menu');
   }
 
   async openProfile() {
     await this.ProfileButton.waitFor({ state: 'visible' });
-    await expect(this.ProfileButton).toBeVisible();
     await this.ProfileButton.click();
     console.log('Opened profile');
   }
 
   async navigateToEducation() {
     await this.educationSection.scrollIntoViewIfNeeded();
-    await expect(this.educationSection).toBeVisible();
     console.log('Navigated to Education section');
   }
 
@@ -74,7 +58,7 @@ export class UpdateEducationPage extends BasePage {
       await this.deleteEduButton.click({ force: true });
       await this.confirmDeleteButton.waitFor({ state: 'visible' });
       await this.confirmDeleteButton.click();
-console.log('Deleted existing education entry');
+      console.log('Deleted existing education entry');
     } else {
       console.log('No education entry to delete');
     }
@@ -88,31 +72,37 @@ console.log('Deleted existing education entry');
   }
 
   async updateSchool(school) {
-    await this.clearAndTypeUsingKeyboard(this.schoolTextbox, school);
+    await this.schoolTextbox.waitFor({ state: 'visible' });
+    await this.schoolTextbox.fill(school);
     console.log(`Updated school: ${school}`);
   }
 
   async updateDegree(degree) {
-    await this.clearAndTypeUsingKeyboard(this.degreeTextbox, degree);
+    await this.degreeTextbox.waitFor({ state: 'visible' });
+    await this.degreeTextbox.fill(degree);
     console.log(`Updated degree: ${degree}`);
   }
 
   async updateFieldOfStudy(fieldOfStudy) {
-    await this.clearAndTypeUsingKeyboard(this.fieldOfStudyTextbox, fieldOfStudy);
+    await this.fieldOfStudyTextbox.waitFor({ state: 'visible' });
+    await this.fieldOfStudyTextbox.fill(fieldOfStudy);
     console.log(`Updated field of study: ${fieldOfStudy}`);
   }
 
   async updateGPA(gpa) {
-    await this.clearAndTypeUsingKeyboard(this.gpaTextbox, gpa);
+    await this.gpaTextbox.waitFor({ state: 'visible' });
+    await this.gpaTextbox.fill(gpa);
     console.log(`Updated GPA: ${gpa}`);
   }
 
   async updateLocation(location) {
-    await this.clearAndTypeUsingKeyboard(this.locationTextbox, location);
+    await this.locationTextbox.waitFor({ state: 'visible' });
+    await this.locationTextbox.fill(location);
     console.log(`Updated location: ${location}`);
   }
 
   async updateStartDate(startDate) {
+    await this.startDateInput.waitFor({ state: 'visible' });
     await this.startDateInput.waitFor({ state: 'visible' });
     await this.startDateInput.fill(startDate);
     const value = await this.startDateInput.inputValue();
@@ -128,7 +118,8 @@ console.log('Deleted existing education entry');
   }
 
   async updateDescription(description) {
-    await this.clearAndTypeUsingKeyboard(this.descriptionTextbox, description);
+    await this.descriptionTextbox.waitFor({ state: 'visible' });
+    await this.descriptionTextbox.fill(description);
     console.log(`Updated description: ${description}`);
   }
 

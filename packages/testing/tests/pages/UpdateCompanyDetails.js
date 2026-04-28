@@ -55,64 +55,58 @@ export class CompanyDetailsPage extends BasePage {
             );
             console.log('Company logo updated');
         }
-        async clearAndTypeUsingKeyboard(locator, value) {
-            await locator.waitFor({ state: 'visible' });
-            await locator.click();
-            await locator.press('Control+A'); // use 'Meta+A' for Mac if needed
-            await locator.press('Backspace');
-            await locator.type(value);
-  }
+
         async updateCompanyName(newText) {
-             await this.clearAndTypeUsingKeyboard(this.companyNameInput, newText);
+             await this.companyNameInput.fill(newText);
              console.log('Company name updated');
         }
         async updateTagLine(newText) {
-             await this.clearAndTypeUsingKeyboard(this.TagLineInput, newText);
+             await this.TagLineInput.fill(newText);
              console.log('Tagline updated');
         }
         async updateDescription(newText) {
-             await this.clearAndTypeUsingKeyboard(this.descriptionInput, newText);
+             await this.descriptionInput.fill(newText);
              console.log('Description updated');
         }
         async updateIndustry(newText) {
-             await this.clearAndTypeUsingKeyboard(this.industryInput, newText);
+             await this.industryInput.fill(newText);
              console.log('Industry updated');
         }
         async updateCompanySize(newText) {
-                await this.clearAndTypeUsingKeyboard(this.companySizeInput, newText);
+                await this.companySizeInput.fill(newText);
                 console.log('Company size updated');
         }
         async updateLocation(newText) {
-                await this.clearAndTypeUsingKeyboard(this.locationInput, newText);
+                await this.locationInput.fill(newText);
                 console.log('Location updated');
         }
         async updateCompanyLocation(newText){
-            await this.clearAndTypeUsingKeyboard(this.companylocationInput, newText);
+            await this.companylocationInput.fill(newText);
             await this.companylocationInput.press('Enter');
             console.log('Company location updated');
         }
         async updateWebsite(newText) {
-                await this.clearAndTypeUsingKeyboard(this.websiteInput, newText);
+                await this.websiteInput.fill(newText);
                 console.log('Website updated');
         }
         async updateLinkedIn(newText) {
-                await this.clearAndTypeUsingKeyboard(this.LinkedInInput, newText);
+                await this.LinkedInInput.fill(newText);
                 console.log('LinkedIn updated');
         }
         async updateTwitter(newText) {
-                await this.clearAndTypeUsingKeyboard(this.twitterInput, newText);
+                await this.twitterInput.fill(newText);
                 console.log('Twitter updated');
         }
         async updateFacebook(newText) {
-                await this.clearAndTypeUsingKeyboard(this.FacebookInput, newText);
+                await this.FacebookInput.fill(newText);
                 console.log('Facebook updated');
         }
         async updateContactEmail(newText) {
-                await this.clearAndTypeUsingKeyboard(this.contactEmailInput, newText);
+                await this.contactEmailInput.fill(newText);
                 console.log('Contact email updated');
         }
         async updateContactNumber(newText) {
-                await this.clearAndTypeUsingKeyboard(this.contactNumberInput, newText);
+                await this.contactNumberInput.fill(newText);
                 console.log('Contact number updated');
         }
         async clickSaveChanges() {

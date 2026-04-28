@@ -12,6 +12,7 @@ export class SearchJob extends BasePage {
     await this.searchInput.waitFor({ state: 'visible' });
     await this.searchInput.fill(keyword);
     await this.searchInput.press('Enter');
+    await this.page.waitForTimeout(2000);
     console.log('Job searched');
   }
 }

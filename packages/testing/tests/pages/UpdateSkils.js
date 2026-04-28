@@ -1,5 +1,4 @@
 import { BasePage } from './base.page.js';
-import {expect} from '@playwright/test';
 
 export class UpdateSkillsPage extends BasePage {
     constructor(page) {

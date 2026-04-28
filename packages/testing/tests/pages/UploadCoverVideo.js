@@ -4,13 +4,12 @@ export class UpdateCoverVideoResumePage extends BasePage {
   constructor(page) {
     super(page);
 
-
     this.profileMenu = page.getByTestId('navbar-user-menu-trigger').first();
     this.profileButton = page.getByTestId('navbar-user-menu-item-profile').first();
     this.coverVideoSection = page.getByTestId('video-resume-header');
     this.removeVideoButton = page.getByRole('button', { name: 'Remove Video Resume' }).last();
     this.okButton = page.getByRole('button', { name: 'Ok' });
-this.uploadVideoInput = page.getByTestId('upload-video-label');
+    this.uploadVideoInput = page.getByTestId('upload-video-label');
   }
 
   async clickProfile() {
@@ -41,10 +40,10 @@ if (await this.uploadVideoInput.isVisible()) {
       await this.removeVideoButton.waitFor({ state: 'visible' });
       await this.removeVideoButton.click();
       console.log('Clicked Remove Video Resume button');
-      await this.okButton.waitFor({ state: 'visible', timeout: 5000 });
+      await this.okButton.waitFor({ state: 'visible' });
       await this.okButton.click();
       console.log('Clicked Ok on confirmation dialog');
-      await this.uploadVideoInput.waitFor({ state: 'visible', timeout: 10000 });
+      await this.uploadVideoInput.waitFor({ state: 'visible' });
       console.log('Video removed successfully - upload button is now visible');
 }
   }
@@ -59,7 +58,7 @@ const videoPath = getVideoPath(filename);
     await videoInput.setInputFiles(videoPath);
     console.log(`Successfully set file: ${videoPath}. Waiting for upload to complete...`);
    
-    await this.removeVideoButton.waitFor({ state: 'visible', timeout: 60000 });
+    await this.removeVideoButton.waitFor({ state: 'visible' });
     console.log('Upload completed: Remove Video button is now visible');    
 
     console.log('Video upload completed successfully');

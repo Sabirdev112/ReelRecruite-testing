@@ -6,8 +6,8 @@ export class CreateJobPage extends BasePage {
   constructor(page) {
     super(page);
     this.createdJobId = null;
-    this.postNewJobButton = page.getByTestId('post-new-job-button'); 
-    this.nextButton = page.getByTestId('next-step-button'); 
+    this.postNewJobButton = page.getByTestId('post-new-job-button');
+    this.nextButton = page.getByTestId('next-step-button');
 
     this.titleInput = page.getByTestId('job-title-input');
     this.summaryInput = page.getByTestId('job-highlight-textarea');
@@ -39,35 +39,36 @@ export class CreateJobPage extends BasePage {
     await this.postNewJobButton.waitFor({ state: 'visible' });
     await this.postNewJobButton.click();
     console.log('Job form opened');
-}
+  }
 
- async fillTitle(title){
-  await this.titleInput.waitFor({ state: 'visible' });
-  await this.titleInput.pressSequentially(title);
-  console.log('Title filled');
- }
+  async fillTitle() {
+    await this.titleInput.waitFor({ state: 'visible' });
+    await this.page.waitForTimeout(500); 
+    await this.titleInput.fill('Senior SQA Engineer');
+    console.log('Title filled');
+  }
 
- async generateHighlight(){
-  await this.generateHighlightButton.waitFor({ state: 'visible' });
-  await this.generateHighlightButton.click();
-  await this.generateInput.waitFor({ state: 'visible' });
-  await this.generateInput.fill('Senior SQA Engineer');
-  await this.confirmGenerateButton.waitFor({ state: 'visible' });
-  await this.confirmGenerateButton.click();
-  await this.applyAiButton.waitFor({ state: 'visible' });
-  await this.applyAiButton.click();
-  console.log('Highlight generated');
- }
- async addRegionAndLocation(region,location){
-  await this.regionInput.waitFor({ state: 'visible' });
-  await this.regionInput.fill(region);
-  await this.locationInput.waitFor({ state: 'visible' });
-  await this.locationInput.fill(location);
-  await this.nextButton.click();
-  console.log('Region and location added');
- }
+  async generateHighlight() {
+    await this.generateHighlightButton.waitFor({ state: 'visible' });
+    await this.generateHighlightButton.click();
+    await this.generateInput.waitFor({ state: 'visible' });
+    await this.generateInput.fill('Senior SQA Engineer');
+    await this.confirmGenerateButton.waitFor({ state: 'visible' });
+    await this.confirmGenerateButton.click();
+    await this.applyAiButton.waitFor({ state: 'visible' });
+    await this.applyAiButton.click();
+    console.log('Highlight generated');
+  }
+  async addRegionAndLocation(region, location) {
+    await this.regionInput.waitFor({ state: 'visible' });
+    await this.regionInput.fill(region);
+    await this.locationInput.waitFor({ state: 'visible' });
+    await this.locationInput.fill(location);
+    await this.nextButton.click();
+    console.log('Region and location added');
+  }
 
-  async fillJobTypeAndCompensation(){
+  async fillJobTypeAndCompensation() {
     await this.jobTypeDropdown.waitFor({ state: 'visible' });
     await this.jobTypeDropdown.click();
     await this.page.getByRole('option', { name: 'Full-time' }).click();
@@ -85,7 +86,14 @@ export class CreateJobPage extends BasePage {
     console.log('Job type and compensation filled');
   }
 
+  async clickNextButton(){
+    await this.nextButton.waitFor({ state: 'visible' });
+    await this.nextButton.click();
+    console.log('Next button clicked');
+  }
+
   async fillJobDescription() {
+    await this.generatedescriptionbutton.waitFor({ state: 'visible' });
     await this.generatedescriptionbutton.click();
     await this.generateInput.waitFor({ state: 'visible' });
     await this.generateInput.fill('React developer');
@@ -97,11 +105,6 @@ export class CreateJobPage extends BasePage {
     console.log('Job description filled');
   }
 
-  async clickNext(){
-    await this.nextButton.waitFor({ state: 'visible' });
-    await this.nextButton.click();
-    console.log('Next button clicked');
-  }
 
   async addQuestions() {
     await this.addQuestionButton.click();
@@ -120,48 +123,47 @@ export class CreateJobPage extends BasePage {
   }
 
   async submitJob() {
-  await this.confirmPostButton.waitFor({ state: 'visible' });
-  await expect(this.confirmPostButton).toBeEnabled();
+    await this.confirmPostButton.waitFor({ state: 'visible' });
+    await expect(this.confirmPostButton).toBeEnabled();
 
-  const jobRequestPromise = this.page.waitForRequest(
-    req =>
-      req.method() === 'POST' &&
-      req.url().includes('/v1/jobs/create'),
-    { timeout: 30000 }
-  );
+    const jobRequestPromise = this.page.waitForRequest(
+      req =>
+        req.method() === 'POST' &&
+        req.url().includes('/v1/jobs/create')
+    );
 
-  await this.confirmPostButton.click();
+    await this.confirmPostButton.click();
 
-  let jobRequest;
-  try {
-    jobRequest = await jobRequestPromise;
-  } catch (error) {
-    console.error('Failed to intercept job creation request:', error);
-    throw new Error(`Job creation request not intercepted. Error: ${error.message}`);
+    let jobRequest;
+    try {
+      jobRequest = await jobRequestPromise;
+    } catch (error) {
+      console.error('Failed to intercept job creation request:', error);
+      throw new Error(`Job creation request not intercepted. Error: ${error.message}`);
+    }
+
+    const response = await jobRequest.response();
+
+    if (!response) {
+      throw new Error('No response returned from job create API');
+    }
+
+    const responseBody = await response.json();
+
+    console.log('JOB CREATE RESPONSE:', responseBody);
+
+    this.createdJobId = responseBody?.job?.id;
+
+    if (!this.createdJobId) {
+      throw new Error(`Job ID missing: ${JSON.stringify(responseBody)}`);
+    }
+
+    storeJobId(this.createdJobId);
+
+    console.log('Job stored successfully:', this.createdJobId);
+
+    return this.createdJobId;
   }
-
-  const response = await jobRequest.response();
-
-  if (!response) {
-    throw new Error('No response returned from job create API');
-  }
-
-  const responseBody = await response.json();
-
-  console.log('JOB CREATE RESPONSE:', responseBody);
-
-  this.createdJobId = responseBody?.job?.id;
-
-  if (!this.createdJobId) {
-    throw new Error(`Job ID missing: ${JSON.stringify(responseBody)}`);
-  }
-
-  storeJobId(this.createdJobId);
-
-  console.log('Job stored successfully:', this.createdJobId);
-
-  return this.createdJobId;
-}
 
 
   async seeAllApplications() {

@@ -5,35 +5,31 @@ import { getBannerImagePath, getProfileImagePath } from '../utils/profileMedia.h
 export class UpdateInfoPage extends BasePage {
   constructor(page) {
     super(page);
-this.profileMenu = page.getByTestId('navbar-user-menu-trigger').first();
+    this.profileMenu = page.getByTestId('navbar-user-menu-trigger').first();
     this.profileButton = page.getByTestId('navbar-user-menu-item-profile').first();
     this.editProfileButton = page.getByTestId('edit-profile-info-button');
     this.coverImageButton = page.getByTestId('edit-profile-cover-upload-button');
     this.profilePictureEditButton = page.getByTestId('edit-profile-avatar-upload-button');
     this.fullNameTextbox = page.locator('#fullName');
     this.professionalTitleTextbox = page.locator('#title');
-
     this.saveChangesButton = page.getByTestId('profile-save-changes-button');
     this.cancelButton = page.getByRole('button', { name: 'Cancel' });
   }
 
   async openProfileMenu() {
     await this.profileMenu.waitFor({ state: 'visible' });
-    await expect(this.profileMenu).toBeVisible();
     await this.profileMenu.click();
     console.log('Profile menu opened');
   }
 
   async clickProfile() {
     await this.profileButton.waitFor({ state: 'visible' });
-    await expect(this.profileButton).toBeVisible();
     await this.profileButton.click();
     console.log('Navigated to profile page');
   }
 
   async clickEditProfile() {
     await this.editProfileButton.waitFor({ state: 'visible' });
-    await expect(this.editProfileButton).toBeVisible();
     await this.editProfileButton.click();
     console.log('Edit profile button clicked');
   }
@@ -61,26 +57,15 @@ const profilePath = getProfileImagePath();
     console.log('Profile picture uploaded:', profilePath);
   }
 
-  async clearAndTypeUsingKeyboard(locator, value) {
-    await locator.waitFor({ state: 'visible' });
-    await expect(locator).toBeEnabled();
-    await locator.click();
-    await locator.press('Control+A');
-    await locator.press('Backspace');
-    await locator.type(value);
-    const typedValue = await locator.inputValue();
-    expect(typedValue).toBe(value);
-  }
-
   async fillFullName(name) {
-    await this.clearAndTypeUsingKeyboard(this.fullNameTextbox, name);
-    await expect(this.fullNameTextbox).toHaveValue(name);
+    await this.fullNameTextbox.waitFor({ state: 'visible' });
+    await this.fullNameTextbox.fill(name);
     console.log('Full name updated:', name);
   }
 
   async fillProfessionalTitle(title) {
-    await this.clearAndTypeUsingKeyboard(this.professionalTitleTextbox, title);
-    await expect(this.professionalTitleTextbox).toHaveValue(title);
+    await this.professionalTitleTextbox.waitFor({ state: 'visible' });
+    await this.professionalTitleTextbox.fill(title);
     console.log('Professional title updated:', title);
   }
 

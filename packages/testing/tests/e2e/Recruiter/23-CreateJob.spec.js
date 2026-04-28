@@ -13,12 +13,12 @@ test('Recruiter login and create a new job', async ({ page, loginPage, createJob
   await page.waitForURL('**/my-jobs');
 
   await createJobPage.openJobForm();
-  await createJobPage.fillTitle('Senior SQA Engineer');
+  await createJobPage.fillTitle();
   await createJobPage.generateHighlight();
   await createJobPage.addRegionAndLocation('Pakistan','Lahore');
   await createJobPage.fillJobTypeAndCompensation();
   await createJobPage.fillJobDescription();
-  await createJobPage.clickNext();
+  await createJobPage.clickNextButton();
   await createJobPage.addQuestions();
   await createJobPage.previewJob();
   
