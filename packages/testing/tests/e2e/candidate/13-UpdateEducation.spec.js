@@ -10,7 +10,6 @@ test('candidate can update education', async ({ page, loginPage, updateEducation
   await loginPage.login(candidate.email, candidate.password);
   await loginPage.clickSignIn();
   await page.waitForURL('**/jobs');
-
   await updateEducation.clickProfile();
   await updateEducation.openProfile();
   await updateEducation.navigateToEducation();

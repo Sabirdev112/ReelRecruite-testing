@@ -10,7 +10,6 @@ const candidate = loadCredentials()[0];
   await loginPage.login(candidate.email, candidate.password);
   await loginPage.clickSignIn();
   await page.waitForURL('**/jobs');
-
   await uploadCoverVideo.clickProfile();
   await uploadCoverVideo.openProfile();
   await uploadCoverVideo.navigateToCoverVideoSection();

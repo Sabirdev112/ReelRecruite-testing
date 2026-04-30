@@ -11,7 +11,6 @@ test('Apply for latest job', async ({ page, loginPage, applyJobPage }) => {
     const user = loadCredentials()[0];
     const jobUrl = getLatestJobUrl();
     const jobId = getLatestJobId();
-
     await loginPage.goto();
     await loginPage.login(user.email, user.password);
     await loginPage.clickSignIn();

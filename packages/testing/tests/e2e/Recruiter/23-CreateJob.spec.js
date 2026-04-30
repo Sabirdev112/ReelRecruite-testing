@@ -11,7 +11,6 @@ test('Recruiter login and create a new job', async ({ page, loginPage, createJob
   await loginPage.login(recruiter.email, recruiter.password);
   await loginPage.clickSignIn();
   await page.waitForURL('**/my-jobs');
-
   await createJobPage.openJobForm();
   await createJobPage.fillTitle();
   await createJobPage.generateHighlight();

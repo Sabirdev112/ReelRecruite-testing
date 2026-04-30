@@ -107,7 +107,7 @@ export default function DashboardPage() {
   // Generate chart data
   const donutData = generateDonutData(stats);
   const barData = generateBarChartData(allRuns);
-  const summaryCardsData = getSummaryCardsData(allRuns, allTestsCount, passRate, globalAvgDur);
+  const summaryCardsData = getSummaryCardsData(stats, passRate, globalAvgDur);
 
   if (loading && uiTests.length === 0) {
     return (

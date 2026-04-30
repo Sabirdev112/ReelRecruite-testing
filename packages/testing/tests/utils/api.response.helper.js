@@ -6,12 +6,15 @@ import { fileURLToPath } from 'url';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const RESPONSES_PATH = path.join(__dirname, 'responses.json');
 const USERS_PATH = path.join(__dirname, '../fixtures/users.json');
-const JOB_ID_PATH = path.join(__dirname, '../test-data/Recruiter/jobid.json');
-const APPLICATION_ID_PATH = path.join(__dirname, '../test-data/Candidate/applicationId.json');
-const NEW_USERS_FILE = path.join(__dirname, '../test-Data/users/NewUsers.json');
+const API_JOBID_PATH = path.join(__dirname, '../test-data/api/jobid.json');
+const API_APPLICATIONID_PATH = path.join(__dirname, '../test-data/api/applicationId.json');
 
 function readJson(filePath) {
   return JSON.parse(fs.readFileSync(filePath, 'utf-8'));
+}
+
+function writeJson(filePath, data) {
+  fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
 }
 
 // Setup phone format
@@ -35,12 +38,12 @@ function buildPlaceholderMap() {
   let jobId;
   let applicationId;
   try {
-    jobId = readJson(JOB_ID_PATH).jobId;
+    jobId = readJson(API_JOBID_PATH).jobId;
   } catch {
     jobId = '';
   }
   try {
-    applicationId = readJson(APPLICATION_ID_PATH).applicationId;
+    applicationId = readJson(API_APPLICATIONID_PATH).applicationId;
   } catch {
     applicationId = '';
   }
@@ -255,6 +258,26 @@ export async function runApiCase(request, testInfo, caseKey, options = {}) {
   console.log(`[API ${caseKey}] ${method} ${endpoint} — ${duration}ms — HTTP ${response.status()}`);
 
   await apiResponse(response, testInfo);
+
+  // Auto-store IDs if successful
+  if (response.ok()) {
+    let body;
+    try {
+      body = await response.json();
+    } catch {
+      body = null;
+    }
+
+    if (body) {
+      if (caseKey === 'CreateJob' && body.job?.id) {
+        writeJson(API_JOBID_PATH, { jobId: body.job.id });
+        console.log(`[API] Stored jobId: ${body.job.id}`);
+      } else if (caseKey === 'jobApply' && body.application?.id) {
+        writeJson(API_APPLICATIONID_PATH, { applicationId: body.application.id });
+        console.log(`[API] Stored applicationId: ${body.application.id}`);
+      }
+    }
+  }
 
   const expected = Array.isArray(def.expectedStatus)
     ? def.expectedStatus

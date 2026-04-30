@@ -420,5 +420,45 @@
     "email": "user1777391393530876@gmail.com",
     "phone": "921393530876",
     "password": "Test@12345"
+  },
+  {
+    "fullName": "User 0603",
+    "email": "user1777463421650603@gmail.com",
+    "phone": "923421650603",
+    "password": "Test@12345"
+  },
+  {
+    "fullName": "API Signup User",
+    "email": "1777464312261_lthf2f47@testmail.dev",
+    "phone": "92551610659",
+    "password": "Test@1234",
+    "userType": "candidate"
+  },
+  {
+    "fullName": "User 0461",
+    "email": "user1777551625750461@gmail.com",
+    "phone": "921625750461",
+    "password": "Test@12345"
+  },
+  {
+    "fullName": "API Signup User",
+    "email": "1777552900428_eo1prozt@testmail.dev",
+    "phone": "92911067939",
+    "password": "Test@1234",
+    "userType": "candidate"
+  },
+  {
+    "fullName": "API Signup User",
+    "email": "1777555587999_3tqzh907@testmail.dev",
+    "phone": "92165109794",
+    "password": "Test@1234",
+    "userType": "candidate"
+  },
+  {
+    "fullName": "API Signup User",
+    "email": "1777555725076_4aa0mhp9@testmail.dev",
+    "phone": "92754938876",
+    "password": "Test@1234",
+    "userType": "candidate"
   }
 ]

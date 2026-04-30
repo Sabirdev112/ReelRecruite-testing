@@ -12,7 +12,6 @@ test('Candidate withdraw application', async ({ page, loginPage, withdrawApplica
   await loginPage.login(candidate.email, candidate.password);
   await loginPage.clickSignIn();
   await page.waitForURL('**/jobs');
-
   const applicationUrl = buildApplicationUrl(applicationId);
   await page.goto(applicationUrl);
   await withdrawApplication.withdraw();

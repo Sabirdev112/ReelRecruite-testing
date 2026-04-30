@@ -15,7 +15,6 @@ test('Recruiter updates company details and logo', async ({ page, loginPage, upd
   await updateCompanyDetails.navigateToProfile();
   await updateCompanyDetails.navigateToCompanyDetails();
   await updateCompanyDetails.clickEditDetails();
-
   await updateCompanyDetails.updateCompanyLogo();
   await updateCompanyDetails.updateCompanyName('Reel Recruit AI');
   await updateCompanyDetails.updateTagLine('Hire smarter with video resumes');
@@ -27,7 +26,7 @@ test('Recruiter updates company details and logo', async ({ page, loginPage, upd
   await updateCompanyDetails.updateLinkedIn('https://linkedin.com/reelrecruitai');
   await updateCompanyDetails.updateTwitter('https://twitter.com/reelrecruitai');
   await updateCompanyDetails.updateFacebook('https://facebook.com/reelrecruitai');
-  await updateCompanyDetails.updateContactEmail('IuYQ4@example.com');
+  await updateCompanyDetails.updateContactEmail('sabir.dev@example.com');
   await updateCompanyDetails.updateContactNumber('123-456-7890');
   await updateCompanyDetails.clickSaveChanges();
 
@@ -36,7 +35,11 @@ test('Recruiter updates company details and logo', async ({ page, loginPage, upd
   expect(db.company_name).toBe('Reel Recruit AI');
   expect(db.tagline).toBe('Hire smarter with video resumes');
   expect(db.website).toBe('https://reelrecruitai.com');
-  
+  expect(db.industry).toBe('Information Technology');
+  expect(db.company_size).toBe('51-200 employees');
+  expect(db.locations).toContain('New York, NY');
+  expect(db.contact_email).toBe('sabir.dev@example.com');
+  expect(db.contact_phone).toBe('1234567890');
 });
 
 

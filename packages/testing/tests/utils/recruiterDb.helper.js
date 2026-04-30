@@ -35,12 +35,12 @@ export async function getCompanyProfileByUserId(userId) {
 
 export async function getCompanyProfileByEmail(email) {
   const rows = await runQuery(
-    `SELECT cp.id, cp.user_id, cp.company_name, cp.company_slug, cp.description, cp.website, cp.logo_url, cp.banner_url, cp.tagline, cp.locations, cp.updated_at FROM company_profiles cp JOIN users u ON cp.user_id = u.id WHERE u.email = $1`,
+    `SELECT cp.id, cp.user_id, cp.company_name, cp.company_slug, cp.description, cp.website, cp.logo_url, cp.banner_url, cp.tagline, cp.locations,cp.company_size, cp.industry, cp.contact_email, cp.contact_phone, cp.updated_at FROM company_profiles cp JOIN users u ON cp.user_id = u.id WHERE u.email = $1`,
     [email]
 
   );
   const result = rows[0];
-  console.log('[recruiterDb] getCompanyProfileByEmail:', { email, company_name: result && result.company_name, updated_at: result && result.updated_at });
+  console.log('[recruiterDb] getCompanyProfileByEmail:', { email, company_name: result && result.company_name, updated_at: result && result.updated_at, contact_phone: result && result.contact_phone, contact_email: result && result.contact_email, locations: result && result.locations, company_size: result && result.company_size, industry: result && result.industry, tagline: result && result.tagline, banner_url: result && result.banner_url, logo_url: result && result.logo_url, website: result && result.website, description: result && result.description, company_slug: result && result.company_slug });
   return result;
 }
 

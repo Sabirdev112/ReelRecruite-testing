@@ -65,18 +65,18 @@ export function calculateProgressPercent(status) {
 }
 
 // Get card data for summary card
-export function getSummaryCardsData(allRuns, allTestsCount, passRate, globalAvgDur) {
+export function getSummaryCardsData(stats, passRate, globalAvgDur) {
   return [
     { 
-      label: 'Cloud Units', 
-      val: allRuns.length, 
-      sub: 'Total test sessions', 
+      label: 'Executed Tests', 
+      val: stats.total, 
+      sub: 'Total individual executions', 
       color: 'text-indigo-600' 
     },
     { 
-      label: 'Spec Audit', 
-      val: allTestsCount, 
-      sub: 'Individual specimen count', 
+      label: 'Passed Tests', 
+      val: stats.passed, 
+      sub: 'Successful validations', 
       color: 'text-emerald-600' 
     },
     { 

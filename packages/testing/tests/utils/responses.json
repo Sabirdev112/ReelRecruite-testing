@@ -36,15 +36,6 @@
       "password": "{{candidate.password}}"
     }
   },
-  "ForgetPassword": {
-    "method": "POST",
-    "endpoint": "/v1/auth/signin",
-    "expectedStatus": 200,
-    "payload": {
-      "email": "{{recruiter.email}}",
-      "password": "{{recruiter.password}}"
-    }
-  },
   "ChangePassword": {
     "method": "POST",
     "endpoint": "/v1/profile/change-password",
@@ -92,36 +83,6 @@
       "expiresAt": "2026-12-31T23:59:59.999Z"
     }
   },
-  "SaveDraft": {
-    "method": "POST",
-    "endpoint": "/v1/jobs/create",
-    "authRole": "recruiter",
-    "expectedStatus": [
-      200,
-      201
-    ],
-    "payload": {
-      "recruiterId": "ee568c89-8dde-4c75-9431-0382c9e2e90b",
-      "companyId": "27dfa07f-ee9e-4a29-842c-28588b114754",
-      "isAnonymous": false,
-      "status": "draft",
-      "isDeleted": false,
-      "title": "Software Quality Assurance Engineer",
-      "highlight": "We are looking for a detail-oriented Software Quality Assurance Engineer to join our dynamic team. The ideal candidate will have experience in manual and automated testing, a keen eye for detail, and a passion for ensuring software quality.",
-      "location": "",
-      "region": "North America",
-      "jobType": "full-time",
-      "workType": "on-site",
-      "experienceLevel": "mid",
-      "salaryRange": "50000-70000",
-      "currency": "usd",
-      "description": "<p>Draft description for API test (SaveDraft POM).</p>",
-      "requiredSkills": [],
-      "requirements": [],
-      "tags": [],
-      "expiresAt": "2026-12-31T23:59:59.999Z"
-    }
-  },
   "EditJob": {
     "method": "POST",
     "endpoint": "/v1/jobs/update",
@@ -137,10 +98,13 @@
     }
   },
   "DeleteJob": {
-    "method": "GET",
-    "endpoint": "/v1/jobs/read/my-jobs",
+    "method": "POST",
+    "endpoint": "/v1/jobs/delete",
     "authRole": "recruiter",
-    "expectedStatus": 200
+    "expectedStatus": 200,
+    "payload": {
+      "jobId": "{{jobId}}"
+    }
   },
   "SearchJob": {
     "method": "GET",
@@ -151,73 +115,12 @@
       "search": "engineer"
     }
   },
-  "FIlter": {
-    "method": "GET",
-    "endpoint": "/v1/jobs/read/get-all",
-    "authRole": "candidate",
-    "expectedStatus": 200,
-    "query": {
-      "jobType": "full-time",
-      "workType": "on-site",
-      "experienceLevel": "executive",
-      "region": "Asia",
-      "currency": "pkr"
-    }
-  },
-  "jobtype": {
-    "method": "GET",
-    "endpoint": "/v1/jobs/read/get-all",
-    "authRole": "candidate",
-    "expectedStatus": 200,
-    "query": {
-      "jobType": "full-time"
-    }
-  },
-  "workTypeFilter": {
-    "method": "GET",
-    "endpoint": "/v1/jobs/read/get-all",
-    "authRole": "candidate",
-    "expectedStatus": 200,
-    "query": {
-      "workType": "on-site"
-    }
-  },
-  "experienceLevelFilter": {
-    "method": "GET",
-    "endpoint": "/v1/jobs/read/get-all",
-    "authRole": "candidate",
-    "expectedStatus": 200,
-    "query": {
-      "experienceLevel": "executive"
-    }
-  },
-  "regionFilter": {
-    "method": "GET",
-    "endpoint": "/v1/jobs/read/get-all",
-    "authRole": "candidate",
-    "expectedStatus": 200,
-    "query": {
-      "region": "Asia"
-    }
-  },
-  "currencyFilter": {
-    "method": "GET",
-    "endpoint": "/v1/jobs/read/get-all",
-    "authRole": "candidate",
-    "expectedStatus": 200,
-    "query": {
-      "currency": "pkr"
-    }
-  },
   "jobApply": {
     "method": "POST",
     "endpoint": "/v1/applications/create/submit",
     "authRole": "candidate",
     "expectedStatus": [
-      200,
-      201,
-      400,
-      409
+      200
     ],
     "payload": {
       "applicationid": "{{applicationId}}",
@@ -228,12 +131,6 @@
       "recruiterNotes": null,
       "rejectionReason": null
     }
-  },
-  "withdrawApplication": {
-    "method": "GET",
-    "endpoint": "/v1/applications/read/my-applications",
-    "authRole": "candidate",
-    "expectedStatus": 200
   },
   "ViewAppliedJobs": {
     "method": "GET",
@@ -247,53 +144,7 @@
     "authRole": "recruiter",
     "expectedStatus": 200
   },
-  "ShortlistCandidate": {
-    "method": "GET",
-    "endpoint": "/v1/jobs/read/my-jobs",
-    "authRole": "recruiter",
-    "expectedStatus": 200
-  },
-  "SeeResume": {
-    "method": "GET",
-    "endpoint": "/v1/profile/read",
-    "authRole": "recruiter",
-    "expectedStatus": 200
-  },
-  "SeeCoverVideo": {
-    "method": "GET",
-    "endpoint": "/v1/jobs/read/my-jobs",
-    "authRole": "recruiter",
-    "expectedStatus": 200
-  },
-  "sendMessage": {
-    "method": "GET",
-    "endpoint": "/v1/chats/read/get-all",
-    "authRole": "recruiter",
-    "expectedStatus": 200
-  },
-  "ArchiveChat": {
-    "method": "GET",
-    "endpoint": "/v1/chats/read/get-all",
-    "authRole": "recruiter",
-    "expectedStatus": 200
-  },
-  "UnArchiveChat": {
-    "method": "GET",
-    "endpoint": "/v1/chats/read/get-all",
-    "authRole": "recruiter",
-    "expectedStatus": 200
-  },
   "UpdateInfo": {
-    "method": "POST",
-    "endpoint": "/v1/profile/update",
-    "authRole": "candidate",
-    "expectedStatus": 200,
-    "payload": {
-      "fullName": "Sabir SQA",
-      "title": "Senior QA Engineer"
-    }
-  },
-  "UpdateInfoRecruiter": {
     "method": "POST",
     "endpoint": "/v1/profile/update",
     "authRole": "recruiter",
@@ -304,15 +155,6 @@
     }
   },
   "UpdateAbout": {
-    "method": "POST",
-    "endpoint": "/v1/profile/update",
-    "authRole": "candidate",
-    "expectedStatus": 200,
-    "payload": {
-      "bio": "Experienced software engineer with a passion for developing innovative programs that expedite organizational success."
-    }
-  },
-  "UpdateAboutRecruiter": {
     "method": "POST",
     "endpoint": "/v1/profile/update",
     "authRole": "recruiter",
@@ -391,17 +233,5 @@
         "Test Automation"
       ]
     }
-  },
-  "UpdateResume": {
-    "method": "GET",
-    "endpoint": "/v1/profile/read",
-    "authRole": "candidate",
-    "expectedStatus": 200
-  },
-  "UpdateCoverVideo": {
-    "method": "GET",
-    "endpoint": "/v1/profile/read",
-    "authRole": "candidate",
-    "expectedStatus": 200
   }
 }

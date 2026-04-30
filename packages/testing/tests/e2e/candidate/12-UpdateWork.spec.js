@@ -10,7 +10,6 @@ test('Candidate deletes existing work (if any) and adds new experience', async (
   await loginPage.login(candidate.email, candidate.password);
   await loginPage.clickSignIn();
   await page.waitForURL('**/jobs');
-
   await updateWork.openProfileDropdown();
   await updateWork.openProfile();
   await updateWork.navigateToWorkSection();

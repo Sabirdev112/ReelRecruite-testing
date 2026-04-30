@@ -10,7 +10,6 @@ test('recruiter info, profile picture, and banner update', async ({ page, loginP
   await loginPage.login(recruiter.email, recruiter.password);
   await loginPage.clickSignIn();
   await page.waitForURL('**/my-jobs');
-  
   await updateInfo.openProfileMenu();
   await updateInfo.clickProfile();
   await updateInfo.clickEditProfile();

@@ -23,8 +23,7 @@ const client = new MongoClient(uri, {
 async function migrate() {
   try {
     console.log('--- MONGODB INITIALIZATION ---');
-    console.log('Connecting to cluster...');
-    
+        
     await client.connect();
     const db = client.db('reelrecruite_automation');
     
