@@ -460,5 +460,17 @@
     "phone": "92754938876",
     "password": "Test@1234",
     "userType": "candidate"
+  },
+  {
+    "fullName": "User 6776",
+    "email": "user1777899258226776@gmail.com",
+    "phone": "929258226776",
+    "password": "Test@12345"
+  },
+  {
+    "fullName": "User 2731",
+    "email": "user1777908818952731@gmail.com",
+    "phone": "928818952731",
+    "password": "Test@12345"
   }
 ]

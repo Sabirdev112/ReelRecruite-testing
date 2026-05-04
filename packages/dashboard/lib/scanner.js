@@ -1,9 +1,9 @@
 import fs from 'fs';
 import path from 'path';
 
-/**
- * Recursively finds all Playwright spec files and sorts them numerically
- */
+
+//  Recursively finds all Playwright spec files and sorts them numerically
+
 export function getDynamicTestOrder(dir, rootDir) {
   if (!fs.existsSync(dir)) return [];
 
@@ -24,7 +24,6 @@ export function getDynamicTestOrder(dir, rootDir) {
 
   const tests = getAllFiles(dir);
 
-  // Sort numerically based on filename prefixes (01-, 02-)
   // This ensures that 01-Signup.spec.js runs before Recruiter/02-ForgetPassword.spec.js
   return tests.sort((a, b) => {
     const aName = path.basename(a);

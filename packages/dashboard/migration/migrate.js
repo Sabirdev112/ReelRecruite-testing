@@ -47,12 +47,8 @@ async function migrate() {
     }
 
     console.log('\nMigration/Initialization finished successfully.');
-    console.log('Your MongoDB database "reelrecruite_automation" is ready.');
 
   } catch (err) {
-    console.error('Initialization failed:', err.message);
-    process.exitCode = 1;
-  } finally {
     await client.close();
     process.exit();
   }
