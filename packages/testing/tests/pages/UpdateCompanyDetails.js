@@ -1,5 +1,5 @@
 import { BasePage } from './base.page.js';
-
+import { expect } from '@playwright/test';
 import { getBannerImagePath } from '../utils/profileMedia.helper.js';
 export class CompanyDetailsPage extends BasePage {
     constructor(page) {
@@ -16,7 +16,6 @@ export class CompanyDetailsPage extends BasePage {
        this.industryInput = page.locator('#industry');
        this.companySizeInput = page.locator('#companySize');
        this.locationInput = page.locator('#headquarters');
-       this.companylocationInput = page.getByTestId('company-locations-multi-input');
        this.websiteInput = page.locator('#website');
        this.LinkedInInput = page.locator('#linkedinUrl');
        this.twitterInput = page.locator('#twitterUrl');
@@ -80,11 +79,6 @@ export class CompanyDetailsPage extends BasePage {
                 await this.locationInput.fill(newText);
                 console.log('Location updated');
         }
-        async updateCompanyLocation(newText){
-            await this.companylocationInput.fill(newText);
-            await this.companylocationInput.press('Enter');
-            console.log('Company location updated');
-        }
         async updateWebsite(newText) {
                 await this.websiteInput.fill(newText);
                 console.log('Website updated');
@@ -112,7 +106,20 @@ export class CompanyDetailsPage extends BasePage {
         async clickSaveChanges() {
             await this.saveButton.waitFor({ state: 'visible' });
             await this.saveButton.click();
-            console.log('Changes saved');
+            const responsePromise = this.page.waitForResponse(
+                (response) =>
+                  response.url().includes('/v1/profile/update') &&
+                  ['POST', 'PUT', 'PATCH'].includes(response.request().method()),
+              );
+              const response = await responsePromise;
+              if (!response.ok()) {
+                const body = await response.text().catch(() => '<no body>');
+                throw new Error(
+                  `Company update failed: HTTP ${response.status()} ${response.url()} — ${body}`
+                );
+              }
+            await expect(this.EditDetailsButton.first()).toBeVisible();
+            console.log(`Changes saved (HTTP ${response.status()})`);
         }
 
 

@@ -1,6 +1,8 @@
 import {test} from '../../fixtures/base.fixtures.js';
 import { loadCredentials } from '../../utils/recruiterCredentials.js';
+import { getLatestJobUrl } from '../../utils/job.helper.js';
 
+const jobUrl = getLatestJobUrl();
 const recruiter = loadCredentials()[0];
 
 test('Recruiter logs in and Unarchives a chat', async ({ page, loginPage, archiveChat }) => {
@@ -9,8 +11,10 @@ test('Recruiter logs in and Unarchives a chat', async ({ page, loginPage, archiv
   await loginPage.login(recruiter.email, recruiter.password);
   await loginPage.clickSignIn();
   await page.waitForURL('**/my-jobs');
-  await archiveChat.openMessages();
-  await archiveChat.openChat();
+  await page.goto(jobUrl);
+  await archiveChat.clickViewApplications();
+  await archiveChat.clickViewDetails();
+  await archiveChat.clickMessagesButton();
   await archiveChat.unArchiveChat();
 });
 

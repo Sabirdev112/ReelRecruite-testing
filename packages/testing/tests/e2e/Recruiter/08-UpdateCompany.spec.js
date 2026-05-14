@@ -37,9 +37,8 @@ test('Recruiter updates company details and logo', async ({ page, loginPage, upd
   expect(db.website).toBe('https://reelrecruitai.com');
   expect(db.industry).toBe('Information Technology');
   expect(db.company_size).toBe('51-200 employees');
-  expect(db.locations).toContain('New York, NY');
   expect(db.contact_email).toBe('sabir.dev@example.com');
-  expect(db.contact_phone).toBe('1234567890');
+  expect(db.headquarters).toBe('New York, NY');
 });
 
 

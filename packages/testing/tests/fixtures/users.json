@@ -1,12 +1,17 @@
 {
   "recruiter": {
-    "email": "carlos@gmail.com",
-    "password": "Carlos@1234"
+    "id": "2e0020a8-9e64-41af-8688-95685ce7537c",
+    "fullName": "User 9963",
+    "email": "user1778762808309963@gmail.com",
+    "phone": "(+92)9228083099",
+    "password": "Test@12345"
   },
   "candidate": {
-    "email": "muhammadsabir.dev@gmail.com",
-    "password": "Sabir@1234_1",
-    "phone": "(+1)3464582853"
+    "id": "4ec2f3af-77b2-44a2-b9e8-bbaab9589698",
+    "fullName": "User 5282",
+    "email": "user1778762801215282@gmail.com",
+    "phone": "(+92)9228012152",
+    "password": "Test@12345"
   },
   "admin": {
     "email": "super-admin@recruitai.com",

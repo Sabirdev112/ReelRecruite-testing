@@ -16,7 +16,6 @@ export class SignupPage extends BasePage {
     this.passwordInput = page.getByTestId('signup-password');
     this.confirmPasswordInput = page.getByTestId('signup-confirm-password');
     this.selectRoleDropdown = page.getByTestId('signup-user-type');
-    this.selectRoleButton = page.getByRole('option', { name: 'Job Seeker' }); 
     this.signUpButton = page.getByTestId('signup-submit-button');
     this.emailExistsError = page.getByText('An account with this email already exists',{ exact: false });
   }
@@ -59,15 +58,16 @@ export class SignupPage extends BasePage {
   }
   async selectRole(role) {
     await this.selectRoleDropdown.click();
-    await this.selectRoleButton.click(role);
-    console.log('Role selected');
-    
+    const option = this.page.getByRole('option', { name: role });
+    await option.waitFor({ state: 'visible' });
+    await option.click();
+    console.log(`Role selected: ${role}`);
   }
     async createAccount() {
   await this.signUpButton.click();
   console.log('clicked on create account.');
 }
-async fillOTP(otp) {
+  async fillOTP(otp) {
     const digits = otp.split('');
     if (digits.length !== 6) {
       throw new Error('OTP must be exactly 6 digits.');

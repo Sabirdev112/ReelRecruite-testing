@@ -9,6 +9,8 @@ test('Candidate info, profile picture, and banner update', async ({ page, loginP
   await loginPage.goto();
   await loginPage.login(candidate.email, candidate.password);
   await loginPage.clickSignIn();
+  await page.waitForURL('**/jobs');
+
   await updateInfo.openProfileMenu();
   await updateInfo.clickProfile();
   await updateInfo.clickEditProfile();
@@ -18,11 +20,11 @@ test('Candidate info, profile picture, and banner update', async ({ page, loginP
   await updateInfo.fillProfessionalTitle('Senior QA Engineer');
   await updateInfo.clickSaveChanges();
 
-  // Verify DB
+  // Verify DB changes
   const db = await getUserByEmail(candidate.email);
   expect(db.full_name).toBe('Sabir SQA');
   expect(db.title).toBe('Senior QA Engineer');
   expect(db.avatar_url).toBeTruthy();
-  expect(db.cover_url).toBeTruthy();
+  expect (db.cover_url).toBeTruthy();
 });
 

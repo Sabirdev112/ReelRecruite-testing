@@ -4,7 +4,7 @@ import { getCandidateWorkExperience, getCandidateProfileByEmail } from '../../ut
 
 const candidate = loadCredentials()[0];
 
-test('Candidate deletes existing work (if any) and adds new experience', async ({ page, loginPage, updateWork }) => {
+test('Candidate adds experience', async ({ page, loginPage, updateWork }) => {
   
   await loginPage.goto();
   await loginPage.login(candidate.email, candidate.password);

@@ -1,7 +1,11 @@
 import fs from 'fs';
 import path from 'path';
+import { fileURLToPath } from 'url';
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 const NEW_USERS_FILE = path.join(process.cwd(), 'tests/test-data/users/NewUsers.json');
+const USERS_JSON_PATH = path.join(__dirname, '../fixtures/users.json');
 const PASSWORD = 'Test@12345';
 
 /**
@@ -49,6 +53,22 @@ export function storeNewUser(user) {
     JSON.stringify(users, null, 2),
     'utf-8'
   );
+}
+
+export function writeUsersJson(updates) {
+  const existing = fs.existsSync(USERS_JSON_PATH)
+    ? JSON.parse(fs.readFileSync(USERS_JSON_PATH, 'utf-8'))
+    : {};
+
+  const next = { ...existing };
+  if (updates.candidate) next.candidate = updates.candidate;
+  if (updates.recruiter) next.recruiter = updates.recruiter;
+
+  fs.writeFileSync(USERS_JSON_PATH, JSON.stringify(next, null, 2), 'utf-8');
+  console.log('[signupCredentials] users.json updated:', {
+    candidate: next.candidate?.email,
+    recruiter: next.recruiter?.email,
+  });
 }
 
 

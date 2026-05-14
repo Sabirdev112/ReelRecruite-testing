@@ -35,25 +35,28 @@ export class UpdateInfoPage extends BasePage {
   }
 
   async uploadCoverImage() {
-const bannerPath = getBannerImagePath();
-
+    const bannerPath = getBannerImagePath();
     await this.coverImageButton.waitFor({ state: 'visible' });
-    await this.page.locator('input[type="file"]').first().waitFor({ state: 'attached' });
-    await this.page.locator('input[type="file"]').first().setInputFiles(bannerPath);
-    await this.page.locator('input[type="file"]').first().evaluate(input =>
-      input.dispatchEvent(new Event('change', { bubbles: true }))
-    );
+
+    // Click the upload button and capture the resulting file picker.
+    // This avoids positional locators like input[type=file]:first/last, which
+    // are fragile on the candidate page (resume + cover-video inputs are also
+    // attached to the DOM and shift the index).
+    const fileChooserPromise = this.page.waitForEvent('filechooser');
+    await this.coverImageButton.click();
+    const fileChooser = await fileChooserPromise;
+    await fileChooser.setFiles(bannerPath);
     console.log('Cover image uploaded:', bannerPath);
   }
 
   async uploadProfilePicture() {
-const profilePath = getProfileImagePath();
+    const profilePath = getProfileImagePath();
     await this.profilePictureEditButton.waitFor({ state: 'visible' });
-    await this.page.locator('input[type="file"]').last().waitFor({ state: 'attached' });
-    await this.page.locator('input[type="file"]').last().setInputFiles(profilePath);
-    await this.page.locator('input[type="file"]').last().evaluate(input =>
-      input.dispatchEvent(new Event('change', { bubbles: true }))
-    );
+
+    const fileChooserPromise = this.page.waitForEvent('filechooser');
+    await this.profilePictureEditButton.click();
+    const fileChooser = await fileChooserPromise;
+    await fileChooser.setFiles(profilePath);
     console.log('Profile picture uploaded:', profilePath);
   }
 
@@ -71,9 +74,24 @@ const profilePath = getProfileImagePath();
 
   async clickSaveChanges() {
     await this.saveChangesButton.waitFor({ state: 'visible' });
-    await this.saveChangesButton.click();
 
-    console.log('Changes saved');
+    const responsePromise = this.page.waitForResponse(
+      (response) =>
+        response.url().includes('/v1/profile/update') &&
+        ['POST', 'PUT', 'PATCH'].includes(response.request().method()),
+    );
+    await this.saveChangesButton.click();
+    const response = await responsePromise;
+
+    if (!response.ok()) {
+      const body = await response.text().catch(() => '<no body>');
+      throw new Error(
+        `Profile update failed: HTTP ${response.status()} ${response.url()} — ${body}`
+      );
+    }
+
+    await expect(this.editProfileButton).toBeVisible();
+    console.log(`Changes saved (HTTP ${response.status()})`);
   }
 }
 

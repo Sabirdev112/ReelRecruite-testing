@@ -4,28 +4,28 @@ import { expect } from '@playwright/test';
 export class ArchiveChatPage extends BasePage {
   constructor(page) {
     super(page);
-    this.messagesButton = page.getByTestId('navbar-nav-item-messages');
-    this.ChatBox = page.getByTestId('chat-item-5ebf38d4-6aed-4b5e-b68b-4067040e03e7');
+    this.viewApplicationButton = page.getByTestId('view-applications-button');
+    this.viewDetailsButton = page.locator('[data-testid^="application-card-view-details-"]').first();
+    this.messagesButton = page.getByTestId('application-chat-button-recruiter');
     this.archiveButton = page.getByTestId('chat-archive-button').first();
     this.unArchiveButton = page.getByTestId('chat-realunarchive-button').first();
 }
 
-
-  // Open messages sidebar
-  async openMessages() {
-    await expect(this.messagesButton).toBeVisible();
-    await this.messagesButton.click();
-    await expect(this.messagesButton).toBeEnabled();
-    console.log('Messages opened.');
+  async clickViewApplications() {
+    await this.viewApplicationButton.waitFor({ state: 'visible' });
+    await this.viewApplicationButton.click();
+    console.log('Applications opened');
   }
-
-  // Open specific chat
-  async openChat() {
-    await expect(this.ChatBox).toBeVisible();
-    await this.ChatBox.click();
-    await expect(this.ChatBox).toBeVisible(); 
-    console.log('Chat opened.');
+  async clickViewDetails() {
+    await this.viewDetailsButton.waitFor({ state: 'visible' });
+    await this.viewDetailsButton.click();
+    console.log('Candidate details opened');
   }
+async clickMessagesButton() {
+  await this.messagesButton.waitFor({ state: 'visible' });
+  await this.messagesButton.click();
+  console.log('Messages opened');
+}
 
   // Archive chat
   async archiveChat() {

@@ -58,7 +58,6 @@ export class ApplyJobPage extends BasePage {
   async submitApplication() {
     await this.submitButton.waitFor({ state: 'visible' });
     await this.submitButton.click();
-    await this.page.waitForLoadState('networkidle');
     console.log('Application submitted.');
   }
 

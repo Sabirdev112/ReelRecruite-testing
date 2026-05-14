@@ -1,6 +1,6 @@
 import {test, expect} from '../../fixtures/base.fixtures.js';
 import {loadCredentials} from '../../utils/recruiterCredentials.js';
-import { getRecruiterPublicFieldsByEmail } from '../../utils/recruiterDb.helper.js';
+import { getRecruiterFields } from '../../utils/recruiterDb.helper.js';
 
 const recruiter = loadCredentials()[0];
 
@@ -20,7 +20,7 @@ test('recruiter info, profile picture, and banner update', async ({ page, loginP
   await updateInfo.clickSaveChanges();
 
   // Verify DB changes
-  const db = await getRecruiterPublicFieldsByEmail(recruiter.email);
+  const db = await getRecruiterFields(recruiter.email);
   expect(db.full_name).toBe('Sabir SQA');
   expect(db.title).toBe('Senior QA Engineer');
   expect(db.avatar_url).toBeTruthy();
