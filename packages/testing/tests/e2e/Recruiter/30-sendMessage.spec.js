@@ -16,7 +16,7 @@ test('recruiter logs in and sends a message', async ({ page, loginPage, sendMess
   await page.goto(jobUrl);
   await sendMessagePage.clickViewApplications();
   await sendMessagePage.clickViewDetails();
-  await sendMessagePage.selectMessage();
+  await sendMessagePage.clickMessageButton();
   await sendMessagePage.sendMessage(message);
 
 });

@@ -14,7 +14,9 @@ test('recruiter info, profile picture, and banner update', async ({ page, loginP
   await updateInfo.clickProfile();
   await updateInfo.clickEditProfile();
   await updateInfo.uploadCoverImage();
+  await updateInfo.applyCoverImage();
   await updateInfo.uploadProfilePicture();
+  await updateInfo.applyProfilePicture();
   await updateInfo.fillFullName('Sabir SQA');
   await updateInfo.fillProfessionalTitle('Senior QA Engineer');
   await updateInfo.clickSaveChanges();

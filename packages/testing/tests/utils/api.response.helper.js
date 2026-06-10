@@ -5,7 +5,8 @@ import { fileURLToPath } from 'url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const RESPONSES_PATH = path.join(__dirname, 'responses.json');
-const USERS_PATH = path.join(__dirname, '../fixtures/users.json');
+const RECRUITER_CREDS_PATH = path.join(__dirname, '../test-data/Recruiter/Credentials.json');
+const CANDIDATE_CREDS_PATH = path.join(__dirname, '../test-data/Candidate/Credentials.json');
 const API_JOBID_PATH = path.join(__dirname, '../test-data/api/jobid.json');
 const API_APPLICATIONID_PATH = path.join(__dirname, '../test-data/api/applicationId.json');
 
@@ -15,6 +16,46 @@ function readJson(filePath) {
 
 function writeJson(filePath, data) {
   fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
+}
+
+/** First matching row from tests/test-data/{Recruiter,Candidate}/Credentials.json */
+function readCredentialRow(filePath, role) {
+  const list = readJson(filePath);
+  if (!Array.isArray(list) || list.length === 0) {
+    throw new Error(`Credentials file is empty or invalid: ${filePath}`);
+  }
+  const roleLower = (role || '').toLowerCase();
+  const found = list.find(
+    (row) => (row.userType || '').toLowerCase() === roleLower,
+  );
+  const row = found || list[0];
+  if (!row?.email || row.password === undefined) {
+    throw new Error(
+      `Credentials entry needs email and password in ${filePath}`,
+    );
+  }
+  return row;
+}
+
+/** Email / password / optional phone for API sign-in and placeholders */
+function resolveRoleCredentials(role) {
+  if (role === 'recruiter') {
+    const row = readCredentialRow(RECRUITER_CREDS_PATH, 'recruiter');
+    return {
+      email: row.email,
+      password: row.password,
+      phone: row.phone,
+    };
+  }
+  if (role === 'candidate') {
+    const row = readCredentialRow(CANDIDATE_CREDS_PATH, 'candidate');
+    return {
+      email: row.email,
+      password: row.password,
+      phone: row.phone,
+    };
+  }
+  return { email: '', password: '', phone: '' };
 }
 
 // Setup phone format
@@ -32,9 +73,18 @@ function phoneApiFormat(raw) {
 
 // Build Placeholder
 function buildPlaceholderMap() {
-  const users = readJson(USERS_PATH);
-  const r = users.recruiter || {};
-  const c = users.candidate || {};
+  const recruiterAuth = resolveRoleCredentials('recruiter');
+  const candidateAuth = resolveRoleCredentials('candidate');
+  let candidatePhone = candidateAuth.phone
+    ? String(candidateAuth.phone)
+    : '';
+  if (!candidatePhone) {
+    const list = readJson(CANDIDATE_CREDS_PATH);
+    if (Array.isArray(list)) {
+      const row = list.find((r) => r.phone);
+      if (row?.phone != null) candidatePhone = String(row.phone);
+    }
+  }
   let jobId;
   let applicationId;
   try {
@@ -48,12 +98,13 @@ function buildPlaceholderMap() {
     applicationId = '';
   }
   return {
-    '{{recruiter.email}}': r.email ?? '',
-    '{{recruiter.password}}': r.password ?? '',
-    '{{candidate.email}}': c.email ?? '',
-    '{{candidate.password}}': c.password ?? '',
-    '{{candidate.phone}}': c.phone ?? '',
-    '{{candidate.phoneApi}}': phoneApiFormat(c.phone) || c.phone || '',
+    '{{recruiter.email}}': recruiterAuth.email,
+    '{{recruiter.password}}': String(recruiterAuth.password ?? ''),
+    '{{candidate.email}}': candidateAuth.email,
+    '{{candidate.password}}': String(candidateAuth.password ?? ''),
+    '{{candidate.phone}}': candidatePhone,
+    '{{candidate.phoneApi}}':
+      phoneApiFormat(candidatePhone) || candidatePhone,
     '{{jobId}}': jobId,
     '{{applicationId}}': applicationId,
     '{{uniqueSignupEmail}}': `${Date.now()}_${Math.random().toString(36).slice(2, 10)}@testmail.dev`,
@@ -149,15 +200,6 @@ export async function apiResponse(response, testInfo) {
   });
 }
 
-/**
- * Runs one API case from tests/utils/responses.json (keys aligned with e2e / POM flows).
- * @param {import('@playwright/test').APIRequestContext} request
- * @param {import('@playwright/test').TestInfo} testInfo
- * @param {string} caseKey
- * @param {object} [options]
- * @param {boolean} [options.refreshUniqueSignupEmail] — new email for {{uniqueSignupEmail}} on each call
- * @param {Record<string, string>} [options.placeholderOverrides] — extra or replacement placeholder values (e.g. {{signup.phone}})
- */
 
 export async function runApiCase(request, testInfo, caseKey, options = {}) {
   const all = readJson(RESPONSES_PATH);
@@ -195,12 +237,16 @@ export async function runApiCase(request, testInfo, caseKey, options = {}) {
     if (def.authRole !== 'recruiter' && def.authRole !== 'candidate') {
       return;
     }
-    const users = readJson(USERS_PATH);
-    const creds = users[def.authRole];
+    const { email, password } = resolveRoleCredentials(def.authRole);
+    if (!email) {
+      throw new Error(
+        `Missing email for authRole "${def.authRole}" (check tests/test-data/${def.authRole === 'recruiter' ? 'Recruiter' : 'Candidate'}/Credentials.json)`,
+      );
+    }
     const loginRes = await request.post(`${baseUrl}/v1/auth/signin`, {
       data: {
-        email: creds.email,
-        password: creds.password,
+        email,
+        password,
       },
       headers: { 'Content-Type': 'application/json' },
     });

@@ -10,6 +10,7 @@ export class CompanyDetailsPage extends BasePage {
        this.companyDetailsSection = page.getByTestId('company-profile-section');
        this.EditDetailsButton = page.getByTestId('edit-company-profile-button');
        this.addLogoButton = page.getByTestId('company-logo-upload-button');
+       this.applylogoButton = page.getByTestId('image-crop-modal-company-logo-apply-button');
        this.companyNameInput = page.locator('#companyName');
        this.TagLineInput = page.locator('#tagline');
        this.descriptionInput = page.locator('#description');
@@ -54,7 +55,11 @@ export class CompanyDetailsPage extends BasePage {
             );
             console.log('Company logo updated');
         }
-
+        async applyCompanyLogo() {
+            await this.applylogoButton.waitFor({ state: 'visible' });
+            await this.applylogoButton.click();
+            console.log('Company logo changes applied');
+        }
         async updateCompanyName(newText) {
              await this.companyNameInput.fill(newText);
              console.log('Company name updated');

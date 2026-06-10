@@ -1,7 +1,7 @@
 {
   "_meta": {
     "baseUrl": "https://recruitai-backend-production.up.railway.app",
-    "notes": "Endpoints and payloads are aligned with tests/pages POMs, tests/e2e flows, tests/Load-Test scripts, and live API checks. Placeholders: {{recruiter.email}}, {{recruiter.password}}, {{candidate.email}}, {{candidate.password}}, {{candidate.phoneApi}}, {{jobId}}, {{applicationId}}, {{uniqueSignupEmail}}, {{signup.phone}}, {{chatId}}. Recruiter/company UUIDs match Load-Test/CreateJob.js for this environment."
+    "notes": "Placeholders {{recruiter.email}}, {{recruiter.password}}, {{candidate.email}}, {{candidate.password}}, {{candidate.phone}} are filled from tests/test-data/Recruiter/Credentials.json and tests/test-data/Candidate/Credentials.json (same source as API Bearer auth)."
   },
   "Login": {
     "method": "POST",

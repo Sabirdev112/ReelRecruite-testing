@@ -16,6 +16,7 @@ test('Recruiter updates company details and logo', async ({ page, loginPage, upd
   await updateCompanyDetails.navigateToCompanyDetails();
   await updateCompanyDetails.clickEditDetails();
   await updateCompanyDetails.updateCompanyLogo();
+  await updateCompanyDetails.applyCompanyLogo();
   await updateCompanyDetails.updateCompanyName('Reel Recruit AI');
   await updateCompanyDetails.updateTagLine('Hire smarter with video resumes');
   await updateCompanyDetails.updateDescription('Revolutionizing recruitment with AI-driven video resumes.');

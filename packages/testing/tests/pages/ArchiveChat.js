@@ -1,5 +1,4 @@
 import { BasePage } from './base.page.js';
-import { expect } from '@playwright/test';
 
 export class ArchiveChatPage extends BasePage {
   constructor(page) {
@@ -22,27 +21,24 @@ export class ArchiveChatPage extends BasePage {
     console.log('Candidate details opened');
   }
 async clickMessagesButton() {
-  await this.messagesButton.waitFor({ state: 'visible' });
-  await this.messagesButton.click();
-  console.log('Messages opened');
+    await this.messagesButton.waitFor({ state: 'visible' });
+    await this.messagesButton.click();
+    console.log('Messages opened');
 }
 
   // Archive chat
   async archiveChat() {
-    await expect(this.archiveButton).toBeVisible();
+    await this.archiveButton.waitFor({ state: 'visible' });
     await this.archiveButton.click();
-    await expect(this.archiveButton).toBeHidden();
-    await expect(this.unArchiveButton).toBeVisible();
+    await this.archiveButton.waitFor({ state: 'hidden' });
     console.log('Chat archived.');
   }
 
   // Unarchive chat
   async unArchiveChat() {
-    await expect(this.unArchiveButton).toBeVisible();
+    await this.unArchiveButton.waitFor({ state: 'visible' });
     await this.unArchiveButton.click();
-    await expect(this.unArchiveButton).toBeHidden();
-    await expect(this.archiveButton).toBeVisible();
+    await this.archiveButton.waitFor({ state: 'visible' });
     console.log('Chat unarchived.');
   }
 }
-

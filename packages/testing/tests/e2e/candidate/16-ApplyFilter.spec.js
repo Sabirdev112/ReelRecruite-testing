@@ -15,7 +15,6 @@ test('Apply filter', async ({ page, loginPage, filter }) => {
   await filter.applyJobTypeFilter();
   await filter.applyCurrencyFilter();
 
-  
 });
 
 

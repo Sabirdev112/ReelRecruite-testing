@@ -26,12 +26,13 @@ export function getRandomUser() {
 }
 
 /**
- * Format a getRandomUser().phone value for POST /v1/auth/signup (expects e.g. (+92)0123456789).
+ * Format a getRandomUser().phone value for POST /v1/auth/signup (e.g. 923098765453).
  */
 export function toSignupApiPhone(phone) {
   const digits = String(phone).replace(/\D/g, '');
-  const local = (digits.startsWith('92') ? digits.slice(2) : digits).slice(-10).padStart(10, '0');
-  return `(+92)${local}`;
+  const withoutCountry = digits.startsWith('92') ? digits.slice(2) : digits;
+  const local = withoutCountry.replace(/^0+/, '').slice(-10).padStart(10, '0');
+  return `92${local}`;
 }
 
 /**

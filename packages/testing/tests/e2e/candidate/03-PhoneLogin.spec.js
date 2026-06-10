@@ -10,3 +10,4 @@ test('Candidate can log in using phone number', async ({ page, loginPage }) => {
     await loginPage.logout();
 
 }); 
+     

@@ -53,9 +53,7 @@ async function connectToMongo() {
  */
 export async function uploadScreenshot(localPath, fileName) {
   try {
-    // Note: Dashboard serves these from its public folder. 
-    // In a production monorepo, you'd use a shared S3 bucket or similar.
-    // For now, we return the filename and assume the dashboard can find it locally if shared.
+    // Dashboard serves these from its public folder. 
     return `/screenshots/${fileName}`;
   } catch (err) {
     console.error('[STORAGE] Fake upload failed:', err.message);

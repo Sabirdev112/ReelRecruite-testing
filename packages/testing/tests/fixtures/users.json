@@ -1,16 +1,16 @@
 {
   "recruiter": {
-    "id": "2e0020a8-9e64-41af-8688-95685ce7537c",
-    "fullName": "User 9963",
-    "email": "user1778762808309963@gmail.com",
-    "phone": "(+92)9228083099",
+    "id": "67198de4-17ed-4932-b7e5-a764cf470f1f",
+    "fullName": "User 3638",
+    "email": "user1781094321743638@gmail.com",
+    "phone": "(+92)9243217436",
     "password": "Test@12345"
   },
   "candidate": {
-    "id": "4ec2f3af-77b2-44a2-b9e8-bbaab9589698",
-    "fullName": "User 5282",
-    "email": "user1778762801215282@gmail.com",
-    "phone": "(+92)9228012152",
+    "id": "132fcb8e-7b24-4b00-9626-67a2f2e82c99",
+    "fullName": "User 8313",
+    "email": "user1781094314768313@gmail.com",
+    "phone": "(+92)9243147683",
     "password": "Test@12345"
   },
   "admin": {

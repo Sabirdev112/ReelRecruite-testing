@@ -679,5 +679,341 @@
     "phone": "922808309963",
     "password": "Test@12345",
     "userType": "recruiter"
+  },
+  {
+    "fullName": "User 8983",
+    "email": "user1778859006728983@gmail.com",
+    "phone": "929006728983",
+    "password": "Test@12345",
+    "userType": "candidate"
+  },
+  {
+    "fullName": "User 7515",
+    "email": "user1778859015527515@gmail.com",
+    "phone": "929015527515",
+    "password": "Test@12345",
+    "userType": "recruiter"
+  },
+  {
+    "fullName": "API Signup User",
+    "email": "1778859389558_m646qr9g@testmail.dev",
+    "phone": "92524541549",
+    "password": "Test@1234",
+    "userType": "candidate"
+  },
+  {
+    "fullName": "API Signup User",
+    "email": "1778864246852_z2pzojjy@testmail.dev",
+    "phone": "92007299974",
+    "password": "Test@1234",
+    "userType": "candidate"
+  },
+  {
+    "fullName": "API Signup User",
+    "email": "1778864478803_muzjlld9@testmail.dev",
+    "phone": "92930636560",
+    "password": "Test@1234",
+    "userType": "candidate"
+  },
+  {
+    "fullName": "User 2968",
+    "email": "user1778864555952968@gmail.com",
+    "phone": "924555952968",
+    "password": "Test@12345",
+    "userType": "candidate"
+  },
+  {
+    "fullName": "User 1142",
+    "email": "user1778864566031142@gmail.com",
+    "phone": "924566031142",
+    "password": "Test@12345",
+    "userType": "recruiter"
+  },
+  {
+    "fullName": "User 0355",
+    "email": "user1778865412820355@gmail.com",
+    "phone": "925412820355",
+    "password": "Test@12345",
+    "userType": "candidate"
+  },
+  {
+    "fullName": "User 2645",
+    "email": "user1778865423882645@gmail.com",
+    "phone": "925423882645",
+    "password": "Test@12345",
+    "userType": "recruiter"
+  },
+  {
+    "fullName": "User 3812",
+    "email": "user1779108388053812@gmail.com",
+    "phone": "928388053812",
+    "password": "Test@12345",
+    "userType": "candidate"
+  },
+  {
+    "fullName": "User 3970",
+    "email": "user1779108396003970@gmail.com",
+    "phone": "928396003970",
+    "password": "Test@12345",
+    "userType": "recruiter"
+  },
+  {
+    "fullName": "User 7972",
+    "email": "user1779110912447972@gmail.com",
+    "phone": "920912447972",
+    "password": "Test@12345",
+    "userType": "candidate"
+  },
+  {
+    "fullName": "User 2402",
+    "email": "user1779110919112402@gmail.com",
+    "phone": "920919112402",
+    "password": "Test@12345",
+    "userType": "recruiter"
+  },
+  {
+    "fullName": "User 5235",
+    "email": "user1779111286175235@gmail.com",
+    "phone": "921286175235",
+    "password": "Test@12345",
+    "userType": "candidate"
+  },
+  {
+    "fullName": "User 9590",
+    "email": "user1779111291939590@gmail.com",
+    "phone": "921291939590",
+    "password": "Test@12345",
+    "userType": "recruiter"
+  },
+  {
+    "fullName": "API Signup User",
+    "email": "1779111805978_ch25696c@testmail.dev",
+    "phone": "92461909863",
+    "password": "Test@1234",
+    "userType": "candidate"
+  },
+  {
+    "fullName": "User 5903",
+    "email": "user1779190168115903@gmail.com",
+    "phone": "920168115903",
+    "password": "Test@12345",
+    "userType": "candidate"
+  },
+  {
+    "fullName": "User 1650",
+    "email": "user1779190196321650@gmail.com",
+    "phone": "920196321650",
+    "password": "Test@12345",
+    "userType": "recruiter"
+  },
+  {
+    "fullName": "User 6329",
+    "email": "user1779190556046329@gmail.com",
+    "phone": "920556046329",
+    "password": "Test@12345",
+    "userType": "candidate"
+  },
+  {
+    "fullName": "User 5177",
+    "email": "user1779190562405177@gmail.com",
+    "phone": "920562405177",
+    "password": "Test@12345",
+    "userType": "recruiter"
+  },
+  {
+    "fullName": "User 0483",
+    "email": "user1779280122650483@gmail.com",
+    "phone": "920122650483",
+    "password": "Test@12345",
+    "userType": "candidate"
+  },
+  {
+    "fullName": "User 5150",
+    "email": "user1779280130455150@gmail.com",
+    "phone": "920130455150",
+    "password": "Test@12345",
+    "userType": "recruiter"
+  },
+  {
+    "fullName": "User 0627",
+    "email": "user1779368580480627@gmail.com",
+    "phone": "928580480627",
+    "password": "Test@12345",
+    "userType": "candidate"
+  },
+  {
+    "fullName": "User 2344",
+    "email": "user1779368595972344@gmail.com",
+    "phone": "928595972344",
+    "password": "Test@12345",
+    "userType": "recruiter"
+  },
+  {
+    "fullName": "User 8580",
+    "email": "user1779718878118580@gmail.com",
+    "phone": "928878118580",
+    "password": "Test@12345",
+    "userType": "candidate"
+  },
+  {
+    "fullName": "User 2193",
+    "email": "user1779718887312193@gmail.com",
+    "phone": "928887312193",
+    "password": "Test@12345",
+    "userType": "recruiter"
+  },
+  {
+    "fullName": "User 2199",
+    "email": "user178031700982199@gmail.com",
+    "phone": "921700982199",
+    "password": "Test@12345",
+    "userType": "candidate"
+  },
+  {
+    "fullName": "User 7942",
+    "email": "user178031701687942@gmail.com",
+    "phone": "921701687942",
+    "password": "Test@12345",
+    "userType": "recruiter"
+  },
+  {
+    "fullName": "User 9785",
+    "email": "user1780398036379785@gmail.com",
+    "phone": "928036379785",
+    "password": "Test@12345",
+    "userType": "candidate"
+  },
+  {
+    "fullName": "User 0274",
+    "email": "user1780398042860274@gmail.com",
+    "phone": "928042860274",
+    "password": "Test@12345",
+    "userType": "recruiter"
+  },
+  {
+    "fullName": "User 7710",
+    "email": "user1780398558587710@gmail.com",
+    "phone": "928558587710",
+    "password": "Test@12345",
+    "userType": "candidate"
+  },
+  {
+    "fullName": "User 0114",
+    "email": "user1780398566730114@gmail.com",
+    "phone": "928566730114",
+    "password": "Test@12345",
+    "userType": "recruiter"
+  },
+  {
+    "fullName": "User 2414",
+    "email": "user1780399359722414@gmail.com",
+    "phone": "929359722414",
+    "password": "Test@12345",
+    "userType": "candidate"
+  },
+  {
+    "fullName": "User 0606",
+    "email": "user1780399367260606@gmail.com",
+    "phone": "929367260606",
+    "password": "Test@12345",
+    "userType": "recruiter"
+  },
+  {
+    "fullName": "User 9774",
+    "email": "user1780400557859774@gmail.com",
+    "phone": "920557859774",
+    "password": "Test@12345",
+    "userType": "candidate"
+  },
+  {
+    "fullName": "User 2267",
+    "email": "user1780400565592267@gmail.com",
+    "phone": "920565592267",
+    "password": "Test@12345",
+    "userType": "recruiter"
+  },
+  {
+    "fullName": "User 6322",
+    "email": "user1780488529836322@gmail.com",
+    "phone": "928529836322",
+    "password": "Test@12345",
+    "userType": "candidate"
+  },
+  {
+    "fullName": "User 6868",
+    "email": "user1780488538386868@gmail.com",
+    "phone": "928538386868",
+    "password": "Test@12345",
+    "userType": "recruiter"
+  },
+  {
+    "fullName": "User 4147",
+    "email": "user1780490225234147@gmail.com",
+    "phone": "920225234147",
+    "password": "Test@12345",
+    "userType": "candidate"
+  },
+  {
+    "fullName": "User 7769",
+    "email": "user1780490232077769@gmail.com",
+    "phone": "920232077769",
+    "password": "Test@12345",
+    "userType": "recruiter"
+  },
+  {
+    "fullName": "User 0547",
+    "email": "user1781004903100547@gmail.com",
+    "phone": "924903100547",
+    "password": "Test@12345",
+    "userType": "candidate"
+  },
+  {
+    "fullName": "User 4133",
+    "email": "user178100491364133@gmail.com",
+    "phone": "920491364133",
+    "password": "Test@12345",
+    "userType": "recruiter"
+  },
+  {
+    "fullName": "User 0532",
+    "email": "user1781005793710532@gmail.com",
+    "phone": "925793710532",
+    "password": "Test@12345",
+    "userType": "candidate"
+  },
+  {
+    "fullName": "User 2810",
+    "email": "user1781005800412810@gmail.com",
+    "phone": "925800412810",
+    "password": "Test@12345",
+    "userType": "recruiter"
+  },
+  {
+    "fullName": "User 9561",
+    "email": "user1781093403779561@gmail.com",
+    "phone": "923403779561",
+    "password": "Test@12345",
+    "userType": "candidate"
+  },
+  {
+    "fullName": "User 2966",
+    "email": "user178109340992966@gmail.com",
+    "phone": "929340992966",
+    "password": "Test@12345",
+    "userType": "recruiter"
+  },
+  {
+    "fullName": "User 8313",
+    "email": "user1781094314768313@gmail.com",
+    "phone": "924314768313",
+    "password": "Test@12345",
+    "userType": "candidate"
+  },
+  {
+    "fullName": "User 3638",
+    "email": "user1781094321743638@gmail.com",
+    "phone": "924321743638",
+    "password": "Test@12345",
+    "userType": "recruiter"
   }
 ]

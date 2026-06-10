@@ -5,7 +5,7 @@ import { getLatestJobUrl } from '../../utils/job.helper.js';
 const jobUrl = getLatestJobUrl();
 const recruiter = loadCredentials()[0];
 
-test('Recruiter logs in and archives a chat', async ({ page, loginPage, archiveChat }) => {
+test('Recruiter logs in and archives/unarchives a chat', async ({ page, loginPage, archiveChat }) => {
 
   await loginPage.goto();
   await loginPage.login(recruiter.email, recruiter.password);
@@ -16,5 +16,6 @@ test('Recruiter logs in and archives a chat', async ({ page, loginPage, archiveC
   await archiveChat.clickViewDetails();
   await archiveChat.clickMessagesButton();
   await archiveChat.archiveChat();
+  await archiveChat.unArchiveChat();
 });
 

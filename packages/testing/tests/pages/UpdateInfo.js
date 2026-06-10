@@ -9,7 +9,9 @@ export class UpdateInfoPage extends BasePage {
     this.profileButton = page.getByTestId('navbar-user-menu-item-profile').first();
     this.editProfileButton = page.getByTestId('edit-profile-info-button');
     this.coverImageButton = page.getByTestId('edit-profile-cover-upload-button');
+    this.coverImpageApplyButton = page.getByTestId('image-crop-modal-cover-apply-button');
     this.profilePictureEditButton = page.getByTestId('edit-profile-avatar-upload-button');
+    this.pictureApplyButton = page.getByTestId('image-crop-modal-avatar-apply-button');
     this.fullNameTextbox = page.locator('#fullName');
     this.professionalTitleTextbox = page.locator('#title');
     this.saveChangesButton = page.getByTestId('profile-save-changes-button');
@@ -38,15 +40,17 @@ export class UpdateInfoPage extends BasePage {
     const bannerPath = getBannerImagePath();
     await this.coverImageButton.waitFor({ state: 'visible' });
 
-    // Click the upload button and capture the resulting file picker.
-    // This avoids positional locators like input[type=file]:first/last, which
-    // are fragile on the candidate page (resume + cover-video inputs are also
-    // attached to the DOM and shift the index).
     const fileChooserPromise = this.page.waitForEvent('filechooser');
     await this.coverImageButton.click();
     const fileChooser = await fileChooserPromise;
     await fileChooser.setFiles(bannerPath);
     console.log('Cover image uploaded:', bannerPath);
+  }
+
+  async applyCoverImage() {
+    await this.coverImpageApplyButton.waitFor({ state: 'visible' });
+    await this.coverImpageApplyButton.click();
+    console.log('Cover image changes applied');
   }
 
   async uploadProfilePicture() {
@@ -58,6 +62,12 @@ export class UpdateInfoPage extends BasePage {
     const fileChooser = await fileChooserPromise;
     await fileChooser.setFiles(profilePath);
     console.log('Profile picture uploaded:', profilePath);
+  }
+
+  async applyProfilePicture() {
+    await this.pictureApplyButton.waitFor({ state: 'visible' });
+    await this.pictureApplyButton.click();
+    console.log('Profile picture changes applied');
   }
 
   async fillFullName(name) {
